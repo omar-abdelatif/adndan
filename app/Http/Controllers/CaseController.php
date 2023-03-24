@@ -31,7 +31,7 @@ class CaseController extends Controller
             'gov' => 'required',
             'sons' => 'required',
             'daughters' => 'required',
-            'files' => 'required|image|max:2028|mimes:jpg,png,jpeg,webp',
+            'files' => 'image|max:2028|mimes:jpg,png,jpeg,webp',
         ]);
         if ($request->hasFile('files')) {
             $upload = $request->file('files');
