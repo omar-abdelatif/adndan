@@ -26,7 +26,7 @@
                         </svg>
                     </div>
                     <div>
-                        <div class="fs-6 fw-semibold text-primary">$1.999,50</div>
+                        <div class="fs-6 fw-semibold text-primary">0</div>
                         <div class="text-medium-emphasis text-uppercase fw-semibold small">إجمالي الحالات المستحقة</div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         </svg>
                     </div>
                     <div>
-                        <div class="fs-6 fw-semibold text-primary">$1.999,50</div>
+                        <div class="fs-6 fw-semibold text-primary">$0</div>
                         <div class="text-medium-emphasis text-uppercase fw-semibold small">إجمالي التحويل هذا الشهر</div>
                     </div>
                 </div>
@@ -56,8 +56,10 @@
                         </svg>
                     </div>
                     <div>
-                        <div class="fs-6 fw-semibold text-primary">$1.999,50</div>
-                        <div class="text-medium-emphasis text-uppercase fw-semibold small">Widget title</div>
+                        <div class="fs-6 fw-semibold text-primary">
+                            <p class="fulldate"></p>
+                        </div>
+                        <div class="text-medium-emphasis text-uppercase fw-semibold small">تاريخ اليوم</div>
                     </div>
                 </div>
             </div>
@@ -88,10 +90,12 @@
                                 <td>{{ $case->phone_number }}</td>
                                 <td>{{ $case->created_at }}</td>
                                 <td>
-                                    <a class="btn btn-danger" href='{{ url("delete/$case->id") }}'> حذف </a>
-                                    <button type="button" class="btn btn-primary" data-coreui-toggle="modal"
-                                        data-coreui-target="#exampleModal{{ $case->id }}" data-coreui-whatever="@mdo">
-                                        عرض </button>
+                                    <a class="btn btn-danger" style="border-radius: 40px" href='{{ url("delete/$case->id") }}'>
+                                        <b>حذف</b>
+                                    </a>
+                                    <button type="button" style="border-radius: 40px" class="btn btn-warning" data-coreui-toggle="modal" data-coreui-target="#exampleModal{{ $case->id }}" data-coreui-whatever="@mdo">
+                                        <b>عرض</b>
+                                    </button>
                                     <div class="modal fade" id="exampleModal{{ $case->id }}" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-xl">

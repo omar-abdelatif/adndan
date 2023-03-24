@@ -38,6 +38,9 @@ class CaseController extends Controller
             $name = time() . '.' . $upload->getClientOriginalExtension();
             $destinationPath = public_path('build/assets/backend/files');
             $upload->move($destinationPath, $name);
+        } else {
+            $name = 'download.png';
+            $destinationPath = public_path('icons/download.png');
         }
         $store = TableCase::create([
             'fullname' => $request->fullname,
