@@ -57,7 +57,7 @@
                     </div>
                     <div>
                         <div class="fs-6 fw-semibold text-primary">
-                            <p class="fulldate"></p>
+                            <p class="mb-0">{{$fullDate}}</p>
                         </div>
                         <div class="text-medium-emphasis text-uppercase fw-semibold small">تاريخ اليوم</div>
                     </div>
@@ -70,7 +70,33 @@
                     <p class="mb-0">{{ session('success') }}</p>
                 </div>
             @endif
-            <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 1, "asc" ]]'
+            <div class="upload-csv mt-5">
+                <button type="button" class="btn btn-primary" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Test</h5>
+                                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('import') }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <input type="file" name="excel" class="form-control">
+                                                <input type="submit" class="btn btn-primary mt-3 d-block w-100" height="50px" value="Submit">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]'
                 data-page-length='25'>
                 <thead>
                     <tr>
@@ -291,11 +317,7 @@
                                                                                 class="form-control mb-3 text-center" value="{{$case->files}}"
                                                                                 accept="image/*">
                                                                             <div class="files">
-                                                                                @if ($count >= 1)
-                                                                                    <img src="{{asset('build/assets/backend/files/' . $case->files)}}" class="" width="300" alt="">
-                                                                                @else
-                                                                                    <h1 class="text-center">لا توجد ملفات للحالة</h1>
-                                                                                @endif
+                                                                                    <img src="{{asset('build/assets/backend/files/' . $case->files)}}" class="" width="300" alt="{{$case->fullname}}">
                                                                             </div>
                                                                         </div>
                                                                     </div>

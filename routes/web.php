@@ -24,4 +24,6 @@ Route::middleware('auth')->group(function () {
     Route::get('home', [CaseController::class, 'ViewData'])->name('home');
     Route::get('delete/{id}', [CaseController::class, 'delete'])->name('delete');
     Route::post('update', [CaseController::class, 'updatecase'])->name('update');
+    //! Excel Uploader
+    Route::post('upload', [CaseController::class, 'importExcel'])->name('import');
 });

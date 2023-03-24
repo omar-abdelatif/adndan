@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\TableCase;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use App\Imports\UserImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CaseController extends Controller
 {
     public function viewData()
     {
+        $date = Carbon::now();
+        $fullDate = $date->format('l jS F Y');
         $data = TableCase::all();
         $count = TableCase::count();
-        return view('home', compact('data', 'count'));
+        return view('home', compact('data', 'count', 'fullDate'));
     }
     public function storecase(Request $request)
     {
@@ -38,9 +42,8 @@ class CaseController extends Controller
             $name = time() . '.' . $upload->getClientOriginalExtension();
             $destinationPath = public_path('build/assets/backend/files');
             $upload->move($destinationPath, $name);
-        } else {
+        } elseif (!$request->file('files')) {
             $name = 'download.png';
-            $destinationPath = public_path('icons/download.png');
         }
         $store = TableCase::create([
             'fullname' => $request->fullname,
@@ -115,5 +118,10 @@ class CaseController extends Controller
             return redirect('home')->with('success', 'تم تعديل الحالة بنجاح');
         }
         return redirect('home')->withErrors('حدث خطأ في المدخلات');
+    }
+    public function importExcel(Request $request)
+    {
+        Excel::import(new UserImport, $request->file('excel'));
+        return redirect()->route('home')->with('success', 'تم الإسترداد بنجاح');
     }
 }
