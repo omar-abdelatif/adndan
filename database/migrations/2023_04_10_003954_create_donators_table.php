@@ -14,10 +14,6 @@ return new class extends Migration
     {
         Schema::create('donators', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->string('name');
-            $table->bigIncrements('mobile_phone')->unique();
-            $table->bigIncrements('amount');
-            $table->string('duration');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

@@ -9,7 +9,7 @@ class DonatorController extends Controller
 {
     public function index()
     {
-        $donator = Donator::all();
-        return view('donator.index', compact('donator'));
+        // $donator = Donator::all();
+        return view('donator.index');
     }
 }
