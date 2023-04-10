@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CaseController;
-
+use App\Http\Controllers\DonatorController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -26,4 +26,6 @@ Route::middleware('auth')->group(function () {
     Route::post('update', [CaseController::class, 'updatecase'])->name('update');
     //! Excel Uploader
     Route::post('upload', [CaseController::class, 'importExcel'])->name('import');
+    //! Donator Routes
+    Route::get('alldonators', [DonatorController::class, 'index'])->name('donator.index');
 });
