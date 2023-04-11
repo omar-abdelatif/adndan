@@ -24,5 +24,11 @@ class DonatorController extends Controller
             'amount' => 'required|numeric',
             'duration' => 'required|numeric'
         ]);
+        $store = Donator::create([
+            'name' => $request->name,
+            'mobile_phone' => $request->mobile_phone,
+            'amount' => $request->amount,
+            'duration' => $request->duration
+        ]);
     }
 }
