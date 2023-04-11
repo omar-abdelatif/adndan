@@ -30,6 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::get('alldonators', [DonatorController::class, 'index'])->name('donator.index');
     Route::get('add_donator', [DonatorController::class, 'AddNew'])->name('donator.addnew');
     Route::post('create-donator', [DonatorController::class, 'store'])->name('donator.store');
+    Route::get('delete-donator/{id}', [DonatorController::class, 'destroy'])->name('donator.delete');
+    Route::get('edit-donator/{id}', [DonatorController::class, 'edit'])->name('donator.edit');
+    Route::post('update-donator', [DonatorController::class, 'update'])->name('donator.update');
+    Route::get('history/{id}', [DonatorController::class, 'history'])->name('donator.history');
     //! Reports
     Route::view('allreports', 'reports.index')->name('reports.index');
 });

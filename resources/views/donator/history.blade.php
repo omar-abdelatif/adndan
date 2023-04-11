@@ -48,7 +48,7 @@
         </div>
         <div class="header-divider"></div>
         <section class="content-header w-100">
-            <div class="container-fluid">
+            <div class="container-fluid d-flex align-items-center">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="d-flex justify-content-between w-100 align-items-center">
@@ -59,9 +59,11 @@
                                 <li class="breadcrumb-item">
                                     <a href="{{ route('showall') }}">الكفالة</a>
                                 </li>
-                                <li class="breadcrumb-item active">كل المتبرعين</li>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('donator.index') }}">كل المتبرعين</a>
+                                </li>
+                                <li class="breadcrumb-item active">السابقة</li>
                             </ol>
-                            <a href="{{ route('donator.addnew') }}" class="btn btn-success">إضافة متبرع</a>
                         </div>
                     </div>
                 </div>
@@ -95,21 +97,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($donator as $donate)
-                <tr class="text-center">
-                    <td>{{$donate->id}}</td>
-                    <td>{{$donate->name}}</td>
-                    <td>{{$donate->mobile_phone}}</td>
-                    <td>{{$donate->amount}}</td>
-                    <td>{{$donate->duration}}</td>
-                    <td>{{$donate->created_at->format('Y-m-d')}}</td>
-                    <td>
-                        <a href="{{url('history/' . $donate->id)}}" class="btn btn-success">History</a>
-                        <a href="{{url('edit-donator/' . $donate->id)}}" class="btn btn-warning">Edit</a>
-                        <a href="{{url('delete-donator/' . $donate->id)}}" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-            @endforeach
+
         </tbody>
     </table>
 @endsection

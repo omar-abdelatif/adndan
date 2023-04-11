@@ -35,4 +35,38 @@ class DonatorController extends Controller
         }
         return redirect()->route('donator.addnew')->withErrors($validator);
     }
+    public function destroy($id)
+    {
+        $donator = Donator::find($id);
+        if ($donator) {
+            $donator->delete();
+            return redirect()->route('donator.index')->with('success', 'تم الحذف بنجاح');
+        }
+        return redirect()->route('donator.index')->withErrors('حدث خطأ أثناء الحذف');
+    }
+    public function edit($id)
+    {
+        $donate = Donator::find($id);
+        if ($donate) {
+            return view('donator.edit', compact('donate'));
+        }
+    }
+    public function history($id)
+    {
+        $history = Donator::find($id);
+        return view('donator.history', compact('history'));
+    }
+    public function update(Request $request)
+    {
+        $donator = Donator::find($request->id);
+        $donator->name = $request->name;
+        $donator->mobile_phone = $request->mobile_phone;
+        $donator->amount = $request->amount;
+        $donator->duration = $request->duration;
+        $update = $donator->save();
+        if ($update) {
+            return redirect()->route('donator.index')->with('success', 'تم التعديل بنجاح');
+        }
+        return redirect()->route('donator.index')->withErrors('خطأ أثناء التحديث');
+    }
 }
