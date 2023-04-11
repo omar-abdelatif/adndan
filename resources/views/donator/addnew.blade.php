@@ -69,16 +69,25 @@
     </header>
 @endsection
 @section('content')
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <p class="alert alert-danger text-center m-0">
+                {{$error}}
+            </p>
+        @endforeach
+    @endif
     <div class="inputs w-50 p-3 mx-auto bg-secondary rounded mt-5">
         <div class="donator-title">
             <h1 class="text-center mt-2 mb-4 text-white text-decoration-underline">إضافة متبرع جديد</h1>
         </div>
         <div class="donator-content text-center">
             <form action="{{route('donator.store')}}" method="post">
+                @csrf
                 <input type="text" name="name" class="form-control mb-2 text-center" placeholder="إسم المتبرع">
                 <input type="number" name="mobile_phone" class="form-control mb-2 text-center" placeholder="رقم المحمول">
                 <input type="number" name="amount" class="form-control mb-2 text-center" placeholder="المبلغ">
                 <select name="duration" class="form-control">
+                    <option selected>إختار المدة</option>
                     <option value="1month">شهري</option>
                     <option value="3month">3 شهور</option>
                     <option value="6month">6 شهور</option>

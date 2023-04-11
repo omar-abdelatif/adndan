@@ -70,5 +70,9 @@
         </header>
 @endsection
 @section('content')
-
+@if (session('success'))
+    <div class="alert alert-success text-center mt-5">
+        <p class="m-0">{{session('success')}}</p>
+    </div>
+@endif
 @endsection
