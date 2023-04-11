@@ -69,13 +69,23 @@
     </header>
 @endsection
 @section('content')
-    <div class="inputs w-50 p-2 mx-auto bg-secondary rounded">
+    <div class="inputs w-50 p-3 mx-auto bg-secondary rounded mt-5">
         <div class="donator-title">
-            <h1 class="text-center mt-2 mb-2 text-white">إضافة متبرع جديد</h1>
+            <h1 class="text-center mt-2 mb-4 text-white text-decoration-underline">إضافة متبرع جديد</h1>
         </div>
-        <div class="donator-content">
-            <form action="" method="post">
-                
+        <div class="donator-content text-center">
+            <form action="{{route('donator.store')}}" method="post">
+                <input type="text" name="name" class="form-control mb-2 text-center" placeholder="إسم المتبرع">
+                <input type="number" name="mobile_phone" class="form-control mb-2 text-center" placeholder="رقم المحمول">
+                <input type="number" name="amount" class="form-control mb-2 text-center" placeholder="المبلغ">
+                <select name="duration" class="form-control">
+                    <option value="1month">شهري</option>
+                    <option value="3month">3 شهور</option>
+                    <option value="6month">6 شهور</option>
+                    <option value="annually">سنوي</option>
+                    <option value="other">أخرى</option>
+                </select>
+                <button type="submit" class="btn btn-success w-100 mt-3 text-center text-white">إرسال</button>
             </form>
         </div>
     </div>

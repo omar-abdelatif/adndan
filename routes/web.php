@@ -29,4 +29,5 @@ Route::middleware('auth')->group(function () {
     //! Donator Routes
     Route::get('alldonators', [DonatorController::class, 'index'])->name('donator.index');
     Route::get('add_donator', [DonatorController::class, 'AddNew'])->name('donator.addnew');
+    Route::post('create-donator', [DonatorController::class, 'store'])->name('donator.store');
 });

@@ -1,5 +1,53 @@
 @extends('layouts.app')
-
+@section('header')
+    <header class="header header-sticky mb-5">
+        <div class="container-fluid">
+            <button class="header-toggler px-md-0 me-md-3" type="button"
+                onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
+                <svg class="icon icon-lg">
+                    <use xlink:href="{{ asset('icons/coreui.svg#cil-menu') }}"></use>
+                </svg>
+            </button>
+            <a class="header-brand d-md-none" href="#">
+                <svg width="118" height="46" alt="CoreUI Logo">
+                    <use xlink:href="{{ asset('icons/brand.svg#full') }}"></use>
+                </svg>
+            </a>
+            <ul class="header-nav d-none d-md-flex">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home') }}">لوحة التحكم</a>
+                </li>
+            </ul>
+            <ul class="header-nav ms-auto"></ul>
+            <ul class="header-nav ms-3">
+                <li class="nav-item dropdown">
+                    <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end pt-0">
+                        <a class="dropdown-item" href="{{ route('profile.show') }}">
+                            <svg class="icon me-2">
+                                <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
+                            </svg>
+                            {{ __('My profile') }}
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); this.closest('form').submit();">
+                                <svg class="icon me-2">
+                                    <use xlink:href="{{ asset('icons/coreui.svg#cil-account-logout') }}"></use>
+                                </svg>
+                                {{ __('Logout') }}
+                            </a>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+@endsection
 @section('content')
     <div class="row">
         <div class="col-6 col-lg-3">
@@ -57,7 +105,7 @@
                     </div>
                     <div>
                         <div class="fs-6 fw-semibold text-primary">
-                            <p class="mb-0">{{$fullDate}}</p>
+                            <p class="mb-0">{{ $fullDate }}</p>
                         </div>
                         <div class="text-medium-emphasis text-uppercase fw-semibold small">تاريخ اليوم</div>
                     </div>
@@ -71,13 +119,16 @@
                 </div>
             @endif
             <div class="upload-csv mt-5">
-                <button type="button" class="btn btn-primary" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button>
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <button type="button" class="btn btn-primary" data-coreui-toggle="modal" data-coreui-target="#exampleModal"
+                    data-coreui-whatever="@mdo"> Upload User Excel Sheet </button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Test</h5>
-                                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-coreui-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form action="{{ route('import') }}" method="post" enctype="multipart/form-data">
@@ -86,7 +137,8 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <input type="file" name="excel" class="form-control">
-                                                <input type="submit" class="btn btn-primary mt-3 d-block w-100" height="50px" value="Submit">
+                                                <input type="submit" class="btn btn-primary mt-3 d-block w-100"
+                                                    height="50px" value="Submit">
                                             </div>
                                         </div>
                                     </div>
@@ -96,8 +148,8 @@
                     </div>
                 </div>
             </div>
-            <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]'
-                data-page-length='25'>
+            <table class="table borderd-table display align-middle text-center" id="table"
+                data-order='[[ 0, "asc" ]]' data-page-length='25'>
                 <thead>
                     <tr>
                         <td class="text-center">id</td>
@@ -116,10 +168,13 @@
                                 <td>{{ $case->phone_number }}</td>
                                 <td>{{ $case->created_at }}</td>
                                 <td>
-                                    <a class="btn btn-danger" style="border-radius: 40px" href='{{ url("delete/$case->id") }}'>
+                                    <a class="btn btn-danger" style="border-radius: 40px"
+                                        href='{{ url("delete/$case->id") }}'>
                                         <b>حذف</b>
                                     </a>
-                                    <button type="button" style="border-radius: 40px" class="btn btn-warning" data-coreui-toggle="modal" data-coreui-target="#exampleModal{{ $case->id }}" data-coreui-whatever="@mdo">
+                                    <button type="button" style="border-radius: 40px" class="btn btn-warning"
+                                        data-coreui-toggle="modal" data-coreui-target="#exampleModal{{ $case->id }}"
+                                        data-coreui-whatever="@mdo">
                                         <b>عرض</b>
                                     </button>
                                     <div class="modal fade" id="exampleModal{{ $case->id }}" tabindex="-1"
@@ -127,7 +182,8 @@
                                         <div class="modal-dialog modal-xl">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">بيانات الحالة كاملة</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">بيانات الحالة كاملة
+                                                    </h5>
                                                     <button type="button" class="btn-close" data-coreui-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
@@ -310,20 +366,27 @@
                                                                 <div class="col-lg-6">
                                                                     <div class="inputs mt-3">
                                                                         <div class="inputs-title">
-                                                                            <h3 class="mb-2 bg-secondary p-2 rounded text-white">ملفات الحالة</h3>
+                                                                            <h3
+                                                                                class="mb-2 bg-secondary p-2 rounded text-white">
+                                                                                ملفات الحالة</h3>
                                                                         </div>
                                                                         <div class="inputs-body">
                                                                             <input type="file" name="files"
-                                                                                class="form-control mb-3 text-center" value="{{$case->files}}"
+                                                                                class="form-control mb-3 text-center"
+                                                                                value="{{ $case->files }}"
                                                                                 accept="image/*">
                                                                             <div class="files">
-                                                                                    <img src="{{asset('build/assets/backend/files/' . $case->files)}}" class="" width="300" alt="{{$case->fullname}}">
+                                                                                <img src="{{ asset('build/assets/backend/files/' . $case->files) }}"
+                                                                                    class="" width="300"
+                                                                                    alt="{{ $case->fullname }}">
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
-                                                                    <input type="submit" class="btn btn-primary mt-3 d-block w-100" height="50px" value="Submit">
+                                                                    <input type="submit"
+                                                                        class="btn btn-primary mt-3 d-block w-100"
+                                                                        height="50px" value="Submit">
                                                                 </div>
                                                             </div>
                                                         </div>

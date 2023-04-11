@@ -22,7 +22,7 @@ class DonatorController extends Controller
             'name' => 'required|string',
             'mobile_phone' => 'required|numeric',
             'amount' => 'required|numeric',
-            'duration' => 'required|numeric'
+            'duration' => 'required|numeric|in:1month,3month,6month,annually,other'
         ]);
         $store = Donator::create([
             'name' => $request->name,
@@ -30,5 +30,9 @@ class DonatorController extends Controller
             'amount' => $request->amount,
             'duration' => $request->duration
         ]);
+        if ($store) {
+            return redirect()->route('donator.index')->with('success', 'تم الإضافة بنجاح');
+        }
+        return redirect()->route('donator.addnew')->withErrors($validator);
     }
 }
