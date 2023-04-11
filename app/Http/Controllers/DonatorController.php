@@ -9,7 +9,20 @@ class DonatorController extends Controller
 {
     public function index()
     {
-        // $donator = Donator::all();
-        return view('donator.index');
+        $donator = Donator::all();
+        return view('donator.index', compact('donator'));
+    }
+    public function AddNew()
+    {
+        return view('donator.addnew');
+    }
+    public function store(Request $request)
+    {
+        $validator = $request->validate([
+            'name' => 'required|string',
+            'mobile_phone' => 'required|numeric',
+            'amount' => 'required|numeric',
+            'duration' => 'required|numeric'
+        ]);
     }
 }
