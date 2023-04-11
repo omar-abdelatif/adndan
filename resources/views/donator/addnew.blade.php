@@ -71,9 +71,9 @@
 @section('content')
     @if ($errors->any())
         @foreach ($errors->all() as $error)
-            <p class="alert alert-danger text-center m-0">
-                {{$error}}
-            </p>
+            <div class="alert alert-danger text-center mt-5">
+                <p class="mb-0">{{$error}}</p>
+            </div>
         @endforeach
     @endif
     <div class="inputs w-50 p-3 mx-auto bg-secondary rounded mt-5">

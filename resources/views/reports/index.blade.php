@@ -48,7 +48,7 @@
         </div>
         <div class="header-divider"></div>
         <section class="content-header w-100">
-            <div class="container-fluid">
+            <div class="container-fluid d-flex">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="d-flex justify-content-between w-100 align-items-center">
@@ -59,9 +59,8 @@
                                 <li class="breadcrumb-item">
                                     <a href="{{ route('showall') }}">الكفالة</a>
                                 </li>
-                                <li class="breadcrumb-item active">كل المتبرعين</li>
+                                <li class="breadcrumb-item active">كل التقارير</li>
                             </ol>
-                            <a href="{{ route('donator.addnew') }}" class="btn btn-success">إضافة متبرع</a>
                         </div>
                     </div>
                 </div>
@@ -70,40 +69,7 @@
     </header>
 @endsection
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success text-center mt-5">
-            <p class="m-0">{{ session('success') }}</p>
-        </div>
-    @endif
-    <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]'
-        data-page-length='10'>
-        <thead>
-            <tr>
-                <td class="text-center">id</td>
-                <td class="text-center">الإسم</td>
-                <td class="text-center">رقم التلفون</td>
-                <td>المبلغ</td>
-                <td>المدة الزمنية</td>
-                <td class="text-center">تاريخ التسجيل</td>
-                <td class="text-center">Actions</td>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($donator as $donate)
-                <tr class="text-center">
-                    <td>{{$donate->id}}</td>
-                    <td>{{$donate->name}}</td>
-                    <td>{{$donate->mobile_phone}}</td>
-                    <td>{{$donate->amount}}</td>
-                    <td>{{$donate->duration}}</td>
-                    <td>{{$donate->created_at->format('Y-m-d')}}</td>
-                    <td>
-                        <a href="" class="btn btn-success">History</a>
-                        <a href="" class="btn btn-warning">Edit</a>
-                        <a href="" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+<div class="text-center d-flex align-items-center justify-content-center" style="height: 90vh">
+    <h1 class="">Soon With Love</h1>
+</div>
 @endsection

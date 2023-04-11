@@ -148,8 +148,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table borderd-table display align-middle text-center" id="table"
-                data-order='[[ 0, "asc" ]]' data-page-length='25'>
+            <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='25'>
                 <thead>
                     <tr>
                         <td class="text-center">id</td>

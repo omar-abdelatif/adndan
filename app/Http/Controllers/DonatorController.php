@@ -20,7 +20,7 @@ class DonatorController extends Controller
     {
         $validator = $request->validate([
             'name' => 'required|string',
-            'mobile_phone' => 'required|numeric|max:12',
+            'mobile_phone' => 'required|numeric',
             'amount' => 'required|numeric',
             'duration' => 'required|in:1month,3month,6month,annually,other'
         ]);
