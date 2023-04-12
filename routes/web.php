@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CaseController;
+use App\Http\Controllers\DonationHistoryController;
 use App\Http\Controllers\DonatorController;
+use App\Models\DonationHistory;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -35,7 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::post('update-donator', [DonatorController::class, 'update'])->name('donator.update');
     Route::get('history/{id}', [DonatorController::class, 'history'])->name('donator.history');
     //! Donation History
-    Route::view('add_donation', 'donation.addnew')->name('donation.insert');
+    Route::get('all_donations', [DonationHistoryController::class, 'index'])->name('donation.index');
+    Route::post('add_donation', [DonationHistoryController::class, 'donationstore'])->name('donation.store');
     //! Reports
     Route::view('allreports', 'reports.index')->name('reports.index');
 });

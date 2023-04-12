@@ -13,6 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('donators', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->integer('id')->autoIncrement();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));

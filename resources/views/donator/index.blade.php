@@ -108,165 +108,59 @@
                         <a href="{{ url('edit-donator/' . $donate->id) }}" class="btn btn-warning">Edit</a>
                         <a href="{{ url('delete-donator/' . $donate->id) }}" class="btn btn-danger">Delete</a>
                         <button type="button" style="border-radius: 40px" class="btn btn-info text-white"
-                            data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo">
+                            data-coreui-toggle="modal" data-coreui-target="#exampleModal_{{ $donate->id }}"
+                            data-coreui-whatever="@mdo">
                             <b>إضافة تبرع</b>
                         </button>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-xl">
+                        <div class="modal fade" dir="rtl" id="exampleModal_{{ $donate->id }}" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">بيانات الحالة كاملة
-                                        </h5>
-                                        <button type="button" class="btn-close" data-coreui-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <h5 class="modal-title" id="exampleModalLabel">بيانات المتبرع كاملة</h5>
+                                        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ 'update' }}" method="post" enctype="multipart/form-data">
+                                        <form action="{{route('donation.store')}}" method="post">
                                             @csrf
                                             <div class="container-fluid">
                                                 <div class="row">
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-12">
                                                         <div class="inputs">
                                                             <div class="inputs-title mb-2">
-                                                                <h3 class="mb-2 bg-primary p-2 rounded text-white">البيانات
-                                                                    الشخصية</h3>
+                                                                <h3 class="mb-2 bg-primary p-2 rounded text-white">البيانات الشخصية</h3>
                                                             </div>
                                                             <div class="inputs-body">
-                                                                <input type="hidden" name="id">
-                                                                <label for="fullname">
-                                                                    <b>الإسم</b>
-                                                                </label>
-                                                                <input type="text" id="fullname" name="fullname"
-                                                                    class="form-control mb-2 text-center"
-                                                                    placeholder="إسم الحالة">
-                                                                <label for="phone_number">
-                                                                    <b>رقم المحمول (اذا وجد)</b>
-                                                                </label>
-                                                                <input type="number" id="phone_number"
-                                                                    name="phone_number"
-                                                                    class="form-control mb-2 text-center"
-                                                                    placeholder="رقم المحمول">
-                                                                <label for="age">
-                                                                    <b>السن</b>
-                                                                </label>
-                                                                <input type="number"
-                                                                    id="age"name="age"class="form-control mb-2 text-center"placeholder="السن">
-                                                                <label for="ssn">
-                                                                    <b>الرقم القومي</b>
-                                                                </label>
-                                                                <input type="number" id="ssn" name="ssn"
-                                                                    class="form-control mb-2 text-center"
-                                                                    placeholder="الرقم القومي">
-                                                                <label for="address">
-                                                                    <b>العنوان</b>
-                                                                </label>
-                                                                <input type="text" id="address" name="address"
-                                                                    class="form-control mb-2 text-center"
-                                                                    placeholder="العنوان">
-                                                                <label for="gov">
-                                                                    <b>المحافظة</b>
-                                                                </label>
-                                                                <input type="text" id="gov" name="gov"
-                                                                    class="form-control mb-2 text-center"
-                                                                    placeholder="المحافظة">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="inputs">
-                                                            <div class="inputs-title">
-                                                                <h3 class="mb-2 bg-info p-2 rounded text-white">البيانات
-                                                                    المادية</h3>
-                                                            </div>
-                                                            <div class="inputs-body">
-                                                                <label>
-                                                                    <b>نوع الدخل</b>
-                                                                </label>
-                                                                <select name="income_type" class="form-control">
-                                                                    <option class="text-center" selected>إختار
-                                                                        نوع الدخل للحالة</option>
-                                                                    <option value="retire">
-                                                                        معاش</option>
-                                                                    <option value="without">
-                                                                        بدون</option>
-                                                                </select>
-                                                                <label class="mt-2">
-                                                                    <b>الحالة التأمينية</b>
-                                                                </label>
-                                                                <input type="number" name="monthly_income"
-                                                                    class="form-control  text-center"
-                                                                    placeholder="الحالة التأمينية">
-                                                                <label class="mt-2">
-                                                                    <b>نوع الإستفادة</b>
-                                                                </label>
-                                                                <select name="benefit_type" class="form-control">
-                                                                    <option class="text-center" selected>إختار
-                                                                        نوع الإستفادة للحالة</option>
-                                                                    <option value="food">
-                                                                        عينية</option>
-                                                                    <option value="money">
-                                                                        مادية</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="inputs mt-3">
-                                                            <div class="inputs-title">
-                                                                <h3 class="mb-2 bg-warning p-2 rounded text-white">
-                                                                    البيانات الإجتماعية</h3>
-                                                            </div>
-                                                            <div class="inputs-body">
-                                                                <label class="mb-2">
-                                                                    <b>الحالة الاجتماعية</b>
-                                                                </label>
-                                                                <select name="marital_status" class="form-control mb-2">
-                                                                    <option class="text-center" selected>إختار
-                                                                        الحالة الاجتماعية للحالة</option>
-                                                                    <option value="single">
-                                                                        أعزب</option>
-                                                                    <option value="married">
-                                                                        متزوج/ة</option>
-                                                                    <option value="widow">
-                                                                        أرمل/ة</option>
-                                                                    <option value="divorced">
-                                                                        مطلق/ة</option>
-                                                                </select>
-                                                                <label class="mb-2">
-                                                                    <b>الحالة الصحية</b>
-                                                                </label>
-                                                                <input type="text" name="health_status"
-                                                                    class="form-control mb-2 text-center"
-                                                                    placeholder="الحالة الصحية">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="inputs mt-3">
-                                                            <div class="inputs-title">
-                                                                <h3 class="mb-2 bg-success p-2 rounded text-white">
-                                                                    العائلة</h3>
-                                                            </div>
-                                                            <div class="inputs-body">
-                                                                <label class="mb-2">
-                                                                    <b>عدد الأولاد</b>
-                                                                </label>
-                                                                <input type="number" name="sons"
-                                                                    class="form-control text-center mb-2"
-                                                                    placeholder="عدد الأولاد">
-                                                                <label class="mb-2">
-                                                                    <b>عدد البنات</b>
-                                                                </label>
-                                                                <input type="number" name="daughters"
-                                                                    class="form-control text-center"
-                                                                    placeholder="عدد البنات">
+                                                                <input type="hidden" name="id" value="id">
+                                                                <div class="form-groups d-flex align-items-center mb-2">
+                                                                    <label for="fullname">
+                                                                        <b>الإسم:</b>
+                                                                    </label>
+                                                                    <input type="text" id="fullname" name="name" value="{{ $donate->name }}" class="form-control text-center border border-0 w-50" placeholder="إسم المتبرع" readonly>
+                                                                </div>
+                                                                <div class="form-groups d-flex align-items-center mb-2">
+                                                                    <label for="phone_number">
+                                                                        <b>رقم المحمول:</b>
+                                                                    </label>
+                                                                    <input type="number" id="phone_number" name="mobile_phone" value="{{$donate->mobile_phone}}" class="form-control text-center border border-0 w-50" placeholder="رقم المحمول" readonly>
+                                                                </div>
+                                                                <div class="form-groups d-flex align-items-center mb-2">
+                                                                    <label for="ssn">
+                                                                        <b>المبلغ:</b>
+                                                                    </label>
+                                                                    <input type="number" id="ssn" name="amount" class="form-control text-center w-50" placeholder="المبلغ المتبرع">
+                                                                </div>
+                                                                <div class="form-groups d-flex align-items-center mb-2">
+                                                                    <label for="address">
+                                                                        <b>المدة الزمنية:</b>
+                                                                    </label>
+                                                                    <input type="text" id="address" name="duration" value="{{$donate->duration}}" class="form-control text-center border border-0 w-50" placeholder="العنوان" readonly>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                        <input type="submit" class="btn btn-primary mt-3 d-block w-100"
-                                                            height="50px" value="Submit">
+                                                        <input type="submit" class="btn btn-success mt-3 d-block w-100 text-white" height="50px" value="إرسال">
                                                     </div>
                                                 </div>
                                             </div>
