@@ -49,7 +49,7 @@
         <div class="header-divider"></div>
         <section class="content-header w-100">
             <div class="container-fluid d-flex">
-                <div class="row align-item-center">
+                <div class="row align-items-center">
                     <div class="col-sm-12">
                         <div class="d-flex justify-content-between w-100 align-items-center">
                             <ol class="breadcrumb float-sm-right">
@@ -125,6 +125,7 @@
                                 <option class="text-center" selected>إختار نوع الدخل</option>
                                 <option value="retire">معاش</option>
                                 <option value="without">بدون</option>
+                                <option value="other">مصدر أخر</option>
                             </select>
                         </div>
                     </div>
@@ -137,9 +138,11 @@
                     <div class="col-lg-6">
                         <div class="field">
                             <select name="benefit_type" class="form-control mb-2">
-                                <option class="text-center" selected>إختار نوع الإستفادة للحالة</option>
+                                <option class="text-center" selected>إختار نوع الإستفادة</option>
                                 <option value="food">عينية</option>
                                 <option value="money">نقدية</option>
+                                <option value="monthly">شهري</option>
+                                <option value="seasonal">موسمي</option>
                             </select>
                         </div>
                     </div>

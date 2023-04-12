@@ -48,7 +48,7 @@
         </div>
         <div class="header-divider"></div>
         <section class="content-header w-100">
-            <div class="container-fluid d-flex">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="d-flex justify-content-between w-100 align-items-center">

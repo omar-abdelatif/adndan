@@ -165,7 +165,7 @@
                                 <td>{{ $case->id }}</td>
                                 <td>{{ $case->fullname }}</td>
                                 <td>{{ $case->phone_number }}</td>
-                                <td>{{ $case->created_at }}</td>
+                                <td>{{ $case->created_at->format('Y-m-d') }}</td>
                                 <td>
                                     <a class="btn btn-danger" style="border-radius: 40px"
                                         href='{{ url("delete/$case->id") }}'>

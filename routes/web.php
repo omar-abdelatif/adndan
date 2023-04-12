@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::get('edit-donator/{id}', [DonatorController::class, 'edit'])->name('donator.edit');
     Route::post('update-donator', [DonatorController::class, 'update'])->name('donator.update');
     Route::get('history/{id}', [DonatorController::class, 'history'])->name('donator.history');
+    //! Donation History
+    Route::view('add_donation', 'donation.addnew')->name('donation.insert');
     //! Reports
     Route::view('allreports', 'reports.index')->name('reports.index');
 });
