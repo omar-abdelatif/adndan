@@ -17,4 +17,8 @@ class Donator extends Model
         'amount',
         'duration'
     ];
+    public function donationHistory()
+    {
+        return $this->hasMany(DonationHistory::class);
+    }
 }

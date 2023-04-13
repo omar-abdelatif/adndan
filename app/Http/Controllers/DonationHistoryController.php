@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Donator;
 use Illuminate\Http\Request;
 use App\Models\DonationHistory;
-use Illuminate\Support\Facades\Auth;
 
 class DonationHistoryController extends Controller
 {
-    public function index()
+    public function index($donatorId)
     {
-        $donation = DonationHistory::all();
-        return view('donation.index', compact('donation'));
+        $donator = Donator::find($donatorId);
+        $donationHistory = $donator->donationHistory;
+        return view('donation.index', compact('donator', 'donationHistory'));
     }
     public function AddNew()
     {
@@ -25,16 +26,28 @@ class DonationHistoryController extends Controller
             'amount' => 'required|numeric',
             'duration' => 'required|in:1month,3month,6month,annually,other'
         ]);
-        $store = DonationHistory::create([
-            'name' => $request->name,
-            'mobile_phone' => $request->mobile_phone,
-            'amount' => $request->amount,
-            'duration' => $request->duration,
-            'donator_id' => Auth::id(),
-        ]);
+        $donator = Donator::where('mobile_phone', $request->mobile_phone)->first();
+        if ($donator) {
+            $donation = new DonationHistory();
+            $donation->name = $request->name;
+            $donation->mobile_phone = $request->mobile_phone;
+            $donation->amount = $request->amount;
+            $donation->duration = $request->duration;
+            $donation->donator_id = $donator->id;
+            $store = $donation->save();
+        }
         if ($store) {
-            return redirect()->route('donation.index')->with('success', 'تم الإضافة بنجاح');
+            return redirect()->route('donation.index', ['id' => $donator->id])->with('success', 'تم الإضافة بنجاح');
         }
         return redirect()->route('donation.addnew')->withErrors($validator);
+    }
+    public function destroy($id)
+    {
+        $donation = DonationHistory::find($id);
+        if ($donation) {
+            $donation->delete();
+            return redirect()->back()->with('success', 'تم الحذف بنجاح');
+        }
+        return redirect()->back()->with('error', 'لم يتم العثور على التبرع');
     }
 }

@@ -81,8 +81,7 @@
             </div>
         @endforeach
     @endif
-    <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]'
-        data-page-length='10'>
+    <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
         <thead>
             <tr>
                 <td class="text-center">id</td>
@@ -104,7 +103,7 @@
                     <td>{{ $donate->duration }}</td>
                     <td>{{ $donate->created_at->format('Y-m-d') }}</td>
                     <td>
-                        <a href="{{ url('history/' . $donate->id) }}" class="btn btn-success text-white">History</a>
+                        <a href="{{ url('all_donations/' . $donate->id) }}" class="btn btn-success text-white">History</a>
                         <a href="{{ url('edit-donator/' . $donate->id) }}" class="btn btn-warning">Edit</a>
                         <a href="{{ url('delete-donator/' . $donate->id) }}" class="btn btn-danger">Delete</a>
                         <button type="button" style="border-radius: 40px" class="btn btn-info text-white"

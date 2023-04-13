@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Donator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class DonationHistory extends Model
 {
@@ -14,8 +16,9 @@ class DonationHistory extends Model
         'mobile_phone',
         'amount',
         'duration',
-        'donator_id'
+        'donator_id',
     ];
+
     public function donator()
     {
         return $this->belongsTo(Donator::class);
