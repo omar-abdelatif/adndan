@@ -10,7 +10,9 @@
     <link rel="shortcut icon" href="{{ asset('icons/download.png') }}" type="image/x-icon">
     @vite('resources/sass/app.scss')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
+    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-ecdc8d53.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('build/assets/backend/css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@4.4.3/dist/css/coreui.min.css">
 </head>
 
 <body>
@@ -49,8 +51,9 @@
         </footer>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@4.4.3/dist/js/coreui.bundle.min.js"></script>
+    {{-- <script src="{{ asset('js/coreui.bundle.min.js') }}"></script> --}}
     <script src="{{ asset('build/assets/backend/js/custom.js') }}"></script>
 </body>
 

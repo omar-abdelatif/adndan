@@ -49,11 +49,6 @@ class DonatorController extends Controller
             return view('donator.edit', compact('donate'));
         }
     }
-    public function history($id)
-    {
-        $history = Donator::find($id);
-        return view('donator.history', compact('history'));
-    }
     public function update(Request $request)
     {
         $donator = Donator::find($request->id);

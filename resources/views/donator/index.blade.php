@@ -21,8 +21,7 @@
             <ul class="header-nav ms-auto"></ul>
             <ul class="header-nav ms-3">
                 <li class="nav-item dropdown">
-                    <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-end pt-0">
@@ -34,8 +33,7 @@
                         </a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); this.closest('form').submit();">
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
                                 <svg class="icon me-2">
                                     <use xlink:href="{{ asset('icons/coreui.svg#cil-account-logout') }}"></use>
                                 </svg>
@@ -81,8 +79,7 @@
             </div>
         @endforeach
     @endif
-    <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]'
-        data-page-length='10'>
+    <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
         <thead>
             <tr>
                 <td class="text-center">id</td>
@@ -105,18 +102,16 @@
                         <a href="{{ url('all_donations/' . $donate->id) }}" class="btn btn-success text-white">
                             <b>History</b>
                         </a>
-                        <button type="button" class="btn btn-warning" data-coreui-toggle="modal"
-                            data-coreui-target="#edit_{{ $donate->id }}" data-coreui-whatever="@mdo">
+
+                        <button type="button" class="btn btn-warning" data-coreui-toggle="modal" data-coreui-target="#edit_{{ $donate->id }}" data-coreui-whatever="@mdo">
                             <b>تعديل</b>
                         </button>
-                        <div class="modal fade" dir="rtl" id="edit_{{ $donate->id }}" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" dir="rtl" id="edit_{{ $donate->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">بيانات المتبرع كاملة</h5>
-                                        <button type="button" class="btn-close" data-coreui-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <form action="{{ route('donator.update') }}" method="post">
@@ -126,60 +121,40 @@
                                                     <div class="col-lg-12">
                                                         <div class="inputs">
                                                             <div class="inputs-title mb-2">
-                                                                <h3 class="mb-2 bg-primary p-2 rounded text-white">تعديل
-                                                                    البيانات الشخصية</h3>
+                                                                <h3 class="mb-2 bg-primary p-2 rounded text-white">تعديل البيانات الشخصية</h3>
                                                             </div>
                                                             <div class="inputs-body">
-                                                                <input type="hidden" name="id" value="{{$donate->id}}">
+                                                                <input type="hidden" name="id" value="{{ $donate->id }}">
                                                                 <div class="form-groups d-flex align-items-center mb-2">
                                                                     <label for="name">
-                                                                        <b>الإسم:</b>
+                                                                        <b>الإسم الكامل:</b>
                                                                     </label>
-                                                                    <input type="text" id="name" name="name"
-                                                                        value="{{ $donate->name }}"
-                                                                        class="form-control text-center w-50 border border-2 border-dark ms-3"
-                                                                        placeholder="إسم المتبرع">
+                                                                    <input type="text" id="name" name="name" value="{{ $donate->name }}" class="form-control text-center w-50 border border-2 border-dark ms-3" placeholder="إسم المتبرع">
                                                                 </div>
                                                                 <div class="form-groups d-flex align-items-center mb-2">
                                                                     <label for="phone_number">
                                                                         <b>رقم المحمول:</b>
                                                                     </label>
-                                                                    <input type="number" id="phone_number"
-                                                                        name="mobile_phone"
-                                                                        value="{{ $donate->mobile_phone }}"
-                                                                        class="form-control text-center w-50 border border-2 border-dark ms-3"
-                                                                        placeholder="رقم المحمول">
+                                                                    <input type="number" id="phone_number" name="mobile_phone" value="{{ $donate->mobile_phone }}" class="form-control text-center w-50 border border-2 border-dark ms-3" placeholder="رقم المحمول">
                                                                 </div>
                                                                 <div class="form-groups d-flex align-items-center mb-2">
                                                                     <label for="address">
                                                                         <b>المدة الزمنية:</b>
                                                                     </label>
-                                                                    <select name="duration" class="form-control w-50 border border-2 border-dark ms-3">
+                                                                    <select name="duration" id="choices-multiple-remove-button" class="form-control w-50 border border-2 border-dark ms-3" multiple>
                                                                         <option selected>إختار المدة</option>
-                                                                        <option value="1month"
-                                                                            {{ $donate->duration == '1month' ? 'selected' : '' }}>
-                                                                            شهري</option>
-                                                                        <option value="3month"
-                                                                            {{ $donate->duration == '3month' ? 'selected' : '' }}>
-                                                                            3 شهور</option>
-                                                                        <option value="6month"
-                                                                            {{ $donate->duration == '6month' ? 'selected' : '' }}>
-                                                                            6 شهور</option>
-                                                                        <option value="annually"
-                                                                            {{ $donate->duration == 'annually' ? 'selected' : '' }}>
-                                                                            سنوي</option>
-                                                                        <option value="other"
-                                                                            {{ $donate->duration == 'other' ? 'selected' : '' }}>
-                                                                            أخرى</option>
+                                                                        <option value="1month" {{ $donate->duration == '1month' ? 'selected' : '' }}>شهري</option>
+                                                                        <option value="3month" {{ $donate->duration == '3month' ? 'selected' : '' }}>3 شهور</option>
+                                                                        <option value="6month" {{ $donate->duration == '6month' ? 'selected' : '' }}>6 شهور</option>
+                                                                        <option value="annually" {{ $donate->duration == 'annually' ? 'selected' : '' }}>سنوي</option>
+                                                                        <option value="other" {{ $donate->duration == 'other' ? 'selected' : '' }}>أخرى</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                        <input type="submit"
-                                                            class="btn btn-success mt-3 d-block w-100 text-white"
-                                                            height="50px" value="إرسال">
+                                                        <input type="submit" class="btn btn-success mt-3 d-block w-100 text-white" height="50px" value="إرسال">
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,26 +166,23 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" style="border-radius: 40px" class="btn btn-info text-white"
-                            data-coreui-toggle="modal" data-coreui-target="#donation_{{ $donate->id }}"
-                            data-coreui-whatever="@mdo">
+
+                        <button type="button" style="border-radius: 40px" class="btn btn-info text-white" data-coreui-toggle="modal" data-coreui-target="#donation_{{ $donate->id }}" data-coreui-whatever="@mdo">
                             <b>إضافة تبرع</b>
                         </button>
-                        <div class="modal fade" dir="rtl" id="donation_{{ $donate->id }}" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" dir="rtl" id="donation_{{ $donate->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">إضافة تبرع جديد</h5>
-                                        <button type="button" class="btn-close" data-coreui-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body p-0">
                                         <form action="{{ route('donation.store') }}" method="post">
                                             @csrf
-                                            <div class="data-info bg-light p-3 rounded mt-3">
+                                            <div class="data-info bg-light p-3 rounded">
                                                 <div class="data-info-title mt-3">
-                                                    <h3 class="text-center text-dark">البيانات الشخصية</h3>
+                                                    <h3 class="text-center text-dark text-decoration-underline">البيانات الشخصية</h3>
                                                 </div>
                                                 <table class="table borderd-table align-middle text-center text-dark mt-3">
                                                     <thead>
@@ -229,51 +201,27 @@
                                                                 <input type="number" name="amount" class="form-control text-center" placeholder="المبلغ المتبرع">
                                                             </td>
                                                             <td>
-                                                                <select name="duration" class="form-control">
-                                                                    <option selected>إختار المدة</option>
+                                                                <select name="duration" id="ms1" class="form-multi-select" multiple>
+                                                                    <option>إختار المدة</option>
                                                                     <option value="1month" {{ $donate->duration == '1month' ? 'selected' : '' }}>شهري</option>
                                                                     <option value="3month" {{ $donate->duration == '3month' ? 'selected' : '' }}>3 شهور</option>
                                                                     <option value="6month" {{ $donate->duration == '6month' ? 'selected' : '' }}>6 شهور</option>
                                                                     <option value="annually" {{ $donate->duration == 'annually' ? 'selected' : '' }}>سنوي</option>
                                                                     <option value="other" {{ $donate->duration == 'other' ? 'selected' : '' }}>أخرى</option>
                                                                 </select>
+                                                                {{-- <select class="form-multi-select" id="ms1" multiple>
+                                                                    <option value="0">Angular</option>
+                                                                    <option value="1">Bootstrap</option>
+                                                                    <option value="2">React.js</option>
+                                                                    <option value="3">Vue.js</option>
+                                                                </select> --}}
                                                             </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                                 <input type="submit" class="btn btn-primary mt-3 d-block w-100 text-white" value="إرسال">
                                             </div>
-                                            <div class="container-fluid">
-                                                <div class="row">
-                                                    <div class="col-12">
-
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </form>
-                                        <div class="donation-history bg-secondary p-3 rounded mt-3 mb-3">
-                                            <div class="history-title">
-                                                <h3 class="text-center text-white text-decoration-underline">
-                                                    <b>التبرعات السابقة</b>
-                                                </h3>
-                                            </div>
-                                            <div class="history-content">
-                                                <table class="table borderd-table display align-middle text-center text-white mt-3" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
-                                                    <thead>
-                                                        <tr>
-                                                            <td class="text-center">id</td>
-                                                            <td class="text-center">الإسم</td>
-                                                            <td class="text-center">رقم التلفون</td>
-                                                            <td class="text-center">المدة الزمنية</td>
-                                                            <td class="text-center">تاريخ التبرع</td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
