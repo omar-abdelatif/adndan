@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::table('donators', function (Blueprint $table) {
             $table->string('name')->after('id');
             $table->bigInteger('mobile_phone')->after('name');
-            $table->integer('amount')->after('mobile_phone');
-            $table->string('duration')->after('amount');
+            $table->string('duration')->after('mobile_phone');
         });
     }
 

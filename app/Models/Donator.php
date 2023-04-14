@@ -14,7 +14,6 @@ class Donator extends Model
     protected $fillable = [
         'name',
         'mobile_phone',
-        'amount',
         'duration'
     ];
     public function donationHistory()

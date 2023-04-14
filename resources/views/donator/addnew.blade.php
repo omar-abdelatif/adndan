@@ -59,6 +59,9 @@
                                 <li class="breadcrumb-item">
                                     <a href="{{ route('showall') }}">الكفالة</a>
                                 </li>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('donator.index') }}">كل المتبرعين</a>
+                                </li>
                                 <li class="breadcrumb-item active">إضافة متبرع</li>
                             </ol>
                         </div>
@@ -85,7 +88,6 @@
                 @csrf
                 <input type="text" name="name" class="form-control mb-2 text-center" placeholder="إسم المتبرع">
                 <input type="number" name="mobile_phone" class="form-control mb-2 text-center" placeholder="رقم المحمول">
-                <input type="number" name="amount" class="form-control mb-2 text-center" placeholder="المبلغ">
                 <select name="duration" class="form-control">
                     <option selected>إختار المدة</option>
                     <option value="1month">شهري</option>

@@ -49,9 +49,9 @@
         <div class="header-divider"></div>
         <section class="content-header w-100">
             <div class="container-fluid d-flex">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col-sm-12">
-                        <div class="d-flex justify-content-between w-100 align-items-center">
+                        <div>
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item">
                                     <a href="{{ route('home') }}">الرئيسية</a>
@@ -69,7 +69,41 @@
     </header>
 @endsection
 @section('content')
-<div class="text-center d-flex align-items-center justify-content-center" style="height: 90vh">
-    <h1 class="">Soon With Love</h1>
+<div class="report text-center">
+    <div class="report-title mt-4">
+        <h1>تقرير</h1>
+    </div>
+    <div class="report-content bg-secondary p-3 rounded w-100 mt-4">
+        <div class="report-logo mt-5 ms-5 d-flex align-items-center justify-content-center">
+            <img src="{{asset('icons/download.png')}}" width="90" alt="logo">
+            <h1 class="ps-3">جمعية أدندان الخيرية</h1>
+        </div>
+        <div class="report-info mt-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="inputs">
+                            <p class="mb-0 bg-light p-2 mb-2 rounded w-100 text-right">
+                                <b>الإسم:</b>
+                            </p>
+                            <p class="mb-0 bg-light p-2 mb-2 rounded w-100 text-right">
+                                <b>رقم المحمول:</b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="inputs">
+                            <p class="mb-0 bg-light p-2 mb-2 rounded w-100 text-right">
+                                <b></b>
+                            </p>
+                            <p class="mb-0 bg-light p-2 mb-2 rounded w-100 text-right">
+                                <b></b>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

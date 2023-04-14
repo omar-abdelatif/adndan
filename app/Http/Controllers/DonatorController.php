@@ -21,13 +21,11 @@ class DonatorController extends Controller
         $validator = $request->validate([
             'name' => 'required|string',
             'mobile_phone' => 'required|numeric',
-            'amount' => 'required|numeric',
             'duration' => 'required|in:1month,3month,6month,annually,other'
         ]);
         $store = Donator::create([
             'name' => $request->name,
             'mobile_phone' => $request->mobile_phone,
-            'amount' => $request->amount,
             'duration' => $request->duration
         ]);
         if ($store) {
@@ -61,7 +59,6 @@ class DonatorController extends Controller
         $donator = Donator::find($request->id);
         $donator->name = $request->name;
         $donator->mobile_phone = $request->mobile_phone;
-        $donator->amount = $request->amount;
         $donator->duration = $request->duration;
         $update = $donator->save();
         if ($update) {

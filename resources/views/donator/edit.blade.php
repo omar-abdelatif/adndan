@@ -89,7 +89,6 @@
                 <input type="hidden" name="id" value="{{$donate->id}}">
                 <input type="text" name="name" value="{{$donate->name}}" class="form-control mb-2 text-center" placeholder="إسم المتبرع">
                 <input type="number" name="mobile_phone" value="{{$donate->mobile_phone}}" class="form-control mb-2 text-center" placeholder="رقم المحمول">
-                <input type="number" name="amount" value="{{$donate->amount}}" class="form-control mb-2 text-center" placeholder="المبلغ">
                 <select name="duration" class="form-control">
                     <option selected>إختار المدة</option>
                     <option value="1month" {{ $donate->duration == '1month' ? 'selected' : '' }}>شهري</option>
