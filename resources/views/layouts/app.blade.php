@@ -9,10 +9,10 @@
     <meta name="theme-color" content="#ffffff">
     <link rel="shortcut icon" href="{{ asset('icons/download.png') }}" type="image/x-icon">
     @vite('resources/sass/app.scss')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
     {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-ecdc8d53.css') }}"> --}}
-    <link rel="stylesheet" href="{{ asset('build/assets/backend/css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@4.4.3/dist/css/coreui.min.css">
+    <link rel="stylesheet" href="{{ asset('build/assets/backend/css/style.css') }}">
 </head>
 
 <body>

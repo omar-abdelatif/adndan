@@ -24,15 +24,17 @@ class DonationHistoryController extends Controller
             'name' => 'required|string',
             'mobile_phone' => 'required|numeric',
             'amount' => 'required|numeric',
-            'duration' => 'required|in:1month,3month,6month,annually,other'
+            'duration' => 'required|in:1month,3month,6month,annually,other|array',
+            'duration.*' => 'required|string|distinct|max:255',
         ]);
         $donator = Donator::where('mobile_phone', $request->mobile_phone)->first();
+        $duration = implode(',', $request->input('duration'));
         if ($donator) {
             $donation = new DonationHistory();
             $donation->name = $request->name;
             $donation->mobile_phone = $request->mobile_phone;
             $donation->amount = $request->amount;
-            $donation->duration = $request->duration;
+            $donation->duration = $duration;
             $donation->donator_id = $donator->id;
             $store = $donation->save();
         }

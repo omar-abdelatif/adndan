@@ -141,7 +141,7 @@
                                                                     <label for="address">
                                                                         <b>المدة الزمنية:</b>
                                                                     </label>
-                                                                    <select name="duration" id="choices-multiple-remove-button" class="form-control w-50 border border-2 border-dark ms-3" multiple>
+                                                                    <select name="duration" class="form-control w-50 border border-2 border-dark ms-3">
                                                                         <option selected>إختار المدة</option>
                                                                         <option value="1month" {{ $donate->duration == '1month' ? 'selected' : '' }}>شهري</option>
                                                                         <option value="3month" {{ $donate->duration == '3month' ? 'selected' : '' }}>3 شهور</option>
@@ -171,7 +171,7 @@
                             <b>إضافة تبرع</b>
                         </button>
                         <div class="modal fade" dir="rtl" id="donation_{{ $donate->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                            <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">إضافة تبرع جديد</h5>
@@ -195,13 +195,17 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td>{{ $donate->name }}</td>
-                                                            <td>{{ $donate->mobile_phone }}</td>
+                                                            <td>
+                                                                <input type="text" id="name" name="name" value="{{ $donate->name }}" class="form-control text-center border border-2 border-dark" placeholder="إسم المتبرع">
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" id="phone_number" name="mobile_phone" value="{{ $donate->mobile_phone }}" class="form-control text-center border border-2 border-dark" placeholder="رقم المحمول">
+                                                            </td>
                                                             <td>
                                                                 <input type="number" name="amount" class="form-control text-center" placeholder="المبلغ المتبرع">
                                                             </td>
                                                             <td>
-                                                                <select name="duration" id="ms1" class="form-multi-select" multiple>
+                                                                <select name="duration[]" class="form-multi-select" multiple>
                                                                     <option>إختار المدة</option>
                                                                     <option value="1month" {{ $donate->duration == '1month' ? 'selected' : '' }}>شهري</option>
                                                                     <option value="3month" {{ $donate->duration == '3month' ? 'selected' : '' }}>3 شهور</option>
