@@ -61,11 +61,8 @@
                                 </li>
                                 <li class="breadcrumb-item active">كل الحالات</li>
                             </ol>
-                            <a href="{{route('addnew')}}" class="btn btn-success">
+                            <button type="button" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#addcase" data-coreui-whatever="@mdo">
                                 <b>إضافة حالة</b>
-                            </a>
-                            <button type="button" style="border-radius: 40px" class="btn btn-warning" data-coreui-toggle="modal" data-coreui-target="#addcase" data-coreui-whatever="@mdo">
-                                <b>عرض</b>
                             </button>
                         </div>
                     </div>
@@ -120,7 +117,7 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @if ($countall > 0)
+            @if ($countall > 0)
                 @foreach ($data as $case)
                     <tr>
                         <td>{{ $case->id }}</td>
@@ -278,15 +275,15 @@
                 @endforeach
             @else
                 <h1 class="text-center mb-0 mt-5">لا توجد حالات</h1>
-            @endif --}}
+            @endif
         </tbody>
     </table>
 
     <div class="modal fade" id="addcase" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">بيانات الحالة كاملة</h5>
+                    <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة حالة جديدة</h1>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
