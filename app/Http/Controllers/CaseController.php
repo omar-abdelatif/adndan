@@ -18,6 +18,12 @@ class CaseController extends Controller
         $count = TableCase::count();
         return view('home', compact('data', 'count', 'fullDate'));
     }
+    public function ShowCase()
+    {
+        $all = TableCase::all();
+        $countall = TableCase::count();
+        return view('الكفالة.showall', compact('countall'));
+    }
     public function storecase(Request $request)
     {
         //! Validations

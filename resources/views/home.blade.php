@@ -148,7 +148,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='25'>
+            {{-- <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='25'>
                 <thead>
                     <tr>
                         <td class="text-center">id</td>
@@ -167,13 +167,10 @@
                                 <td>{{ $case->phone_number }}</td>
                                 <td>{{ $case->created_at->format('Y-m-d') }}</td>
                                 <td>
-                                    <a class="btn btn-danger" style="border-radius: 40px"
-                                        href='{{ url("delete/$case->id") }}'>
+                                    <a class="btn btn-danger" style="border-radius: 40px" href='{{ url("delete/$case->id") }}'>
                                         <b>حذف</b>
                                     </a>
-                                    <button type="button" style="border-radius: 40px" class="btn btn-warning"
-                                        data-coreui-toggle="modal" data-coreui-target="#exampleModal{{ $case->id }}"
-                                        data-coreui-whatever="@mdo">
+                                    <button type="button" style="border-radius: 40px" class="btn btn-warning" data-coreui-toggle="modal" data-coreui-target="#exampleModal{{ $case->id }}" data-coreui-whatever="@mdo">
                                         <b>عرض</b>
                                     </button>
                                     <div class="modal fade" id="exampleModal{{ $case->id }}" tabindex="-1"
@@ -401,7 +398,7 @@
                         <h1 class="text-center mb-0 mt-5">لا توجد حالات</h1>
                     @endif
                 </tbody>
-            </table>
+            </table> --}}
         </div>
     </div>
 @endsection

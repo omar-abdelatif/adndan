@@ -59,7 +59,12 @@
                                 </li>
                                 <li class="breadcrumb-item active">كل المتبرعين</li>
                             </ol>
-                            <a href="{{ route('donator.addnew') }}" class="btn btn-success">إضافة متبرع</a>
+                            {{-- <a href="{{ route('donator.addnew') }}" class="btn btn-success">
+                                <b>إضافة متبرع</b>
+                            </a> --}}
+                            <button type="button" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#add_donation" data-coreui-whatever="@mdo">
+                                <b>إضافة متبرع</b>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -206,19 +211,19 @@
                                                             </td>
                                                             <td>
                                                                 <select name="duration[]" class="form-multi-select" multiple>
-                                                                    <option>إختار المدة</option>
-                                                                    <option value="1month" {{ $donate->duration == '1month' ? 'selected' : '' }}>شهري</option>
-                                                                    <option value="3month" {{ $donate->duration == '3month' ? 'selected' : '' }}>3 شهور</option>
-                                                                    <option value="6month" {{ $donate->duration == '6month' ? 'selected' : '' }}>6 شهور</option>
-                                                                    <option value="annually" {{ $donate->duration == 'annually' ? 'selected' : '' }}>سنوي</option>
-                                                                    <option value="other" {{ $donate->duration == 'other' ? 'selected' : '' }}>أخرى</option>
+                                                                    <option value="يناير">يناير</option>
+                                                                    <option value="فبراير">فبراير</option>
+                                                                    <option value="مارس">مارس</option>
+                                                                    <option value="إبريل">إبريل</option>
+                                                                    <option value="مايو">مايو</option>
+                                                                    <option value="يونيه">يونيه</option>
+                                                                    <option value="يوليو">يوليو</option>
+                                                                    <option value="أغسطس">أغسطس</option>
+                                                                    <option value="سبتمبر">سبتمبر</option>
+                                                                    <option value="أكتوبر">أكتوبر</option>
+                                                                    <option value="نوفمبر">نوفمبر</option>
+                                                                    <option value="ديسمبر">ديسمبر</option>
                                                                 </select>
-                                                                {{-- <select class="form-multi-select" id="ms1" multiple>
-                                                                    <option value="0">Angular</option>
-                                                                    <option value="1">Bootstrap</option>
-                                                                    <option value="2">React.js</option>
-                                                                    <option value="3">Vue.js</option>
-                                                                </select> --}}
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -235,4 +240,30 @@
             @endforeach
         </tbody>
     </table>
+    <div class="modal fade" dir="rtl" id="add_donation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">إضافة تبرع جديد</h5>
+                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('donator.store')}}" method="post">
+                        @csrf
+                        <input type="text" name="name" class="form-control mb-2 text-center" placeholder="إسم المتبرع">
+                        <input type="number" name="mobile_phone" class="form-control mb-2 text-center" placeholder="رقم المحمول">
+                        <select name="duration" class="form-control">
+                            <option selected>إختار المدة</option>
+                            <option value="1month">شهري</option>
+                            <option value="3month">3 شهور</option>
+                            <option value="6month">6 شهور</option>
+                            <option value="annually">سنوي</option>
+                            <option value="other">أخرى</option>
+                        </select>
+                        <button type="submit" class="btn btn-success w-100 mt-3 text-center text-white">إرسال</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

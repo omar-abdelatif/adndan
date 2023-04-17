@@ -14,33 +14,25 @@
         <ul class="nav-group-items" style="height: 0px;">
             <li class="nav-item">
                 <a class="nav-link" href="{{route('showall')}}" target="_top">
-                    <svg class="nav-icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-people') }}"></use>
-                    </svg>
+                    <img src="{{asset('icons/all_cases.png')}}" width="100" alt="alcases">
                     إجمالي الحالات
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('addnew')}}" target="_top">
-                    <svg class="nav-icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-playlist-add') }}"></use>
-                    </svg>
+                    <img src="{{asset('icons/add_case.png')}}" width="120" alt="alcases">
                     إضافة حالة
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('donator.index')}}" target="_top">
-                    <svg class="nav-icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-playlist-add') }}"></use>
-                    </svg>
+                    <img src="{{asset('icons/donator.png')}}" width="100" alt="alcases">
                     المتبرع
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('reports.index')}}" target="_top">
-                    <svg class="nav-icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-playlist-add') }}"></use>
-                    </svg>
+                    <img src="{{asset('icons/report.png')}}" width="100" alt="alcases">
                     تقارير
                 </a>
             </li>
