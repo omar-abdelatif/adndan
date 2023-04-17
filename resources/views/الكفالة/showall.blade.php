@@ -64,6 +64,9 @@
                             <a href="{{route('addnew')}}" class="btn btn-success">
                                 <b>إضافة حالة</b>
                             </a>
+                            <button type="button" style="border-radius: 40px" class="btn btn-warning" data-coreui-toggle="modal" data-coreui-target="#addcase" data-coreui-whatever="@mdo">
+                                <b>عرض</b>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -75,6 +78,37 @@
     <div class="cases-title bg-info-gradient mt-5 p-3 rounded w-50 mx-auto text-center">
         <h1 class="text-white">إجمالي الحالات</h1>
     </div>
+    <div class="upload-csv mt-5">
+        <button type="button" class="btn btn-primary" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">إضافة مجموعة حالات</h5>
+                        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('import') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="file" name="excel" class="form-control">
+                                        <input type="submit" class="btn btn-primary mt-3 d-block w-100" height="50px" value="Submit">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (session('success'))
+        <div class="alert alert-success text-center mt-5">
+            <p class="mb-0">{{ session('success') }}</p>
+        </div>
+    @endif
     <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
         <thead>
             <tr>
@@ -86,8 +120,8 @@
             </tr>
         </thead>
         <tbody>
-            @if ($countall > 0)
-                {{-- @foreach ($data as $case)
+            {{-- @if ($countall > 0)
+                @foreach ($data as $case)
                     <tr>
                         <td>{{ $case->id }}</td>
                         <td>{{ $case->fullname }}</td>
@@ -241,10 +275,132 @@
                             </div>
                         </td>
                     </tr>
-                @endforeach --}}
+                @endforeach
             @else
                 <h1 class="text-center mb-0 mt-5">لا توجد حالات</h1>
-            @endif
+            @endif --}}
         </tbody>
     </table>
+
+    <div class="modal fade" id="addcase" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">بيانات الحالة كاملة</h5>
+                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ 'storecase' }}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <input type="text" name="fullname" placeholder="إسم الحالة"
+                                class="form-control mb-3 text-center">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <input type="number" name="ssn" placeholder="الرقم القومي"
+                                class="form-control mb-3 text-center">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <input type="number" name="phone_number" placeholder="رقم المحمول"
+                                class="form-control mb-3 text-center">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <input type="number" name="age" placeholder="سن الحالة"
+                                class="form-control mb-3 text-center">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <input type="text" name="address" placeholder="العنوان"
+                                class="form-control mb-3 text-center">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <select name="income_type" class="form-control mb-3">
+                                <option class="text-center" selected>إختار نوع الدخل</option>
+                                <option value="retire">معاش</option>
+                                <option value="without">بدون</option>
+                                <option value="other">مصدر أخر</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <input type="text" name="monthly_income" class="form-control mb-3 text-center"
+                                placeholder="الدخل الشهري">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <select name="benefit_type" class="form-control mb-2">
+                                <option class="text-center" selected>إختار نوع الإستفادة</option>
+                                <option value="food">عينية</option>
+                                <option value="money">نقدية</option>
+                                <option value="monthly">شهري</option>
+                                <option value="seasonal">موسمي</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <select name="marital_status" class="form-control mb-2">
+                                <option class="text-center" selected>إختار الحالة الاجتماعية للحالة</option>
+                                <option value="single">أعزب</option>
+                                <option value="married">متزوج/ة</option>
+                                <option value="widow">أرمل/ة</option>
+                                <option value="divorced">مطلق/ة</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <input type="text" name="health_status"
+                                class="form-control mb-3 text-center"placeholder="الحالة الصحية">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <input type="number" name="sons" class="form-control text-center mb-3"
+                                placeholder="عدد الأولاد">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <input type="number" name="daughters" class="form-control text-center mb-3"
+                                placeholder="عدد البنات">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <input type="text" name="gov" class="form-control mb-3 text-center"
+                                placeholder="المحافظة">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <input type="file" name="files" class="form-control mb-3 text-center" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="field">
+                            <input type="submit" value="إضافة" class="btn btn-success w-100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

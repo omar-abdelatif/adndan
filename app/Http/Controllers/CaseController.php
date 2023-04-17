@@ -2,27 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TableCase;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\TableCase;
 use App\Imports\UserImport;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class CaseController extends Controller
 {
     public function viewData()
     {
-        $date = Carbon::now();
-        $fullDate = $date->format('l jS F Y');
         $data = TableCase::all();
-        $count = TableCase::count();
-        return view('home', compact('data', 'count', 'fullDate'));
-    }
-    public function ShowCase()
-    {
-        $all = TableCase::all();
-        $countall = TableCase::count();
-        return view('الكفالة.showall', compact('countall'));
+        return view('الكفالة.showall', compact('data'));
     }
     public function storecase(Request $request)
     {
@@ -68,9 +59,9 @@ class CaseController extends Controller
             'files' => $name,
         ]);
         if ($store) {
-            return redirect()->route('home')->with('success', 'تمت الإضافة بنجاح');
+            return redirect()->route('showall')->with('success', 'تمت الإضافة بنجاح');
         }
-        return redirect()->route('addnew')->withErrors($request->validate());
+        return redirect()->route('showall')->withErrors($request->validate());
     }
     public function delete($id)
     {
@@ -83,9 +74,9 @@ class CaseController extends Controller
                 }
             }
             $case->delete();
-            return redirect()->route('home')->with('success', 'تم حذف بيانات المستخدم بنجاح');
+            return redirect()->route('showall')->with('success', 'تم حذف بيانات المستخدم بنجاح');
         }
-        return redirect()->route('home')->withErrors('error', 'خطأ في الخذف');
+        return redirect()->route('showall')->withErrors('error', 'خطأ في الخذف');
     }
     public function updatecase(Request $request)
     {
@@ -121,13 +112,13 @@ class CaseController extends Controller
         $case->daughters = $request->daughters;
         $update = $case->save();
         if ($update) {
-            return redirect('home')->with('success', 'تم تعديل الحالة بنجاح');
+            return redirect()->route('showall')->with('success', 'تم تعديل الحالة بنجاح');
         }
-        return redirect('home')->withErrors('حدث خطأ في المدخلات');
+        return redirect()->route('showall')->withErrors('حدث خطأ في المدخلات');
     }
     public function importExcel(Request $request)
     {
         Excel::import(new UserImport, $request->file('excel'));
-        return redirect()->route('home')->with('success', 'تم الإسترداد بنجاح');
+        return redirect()->route('showall')->with('success', 'تم الإسترداد بنجاح');
     }
 }
