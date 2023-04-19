@@ -106,6 +106,7 @@
                     <div class="date-filter mt-3 mb-3">
                         <div class="date-filter text-center text-white w-50 mx-auto">
                             <form action="{{route('reports.index')}}" method="get" class="d-flex">
+                                @csrf
                                 <input type="month" name="date" class="form-control">
                                 <input type="submit" value="Submit" class="btn btn-primary mr-2">
                             </form>

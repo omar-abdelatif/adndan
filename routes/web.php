@@ -6,6 +6,7 @@ use App\Http\Controllers\CaseController;
 use App\Http\Controllers\DonatorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonationHistoryController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -43,5 +44,5 @@ Route::middleware('auth')->group(function () {
     Route::post('add_donation', [DonationHistoryController::class, 'donationstore'])->name('donation.store');
     Route::get('delete_donation/{id}', [DonationHistoryController::class, 'destroy'])->name('donation.destroy');
     //! Reports
-    Route::view('allreports', 'reports.index')->name('reports.index');
+    Route::get('allreports', [ReportController::class, 'index'])->name('reports.index');
 });
