@@ -19,8 +19,7 @@
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
         <div class="sidebar-brand d-none d-md-flex">
             <div class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
-                <img src="{{ asset('icons/full-logo.png') }}" class="mr-2" width="80%" height="46%"
-                    alt="">
+                <img src="{{ asset('icons/full-logo.png') }}" class="mr-2" width="80%" height="46%" alt="">
             </div>
             <div class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
                 <img src="{{ asset('icons/download.png') }}" width="80%" alt="">
@@ -45,7 +44,7 @@
                 &copy;
                 جمعية أدندان الخيرية
             </div>
-            <div class="ms-auto">تم التصميم و التطوير بواسطة
+            <div class="mr-auto">تم التصميم و التطوير بواسطة
                 <a href="https://www.facebook.com/omar.elmalek.5">Omar Abdelatif</a>
             </div>
         </footer>
@@ -53,7 +52,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@4.4.3/dist/js/coreui.bundle.min.js"></script>
-    {{-- <script src="{{ asset('js/coreui.bundle.min.js') }}"></script> --}}
     <script src="{{ asset('build/assets/backend/js/custom.js') }}"></script>
 </body>
 

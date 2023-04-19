@@ -81,26 +81,44 @@
         <div class="report-info mt-4">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="inputs">
                             <p class="mb-0 bg-light p-2 mb-2 rounded w-100 text-right">
-                                <b>الإسم:</b>
+                                <b>الإسم الكامل:</b>
                             </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="inputs">
                             <p class="mb-0 bg-light p-2 mb-2 rounded w-100 text-right">
                                 <b>رقم المحمول:</b>
                             </p>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="inputs">
                             <p class="mb-0 bg-light p-2 mb-2 rounded w-100 text-right">
-                                <b></b>
-                            </p>
-                            <p class="mb-0 bg-light p-2 mb-2 rounded w-100 text-right">
-                                <b></b>
+                                <b>نوع التبرع:</b>
                             </p>
                         </div>
                     </div>
+                    <hr class="mt-3 text-white">
+                    <div class="date-filter mt-3 mb-3">
+                        <div class="date-filter-title rounded text-center text-white p-3 bg-info w-50 mx-auto">
+                            <h3></h3>
+                        </div>
+                    </div>
+                    <table class="table borderd-table table-striped display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                        <thead>
+                            <tr>
+                                <td class="text-center">id</td>
+                                <td class="text-center">الإسم</td>
+                                <td class="text-center">رقم التلفون</td>
+                                <td class="text-center">تاريخ التسجيل</td>
+                                <td class="text-center">Actions</td>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
