@@ -104,11 +104,14 @@
                     </div>
                     <hr class="mt-3 text-white">
                     <div class="date-filter mt-3 mb-3">
-                        <div class="date-filter-title rounded text-center text-white p-3 bg-info w-50 mx-auto">
-                            <h3></h3>
+                        <div class="date-filter text-center text-white w-50 mx-auto">
+                            <form action="{{route('reports.index')}}" method="get" class="d-flex">
+                                <input type="month" name="date" class="form-control">
+                                <input type="submit" value="Submit" class="btn btn-primary mr-2">
+                            </form>
                         </div>
                     </div>
-                    <table class="table borderd-table table-striped display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                    <table class="table borderd-table table-striped display align-middle text-center mt-2" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                         <thead>
                             <tr>
                                 <td class="text-center">id</td>
