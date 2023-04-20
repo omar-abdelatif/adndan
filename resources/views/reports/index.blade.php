@@ -112,6 +112,13 @@
                             </form>
                         </div>
                     </div>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger mt-3">
+                                <p class="m-0">{{$error}}</p>
+                            </div>
+                        @endforeach
+                    @endif
                     <table class="table borderd-table table-striped display align-middle text-center mt-2" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                         <thead>
                             <tr>
