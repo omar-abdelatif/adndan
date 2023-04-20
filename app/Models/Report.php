@@ -9,4 +9,10 @@ class Report extends Model
 {
     use HasFactory;
     protected $table = 'reports';
+    protected $fillable = [
+        'name',
+        'mobile_phone',
+        'amount',
+        'date'
+    ];
 }

@@ -89,8 +89,8 @@
                         </svg>
                     </div>
                     <div>
-                        <div class="fs-6 fw-semibold text-primary">$0</div>
-                        <div class="text-medium-emphasis text-uppercase fw-semibold small">إجمالي التحويل هذا الشهر</div>
+                        <div class="fs-6 fw-semibold text-primary">{{ $totalAmount }}</div>
+                        <div class="text-medium-emphasis text-uppercase fw-semibold small">إجمالي التبرعات</div>
                     </div>
                 </div>
             </div>

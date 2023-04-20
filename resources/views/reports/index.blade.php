@@ -70,39 +70,17 @@
 @endsection
 @section('content')
 <div class="report text-center">
-    <div class="report-title mt-4">
-        <h1>تقرير</h1>
-    </div>
     <div class="report-content bg-secondary p-3 rounded w-100 mt-4">
-        <div class="report-logo mt-5 ms-5 d-flex align-items-center justify-content-center">
+        <div class="report-logo mt-4 ms-5 d-flex align-items-center justify-content-center">
             <img src="{{asset('icons/download.png')}}" width="90" alt="logo">
             <h1 class="ps-3">جمعية أدندان الخيرية</h1>
+        </div>
+        <div class="sub-logo">
+            <h3 class="text-center text-decoration-underline">مشروع الكفالة</h3>
         </div>
         <div class="report-info mt-4">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="inputs">
-                            <p class="mb-0 bg-light p-2 mb-2 rounded w-100 text-right">
-                                <b>الإسم الكامل:</b>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="inputs">
-                            <p class="mb-0 bg-light p-2 mb-2 rounded w-100 text-right">
-                                <b>رقم المحمول:</b>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="inputs">
-                            <p class="mb-0 bg-light p-2 mb-2 rounded w-100 text-right">
-                                <b>نوع التبرع:</b>
-                            </p>
-                        </div>
-                    </div>
-                    <hr class="mt-3 text-white">
                     <div class="date-filter mt-3 mb-3">
                         <div class="date-filter text-center text-white w-50 mx-auto">
                             <form action="{{route('reports.index')}}" method="get" class="d-flex">
@@ -123,13 +101,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($count > 0)
-                                <h1 class="text-center">There Is a Record</h1>
-                            @else
-                                <h1 class="text-center text-white text-decoration-underline">لا توجد تقارير</h1>
-                            @endif
                             <?php $i = 1 ?>
-                            @foreach ($reports as $report)
+                            @foreach ($donations as $report)
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>{{$report->name}}</td>
@@ -139,6 +112,14 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="text-right">
+                                    <b>الإجمالي</b>
+                                </td>
+                                <td id="totalAmount"></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

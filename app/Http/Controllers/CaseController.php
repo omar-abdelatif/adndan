@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Report;
 use App\Models\TableCase;
 use App\Imports\UserImport;
 use Illuminate\Http\Request;
