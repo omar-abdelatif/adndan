@@ -112,13 +112,6 @@
                             </form>
                         </div>
                     </div>
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger mt-3">
-                                <p class="m-0">{{$error}}</p>
-                            </div>
-                        @endforeach
-                    @endif
                     <table class="table borderd-table table-striped display align-middle text-center mt-2" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                         <thead>
                             <tr>
@@ -130,9 +123,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                                @foreach ($reports as $report)
-                                    <h1>There Is a Record</h1>
-                                @endforeach
+                            @if ($count > 0)
+                                <h1 class="text-center">There Is a Record</h1>
+                            @else
+                                <h1 class="text-center text-white text-decoration-underline">لا توجد تقارير</h1>
+                            @endif
+                            <?php $i = 1 ?>
+                            @foreach ($reports as $report)
+                                <tr>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{$report->name}}</td>
+                                    <td>{{$report->mobile_phone}}</td>
+                                    <td>{{$report->created_at}}</td>
+                                    <td>{{$report->amount}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

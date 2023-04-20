@@ -12,12 +12,11 @@ class ReportController extends Controller
         $selectedMonth = $request->input('date');
         if ($selectedMonth) {
             $reports = Report::whereMonth('created_at', '=', date('m', strtotime($selectedMonth)))->get();
-            if ($reports->isEmpty()) {
-                return redirect()->route('reports.index')->withErrors("لا يوجد بيانات في هذا الشهر");
-            }
+            $count = Report::count();
         } else {
             $reports = Report::all();
+            $count = Report::count();
         }
-        return view('reports.index', compact('reports'));
+        return view('reports.index', compact('reports', 'count'));
     }
 }
