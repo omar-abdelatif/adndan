@@ -11,9 +11,9 @@ class ReportController extends Controller
     {
         $selectedMonth = $request->input('date');
         if ($selectedMonth) {
-            $reports = Report::whereMonth('date_sale', '=', date('m', strtotime($selectedMonth)))->get();
+            $reports = Report::whereMonth('date', '=', date('m', strtotime($selectedMonth)))->get();
             if ($reports->isEmpty()) {
-                return "لا يوجد بيانات في هذا الشهر";
+                echo "لا يوجد بيانات في هذا الشهر";
             }
         } else {
             $reports = Report::all();

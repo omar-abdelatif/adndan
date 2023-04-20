@@ -118,10 +118,15 @@
                                 <td class="text-center">id</td>
                                 <td class="text-center">الإسم</td>
                                 <td class="text-center">رقم التلفون</td>
-                                <td class="text-center">تاريخ التسجيل</td>
-                                <td class="text-center">Actions</td>
+                                <td class="text-center">تاريخ التبرع</td>
+                                <td class="text-center">مبلغ التبرع</td>
                             </tr>
                         </thead>
+                        <tbody>
+                                @foreach ($reports as $report)
+                                    <h1>There Is a Record</h1>
+                                @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
