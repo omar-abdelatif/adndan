@@ -14,15 +14,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'ViewData'])->name('home');
-
 Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
     //! Home Routes
-    // Route::get('home', [CaseController::class, 'ViewData'])->name('home');
     Route::get('home', [DashboardController::class, 'index'])->name('home');
     //! Case Routes
     Route::view('addnew', 'الكفالة.addnew')->name('addnew');

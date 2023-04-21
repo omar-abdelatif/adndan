@@ -2,8 +2,7 @@
 @section('header')
     <header class="header header-sticky">
         <div class="container-fluid">
-            <button class="header-toggler px-md-0 me-md-3" type="button"
-                onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
+            <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
                 <svg class="icon icon-lg">
                     <use xlink:href="{{ asset('icons/coreui.svg#cil-menu') }}"></use>
                 </svg>
@@ -21,8 +20,7 @@
             <ul class="header-nav ms-auto"></ul>
             <ul class="header-nav ms-3">
                 <li class="nav-item dropdown">
-                    <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-end pt-0">
@@ -34,8 +32,7 @@
                         </a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); this.closest('form').submit();">
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
                                 <svg class="icon me-2">
                                     <use xlink:href="{{ asset('icons/coreui.svg#cil-account-logout') }}"></use>
                                 </svg>
@@ -85,11 +82,18 @@
                         <div class="date-filter text-center text-white w-50 mx-auto">
                             <form action="{{route('reports.index')}}" method="get" class="d-flex">
                                 @csrf
-                                <input type="month" name="date" class="form-control">
+                                <input type="date" name="date" class="form-control">
                                 <input type="submit" value="Submit" class="btn btn-primary mr-2">
                             </form>
                         </div>
                     </div>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger mt-3 text-center mx-auto w-50">
+                                <p class="mb-0">{{$error}}</p>
+                            </div>
+                        @endforeach
+                    @endif
                     <table class="table borderd-table table-striped display align-middle text-center mt-2" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                         <thead>
                             <tr>
@@ -101,16 +105,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 1 ?>
-                            @foreach ($donations as $report)
-                                <tr>
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{$report->name}}</td>
-                                    <td>{{$report->mobile_phone}}</td>
-                                    <td>{{$report->created_at}}</td>
-                                    <td>{{$report->amount}}</td>
-                                </tr>
-                            @endforeach
+                            @if ($get_all_donations->isEmpty())
+                                <div class="alert alert-warning" role="alert">
+                                    No records found for the selected month.
+                                </div>
+                            @else
+                                <?php $i = 1 ?>
+                                @foreach($get_all_donations as $donation)
+                                    <tr>
+                                        <th scope="row">{{ $i++ }}</th>
+                                        <td>{{ $donation->name }}</td>
+                                        <td>{{ $donation->mobile_phone }}</td>
+                                        <td>{{ $donation->created_at->format('Y-m-d') }}</td>
+                                        <td>{{ $donation->amount }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                         <tfoot>
                             <tr>

@@ -89,7 +89,9 @@
                         </svg>
                     </div>
                     <div>
-                        <div class="fs-6 fw-semibold text-primary">{{ $totalAmount }}</div>
+                        <div class="fs-6 fw-semibold text-primary">
+                            <p id="totalAmountHome" class="mb-0"></p>
+                        </div>
                         <div class="text-medium-emphasis text-uppercase fw-semibold small">إجمالي التبرعات</div>
                     </div>
                 </div>
