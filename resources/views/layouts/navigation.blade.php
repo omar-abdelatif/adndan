@@ -91,9 +91,15 @@
         </a>
         <ul class="nav-group-items" style="height: 0px;">
             <li class="nav-item">
-                <a class="nav-link" href="#" target="_top">
+                <a class="nav-link" href="{{route('text.add')}}" target="_top">
                     <img src="{{ asset('icons/icons8-sms-30.png') }}" alt="donate">
                     <b>الرسائل النصية</b>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('text.add')}}" target="_top">
+                    <img src="{{ asset('icons/subscription.png') }}" alt="subscription">
+                    <b>الإشتراكات</b>
                 </a>
             </li>
         </ul>

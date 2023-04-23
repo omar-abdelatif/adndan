@@ -7,6 +7,7 @@ use App\Http\Controllers\DonatorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonationHistoryController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SMSController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -42,4 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::get('delete_donation/{id}', [DonationHistoryController::class, 'destroy'])->name('donation.destroy');
     //! Reports
     Route::get('allreports', [ReportController::class, 'index'])->name('reports.index');
+    //! Texts
+    Route::view('add_text', 'text.sendnew')->name('text.add');
+    Route::post('send_sms', [SMSController::class, 'sendSms'])->name('text.send');
 });
