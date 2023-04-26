@@ -130,7 +130,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="text" name="other_income" class="form-control mb-3 text-center" placeholder="مصدر أخر">
+                            <input type="text" name="another_source" class="form-control mb-3 text-center" placeholder="مصدر أخر">
                         </div>
                     </div>
                     <div class="col-lg-6">
