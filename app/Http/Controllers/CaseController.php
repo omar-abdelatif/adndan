@@ -115,6 +115,7 @@ class CaseController extends Controller
         $case->monthly_income = $request->monthly_income;
         $case->another_source = $request->another_source;
         $case->retire_income = $request->retire_income;
+        $case->total_income = $request->total_income;
         $case->marital_status = $request->marital_status;
         $case->health_status = $request->health_status;
         $case->gov = $request->gov;

@@ -217,7 +217,7 @@
                                                                     <label class="mt-2">
                                                                         <b>إجمالي الدخل</b>
                                                                     </label>
-                                                                    <input type="number" name="total_income" class="form-control text-center" value="{{$case->total_income}}" placeholder="إجمالي الدخل">
+                                                                    <input type="number" name="total_income" class="form-control text-center bg-secondary text-white" value="{{$case->total_income}}" placeholder="إجمالي الدخل">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -240,7 +240,7 @@
                                                                     <label class="mb-2">
                                                                         <b>الحالة الصحية</b>
                                                                     </label>
-                                                                    <input type="text" name="health_status" class="form-control mb-2 text-center" value="{{ $case->health_status }}" placeholder="الحالة الصحية">
+                                                                    <input type="text" name="health_status" class="form-control text-center" value="{{ $case->health_status }}" placeholder="الحالة الصحية">
                                                                 </div>
                                                             </div>
                                                         </div>
