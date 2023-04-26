@@ -120,17 +120,18 @@
                                 <option class="text-center" selected>إختار نوع الدخل</option>
                                 <option value="retire">معاش</option>
                                 <option value="without">بدون</option>
+                                <option value="other">مصدر أخر</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="text" name="monthly_income" class="form-control mb-3 text-center" placeholder="الدخل الشهري">
+                            <input type="number" name="another_source" class="form-control mb-3 text-center" placeholder="مصدر أخر">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="text" name="another_source" class="form-control mb-3 text-center" placeholder="مصدر أخر">
+                            <input type="number" name="retire_income" class="form-control mb-3 text-center" placeholder="دخل المعاش">
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -146,6 +147,11 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
+                            <input type="number" name="monthly_income" class="form-control mb-3 text-center" placeholder="الدخل الشهري">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
                             <select name="marital_status" class="form-control mb-2">
                                 <option class="text-center" selected>إختار الحالة الاجتماعية للحالة</option>
                                 <option value="single">أعزب</option>
@@ -157,12 +163,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="text" name="health_status" class="form-control mb-3 mt-2 text-center"placeholder="الحالة الصحية">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <input type="number" name="sons" class="form-control text-center mb-3 mt-2" placeholder="عدد الأولاد">
+                            <input type="number" name="sons" class="form-control text-center mb-3" placeholder="عدد الأولاد">
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -172,7 +173,17 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
+                            <input type="text" name="health_status" class="form-control mb-3 text-center"placeholder="الحالة الصحية">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
                             <input type="text" name="gov" class="form-control mb-3 text-center" placeholder="المحافظة">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <input id="total_income" type="number" name="total_income" class="form-control mb-3 text-center" placeholder="إجمالي الدخل" readonly autofocus="none">
                         </div>
                     </div>
                     <div class="col-lg-6">

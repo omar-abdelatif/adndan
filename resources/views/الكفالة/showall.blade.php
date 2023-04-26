@@ -135,8 +135,7 @@
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">بيانات الحالة كاملة
-                                            </h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">بيانات الحالة كاملة</h5>
                                             <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -174,7 +173,7 @@
                                                                     <label for="gov">
                                                                         <b>المحافظة</b>
                                                                     </label>
-                                                                    <input type="text" id="gov" name="gov" class="form-control mb-2 text-center" value="{{ $case->gov }}" placeholder="المحافظة">
+                                                                    <input type="text" id="gov" name="gov" class="form-control text-center" value="{{ $case->gov }}" placeholder="المحافظة">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -191,19 +190,34 @@
                                                                         <option class="text-center" selected>إختار نوع الدخل للحالة</option>
                                                                         <option value="retire" {{ $case->income_type == 'retire' ? 'selected' : '' }}> معاش</option>
                                                                         <option value="without" {{ $case->income_type == 'without' ? 'selected' : '' }}> بدون</option>
+                                                                        <option value="other" {{ $case->income_type == 'other' ? 'selected' : '' }}> مصدر أخر</option>
                                                                     </select>
                                                                     <label class="mt-2">
-                                                                        <b>الحالة التأمينية</b>
+                                                                        <b>دخل المعاش</b>
                                                                     </label>
-                                                                    <input type="number" name="monthly_income" class="form-control  text-center" value="{{ $case->monthly_income }}" placeholder="الحالة التأمينية">
+                                                                    <input type="number" name="retire_income" value="{{$case->retire_income}}" class="form-control text-center" placeholder="دخل المعاش">
+                                                                    <label class="mt-2">
+                                                                        <b>مصدر أخر</b>
+                                                                    </label>
+                                                                    <input type="number" name="another_source" value="{{$case->another_source}}" class="form-control text-center" placeholder="مصدر أخر">
                                                                     <label class="mt-2">
                                                                         <b>نوع الإستفادة</b>
                                                                     </label>
                                                                     <select name="benefit_type" class="form-control">
                                                                         <option class="text-center" selected>إختار نوع الإستفادة للحالة</option>
                                                                         <option value="food" {{ $case->benefit_type == 'food' ? 'selected' : '' }}> عينية</option>
-                                                                        <option value="money" {{ $case->benefit_type == 'money' ? 'selected' : '' }}> مادية</option>
+                                                                        <option value="money" {{ $case->benefit_type == 'money' ? 'selected' : '' }}>نقدية</option>
+                                                                        <option value="monthly" {{ $case->benefit_type == 'monthly' ? 'selected' : '' }}>شهري</option>
+                                                                        <option value="seasonal" {{ $case->benefit_type == 'seasonal' ? 'selected' : '' }}>موسمي</option>
                                                                     </select>
+                                                                    <label class="mt-2">
+                                                                        <b>الدخل الشهري</b>
+                                                                    </label>
+                                                                    <input type="number" name="monthly_income" class="form-control text-center" value="{{ $case->monthly_income }}" placeholder="الدخل الشهري">
+                                                                    <label class="mt-2">
+                                                                        <b>إجمالي الدخل</b>
+                                                                    </label>
+                                                                    <input type="number" name="total_income" class="form-control text-center" value="{{$case->total_income}}" placeholder="إجمالي الدخل">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -288,114 +302,119 @@
                 </div>
                 <div class="modal-body">
                     <form action="{{ 'storecase' }}" method="post" enctype="multipart/form-data">
-            @csrf
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <input type="text" name="fullname" placeholder="إسم الحالة"
-                                class="form-control mb-3 text-center">
+                        @csrf
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="text" name="fullname" placeholder="إسم الحالة" class="form-control mb-3 text-center">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="number" name="ssn" placeholder="الرقم القومي" class="form-control mb-3 text-center">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="number" name="phone_number" placeholder="رقم المحمول" class="form-control mb-3 text-center">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="number" name="age" placeholder="سن الحالة" class="form-control mb-3 text-center">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="text" name="address" placeholder="العنوان" class="form-control mb-3 text-center">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <select name="income_type" class="form-control mb-3">
+                                            <option class="text-center" selected>إختار نوع الدخل</option>
+                                            <option value="retire">معاش</option>
+                                            <option value="without">بدون</option>
+                                            <option value="other">مصدر أخر</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="number" name="another_source" class="form-control mb-3 text-center" placeholder="مصدر أخر">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="number" name="retire_income" class="form-control mb-3 text-center" placeholder="دخل المعاش">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <select name="benefit_type" class="form-control mb-2">
+                                            <option class="text-center" selected>إختار نوع الإستفادة</option>
+                                            <option value="food">عينية</option>
+                                            <option value="money">نقدية</option>
+                                            <option value="monthly">شهري</option>
+                                            <option value="seasonal">موسمي</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="number" name="monthly_income" class="form-control mb-3 text-center" placeholder="الدخل الشهري">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <select name="marital_status" class="form-control mb-2">
+                                            <option class="text-center" selected>إختار الحالة الاجتماعية للحالة</option>
+                                            <option value="single">أعزب</option>
+                                            <option value="married">متزوج/ة</option>
+                                            <option value="widow">أرمل/ة</option>
+                                            <option value="divorced">مطلق/ة</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="number" name="sons" class="form-control text-center mb-3" placeholder="عدد الأولاد">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="number" name="daughters" class="form-control text-center mb-3" placeholder="عدد البنات">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="text" name="health_status" class="form-control mb-3 text-center"placeholder="الحالة الصحية">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="text" name="gov" class="form-control mb-3 text-center" placeholder="المحافظة">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input id="total_income" type="number" name="total_income" class="form-control mb-3 text-center" placeholder="إجمالي الدخل" readonly autofocus="none">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="file" name="files" class="form-control mb-3 text-center" accept="image/*">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="field">
+                                        <input type="submit" value="إضافة" class="btn btn-success w-100">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <input type="number" name="ssn" placeholder="الرقم القومي"
-                                class="form-control mb-3 text-center">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <input type="number" name="phone_number" placeholder="رقم المحمول"
-                                class="form-control mb-3 text-center">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <input type="number" name="age" placeholder="سن الحالة"
-                                class="form-control mb-3 text-center">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <input type="text" name="address" placeholder="العنوان"
-                                class="form-control mb-3 text-center">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <select name="income_type" class="form-control mb-3">
-                                <option class="text-center" selected>إختار نوع الدخل</option>
-                                <option value="retire">معاش</option>
-                                <option value="without">بدون</option>
-                                <option value="other">مصدر أخر</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <input type="text" name="monthly_income" class="form-control mb-3 text-center"
-                                placeholder="الدخل الشهري">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <select name="benefit_type" class="form-control mb-2">
-                                <option class="text-center" selected>إختار نوع الإستفادة</option>
-                                <option value="food">عينية</option>
-                                <option value="money">نقدية</option>
-                                <option value="monthly">شهري</option>
-                                <option value="seasonal">موسمي</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <select name="marital_status" class="form-control mb-2">
-                                <option class="text-center" selected>إختار الحالة الاجتماعية للحالة</option>
-                                <option value="single">أعزب</option>
-                                <option value="married">متزوج/ة</option>
-                                <option value="widow">أرمل/ة</option>
-                                <option value="divorced">مطلق/ة</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <input type="text" name="health_status"
-                                class="form-control mb-3 text-center"placeholder="الحالة الصحية">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <input type="number" name="sons" class="form-control text-center mb-3"
-                                placeholder="عدد الأولاد">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <input type="number" name="daughters" class="form-control text-center mb-3"
-                                placeholder="عدد البنات">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <input type="text" name="gov" class="form-control mb-3 text-center"
-                                placeholder="المحافظة">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="field">
-                            <input type="file" name="files" class="form-control mb-3 text-center" accept="image/*">
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="field">
-                            <input type="submit" value="إضافة" class="btn btn-success w-100">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
+                    </form>
                 </div>
             </div>
         </div>

@@ -23,12 +23,15 @@ class UserImport implements WithHeadingRow, WithBatchInserts, SkipsEmptyRows, To
                 'address' => $row['address'],
                 'income_type' => $row['income_type'],
                 'benefit_type' => $row['benefit_type'],
-                'monthly_income' => $row['monthly_income'],
                 'marital_status' => $row['marital_status'],
                 'health_status' => $row['health_status'],
-                'gov' => $row['gov'],
+                'monthly_income' => $row['monthly_income'],
+                'retire_income' => $row['retire_income'],
+                'another_source' => $row['another_source'],
+                'total_income' => $row['total_income'],
                 'sons' => $row['sons'],
                 'daughters' => $row['daughters'],
+                'gov' => $row['gov'],
                 'files' => $row['files'],
             ]);
         }
