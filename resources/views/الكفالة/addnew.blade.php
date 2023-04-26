@@ -91,32 +91,27 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="text" name="fullname" placeholder="إسم الحالة"
-                                class="form-control mb-3 text-center">
+                            <input type="text" name="fullname" placeholder="إسم الحالة" class="form-control mb-3 text-center">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="number" name="ssn" placeholder="الرقم القومي"
-                                class="form-control mb-3 text-center">
+                            <input type="number" name="ssn" placeholder="الرقم القومي" class="form-control mb-3 text-center">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="number" name="phone_number" placeholder="رقم المحمول"
-                                class="form-control mb-3 text-center">
+                            <input type="number" name="phone_number" placeholder="رقم المحمول" class="form-control mb-3 text-center">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="number" name="age" placeholder="سن الحالة"
-                                class="form-control mb-3 text-center">
+                            <input type="number" name="age" placeholder="سن الحالة" class="form-control mb-3 text-center">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="text" name="address" placeholder="العنوان"
-                                class="form-control mb-3 text-center">
+                            <input type="text" name="address" placeholder="العنوان" class="form-control mb-3 text-center">
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -125,14 +120,17 @@
                                 <option class="text-center" selected>إختار نوع الدخل</option>
                                 <option value="retire">معاش</option>
                                 <option value="without">بدون</option>
-                                <option value="other">مصدر أخر</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="text" name="monthly_income" class="form-control mb-3 text-center"
-                                placeholder="الدخل الشهري">
+                            <input type="text" name="monthly_income" class="form-control mb-3 text-center" placeholder="الدخل الشهري">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="field">
+                            <input type="text" name="other_income" class="form-control mb-3 text-center" placeholder="مصدر أخر">
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -159,26 +157,22 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="text" name="health_status"
-                                class="form-control mb-3 text-center"placeholder="الحالة الصحية">
+                            <input type="text" name="health_status" class="form-control mb-3 mt-2 text-center"placeholder="الحالة الصحية">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="number" name="sons" class="form-control text-center mb-3"
-                                placeholder="عدد الأولاد">
+                            <input type="number" name="sons" class="form-control text-center mb-3 mt-2" placeholder="عدد الأولاد">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="number" name="daughters" class="form-control text-center mb-3"
-                                placeholder="عدد البنات">
+                            <input type="number" name="daughters" class="form-control text-center mb-3" placeholder="عدد البنات">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="field">
-                            <input type="text" name="gov" class="form-control mb-3 text-center"
-                                placeholder="المحافظة">
+                            <input type="text" name="gov" class="form-control mb-3 text-center" placeholder="المحافظة">
                         </div>
                     </div>
                     <div class="col-lg-6">
