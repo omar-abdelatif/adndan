@@ -27,6 +27,7 @@ class CaseController extends Controller
             'age' => 'required',
             'address' => 'required',
             'monthly_income' => 'required|numeric',
+            'another_source' => 'required|numeric',
             'income_type' => 'required|in:retire,without,other',
             'benefit_type' => 'required|in:money,food, monthly, seasonal',
             'marital_status' => 'required|in:single,married,widow,divorced',
@@ -51,6 +52,7 @@ class CaseController extends Controller
             'age' => $request->age,
             'address' => $request->address,
             'monthly_income' => $request->monthly_income,
+            'another_source' => $request->another_source,
             'income_type' => $request->income_type,
             'benefit_type' => $request->benefit_type,
             'marital_status' => $request->marital_status,
@@ -107,6 +109,7 @@ class CaseController extends Controller
         $case->income_type = $request->income_type;
         $case->benefit_type = $request->benefit_type;
         $case->monthly_income = $request->monthly_income;
+        $case->another_source = $request->another_source;
         $case->marital_status = $request->marital_status;
         $case->health_status = $request->health_status;
         $case->gov = $request->gov;

@@ -182,7 +182,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Ghanem\LaravelSmsmisr\SmsmisrServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -212,7 +211,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Smsmisr' => Ghanem\LaravelSmsmisr\Smsmisr::class,
     ])->toArray(),
 
 ];
