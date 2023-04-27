@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonationHistoryController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SMSController;
+use App\Http\Controllers\TombsController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -46,4 +47,6 @@ Route::middleware('auth')->group(function () {
     //! Texts
     Route::view('add_text', 'text.sendnew')->name('text.add');
     Route::post('send_sms', [SMSController::class, 'sendSms'])->name('text.send');
+    //! Tombs
+    Route::get('alltombs', [TombsController::class, 'index'])->name('tomb.index');
 });

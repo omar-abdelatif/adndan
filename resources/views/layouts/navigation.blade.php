@@ -40,11 +40,11 @@
     </li>
 
     <li class="nav-group" aria-expanded="false">
-        <a class="nav-link nav-group-toggle" href="#">
+        <a class="nav-link" href="{{route('tomb.index')}}">
             <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
             <b>المقابر</b>
         </a>
-        <ul class="nav-group-items" style="height: 0px;">
+        {{-- <ul class="nav-group-items" style="height: 0px;">
             <li class="nav-item">
                 <a class="nav-link" href="#" target="_top">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
@@ -81,7 +81,7 @@
                     15 مايو
                 </a>
             </li>
-        </ul>
+        </ul> --}}
     </li>
 
     <li class="nav-group" aria-expanded="false">

@@ -125,6 +125,33 @@
                         <td>{{ $case->phone_number }}</td>
                         <td>{{ $case->created_at->format('Y-m-d') }}</td>
                         <td>
+                            {{-- <button type="button" style="border-radius: 40px" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#history{{$case->id}}" data-coreui-whatever="@mdo">
+                                <b>History</b>
+                            </button>
+                            <div class="modal fade" id="history{{$case->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">بيانات الحالة كاملة</h5>
+                                            <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                                                <thead>
+                                                    <tr>
+                                                        <td class="text-center">id</td>
+                                                        <td class="text-center">الإسم</td>
+                                                        <td class="text-center">رقم التلفون</td>
+                                                        <td class="text-center">تاريخ التسجيل</td>
+                                                        <td class="text-center">Actions</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> --}}
                             <a class="btn btn-danger" style="border-radius: 40px" href='{{ url("delete/$case->id") }}'>
                                 <b>حذف</b>
                             </a>
