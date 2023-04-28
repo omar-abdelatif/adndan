@@ -10,7 +10,10 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SMSController;
 use App\Http\Controllers\Tombs\FayumTombController;
 use App\Http\Controllers\Tombs\GafeerTombController;
+use App\Http\Controllers\Tombs\KatamyaTombController;
+use App\Http\Controllers\Tombs\May15TombController;
 use App\Http\Controllers\Tombs\OctoberTombController;
+use App\Http\Controllers\Tombs\ZenhomTombController;
 use App\Http\Controllers\TombsController;
 
 Route::get('/', function () {
@@ -59,6 +62,9 @@ Route::middleware('auth')->group(function () {
     //! Gafeer Routes
     Route::get('gafeer_tombs', [GafeerTombController::class, 'index'])->name('gafeer.index');
     //! Zenhom Routes
+    Route::get('zenhom_tombs', [ZenhomTombController::class, 'index'])->name('zenhom.index');
     //! Katamya Routes
+    Route::get('katamya_tombs', [KatamyaTombController::class, 'index'])->name('katamya.index');
     //! 15 May Routes
+    Route::get('15may_tombs', [May15TombController::class, 'index'])->name('15may.index');
 });
