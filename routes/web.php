@@ -8,6 +8,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonationHistoryController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SMSController;
+use App\Http\Controllers\Tombs\FayumTombController;
+use App\Http\Controllers\Tombs\GafeerTombController;
+use App\Http\Controllers\Tombs\OctoberTombController;
 use App\Http\Controllers\TombsController;
 
 Route::get('/', function () {
@@ -29,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::post('storecase', [CaseController::class, 'storecase'])->name('storecase');
     Route::get('delete/{id}', [CaseController::class, 'delete'])->name('delete');
     Route::post('update', [CaseController::class, 'updatecase'])->name('update');
-    //! Excel Uploader
+    //! Excel Uploader Routes
     Route::post('upload', [CaseController::class, 'importExcel'])->name('import');
     //! Donator Routes
     Route::get('alldonators', [DonatorController::class, 'index', "data"])->name('donator.index');
@@ -38,15 +41,24 @@ Route::middleware('auth')->group(function () {
     Route::get('delete-donator/{id}', [DonatorController::class, 'destroy'])->name('donator.delete');
     Route::get('edit-donator/{id}', [DonatorController::class, 'edit'])->name('donator.edit');
     Route::post('update-donator', [DonatorController::class, 'update'])->name('donator.update');
-    //! Donation History
+    //! Donation History Routes
     Route::get('all_donations/{id}', [DonationHistoryController::class, 'index'])->name('donation.index');
     Route::post('add_donation', [DonationHistoryController::class, 'donationstore'])->name('donation.store');
     Route::get('delete_donation/{id}', [DonationHistoryController::class, 'destroy'])->name('donation.destroy');
-    //! Reports
+    //! Reports Routes
     Route::get('allreports', [ReportController::class, 'index'])->name('reports.index');
-    //! Texts
+    //! Texts Routes
     Route::view('add_text', 'text.sendnew')->name('text.add');
     Route::post('send_sms', [SMSController::class, 'sendSms'])->name('text.send');
-    //! Tombs
-    Route::get('alltombs', [TombsController::class, 'index'])->name('tomb.index');
+    //! Tombs  Routes
+    Route::get('alltombs', [TombsController::class, 'index'])->name('tombs.index');
+    //! October Tombs Routes
+    Route::get('october_tombs', [OctoberTombController::class, 'index'])->name('october.index');
+    //! Fayum Routes
+    Route::get('fayum_tombs', [FayumTombController::class, 'index'])->name('fayum.index');
+    //! Gafeer Routes
+    Route::get('gafeer_tombs', [GafeerTombController::class, 'index'])->name('gafeer.index');
+    //! Zenhom Routes
+    //! Katamya Routes
+    //! 15 May Routes
 });

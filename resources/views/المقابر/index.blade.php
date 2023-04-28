@@ -2,8 +2,7 @@
 @section('header')
     <header class="header header-sticky">
         <div class="container-fluid">
-            <button class="header-toggler px-md-0 me-md-3" type="button"
-                onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
+            <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
                 <svg class="icon icon-lg">
                     <use xlink:href="{{ asset('icons/coreui.svg#cil-menu') }}"></use>
                 </svg>
@@ -21,8 +20,7 @@
             <ul class="header-nav ms-auto"></ul>
             <ul class="header-nav ms-3">
                 <li class="nav-item dropdown">
-                    <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-end pt-0">
@@ -34,8 +32,7 @@
                         </a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); this.closest('form').submit();">
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
                                 <svg class="icon me-2">
                                     <use xlink:href="{{ asset('icons/coreui.svg#cil-account-logout') }}"></use>
                                 </svg>
@@ -48,8 +45,8 @@
         </div>
         <div class="header-divider"></div>
         <section class="content-header w-100">
-            <div class="container-fluid">
-                <div class="row">
+            <div class="container-fluid d-flex">
+                <div class="row align-items-center">
                     <div class="col-sm-12">
                         <div class="d-flex justify-content-between w-100 align-items-center">
                             <ol class="breadcrumb float-sm-right">
@@ -58,13 +55,65 @@
                                 </li>
                                 <li class="breadcrumb-item active">كل المقابر</li>
                             </ol>
-                            <button type="button" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#addcase" data-coreui-whatever="@mdo">
-                                <b>إضافة حالة</b>
-                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </header>
+@endsection
+@section('content')
+    <div class="row mt-5">
+        <div class="col-lg-4 col-md-6">
+            <div class="items bg-info-gradient p-3 rounded overflow-hidden">
+                <div class="item-header">
+                    <div class="item-logo text-center">
+                        <img src="{{asset('icons/icons8-cemetery-30.png')}}" width="50" alt="cemetry logo">
+                    </div>
+                    <div class="item-title mt-2">
+                        <h3 class="text-white text-center text-decoration-underline">6 أكتوبر</h3>
+                    </div>
+                </div>
+                <div class="item-footer">
+                    <a href='{{route("october.index")}}' class="btn btn-primary w-100 mt-3">
+                        <b>المزيد</b>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="items bg-info-gradient p-3 rounded overflow-hidden">
+                <div class="item-header">
+                    <div class="item-logo text-center">
+                        <img src="{{asset('icons/icons8-cemetery-30.png')}}" width="50" alt="cemetry logo">
+                    </div>
+                    <div class="item-title mt-2">
+                        <h3 class="text-white text-center text-decoration-underline">الفيوم</h3>
+                    </div>
+                </div>
+                <div class="item-footer">
+                    <a href='{{route("fayum.index")}}' class="btn btn-primary w-100 mt-3">
+                        <b>المزيد</b>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="items bg-info-gradient p-3 rounded overflow-hidden">
+                <div class="item-header">
+                    <div class="item-logo text-center">
+                        <img src="{{asset('icons/icons8-cemetery-30.png')}}" width="50" alt="cemetry logo">
+                    </div>
+                    <div class="item-title mt-2">
+                        <h3 class="text-white text-center text-decoration-underline">الغفير</h3>
+                    </div>
+                </div>
+                <div class="item-footer">
+                    <a href='{{route("fayum.index")}}' class="btn btn-primary w-100 mt-3">
+                        <b>المزيد</b>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

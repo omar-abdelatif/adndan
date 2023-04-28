@@ -67,11 +67,11 @@
 @endsection
 @section('content')
 <div class="report text-center">
+    <div class="report-logo mt-4 ms-5 d-flex align-items-center justify-content-center">
+        <img src="{{asset('icons/download.png')}}" width="90" alt="logo">
+        <h1 class="ps-3">جمعية أدندان الخيرية</h1>
+    </div>
     <div class="report-content bg-secondary p-3 rounded w-100 mt-4">
-        <div class="report-logo mt-4 ms-5 d-flex align-items-center justify-content-center">
-            <img src="{{asset('icons/download.png')}}" width="90" alt="logo">
-            <h1 class="ps-3">جمعية أدندان الخيرية</h1>
-        </div>
         <div class="sub-logo">
             <h3 class="text-center text-decoration-underline">مشروع الكفالة</h3>
         </div>

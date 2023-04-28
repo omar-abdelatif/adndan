@@ -18,12 +18,12 @@
                     إجمالي الحالات
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{route('addnew')}}" target="_top">
                     <img src="{{asset('icons/add_case.png')}}" width="120" alt="alcases">
                     إضافة حالة
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{route('donator.index')}}" target="_top">
                     <img src="{{asset('icons/donator.png')}}" width="100" alt="alcases">
@@ -39,49 +39,56 @@
         </ul>
     </li>
 
-    <li class="nav-group" aria-expanded="false">
-        <a class="nav-link" href="{{route('tomb.index')}}">
+    {{-- <li class="nav-group" aria-expanded="false">
+        <a class="nav-link nav-group-toggle" href="#">
             <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
             <b>المقابر</b>
         </a>
-        {{-- <ul class="nav-group-items" style="height: 0px;">
+        <ul class="nav-group-items" style="height: 0px;">
             <li class="nav-item">
-                <a class="nav-link" href="#" target="_top">
+                <a href="{{route('october.index')}}" class="nav-link">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    <b>أكتوبر</b>
+                    <b>6 أكتوبر</b>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" target="_top">
+                <a href="{{route('october.index')}}" class="nav-link">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    الفيوم
+                    <b>الغفير</b>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" target="_top">
+                <a href="{{route('october.index')}}" class="nav-link">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    الغفير
+                    <b>الفيوم</b>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" target="_top">
+                <a href="{{route('october.index')}}" class="nav-link">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    زينهم
+                    <b>زينهم</b>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" target="_top">
+                <a href="{{route('october.index')}}" class="nav-link">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    القطامية
+                    <b>القطامية</b>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" target="_top">
+                <a href="{{route('october.index')}}" class="nav-link">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    15 مايو
+                    <b>15 مايو</b>
                 </a>
             </li>
-        </ul> --}}
+        </ul>
+    </li> --}}
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('tombs.index') }}">
+            <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
+            <b>المقابر</b>
+        </a>
     </li>
 
     <li class="nav-group" aria-expanded="false">

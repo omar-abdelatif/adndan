@@ -9,7 +9,6 @@ class TombsController extends Controller
 {
     public function index()
     {
-        $tomb = Tomb::all();
         return view('المقابر.index');
     }
 }

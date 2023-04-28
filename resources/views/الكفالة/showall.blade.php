@@ -319,7 +319,6 @@
             @endif
         </tbody>
     </table>
-
     <div class="modal fade" id="addcase" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
