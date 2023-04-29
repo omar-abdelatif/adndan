@@ -51,12 +51,13 @@ Route::middleware('auth')->group(function () {
     //! Reports Routes
     Route::get('allreports', [ReportController::class, 'index'])->name('reports.index');
     //! Texts Routes
-    Route::view('add_text', 'text.sendnew')->name('text.add');
-    Route::post('send_sms', [SMSController::class, 'sendSms'])->name('text.send');
+    Route::get('add_text', [SMSController::class, 'index'])->name('text.add');
+    Route::post('send_sms', [SMSController::class, 'sendSms'])->name('api.send');
     //! Tombs  Routes
     Route::get('alltombs', [TombsController::class, 'index'])->name('tombs.index');
     //! October Tombs Routes
     Route::get('october_tombs', [OctoberTombController::class, 'index'])->name('october.index');
+    Route::post('october_store', [OctoberTombController::class, 'store'])->name('october.store');
     //! Fayum Routes
     Route::get('fayum_tombs', [FayumTombController::class, 'index'])->name('fayum.index');
     //! Gafeer Routes

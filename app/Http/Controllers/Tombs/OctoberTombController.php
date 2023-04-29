@@ -12,4 +12,5 @@ class OctoberTombController extends Controller
         // $tomb = Tomb::all();
         return view('المقابر.أكتوبر.index');
     }
+    
 }

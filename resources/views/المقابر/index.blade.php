@@ -64,6 +64,12 @@
 @endsection
 @section('content')
     <div class="row mt-5">
+        <div class="col-12">
+            <div class="cases-title bg-dark-gradient mb-5 p-3 rounded w-50 mx-auto text-center d-flex justify-content-center align-items-center" data-wow-iteration="infinite">
+                <img src="{{asset('icons/icons8-cemetery-30.png')}}" width="40" alt="logo">
+                <h1 class="text-white text-decoration-underline mb-0">مشروع المقابر</h1>
+            </div>
+        </div>
         <div class="col-lg-4 col-md-6">
             <div class="items bg-info-gradient p-3 rounded overflow-hidden">
                 <div class="item-header">

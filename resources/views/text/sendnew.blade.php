@@ -67,7 +67,7 @@
 @endsection
 @section('content')
     <div class="inputs w-50 mx-auto ">
-        <form action="{{route('api.send')}}" method="get">
+        <form action="{{route('api.send')}}" method="post">
             @csrf
             <textarea class="form-control text-center mt-5 pt-5" placeholder="محتوى الرسالة" name="send" cols="10" rows="3"></textarea>
             <button type="submit" class="text-center btn btn-success text-white w-100 mt-3">إرسال</button>
