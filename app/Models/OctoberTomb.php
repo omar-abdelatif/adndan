@@ -8,13 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class OctoberTomb extends Model
 {
     use HasFactory;
-    protected $table = '';
+    protected $table = 'october_tombs';
     protected $fillable = [
-        '',
-        '',
-        '',
-        '',
-        '',
-        ''
+        'name',
+        'type',
+        'power',
+        'annually_cost'
     ];
 }

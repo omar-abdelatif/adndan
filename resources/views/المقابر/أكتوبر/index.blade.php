@@ -77,46 +77,83 @@
                 </div>
             </div>
             <?php $i = 1 ?>
+            @if (session('success'))
+                <div class="alert alert-success text-center mt-5">
+                    <p class="mb-0">{{ session('success') }}</p>
+                </div>
+            @elseif ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger text-center mt-5">
+                        <p class="mb-0">{{ $error }}</p>
+                    </div>
+                @endforeach
+            @endif
             <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                 <thead>
                     <tr>
                         <td class="text-center">id</td>
                         <td class="text-center">الإسم</td>
                         <td class="text-center">نوع المقبرة</td>
-                        {{-- <td class="text-center">المنطقة</td> --}}
-                        <td class="text-center">تاريخ أخر دفن</td>
+                        <td class="text-center">قوة المقبرة</td>
+                        <td class="text-center">قمة الدفع السنوي</td>
                         <td class="text-center">Actions</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th >1</th>
-                        <td>جاد</td>
-                        <td>عيون</td>
-                        {{-- <td>6 أكتوبر</td> --}}
-                        <td>شيشسيشسيشسي</td>
-                        <td>
-                            <button type="button" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#history" data-coreui-whatever="@mdo">
-                                <b>عرض</b>
-                            </button>
-                            <a href="" class="btn btn-danger">
-                                <b>حذف</b>
-                            </a>
-                            <div class="modal fade" id="history" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">بيانات المقبرة كاملة</h5>
-                                            <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
+                    @if ($tombCount > 0)
+                        @foreach ($octoberTomb as $tomb)
+                            <tr>
+                                <td>{{ $i++ }}</td>
+                                <td>{{$tomb->name}}</td>
+                                <td>{{$tomb->type}}</td>
+                                <td>{{$tomb->power}}</td>
+                                <td>{{$tomb->annually_cost}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#history_{{$tomb->id}}" data-coreui-whatever="@mdo">
+                                        <b>عرض</b>
+                                    </button>
+                                    <div class="modal fade" id="history_{{$tomb->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">بيانات المقبرة الثابتة</h5>
+                                                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="tomb-static-details d-flex justify-content-evenly">
+                                                        <div class="tomb-name">
+                                                            <h4>
+                                                                إسم المقبرة:
+                                                                {{$tomb->name}}
+                                                            </h4>
+                                                        </div>
+                                                        <div class="tomb-power">
+                                                            <h4>
+                                                                القوة:
+                                                                {{$tomb->power}}
+                                                            </h4>
+                                                        </div>
+                                                        <div class="tomb-type">
+                                                            <h4>
+                                                                النوع:
+                                                                {{$tomb->type}}
+                                                            </h4>
+                                                        </div>
+                                                    </div>
 
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
+                                    <a href="{{url('destroy_october_tomb/'.$tomb->id)}}" class="btn btn-danger">
+                                        <b>حذف</b>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <h1 class="text-center text-dark mt-5">لا توجد مقابر حاليا</h1>
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -129,7 +166,7 @@
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ 'storecase' }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('october.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="container-fluid">
                             <div class="row">
@@ -140,20 +177,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="field">
-                                        <select name="region" class="form-control mb-3">
-                                            <option class="text-center" selected>إختار المنطقة</option>
-                                            <option value="retire">أكتوبر</option>
-                                            <option value="without">الغفير</option>
-                                            <option value="other">القطامية</option>
-                                            <option value="other">زينهم</option>
-                                            <option value="other">15 مايو</option>
-                                            <option value="other">الفيوم</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <select name="tomb_type" class="form-control mb-2">
+                                        <select name="power" class="form-control mb-2">
                                             <option class="text-center" selected>قوة المقبرة</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -166,10 +190,10 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="field">
-                                        <select name="tomb_type" class="form-control mb-2">
+                                        <select name="type" class="form-control mb-2">
                                             <option class="text-center" selected>إختار نوع المقبرة</option>
-                                            <option value="limit">لحد</option>
-                                            <option value="eye">عيون</option>
+                                            <option value="لحد">لحد</option>
+                                            <option value="عيون">عيون</option>
                                         </select>
                                     </div>
                                 </div>

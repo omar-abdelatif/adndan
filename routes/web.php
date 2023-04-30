@@ -57,7 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::get('alltombs', [TombsController::class, 'index'])->name('tombs.index');
     //! October Tombs Routes
     Route::get('october_tombs', [OctoberTombController::class, 'index'])->name('october.index');
-    Route::post('october_store', [OctoberTombController::class, 'store'])->name('october.store');
+    Route::post('october_store', [OctoberTombController::class, 'tombStore'])->name('october.store');
+    Route::get('destroy_october_tomb/{id}', [OctoberTombController::class, 'destroyTomb'])->name('october.destroy');
     //! Fayum Routes
     Route::get('fayum_tombs', [FayumTombController::class, 'index'])->name('fayum.index');
     //! Gafeer Routes

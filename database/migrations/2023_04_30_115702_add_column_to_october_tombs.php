@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('october_tombs', function (Blueprint $table) {
-            $table->string('name')->after('id');
-            $table->string('type')->after('name');
+            $table->integer('power')->after('type');
+            $table->string('annually_cost')->after('burial_cost');
         });
     }
 
@@ -23,8 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('october_tombs', function (Blueprint $table) {
-            $table->dropColumn('name');
-            $table->dropColumn('type');
+            $table->dropColumn('power');
+            $table->dropColumn('annually_cost');
         });
     }
 };
