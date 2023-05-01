@@ -42,4 +42,18 @@ class OctoberTombController extends Controller
         }
         return redirect()->route('october.index')->withErrors('حدث خطأ أثناء الحذف');
     }
+    public function updateTomb(Request $request)
+    {
+        $tomb = OctoberTomb::find($request->id);
+        if ($tomb) {
+            $tomb->update([
+                'name' => $request->name,
+                'type' => $request->type,
+                'power' => $request->power,
+                'annually_cost' => $request->annually_cost
+            ]);
+            return redirect()->route('october.index')->with('success', 'تم تحديث البيانات بنجاح');
+        }
+        return redirect()->route('october.index')->withErrors('خطأ أثناء التحديث');
+    }
 }

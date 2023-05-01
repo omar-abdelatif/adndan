@@ -45,17 +45,18 @@
         </div>
         <div class="header-divider"></div>
         <section class="content-header w-100">
-            <div class="container-fluid d-flex">
-                <div class="row align-items-center">
-                    <div class="col-sm-12">
-                        <div class="d-flex justify-content-between w-100 align-items-center">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item">
-                                    <a href="{{ route('home') }}">الرئيسية</a>
-                                </li>
-                                <li class="breadcrumb-item active">كل المقابر</li>
-                            </ol>
-                        </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 d-inline-flex align-items-center justify-content-between w-100">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item">
+                                <a href="{{ route('home') }}">الرئيسية</a>
+                            </li>
+                            <li class="breadcrumb-item active">كل المقابر</li>
+                        </ol>
+                        <button type="button" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#addregion" data-coreui-whatever="@mdo">
+                            <b>إضافة منطقة</b>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -169,6 +170,62 @@
                     <a href='{{route("15may.index")}}' class="btn btn-primary w-100 mt-3">
                         <b>المزيد</b>
                     </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addregion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة مقبرة جديدة</h1>
+                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('october.store') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="text" name="name" placeholder="إسم المقبرة" class="form-control mb-3 text-center">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <select name="power" class="form-control mb-2">
+                                            <option class="text-center" selected>قوة المقبرة</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <select name="type" class="form-control mb-2">
+                                            <option class="text-center" selected>إختار نوع المقبرة</option>
+                                            <option value="لحد">لحد</option>
+                                            <option value="عيون">عيون</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="number" name="annually_cost" class="form-control mb-3 text-center" placeholder="قيمة الدفع السنوي">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="field">
+                                        <input type="submit" value="إضافة" class="btn btn-success w-100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

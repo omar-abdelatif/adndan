@@ -15,6 +15,7 @@ use App\Http\Controllers\Tombs\May15TombController;
 use App\Http\Controllers\Tombs\OctoberTombController;
 use App\Http\Controllers\Tombs\ZenhomTombController;
 use App\Http\Controllers\TombsController;
+use App\Models\OctoberTomb;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -54,11 +55,13 @@ Route::middleware('auth')->group(function () {
     Route::get('add_text', [SMSController::class, 'index'])->name('text.add');
     Route::post('send_sms', [SMSController::class, 'sendSms'])->name('api.send');
     //! Tombs  Routes
-    Route::get('alltombs', [TombsController::class, 'index'])->name('tombs.index');
+    Route::get('allregions', [TombsController::class, 'index'])->name('region.index');
+
     //! October Tombs Routes
     Route::get('october_tombs', [OctoberTombController::class, 'index'])->name('october.index');
     Route::post('october_store', [OctoberTombController::class, 'tombStore'])->name('october.store');
     Route::get('destroy_october_tomb/{id}', [OctoberTombController::class, 'destroyTomb'])->name('october.destroy');
+    Route::post('update_october_tomb', [OctoberTombController::class, 'updateTomb'])->name('october.update');
     //! Fayum Routes
     Route::get('fayum_tombs', [FayumTombController::class, 'index'])->name('fayum.index');
     //! Gafeer Routes

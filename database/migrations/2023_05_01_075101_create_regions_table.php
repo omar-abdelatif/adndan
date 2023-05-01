@@ -12,8 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('october_tombs', function (Blueprint $table) {
-            $table->integerIncrements('id');
+        Schema::create('regions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->integer('capacity');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('october_tombs');
+        Schema::dropIfExists('regions');
     }
 };

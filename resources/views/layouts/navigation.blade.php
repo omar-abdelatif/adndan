@@ -85,7 +85,7 @@
     </li> --}}
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('tombs.index') }}">
+        <a class="nav-link" href="{{ route('region.index') }}">
             <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
             <b>المقابر</b>
         </a>
