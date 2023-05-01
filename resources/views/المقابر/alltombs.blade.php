@@ -112,7 +112,7 @@
                                                 <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{route('tombs.store')}}" method="post" enctype="multipart/form-data">
+                                                <form action="{{route('tomb.update')}}" method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="container-fluid">
                                                         <div class="row">
@@ -148,9 +148,11 @@
                                                                 <div class="field">
                                                                     <select name="region" class="form-control">
                                                                         <option selected>إختار المنطقة</option>
-                                                                        @foreach ($region as $region)
-                                                                            <option value="{{$region->name}}" {{$tomb->region == $region->name ? 'selected' : ''}}>{{$region->name}}</option>
-                                                                        @endforeach
+                                                                        @if ($regionCount > 0)
+                                                                            @foreach ($region as $regions)
+                                                                                <option value="{{$regions->name}}" {{$tomb->region == $regions->name ? 'selected' : ''}}>{{$regions->name}}</option>
+                                                                            @endforeach
+                                                                        @endif
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -161,7 +163,7 @@
                                                             </div>
                                                             <div class="col-12">
                                                                 <div class="field">
-                                                                    <input type="submit" value="إضافة" class="btn btn-success w-100">
+                                                                    <input type="submit" value="تعديل" class="btn btn-success w-100">
                                                                 </div>
                                                             </div>
                                                         </div>

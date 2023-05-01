@@ -59,9 +59,10 @@ Route::middleware('auth')->group(function () {
     Route::post('store_region', [RegionController::class, 'regionStore'])->name('region.store');
     //! Tombs Routes
     Route::get('all_tombs', [TombsController::class, 'AllTombs'])->name('tombs.all');
-    Route::get('add_tombs', [TombsController::class, 'TombForm'])->name('tomb.add');
+    // Route::get('add_tombs', [TombsController::class, 'TombForm'])->name('tomb.add');
     Route::post('create_tombs', [TombsController::class, 'addTomb'])->name('tombs.store');
     Route::get('destroy_tomb/{id}', [TombsController::class, 'deleteTomb'])->name('tomb.destroy');
+    Route::post('update_tomb', [TombsController::class, 'updateTomb'])->name('tomb.update');
     //! October Tombs Routes
     Route::get('october_tombs', [OctoberTombController::class, 'index'])->name('october.index');
     Route::post('october_store', [OctoberTombController::class, 'addTomb'])->name('october.store');

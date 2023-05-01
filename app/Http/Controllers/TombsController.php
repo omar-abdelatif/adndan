@@ -12,7 +12,8 @@ class TombsController extends Controller
     {
         $tomb = Tomb::all();
         $region = Region::all();
-        return view('المقابر.alltombs', compact('tomb', 'region'));
+        $regionCount = Region::count();
+        return view('المقابر.alltombs', compact('tomb', 'region', 'regionCount'));
     }
     public function TombForm()
     {
@@ -43,7 +44,7 @@ class TombsController extends Controller
         }
         return redirect()->route('tombs.all')->withErrors('حدث خطأ أثناء الإضافة');
     }
-    public function editTomb(Request $request)
+    public function updateTomb(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string',
@@ -55,9 +56,9 @@ class TombsController extends Controller
         $tomb = Tomb::find($request->id);
         if ($tomb) {
             $tomb->update($validated);
-            return redirect()->route('tomb.edit')->with('success', 'تمت تحديث المقبرة بنجاح.');
+            return redirect()->route('tombs.all')->with('success', 'تمت تحديث المقبرة بنجاح.');
         }
-        return redirect()->route('tomb.edit')->withErrors('حدث خطأ أثناء التحديث');
+        return redirect()->route('tombs.all')->withErrors($validated);
     }
     public function deleteTomb($id)
     {
