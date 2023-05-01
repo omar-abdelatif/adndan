@@ -45,15 +45,18 @@
         </div>
         <div class="header-divider"></div>
         <section class="content-header w-100">
-            <div class="container-fluid">
+            <div class="container-fluid d-flex align-items-center">
                 <div class="row">
                     <div class="col-lg-12 d-inline-flex align-items-center justify-content-between w-100">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item">
                                 <a href="{{ route('home') }}">الرئيسية</a>
                             </li>
-                            <li class="breadcrumb-item active">إضافة مقبرة</li>
+                            <li class="breadcrumb-item active">كل المقابر</li>
                         </ol>
+                        <button type="button" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#addtomb" data-coreui-whatever="@mdo">
+                        <b>إضافة مقبرة</b>
+                    </button>
                     </div>
                 </div>
             </div>
@@ -64,6 +67,17 @@
     <div class="row">
         <div class="col-12">
             <div class="alltombs">
+                @if (session('success'))
+                    <div class="alert alert-success text-center mt-5">
+                        <p class="mb-0">{{ session('success') }}</p>
+                    </div>
+                @elseif ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger text-center mt-5">
+                            <p class="mb-0">{{ $error }}</p>
+                        </div>
+                    @endforeach
+                @endif
                 <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                 <thead>
                     <tr>
@@ -77,9 +91,91 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    <?php $i = 1 ?>
+                    @foreach ($tomb as $tomb)
+                        <tr>
+                            <td>{{$i++}}</td>
+                            <td>{{$tomb->name}}</td>
+                            <td>{{$tomb->type}}</td>
+                            <td>{{$tomb->power}}</td>
+                            <td>{{$tomb->region}}</td>
+                            <td>{{$tomb->annual_cost}}</td>
+                            <td>
+                                <a href="" class="btn btn-warning">
+                                    <b>تعديل</b>
+                                </a>
+                                <a href="{{url('destroy_tomb/'.$tomb->id)}}" class="btn btn-danger">حذف</a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addtomb" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة مقبرة جديدة</h1>
+                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('tombs.store')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="text" name="name" placeholder="إسم المقبرة" class="form-control mb-3 text-center">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <select name="power" class="form-control mb-2">
+                                            <option class="text-center" selected>قوة المقبرة</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <select name="type" class="form-control mb-2">
+                                            <option class="text-center" selected>إختار نوع المقبرة</option>
+                                            <option value="لحد">لحد</option>
+                                            <option value="عيون">عيون</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <select name="region" class="form-control">
+                                            <option selected>إختار المنطقة</option>
+                                            @foreach ($region as $region)
+                                                <option value="{{$region->name}}">{{$region->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <input type="number" name="annual_cost" class="form-control mb-3 text-center" placeholder="قيمة الدفع السنوي">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="field">
+                                        <input type="submit" value="إضافة" class="btn btn-success w-100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

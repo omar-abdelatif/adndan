@@ -14,6 +14,7 @@ class Tomb extends Model
         'type',
         'power',
         'region',
+        'annual_cost',
         'region_id'
     ];
 

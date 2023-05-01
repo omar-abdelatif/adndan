@@ -58,12 +58,13 @@ Route::middleware('auth')->group(function () {
     Route::get('allregions', [RegionController::class, 'index'])->name('region.index');
     Route::post('store_region', [RegionController::class, 'regionStore'])->name('region.store');
     //! Tombs Routes
+    Route::get('all_tombs', [TombsController::class, 'AllTombs'])->name('tombs.all');
     Route::get('add_tombs', [TombsController::class, 'TombForm'])->name('tomb.add');
-    Route::post('create_tombs', [TombsController::class, 'tombStore'])->name('tombs.store');
-    // Route::get('all_tombs/{id}', [TombsController::class, ''])->name('');
+    Route::post('create_tombs', [TombsController::class, 'addTomb'])->name('tombs.store');
+    Route::get('destroy_tomb/{id}', [TombsController::class, 'deleteTomb'])->name('tomb.destroy');
     //! October Tombs Routes
     Route::get('october_tombs', [OctoberTombController::class, 'index'])->name('october.index');
-    Route::post('october_store', [OctoberTombController::class, 'tombStore'])->name('october.store');
+    Route::post('october_store', [OctoberTombController::class, 'addTomb'])->name('october.store');
     Route::get('destroy_october_tomb/{id}', [OctoberTombController::class, 'destroyTomb'])->name('october.destroy');
     Route::post('update_october_tomb', [OctoberTombController::class, 'updateTomb'])->name('october.update');
     //! Fayum Routes

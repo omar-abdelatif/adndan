@@ -54,6 +54,7 @@
                             </li>
                             <li class="breadcrumb-item active">إضافة مقبرة</li>
                         </ol>
+
                     </div>
                 </div>
             </div>
@@ -78,7 +79,7 @@
                         </div>
                     @endforeach
                 @endif
-                <form action="{{ route('tombs.store') }}" method="post">
+                <form action="{{ route('october.store') }}" method="post">
                     @csrf
                     <div class="container-fluid">
                         <div class="row">
@@ -89,7 +90,15 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="field">
-                                    <input type="number" name="power" class="form-control mb-3 text-center" placeholder="قوة المقبرة">
+                                    <select name="power" class="form-control mb-2">
+                                        <option class="text-center" selected>قوة المقبرة</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -111,7 +120,11 @@
                                     </select>
                                 </div>
                             </div>
-
+                            <div class="col-lg-6">
+                                <div class="field">
+                                    <input type="number" name="annual_cost" class="form-control mt-3 text-center" placeholder="قيمة الدفع السنوي">
+                                </div>
+                            </div>
                             <div class="col-12">
                                 <div class="field">
                                     <input type="submit" value='إضافة' class="btn btn-success w-100 mt-3">
@@ -123,4 +136,5 @@
             </div>
         </div>
     </div>
+    
 @endsection
