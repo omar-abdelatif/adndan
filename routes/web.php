@@ -6,6 +6,7 @@ use App\Http\Controllers\CaseController;
 use App\Http\Controllers\DonatorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonationHistoryController;
+use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SMSController;
 use App\Http\Controllers\Tombs\FayumTombController;
@@ -15,7 +16,6 @@ use App\Http\Controllers\Tombs\May15TombController;
 use App\Http\Controllers\Tombs\OctoberTombController;
 use App\Http\Controllers\Tombs\ZenhomTombController;
 use App\Http\Controllers\TombsController;
-use App\Models\OctoberTomb;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -54,9 +54,13 @@ Route::middleware('auth')->group(function () {
     //! Texts Routes
     Route::get('add_text', [SMSController::class, 'index'])->name('text.add');
     Route::post('send_sms', [SMSController::class, 'sendSms'])->name('api.send');
-    //! Tombs  Routes
-    Route::get('allregions', [TombsController::class, 'index'])->name('region.index');
-
+    //! Region  Routes
+    Route::get('allregions', [RegionController::class, 'index'])->name('region.index');
+    Route::post('store_region', [RegionController::class, 'regionStore'])->name('region.store');
+    //! Tombs Routes
+    Route::get('add_tombs', [TombsController::class, 'TombForm'])->name('tomb.add');
+    Route::post('create_tombs', [TombsController::class, 'tombStore'])->name('tombs.store');
+    // Route::get('all_tombs/{id}', [TombsController::class, ''])->name('');
     //! October Tombs Routes
     Route::get('october_tombs', [OctoberTombController::class, 'index'])->name('october.index');
     Route::post('october_store', [OctoberTombController::class, 'tombStore'])->name('october.store');

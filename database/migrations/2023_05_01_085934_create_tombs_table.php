@@ -12,11 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('regions', function (Blueprint $table) {
+        Schema::create('tombs', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
-            $table->integer('capacity');
+            $table->integer('power');
+            $table->string('type');
+            $table->integer('region_id')->index()->references('id')->on('regions')->onDelete('cascade');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('regions');
+        Schema::dropIfExists('tombs');
     }
 };

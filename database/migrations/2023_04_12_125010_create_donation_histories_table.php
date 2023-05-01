@@ -19,7 +19,7 @@ return new class extends Migration
             $table->bigInteger('mobile_phone');
             $table->integer('amount');
             $table->string('duration');
-            $table->integer('donator_id')->index()->references('id')->on('donators')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('donator_id')->index()->references('id')->on('donators')->onDelete('cascade');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

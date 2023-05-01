@@ -84,11 +84,31 @@
         </ul>
     </li> --}}
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('region.index') }}">
+    <li class="nav-group" aria-expanded="false">
+        <a class="nav-link nav-group-toggle" href="{{ route('region.index') }}">
             <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
             <b>المقابر</b>
         </a>
+        <ul class="nav-group-items" style="height: 0px;">
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('region.index')}}" target="_top">
+                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
+                    <b>كل المناطق</b>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('tomb.add')}}" target="_top">
+                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
+                    <b>إضافة مقبرة</b>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="" target="_top">
+                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
+                    <b>كل المقابر</b>
+                </a>
+            </li>
+        </ul>
     </li>
 
     <li class="nav-group" aria-expanded="false">

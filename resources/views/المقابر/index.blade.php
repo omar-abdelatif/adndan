@@ -65,6 +65,17 @@
 @endsection
 @section('content')
     <div class="row mt-5">
+        @if (session('success'))
+            <div class="alert alert-success text-center">
+                <p class="m-0">{{ session('success') }}</p>
+            </div>
+        @elseif ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger text-center">
+                    <p class="mb-0">{{ $error }}</p>
+                </div>
+            @endforeach
+        @endif
         <div class="col-12">
             <div class="cases-title bg-dark-gradient mb-5 p-3 rounded w-50 mx-auto text-center d-flex justify-content-center align-items-center" data-wow-iteration="infinite">
                 <img src="{{asset('icons/icons8-cemetery-30.png')}}" width="40" alt="logo">
@@ -178,49 +189,27 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة مقبرة جديدة</h1>
+                    <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة منطقة جديدة</h1>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('october.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('region.store') }}" method="post">
                         @csrf
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="field">
-                                        <input type="text" name="name" placeholder="إسم المقبرة" class="form-control mb-3 text-center">
+                                        <input type="text" name="name" placeholder="إسم المنطقة" class="form-control mb-3 text-center">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="field">
-                                        <select name="power" class="form-control mb-2">
-                                            <option class="text-center" selected>قوة المقبرة</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <select name="type" class="form-control mb-2">
-                                            <option class="text-center" selected>إختار نوع المقبرة</option>
-                                            <option value="لحد">لحد</option>
-                                            <option value="عيون">عيون</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="number" name="annually_cost" class="form-control mb-3 text-center" placeholder="قيمة الدفع السنوي">
+                                        <input type="number" name="capacity" class="form-control mb-3 text-center" placeholder="قوة المنطقة">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="field">
-                                        <input type="submit" value="إضافة" class="btn btn-success w-100">
+                                        <input type="submit" value='إضافة' class="btn btn-success w-100">
                                     </div>
                                 </div>
                             </div>

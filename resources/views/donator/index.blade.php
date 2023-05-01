@@ -107,7 +107,6 @@
                         <a href="{{ url('all_donations/' . $donate->id) }}" class="btn btn-success text-white">
                             <b>History</b>
                         </a>
-
                         <button type="button" class="btn btn-warning" data-coreui-toggle="modal" data-coreui-target="#edit_{{ $donate->id }}" data-coreui-whatever="@mdo">
                             <b>تعديل</b>
                         </button>

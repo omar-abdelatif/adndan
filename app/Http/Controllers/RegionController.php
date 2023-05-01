@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class RegionController extends Controller
 {
+    public function index()
+    {
+        return view('المقابر.index');
+    }
     public function regionStore(Request $request)
     {
         $validate = $request->validate([

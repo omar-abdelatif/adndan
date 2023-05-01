@@ -5,17 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Region extends Model
+class Tomb extends Model
 {
     use HasFactory;
-    protected $table = 'regions';
+    protected $table = 'tombs';
     protected $fillable = [
         'name',
-        'capacity'
+        'type',
+        'power',
+        'region',
+        'region_id'
     ];
 
-    public function tombs()
+    public function regions()
     {
-        return $this->hasMany(Tomb::class);
+        return $this->belongsTo(Region::class);
     }
 }
