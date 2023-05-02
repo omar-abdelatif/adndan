@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Tombs;
 
-use App\Http\Controllers\Controller;
+use App\Models\Region;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class FayumTombController extends Controller
 {
     public function index()
     {
-        return view('المقابر.الفيوم.index');
+        $region = Region::where('name', 'الفيوم')->firstOrFail();
+        $tombs = $region->tombs;
+        return view('المقابر.الفيوم.index', compact('region', 'tombs'));
     }
 }
