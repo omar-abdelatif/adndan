@@ -58,7 +58,7 @@
                                 </li>
                                 <li class="breadcrumb-item active">مقابر 6 أكتوبر</li>
                             </ol>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
         <div class="col-12">
             <div class="bg-info-gradient p-3 w-50 mx-auto rounded mt-5">
                 <div class="wrapper-title">
-                    <h2 class="text-center text-white">مقابر السادس من أكتوبر</h2>
+                    <h2 class="text-center text-white">مقابر {{$region->name}}</h2>
                 </div>
             </div>
             <?php $i = 1 ?>
@@ -99,7 +99,23 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach ($tombs as $tomb)
+                        <tr>
+                            <td>{{$i++}}</td>
+                            <td>{{$tomb->name}}</td>
+                            <td>{{$tomb->type}}</td>
+                            <td>{{$tomb->power}}</td>
+                            <td>{{$tomb->region}}</td>
+                            <td>{{$tomb->annual_cost}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="{{ $tomb->url }}" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-external-link" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
