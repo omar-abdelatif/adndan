@@ -14,11 +14,9 @@ class OctoberTombController extends Controller
 {
     public function index()
     {
-        $allRegions = Region::all();
-        $regionCount = Region::count();
         $region = Region::where('name', '6 أكتوبر')->firstOrFail();
         $tombs = $region->tombs;
-        return view('المقابر.أكتوبر.index', compact('region', 'tombs', 'regionCount', 'allRegions'));
+        return view('المقابر.أكتوبر.index', compact('region', 'tombs'));
     }
 
     public function updateTomb(Request $request)

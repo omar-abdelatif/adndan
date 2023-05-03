@@ -107,10 +107,109 @@
                             <td>{{$tomb->region}}</td>
                             <td>{{$tomb->annual_cost}}</td>
                             <td>
-                                <div class="btn-group">
-                                    <a href="{{ $tomb->url }}" class="btn btn-sm btn-primary">
-                                        <i class="fa fa-external-link" aria-hidden="true"></i>
-                                    </a>
+                                <div class="btn-group align-items-center justify-content-evenly">
+                                    <button type="button" class="btn btn-warning rounded" data-coreui-toggle="modal" data-coreui-target="#edit{{$tomb->id}}" data-coreui-whatever="@mdo">
+                                        <i class="fa-solid fa-pen-to-square fa-fade fa-lg"></i>
+                                    </button>
+                                    <div class="modal fade" id="edit{{$tomb->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">تعديل مقبرة {{$tomb->name}}</h1>
+                                                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{route('fayum.update')}}" method="post">
+                                                        @csrf
+                                                        <div class="container-fluid">
+                                                            <div class="row">
+                                                                <input type="hidden" name="id" value="{{$tomb->id}}">
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="text" name="name" value="{{$tomb->name}}" placeholder="إسم المقبرة" class="form-control mb-3 text-center">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <select name="power" class="form-control mb-2">
+                                                                            <option class="text-center" selected>قوة المقبرة</option>
+                                                                            <option value="1" {{$tomb->power  == '1' ? 'selected' : ''}}>1</option>
+                                                                            <option value="2" {{$tomb->power  == '2' ? 'selected' : ''}}>2</option>
+                                                                            <option value="3" {{$tomb->power  == '3' ? 'selected' : ''}}>3</option>
+                                                                            <option value="4" {{$tomb->power  == '4' ? 'selected' : ''}}>4</option>
+                                                                            <option value="5" {{$tomb->power  == '5' ? 'selected' : ''}}>5</option>
+                                                                            <option value="6" {{$tomb->power  == '6' ? 'selected' : ''}}>6</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <select name="type" class="form-control mb-2">
+                                                                            <option class="text-center" selected>إختار نوع المقبرة</option>
+                                                                            <option value="لحد" {{$tomb->type  == 'لحد' ? 'selected' : ''}}>لحد</option>
+                                                                            <option value="عيون" {{$tomb->type  == 'عيون' ? 'selected' : ''}}>عيون</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="text" name="region" value="{{$tomb->region}}" class="form-control text-center mb-3" placeholder="إختار المنطقة" readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="number" name="annual_cost" value="{{$tomb->annual_cost}}" class="form-control mb-3 text-center" placeholder="قيمة الدفع السنوي">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="field">
+                                                                        <input type="submit" value="تعديل" class="btn btn-success w-100">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-danger rounded ms-2" data-coreui-toggle="modal" data-coreui-target="#delete{{$tomb->id}}" data-coreui-whatever="@mdo">
+                                        <i class="fa-solid fa-trash fa-fade fa-lg"></i>
+                                    </button>
+                                    <div class="modal fade" id="delete{{$tomb->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title text-decoration-underline" id="exampleModalLabel">حذف مقبرة {{$tomb->name}}</h3>
+                                                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{route('fayum.destroy', $tomb->id)}}" method="get">
+                                                        @csrf
+                                                        <div class="container-fluid">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="confirm_msg mb-3">
+                                                                        <h2 class="text-center">هل أنت متأكد من الحذف ؟</h2>
+                                                                    </div>
+                                                                    <div class="modal-footer d-flex justify-content-center w-100">
+                                                                        <div class="field">
+                                                                            <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <button type="submit" class="btn btn-danger w-100 text-white">
+                                                                                <b>حذف</b>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -119,5 +218,4 @@
             </table>
         </div>
     </div>
-
 @endsection

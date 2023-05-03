@@ -153,14 +153,6 @@
                                                                 </div>
                                                                 <div class="col-lg-6">
                                                                     <div class="field">
-                                                                        {{-- <select name="region" class="form-control" readonly>
-                                                                            <option selected>إختار المنطقة</option>
-                                                                            @if ($regionCount > 0)
-                                                                                @foreach ($allRegions as $region)
-                                                                                    <option value="{{$region->name}}" {{$tomb->region == $region->name ? 'selected' : ''}}>{{$region->name}}</option>
-                                                                                @endforeach
-                                                                            @endif
-                                                                        </select> --}}
                                                                         <input type="text" name="region" value="{{$tomb->region}}" class="form-control text-center mb-3" placeholder="إختار المنطقة" readonly>
                                                                     </div>
                                                                 </div>
@@ -215,22 +207,6 @@
                                                         </div>
                                                     </form>
                                                 </div>
-                                                {{-- <div class="modal-footer justify-content-center">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="field">
-                                                                <button type="button" class="btn btn-secondary w-100" data-coreui-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="field">
-                                                                <button type="submit" class="btn btn-danger w-100 text-white">
-                                                                    <b>حذف</b>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>

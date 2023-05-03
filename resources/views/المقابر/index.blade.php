@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 <div class="item-footer">
-                    <a href='{{route("fayum.index")}}' class="btn btn-primary w-100 mt-3">
+                    <a href='{{route("gafeer.index")}}' class="btn btn-primary w-100 mt-3">
                         <b>المزيد</b>
                     </a>
                 </div>
