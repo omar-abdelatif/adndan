@@ -56,7 +56,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="{{ route('region.index') }}">كل المقابر</a>
                                 </li>
-                                {{-- <li class="breadcrumb-item active">مقابر {{$region->name}}</li> --}}
+                                <li class="breadcrumb-item active">مقابر {{$region->name}}</li>
                             </ol>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
         </section>
     </header>
 @endsection
-{{-- @section('content')
+@section('content')
     <div class="row">
         <div class="col-12">
             <div class="bg-info-gradient p-3 w-50 mx-auto rounded mt-5">
@@ -119,7 +119,7 @@
                                                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{route('october.update')}}" method="post">
+                                                    <form action="{{route('gafeer.update')}}" method="post">
                                                         @csrf
                                                         <div class="container-fluid">
                                                             <div class="row">
@@ -184,7 +184,7 @@
                                                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{route('october.destroy', $tomb->id)}}" method="get">
+                                                    <form action="{{route('gafeer.destroy', $tomb->id)}}" method="get">
                                                         @csrf
                                                         <div class="container-fluid">
                                                             <div class="row">
@@ -218,4 +218,4 @@
             </table>
         </div>
     </div>
-@endsection --}}
+@endsection

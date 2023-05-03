@@ -70,13 +70,21 @@ Route::middleware('auth')->group(function () {
     //! Fayum Routes
     Route::get('fayum_tombs', [FayumTombController::class, 'index'])->name('fayum.index');
     Route::get('destroy_fayum_tomb/{id}', [FayumTombController::class, 'destroyTomb'])->name('fayum.destroy');
-    Route::post('fayum_fayum_tomb', [FayumTombController::class, 'updateTomb'])->name('fayum.update');
+    Route::post('update_fayum_tomb', [FayumTombController::class, 'updateTomb'])->name('fayum.update');
     //! Gafeer Routes
     Route::get('gafeer_tombs', [GafeerTombController::class, 'index'])->name('gafeer.index');
+    Route::get('destroy_gafeer_tomb/{id}', [GafeerTombController::class, 'destroyTomb'])->name('gafeer.destroy');
+    Route::post('update_gafeer_tomb', [GafeerTombController::class, 'updateTomb'])->name('gafeer.update');
     //! Zenhom Routes
     Route::get('zenhom_tombs', [ZenhomTombController::class, 'index'])->name('zenhom.index');
+    Route::get('destroy_zenhom_tomb/{id}', [ZenhomTombController::class, 'destroyTomb'])->name('zenhom.destroy');
+    Route::post('update_zenhom_tomb', [ZenhomTombController::class, 'updateTomb'])->name('zenhom.update');
     //! Katamya Routes
     Route::get('katamya_tombs', [KatamyaTombController::class, 'index'])->name('katamya.index');
+    Route::get('destroy_katamya_tomb/{id}', [KatamyaTombController::class, 'destroyTomb'])->name('katamya.destroy');
+    Route::post('update_katamya_tomb', [KatamyaTombController::class, 'updateTomb'])->name('katamya.update');
     //! 15 May Routes
     Route::get('15may_tombs', [May15TombController::class, 'index'])->name('15may.index');
+    Route::get('destroy_15may_tomb/{id}', [May15TombController::class, 'destroyTomb'])->name('15may.destroy');
+    Route::post('update_15may_tomb', [May15TombController::class, 'updateTomb'])->name('15may.update');
 });

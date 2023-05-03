@@ -22,4 +22,16 @@ class Tomb extends Model
     {
         return $this->belongsTo(Region::class);
     }
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
+    public function createRooms()
+    {
+        $power = $this->power;
+
+        for ($i = 1; $i <= $power; $i++) {
+            $room = new Rooms;
+        }
+    }
 }
