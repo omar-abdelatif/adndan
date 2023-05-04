@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Region;
 use App\Models\Tomb;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Assert;
 
 class TombsController extends Controller
 {
@@ -14,6 +15,12 @@ class TombsController extends Controller
         $region = Region::all();
         $regionCount = Region::count();
         return view('المقابر.alltombs', compact('tomb', 'region', 'regionCount'));
+    }
+    public function AllRooms()
+    {
+        $region = Region::all();
+        $tomb = Tomb::all();
+        return view('المقابر.addtomb', compact('tomb', 'region'));
     }
     public function TombForm()
     {
@@ -31,18 +38,22 @@ class TombsController extends Controller
         ]);
         $region = Region::where('name', $validated['region'])->first();
         if ($region) {
-            $tomb = new Tomb([
-                'name' => $validated['name'],
-                'power' => $validated['power'],
-                'type' => $validated['type'],
-                'annual_cost' => $validated['annual_cost'],
-                'region' => $validated['region'],
-                'region_id' => $region->id
-            ]);
-            $region->tombs()->save($tomb);
-            return redirect()->route('tombs.all')->with('success', 'تمت إضافة المقبرة بنجاح.');
+            $tomb = new Tomb;
+            $tomb->name = $request->name;
+            $tomb->power = $request->power;
+            $tomb->region = $request->region;
+            $tomb->type = $request->type;
+            $tomb->annual_cost = $request->annual_cost;
+            $tomb->region_id = $region->id;
+            $store = $tomb->save();
         }
-        return redirect()->route('tombs.all')->withErrors('حدث خطأ أثناء الإضافة');
+        if ($store) {
+            $tomb->createRooms();
+            $rooms = $tomb->rooms;
+            Assert::assertCount($request->power, $rooms);
+            return redirect()->route('tombs.all')->with('success', 'تمت الإضافة بنجاح');
+        }
+        return redirect()->route('tombs.all')->withErrors($validated);
     }
     public function updateTomb(Request $request)
     {

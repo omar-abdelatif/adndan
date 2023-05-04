@@ -45,7 +45,7 @@
         </div>
         <div class="header-divider"></div>
         <section class="content-header w-100">
-            <div class="container-fluid">
+            <div class="container-fluid d-flex">
                 <div class="row">
                     <div class="col-lg-12 d-inline-flex align-items-center justify-content-between w-100">
                         <ol class="breadcrumb float-sm-right">
@@ -54,7 +54,6 @@
                             </li>
                             <li class="breadcrumb-item active">إضافة مقبرة</li>
                         </ol>
-
                     </div>
                 </div>
             </div>
@@ -79,7 +78,7 @@
                         </div>
                     @endforeach
                 @endif
-                <form action="{{ route('october.store') }}" method="post">
+                <form action="{{ route('tombs.store') }}" method="post">
                     @csrf
                     <div class="container-fluid">
                         <div class="row">
@@ -136,5 +135,4 @@
             </div>
         </div>
     </div>
-    
 @endsection

@@ -45,8 +45,8 @@
         </div>
         <div class="header-divider"></div>
         <section class="content-header w-100">
-            <div class="container-fluid">
-                <div class="row">
+            <div class="container-fluid d-flex">
+                <div class="row align-items-center ">
                     <div class="col-sm-12">
                         <div class="d-flex justify-content-between w-100 align-items-center">
                             <ol class="breadcrumb float-sm-right">
@@ -110,6 +110,7 @@
                                 <div class="btn-group align-items-center justify-content-evenly">
                                     <button type="button" class="btn btn-warning rounded" data-coreui-toggle="modal" data-coreui-target="#edit{{$tomb->id}}" data-coreui-whatever="@mdo">
                                         <i class="fa-solid fa-pen-to-square fa-fade fa-lg"></i>
+                                        <b class="fa-fade">تعديل</b>
                                     </button>
                                     <div class="modal fade" id="edit{{$tomb->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
@@ -175,6 +176,7 @@
                                     </div>
                                     <button type="button" class="btn btn-danger rounded ms-2" data-coreui-toggle="modal" data-coreui-target="#delete{{$tomb->id}}" data-coreui-whatever="@mdo">
                                         <i class="fa-solid fa-trash fa-fade fa-lg"></i>
+                                        <b class="fa-fade">حذف</b>
                                     </button>
                                     <div class="modal fade" id="delete{{$tomb->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -206,6 +208,38 @@
                                                             </div>
                                                         </div>
                                                     </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-warning rounded" data-coreui-toggle="modal" data-coreui-target="#show{{$tomb->id}}" data-coreui-whatever="@mdo">
+                                        <i class="fa-solid fa-eye fa-fade fa-lg"></i>
+                                        <b class=" fa-fade">عرض</b>
+                                    </button>
+                                    <div class="modal fade" id="show{{$tomb->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title text-decoration-underline" id="exampleModalLabel">عرض بيانات {{$tomb->name}}</h3>
+                                                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="tomb-details bg-secondary rounded p-3">
+                                                        <div class="tomb-details-title mb-3">
+                                                            <h2 class="text-center text-decoration-underline">تفاصيل المقبرة</h2>
+                                                        </div>
+                                                        <div class="tomb-details-content d-flex align-items-center justify-content-evenly">
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">إسم المقبرة: {{$tomb->name}}</p>
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">قوة المقبرة: {{$tomb->power}}</p>
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">إسم المنطقة: {{$tomb->region}}</p>
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">المتاح: .....</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tomb-status bg-info rounded p-3 mt-3">
+                                                        <div class="tomb-status-title mb-3">
+                                                            <h2 class="text-center text-decoration-underline">حالة المقبرة</h2>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

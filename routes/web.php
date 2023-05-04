@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonationHistoryController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\SMSController;
 use App\Http\Controllers\Tombs\FayumTombController;
 use App\Http\Controllers\Tombs\GafeerTombController;
@@ -59,7 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::post('store_region', [RegionController::class, 'regionStore'])->name('region.store');
     //! Tombs Routes
     Route::get('all_tombs', [TombsController::class, 'AllTombs'])->name('tombs.all');
-    // Route::get('add_tombs', [TombsController::class, 'TombForm'])->name('tomb.add');
+    Route::get('add_tombs', [TombsController::class, 'TombForm'])->name('tomb.add');
     Route::post('create_tombs', [TombsController::class, 'addTomb'])->name('tombs.store');
     Route::get('destroy_tomb/{id}', [TombsController::class, 'deleteTomb'])->name('tomb.destroy');
     Route::post('update_tomb', [TombsController::class, 'updateTomb'])->name('tomb.update');
@@ -87,4 +88,7 @@ Route::middleware('auth')->group(function () {
     Route::get('15may_tombs', [May15TombController::class, 'index'])->name('15may.index');
     Route::get('destroy_15may_tomb/{id}', [May15TombController::class, 'destroyTomb'])->name('15may.destroy');
     Route::post('update_15may_tomb', [May15TombController::class, 'updateTomb'])->name('15may.update');
+    //! Rooms Routes
+    Route::get('all_rooms', [RoomsController::class, 'index'])->name('rooms.all');
+    // Route::post('/tomb/create-rooms', [TombsController::class, 'addTomb'])->name('room.create');
 });

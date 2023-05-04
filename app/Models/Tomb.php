@@ -24,14 +24,21 @@ class Tomb extends Model
     }
     public function rooms()
     {
-        return $this->hasMany(Room::class);
+        return $this->hasMany(Rooms::class);
     }
+
     public function createRooms()
     {
+        // Get the power of the tomb
         $power = $this->power;
 
+        // Loop through the power and create the rooms
         for ($i = 1; $i <= $power; $i++) {
             $room = new Rooms;
+            $room->name = "غرفة " . $i;
+            $room->capacity = 6;
+            $room->tomb_id = $this->id;
+            $room->save();
         }
     }
 }
