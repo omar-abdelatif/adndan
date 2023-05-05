@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CaseController;
 use App\Http\Controllers\DonatorController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DeceasedController;
 use App\Http\Controllers\DonationHistoryController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ReportController;
@@ -91,4 +92,6 @@ Route::middleware('auth')->group(function () {
     //! Rooms Routes
     Route::get('all_rooms', [RoomsController::class, 'index'])->name('rooms.all');
     // Route::post('/tomb/create-rooms', [TombsController::class, 'addTomb'])->name('room.create');
+    //! Deceased Routes
+    Route::get('all_deceased', [DeceasedController::class, 'index'])->name('deceased.index');
 });

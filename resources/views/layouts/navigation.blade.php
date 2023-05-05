@@ -111,6 +111,12 @@
                     <b>كل الغرف</b>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('deceased.index')}}" target="_top">
+                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
+                    <b>إضافة متوفي</b>
+                </a>
+            </li>
         </ul>
     </li>
     <li class="nav-group" aria-expanded="false">
