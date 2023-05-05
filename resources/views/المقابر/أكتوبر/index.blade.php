@@ -73,7 +73,6 @@
                     <h2 class="text-center text-white">مقابر {{$region->name}}</h2>
                 </div>
             </div>
-            <?php $i = 1 ?>
             @if (session('success'))
                 <div class="alert alert-success text-center mt-5">
                     <p class="mb-0">{{ session('success') }}</p>
@@ -98,9 +97,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $i = 1 ?>
                     @foreach ($tombs as $tomb)
                         <tr>
-                            <td>{{$i++}}</td>
+                            <td>{{ $i++ }}</td>
                             <td>{{$tomb->name}}</td>
                             <td>{{$tomb->type}}</td>
                             <td>{{$tomb->power}}</td>
@@ -212,7 +212,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-warning rounded" data-coreui-toggle="modal" data-coreui-target="#show{{$tomb->id}}" data-coreui-whatever="@mdo">
+                                    <button type="button" class="btn btn-success rounded" data-coreui-toggle="modal" data-coreui-target="#show{{$tomb->id}}" data-coreui-whatever="@mdo">
                                         <i class="fa-solid fa-eye fa-fade fa-lg"></i>
                                         <b class=" fa-fade">عرض</b>
                                     </button>
@@ -229,15 +229,77 @@
                                                             <h2 class="text-center text-decoration-underline">تفاصيل المقبرة</h2>
                                                         </div>
                                                         <div class="tomb-details-content d-flex align-items-center justify-content-evenly">
-                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">إسم المقبرة: {{$tomb->name}}</p>
-                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">قوة المقبرة: {{$tomb->power}}</p>
-                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">إسم المنطقة: {{$tomb->region}}</p>
-                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">المتاح: .....</p>
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                <b>إسم المقبرة:</b>
+                                                                {{$tomb->name}}
+                                                            </p>
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                <b>قوة المقبرة:</b>
+                                                                {{$tomb->power}}
+                                                            </p>
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                <b>إسم المنطقة:</b>
+                                                                {{$tomb->region}}
+                                                            </p>
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                <b>المتاح:</b>
+                                                                .....
+                                                            </p>
                                                         </div>
                                                     </div>
                                                     <div class="tomb-status bg-info rounded p-3 mt-3">
                                                         <div class="tomb-status-title mb-3">
                                                             <h2 class="text-center text-decoration-underline">حالة المقبرة</h2>
+                                                        </div>
+                                                        <div class="tomb-status-content d-flex align-items-center justify-content-around">
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                <b>قوة المقبرة:</b>
+                                                                {{$tomb->power}}
+                                                            </p>
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                <b>المتاح المقبرة:</b>
+                                                                .....
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="rooms bg-success rounded p-3 mt-3">
+                                                        <div class="rooms-title mb-3">
+                                                            <h2 class="text-center text-decoration-underline">تفاصيل الغرف</h2>
+                                                        </div>
+                                                        <div class="rooms-content">
+                                                            <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                                                                <thead>
+                                                                    <th class="text-center">id</th>
+                                                                    <th class="text-center">إسم الغرفة</th>
+                                                                    <th class="text-center">قوة الغرفة</th>
+                                                                    <th class="text-center">المتاح</th>
+                                                                    <th class="text-center">تاريخ أخر دفنة</th>
+                                                                    <th class="text-center">Actions</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php $j=1 ?>
+                                                                    @foreach ($tomb->rooms as $room)
+                                                                        <tr>
+                                                                            <td>{{ $j++ }}</td>
+                                                                            <td>{{$room->name}}</td>
+                                                                            <td>{{$room->capacity}}</td>
+                                                                            <td>0</td>
+                                                                            <td>0</td>
+                                                                            <td>
+                                                                                <a href="" class="btn btn-primary">
+                                                                                    <b>عرض</b>
+                                                                                </a>
+                                                                                <a href="" class="btn btn-warning">
+                                                                                    <b>تعديل</b>
+                                                                                </a>
+                                                                                <a href="" class="btn btn-danger">
+                                                                                    <b>حذف</b>
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>

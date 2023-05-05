@@ -110,6 +110,7 @@
                                 <div class="btn-group align-items-center justify-content-evenly">
                                     <button type="button" class="btn btn-warning rounded" data-coreui-toggle="modal" data-coreui-target="#edit{{$tomb->id}}" data-coreui-whatever="@mdo">
                                         <i class="fa-solid fa-pen-to-square fa-fade fa-lg"></i>
+                                        <b class="fa-fade">تعديل</b>
                                     </button>
                                     <div class="modal fade" id="edit{{$tomb->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
@@ -175,6 +176,7 @@
                                     </div>
                                     <button type="button" class="btn btn-danger rounded ms-2" data-coreui-toggle="modal" data-coreui-target="#delete{{$tomb->id}}" data-coreui-whatever="@mdo">
                                         <i class="fa-solid fa-trash fa-fade fa-lg"></i>
+                                        <b class="fa-fade">حذف</b>
                                     </button>
                                     <div class="modal fade" id="delete{{$tomb->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -206,6 +208,100 @@
                                                             </div>
                                                         </div>
                                                     </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-success rounded" data-coreui-toggle="modal" data-coreui-target="#show{{$tomb->id}}" data-coreui-whatever="@mdo">
+                                        <i class="fa-solid fa-eye fa-fade fa-lg"></i>
+                                        <b class=" fa-fade">عرض</b>
+                                    </button>
+                                    <div class="modal fade" id="show{{$tomb->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title text-decoration-underline" id="exampleModalLabel">عرض بيانات {{$tomb->name}}</h3>
+                                                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="tomb-details bg-secondary rounded p-3">
+                                                        <div class="tomb-details-title mb-3">
+                                                            <h2 class="text-center text-decoration-underline">تفاصيل المقبرة</h2>
+                                                        </div>
+                                                        <div class="tomb-details-content d-flex align-items-center justify-content-evenly">
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                <b>إسم المقبرة:</b>
+                                                                {{$tomb->name}}
+                                                            </p>
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                <b>قوة المقبرة:</b>
+                                                                {{$tomb->power}}
+                                                            </p>
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                <b>إسم المنطقة:</b>
+                                                                {{$tomb->region}}
+                                                            </p>
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                <b>المتاح:</b>
+                                                                .....
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tomb-status bg-info rounded p-3 mt-3">
+                                                        <div class="tomb-status-title mb-3">
+                                                            <h2 class="text-center text-decoration-underline">حالة المقبرة</h2>
+                                                        </div>
+                                                        <div class="tomb-status-content d-flex align-items-center justify-content-around">
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                <b>قوة المقبرة:</b>
+                                                                {{$tomb->power}}
+                                                            </p>
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                <b>المتاح المقبرة:</b>
+                                                                .....
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="rooms bg-success rounded p-3 mt-3">
+                                                        <div class="rooms-title mb-3">
+                                                            <h2 class="text-center text-decoration-underline">تفاصيل الغرف</h2>
+                                                        </div>
+                                                        <div class="rooms-content">
+                                                            <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                                                                <thead>
+                                                                    <th class="text-center">id</th>
+                                                                    <th class="text-center">إسم الغرفة</th>
+                                                                    <th class="text-center">قوة الغرفة</th>
+                                                                    <th class="text-center">المتاح</th>
+                                                                    <th class="text-center">تاريخ أخر دفنة</th>
+                                                                    <th class="text-center">Actions</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php $j=1 ?>
+                                                                    @foreach ($tomb->rooms as $room)
+                                                                        <tr>
+                                                                            <td>{{ $j++ }}</td>
+                                                                            <td>{{$room->name}}</td>
+                                                                            <td>{{$room->capacity}}</td>
+                                                                            <td>0</td>
+                                                                            <td>0</td>
+                                                                            <td>
+                                                                                <a href="" class="btn btn-primary">
+                                                                                    <b>عرض</b>
+                                                                                </a>
+                                                                                <a href="" class="btn btn-warning">
+                                                                                    <b>تعديل</b>
+                                                                                </a>
+                                                                                <a href="" class="btn btn-danger">
+                                                                                    <b>حذف</b>
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
