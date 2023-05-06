@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Region;
 use App\Models\Tomb;
+use App\Models\Rooms;
+use App\Models\Region;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\Assert;
 
@@ -80,4 +81,12 @@ class TombsController extends Controller
         }
         return redirect()->route('tombs.all')->withErrors('خطأ أثناء الحذف');
     }
+    public function getTombs(Request $request)
+    {
+        $tombs = Tomb::select('name', 'id')->where('region_id', $request->id)->take(100)->get();
+        return response()->json($tombs);
+    }
+
+
+
 }

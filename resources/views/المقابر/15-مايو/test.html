@@ -45,35 +45,38 @@
         </div>
     </main>
     <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script>
-        $('#region').change(function () {
-            var region = $(this).val();
+        $(function () {
+            $('#region').change(function () {
+                var region = $(this).val();
 
-            if (region) {
-                $('#tomb').empty();
-                $('#room').empty();
-                $('#tomb').append('<option value="">-- Select Tomb --</option>');
+                if (region) {
+                    $('#tomb').empty();
+                    $('#room').empty();
+                    $('#tomb').append('<option value="">-- Select Tomb --</option>');
 
-                if (region == 'region1') {
-                    $('#tomb').append('<option value="tomb1">Tomb 1</option>');
-                    $('#tomb').append('<option value="tomb2">Tomb 2</option>');
-                    $('#tomb').append('<option value="tomb3">Tomb 3</option>');
-                } else if (region == 'region2') {
-                    $('#tomb').append('<option value="tomb4">Tomb 4</option>');
-                    $('#tomb').append('<option value="tomb5">Tomb 5</option>');
-                    $('#tomb').append('<option value="tomb6">Tomb 6</option>');
-                } else if (region == 'region3') {
-                    $('#tomb').append('<option value="tomb7">Tomb 7</option>');
-                    $('#tomb').append('<option value="tomb8">Tomb 8</option>');
-                    $('#tomb').append('<option value="tomb9">Tomb 9</option>');
+                    if (region == 'region1') {
+                        $('#tomb').append('<option value="tomb1">Tomb 1</option>');
+                        $('#tomb').append('<option value="tomb2">Tomb 2</option>');
+                        $('#tomb').append('<option value="tomb3">Tomb 3</option>');
+                    } else if (region == 'region2') {
+                        $('#tomb').append('<option value="tomb4">Tomb 4</option>');
+                        $('#tomb').append('<option value="tomb5">Tomb 5</option>');
+                        $('#tomb').append('<option value="tomb6">Tomb 6</option>');
+                    } else if (region == 'region3') {
+                        $('#tomb').append('<option value="tomb7">Tomb 7</option>');
+                        $('#tomb').append('<option value="tomb8">Tomb 8</option>');
+                        $('#tomb').append('<option value="tomb9">Tomb 9</option>');
+                    }
+                } else {
+                    $('#tomb').empty();
+                    $('#room').empty();
+                    $('#tomb').append('<option value="">-- Select Tomb --</option>');
+                    $('#room').append('<option value="">-- Select Room --</option>');
                 }
-            } else {
-                $('#tomb').empty();
-                $('#room').empty();
-                $('#tomb').append('<option value="">-- Select Tomb --</option>');
-                $('#room').append('<option value="">-- Select Room --</option>');
-            }
-        });
+            });
+        })
     </script>
 </body>
 

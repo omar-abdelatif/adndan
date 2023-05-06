@@ -73,7 +73,8 @@
                     <h2 class="text-center text-white">إضافة متوفي</h2>
                 </div>
                 <div class="deceased-content mt-4 bg-dark-gradient p-4 rounded">
-                    <form action="" method="post">
+                    <form action="{{route('deceased.store')}}" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group mt-3">
@@ -100,6 +101,12 @@
                                     </label>
                                     <input type="date" id="burial_date" class="form-control text-center" name="burial_date" placeholder="تاريخ الدفن">
                                 </div>
+                                <div class="form-group mt-3">
+                                    <label for="files" class="text-white">
+                                        <b>ملفات</b>
+                                    </label>
+                                    <input type="file" id="files" class="form-control text-center" name="files">
+                                </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group mt-3">
@@ -119,18 +126,18 @@
                                         <b>المنطقة</b>
                                     </label>
                                     <select name="region" id="region" class="form-control">
-                                        <option value="">-- إختار المنطقة --</option>
+                                        <option value="0" selected>-- إختار المنطقة --</option>
                                         @foreach ($regions as $region)
                                             <option value="{{ $region->id }}">{{ $region->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label for="burial_date" class="text-white">
+                                    <label for="tomb" class="text-white">
                                         <b>إسم المقبرة</b>
                                     </label>
-                                    <select name="tomb" id="tomb" class="form-control">
-                                        <option value="">-- إختار المقبرة --</option>
+                                    <select name="tomb" id="regionTomb" class="form-control regionTomb">
+                                        <option value="0" selected>-- إختار المقبرة --</option>
                                     </select>
                                 </div>
                                 <div class="form-group mt-3">
@@ -143,7 +150,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="textarea">
+                                <div class="textarea mt-4">
                                     <label for="notes" class="text-white">
                                         <b>ملاحظـــــــات</b>
                                     </label>

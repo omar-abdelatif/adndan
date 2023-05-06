@@ -65,6 +65,7 @@ Route::middleware('auth')->group(function () {
     Route::post('create_tombs', [TombsController::class, 'addTomb'])->name('tombs.store');
     Route::get('destroy_tomb/{id}', [TombsController::class, 'deleteTomb'])->name('tomb.destroy');
     Route::post('update_tomb', [TombsController::class, 'updateTomb'])->name('tomb.update');
+    Route::get('/get-tombs', [TombsController::class, 'getTombs'])->name('getTombs');
     //! October Tombs Routes
     Route::get('october_tombs', [OctoberTombController::class, 'index'])->name('october.index');
     Route::get('destroy_october_tomb/{id}', [OctoberTombController::class, 'destroyTomb'])->name('october.destroy');
@@ -91,7 +92,9 @@ Route::middleware('auth')->group(function () {
     Route::post('update_15may_tomb', [May15TombController::class, 'updateTomb'])->name('15may.update');
     //! Rooms Routes
     Route::get('all_rooms', [RoomsController::class, 'index'])->name('rooms.all');
+    Route::get('get-rooms/{tomb}', [RoomsController::class, 'getRooms'])->name('getRooms');
     // Route::post('/tomb/create-rooms', [TombsController::class, 'addTomb'])->name('room.create');
     //! Deceased Routes
     Route::get('all_deceased', [DeceasedController::class, 'index'])->name('deceased.index');
+    Route::post('store_deceased', [DeceasedController::class, ''])->name('deceased.store');
 });
