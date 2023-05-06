@@ -92,7 +92,7 @@ Route::middleware('auth')->group(function () {
     Route::post('update_15may_tomb', [May15TombController::class, 'updateTomb'])->name('15may.update');
     //! Rooms Routes
     Route::get('all_rooms', [RoomsController::class, 'index'])->name('rooms.all');
-    Route::get('get-rooms/{tomb}', [RoomsController::class, 'getRooms'])->name('getRooms');
+    Route::get('/get-rooms', [RoomsController::class, 'getRooms'])->name('getRooms');
     // Route::post('/tomb/create-rooms', [TombsController::class, 'addTomb'])->name('room.create');
     //! Deceased Routes
     Route::get('all_deceased', [DeceasedController::class, 'index'])->name('deceased.index');

@@ -144,7 +144,7 @@
                                     <label for="room" class="text-white">
                                         <b>رقم الغرفة</b>
                                     </label>
-                                    <select name="room" id="room" class="form-control">
+                                    <select name="room" id="room" class="form-control roomTomb">
                                         <option value="">-- إختار الغرفة --</option>
                                     </select>
                                 </div>
