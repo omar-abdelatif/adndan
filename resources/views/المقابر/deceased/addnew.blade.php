@@ -73,7 +73,18 @@
                     <h2 class="text-center text-white">إضافة متوفي</h2>
                 </div>
                 <div class="deceased-content mt-4 bg-dark-gradient p-4 rounded">
-                    <form action="{{route('deceased.store')}}" method="post">
+                    @if (session('success'))
+                        <div class="alert alert-success text-center mt-5">
+                            <p class="m-0">{{ session('success') }}</p>
+                        </div>
+                    @elseif ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger text-center mt-5">
+                                <p class="mb-0">{{ $error }}</p>
+                            </div>
+                        @endforeach
+                    @endif
+                    <form action="{{route('deceased.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-6">
@@ -105,7 +116,7 @@
                                     <label for="files" class="text-white">
                                         <b>ملفات</b>
                                     </label>
-                                    <input type="file" id="files" class="form-control text-center" name="files">
+                                    <input type="file" name="files[]" id="files" class="form-control text-center" accept="image/*,.pdf">
                                 </div>
                             </div>
                             <div class="col-6">
@@ -113,13 +124,13 @@
                                     <label for="the_washer" class="text-white">
                                         <b>القائم بالغسل</b>
                                     </label>
-                                    <input type="text" id="the_washer" class="form-control text-center" name="the_washer" placeholder="القائم بالغسل">
+                                    <input type="text" id="the_washer" class="form-control text-center" name="washer" placeholder="القائم بالغسل">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="the_carrier" class="text-white">
                                         <b>القائم بالنقل</b>
                                     </label>
-                                    <input type="text" id="the_carrier" class="form-control text-center" name="the_carrier" placeholder="القائم بالنقل">
+                                    <input type="text" id="the_carrier" class="form-control text-center" name="carrier" placeholder="القائم بالنقل">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="region" class="text-white">

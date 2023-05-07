@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Deceased extends Model
 {
     use HasFactory;
+    protected $table = 'deceaseds';
+    protected $fillable = [
+        'name',
+        'death_place',
+        'death_date',
+        'burial_date',
+        'washer',
+        'carrier',
+        'region',
+        'tomb',
+        'room',
+        'notes',
+        'files',
+        'region_id',
+        'tomb_id',
+        'rooms_id',
+    ];
 }
