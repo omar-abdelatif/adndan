@@ -73,17 +73,45 @@
             </div>
             <div class="deceased-content">
                 <div class="table-responsive">
+                    @if (session('success'))
+                        <div class="alert alert-success text-center mt-5">
+                            <p class="mb-0">{{ session('success') }}</p>
+                        </div>
+                    @elseif ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger text-center mt-5">
+                                <p class="mb-0">{{ $error }}</p>
+                            </div>
+                        @endforeach
+                    @endif
                     <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                         <thead>
-                            <th>#</th>
-                            <th>إسم المتوفي</th>
-                            <th>مكان الوفاه</th>
-                            <th>تاريخ الوفاه</th>
-                            <th>تاريخ الدفن</th>
-                            <th>Actions</th>
+                            <th class="text-center">#</th>
+                            <th class="text-center">إسم المتوفي</th>
+                            <th class="text-center">مكان الوفاه</th>
+                            <th class="text-center">تاريخ الوفاه</th>
+                            <th class="text-center">تاريخ الدفن</th>
+                            <th class="text-center">Actions</th>
                         </thead>
                         <tbody>
-                            
+                            <?php $i=1 ?>
+                            @foreach ($deceased as $deceased)
+                            <tr>
+                                <td class="text-center">{{$i++}}</td>
+                                <td class="text-center">{{$deceased->name}}</td>
+                                <td class="text-center">{{$deceased->death_place}}</td>
+                                <td class="text-center">{{$deceased->death_date}}</td>
+                                <td class="text-center">{{$deceased->burial_date}}</td>
+                                <td class="text-center">
+                                    <a href="{{route('deceased.index', $deceased->id)}}" class="btn btn-info">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{{url('delete_deceased/'.$deceased->id)}}" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

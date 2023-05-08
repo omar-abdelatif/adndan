@@ -12,7 +12,8 @@ class DeceasedController extends Controller
 {
     public function index()
     {
-        return view('المقابر.deceased.index');
+        $deceased = Deceased::all();
+        return view('المقابر.deceased.index', compact('deceased'));
     }
     public function addnew()
     {
@@ -69,7 +70,9 @@ class DeceasedController extends Controller
     {
         $deceased = Deceased::find($id);
         if ($deceased) {
-            echo "record found";
+            $deceased->delete();
+            return redirect()->route('deceased.index')->with('success', 'تم الحذف بنجاح');
         }
+        return redirect()->route('deceased.index')->withErrors('حدث خطأ أثناء الحذف');
     }
 }
