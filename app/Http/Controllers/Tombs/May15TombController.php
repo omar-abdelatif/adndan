@@ -11,7 +11,7 @@ class May15TombController extends Controller
 {
     public function index()
     {
-        $region = Region::where('name', '15 مايو')->firstOrFail();
+        $region = Region::where('name', 'مايو')->firstOrFail();
         $tombs = $region->tombs;
         return view('المقابر.15-مايو.index', compact('region', 'tombs'));
     }
@@ -22,7 +22,7 @@ class May15TombController extends Controller
             'power' => 'required|numeric',
             'type' => 'required|string|in:لحد,عيون',
             'annual_cost' => 'required|numeric',
-            'region' => 'required|string|in:6 أكتوبر,الغفير,القطامية,الفيوم,زينهم,15 مايو'
+            'region' => 'required|string|in:أكتوبر,الغفير,القطامية,الفيوم,زينهم,مايو'
         ]);
         $tomb = Tomb::find($request->id);
         if ($tomb) {

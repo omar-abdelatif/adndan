@@ -95,6 +95,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-rooms', [RoomsController::class, 'getRooms'])->name('getRooms');
     // Route::post('/tomb/create-rooms', [TombsController::class, 'addTomb'])->name('room.create');
     //! Deceased Routes
-    Route::get('new_deceased', [DeceasedController::class, 'index'])->name('deceased.index');
+    Route::get('all_deceased', [DeceasedController::class, 'index'])->name('deceased.index');
+    Route::get('new_deceased', [DeceasedController::class, 'addnew'])->name('deceased.addnew');
     Route::post('store_deceased', [DeceasedController::class, 'storeDeceased'])->name('deceased.store');
+    Route::get('delete_deceased/{id}', [DeceasedController::class, 'destroy'])->name('deceased.delete');
 });

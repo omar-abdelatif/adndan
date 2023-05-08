@@ -21,8 +21,6 @@ class Deceased extends Model
         'room',
         'notes',
         'files',
-        'region_id',
-        'tomb_id',
         'rooms_id',
     ];
     public function rooms()

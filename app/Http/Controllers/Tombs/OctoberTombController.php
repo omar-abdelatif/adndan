@@ -13,7 +13,7 @@ class OctoberTombController extends Controller
 {
     public function index(Request $request)
     {
-        $region = Region::where('name', '6 أكتوبر')->firstOrFail();
+        $region = Region::where('name', 'أكتوبر')->first();
         $tombs = $region->tombs;
         $tombRooms = [];
         foreach ($tombs as $tomb) {
@@ -29,7 +29,7 @@ class OctoberTombController extends Controller
             'power' => 'required|numeric',
             'type' => 'required|string|in:لحد,عيون',
             'annual_cost' => 'required|numeric',
-            'region' => 'required|string|in:6 أكتوبر,الغفير,القطامية,الفيوم,زينهم,15 مايو'
+            'region' => 'required|string|in:أكتوبر,الغفير,القطامية,الفيوم,زينهم,مايو'
         ]);
         $tomb = Tomb::find($request->id);
         if ($tomb) {

@@ -292,9 +292,9 @@
                                                                                 <a href="" class="btn btn-warning">
                                                                                     <b>تعديل</b>
                                                                                 </a>
-                                                                                <a href="" class="btn btn-danger">
+                                                                                {{-- <a href="" class="btn btn-danger">
                                                                                     <b>حذف</b>
-                                                                                </a>
+                                                                                </a> --}}
                                                                             </td>
                                                                         </tr>
                                                                     @endforeach

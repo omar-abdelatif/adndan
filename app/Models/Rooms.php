@@ -18,19 +18,12 @@ class Rooms extends Model
     {
         return $this->belongsTo(Tomb::class);
     }
-    public function createRooms()
-    {
-        $power = $this->power;
-        for ($i = 1; $i <= $power; $i++) {
-            $room = new Rooms;
-            $room->name = "غرفة " . $i;
-            $room->capacity = 6;
-            $room->tomb_id = $this->id;
-            $room->save();
-        }
-    }
     public function deceased()
     {
         return $this->hasMany(Deceased::class);
+    }
+    public function isFull()
+    {
+        return $this->deceased()->count() >= $this->capacity;
     }
 }

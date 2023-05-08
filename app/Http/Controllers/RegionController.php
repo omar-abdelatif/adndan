@@ -17,10 +17,7 @@ class RegionController extends Controller
             'name' => 'required|string',
             'capacity' => 'required|numeric'
         ]);
-        $store = Region::create([
-            'name' => $request->name,
-            'capacity' => $request->capacity
-        ]);
+        $store = Region::create($validate);
         if ($store) {
             return redirect()->route('region.index')->with('success', 'تمت الإضافة بنجاح');
         }
