@@ -26,9 +26,7 @@ return new class extends Migration
             $table->string('room');
             $table->longText('notes');
             $table->string('files');
-            $table->integer('region_id')->index()->references('id')->on('regions')->onDelete('cascade');
-            $table->integer('tomb_id')->index()->references('id')->on('tombs')->onDelete('cascade');
-            $table->integer('rooms_id')->index()->references('id')->on('rooms')->onDelete('cascade');
+            $table->foreignId('rooms_id')->constrained();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

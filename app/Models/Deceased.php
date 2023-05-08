@@ -25,4 +25,8 @@ class Deceased extends Model
         'tomb_id',
         'rooms_id',
     ];
+    public function rooms()
+    {
+        return $this->belongsTo(Rooms::class);
+    }
 }

@@ -14,7 +14,6 @@ class Rooms extends Model
         'capacity',
         'tomb_id'
     ];
-
     public function tombs()
     {
         return $this->belongsTo(Tomb::class);
@@ -30,5 +29,8 @@ class Rooms extends Model
             $room->save();
         }
     }
-
+    public function deceased()
+    {
+        return $this->hasMany(Deceased::class);
+    }
 }

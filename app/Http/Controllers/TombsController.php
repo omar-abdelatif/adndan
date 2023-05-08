@@ -86,7 +86,4 @@ class TombsController extends Controller
         $tombs = Tomb::select('name', 'id')->where('region_id', $request->id)->take(100)->get();
         return response()->json($tombs);
     }
-
-
-
 }

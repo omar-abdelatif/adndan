@@ -77,12 +77,10 @@
                         <div class="alert alert-success text-center mt-5">
                             <p class="m-0">{{ session('success') }}</p>
                         </div>
-                    @elseif ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger text-center mt-5">
-                                <p class="mb-0">{{ $error }}</p>
-                            </div>
-                        @endforeach
+                    @elseif (session('error'))
+                        <div class="alert alert-danger text-center mt-5">
+                            <p class="mb-0">{{ session('error') }}</p>
+                        </div>
                     @endif
                     <form action="{{route('deceased.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -116,7 +114,7 @@
                                     <label for="files" class="text-white">
                                         <b>ملفات</b>
                                     </label>
-                                    <input type="file" name="files[]" id="files" class="form-control text-center" accept="image/*,.pdf">
+                                    <input type="file" name="files[]" id="files" class="form-control text-center" accept="image/*,.pdf" multiple>
                                 </div>
                             </div>
                             <div class="col-6">
