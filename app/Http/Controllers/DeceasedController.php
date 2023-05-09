@@ -12,8 +12,9 @@ class DeceasedController extends Controller
 {
     public function index()
     {
+        $regions = Region::all();
         $deceased = Deceased::all();
-        return view('المقابر.deceased.index', compact('deceased'));
+        return view('المقابر.deceased.index', compact('deceased', 'regions'));
     }
     public function addnew()
     {
@@ -50,14 +51,19 @@ class DeceasedController extends Controller
             $deceased->notes = $validated['notes'];
             $names = [];
             if ($request->hasFile('files')) {
-                foreach ($request->file('files') as $file) {
-                    $name = time() . '.' . $file->getClientOriginalExtension();
-                    $destinationPath = public_path('build/assets/backend/files');
-                    $file->move($destinationPath, $name);
-                    $names[] = $name;
-                }
+                $file = $request->file('files');
+                $name = time() . '.' . $file->getClientOriginalExtension();
+                $destinationPath = public_path('build/assets/backend/files/tombs/imgs/');
+                $file->move($destinationPath, $name);
             }
-            $deceased->files = implode(',', $names);
+            if ($request->hasFile('pdf_files')) {
+                $files = $request->file('pdf_files');
+                $file_name = time() . '.' . $files->getClientOriginalExtension();
+                $Path = public_path('build/assets/backend/files/tombs/pdf/');
+                $files->move($Path, $file_name);
+            }
+            $deceased->files = $name;
+            $deceased->pdf_files = $file_name;
             $deceased->rooms_id = $room->id;
             $store = $deceased->save();
             if ($store) {
@@ -92,7 +98,36 @@ class DeceasedController extends Controller
         ]);
         $deceased = Deceased::find($request->id);
         if ($deceased) {
-            
+            if ($request->hasFile('files') && $request->file('files')->isValid()) {
+                $uploadFile = $request->file('files');
+                $name = time() . '.' . $uploadFile->getClientOriginalExtension();
+                $destinationPath = public_path('build/assets/backend/files/tombs/imgs/');
+                $uploadFile->move($destinationPath, $name);
+            }
+            if ($request->hasFile('pdf_files')) {
+                $files = $request->file('pdf_files');
+                $file_name = time() . '.' . $files->getClientOriginalExtension();
+                $Path = public_path('build/assets/backend/files/tombs/pdf/');
+                $files->move($Path, $file_name);
+            }
+            $store = $deceased->update([
+                'name' => $validated['name'],
+                'death_place' => $validated['death_place'],
+                'death_date' => $validated['death_date'],
+                'burial_date' => $validated['burial_date'],
+                'washer' => $validated['washer'],
+                'carrier' => $validated['carrier'],
+                'region' => $validated['region'],
+                'tomb' => $validated['tomb'],
+                'room' => $validated['room'],
+                'notes' => $validated['notes'],
+                'files' => $name,
+                'pdf_files' => $file_name
+            ]);
+            if ($store) {
+                return redirect()->route('deceased.index')->with('success', 'تم التعديل بنجاح');
+            }
+            return redirect()->route('deceased.index')->withErrors($validated);
         }
     }
 }

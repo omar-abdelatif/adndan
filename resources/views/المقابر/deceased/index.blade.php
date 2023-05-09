@@ -46,7 +46,7 @@
         <div class="header-divider"></div>
         <section class="content-header w-100">
             <div class="container-fluid d-flex">
-                <div class="row align-items-center ">
+                <div class="row">
                     <div class="col-sm-12">
                         <div class="d-flex justify-content-between w-100 align-items-center">
                             <ol class="breadcrumb float-sm-right">
@@ -58,6 +58,9 @@
                                 </li>
                                 <li class="breadcrumb-item active">كل المتوفيين</li>
                             </ol>
+                            <button type="button" class="btn btn-success rounded" data-coreui-toggle="modal" data-coreui-target="#addnew" data-coreui-whatever="@mdo">
+                                <b>إضافة متوفي جديد</b>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -124,65 +127,98 @@
                                                         @csrf
                                                         <div class="container-fluid">
                                                             <div class="row">
-                                                                <input type="hidden" name="id" value="{{$deceased->id}}">
-                                                                <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <input type="text" name="name" value="{{$deceased->name}}" placeholder="إسم المتوفي" class="form-control mb-3 text-center">
+                                                                <div class="col-6">
+                                                                    <div class="form-group mt-3">
+                                                                        <label for="name">
+                                                                            <b>إسم المتوفي</b>
+                                                                        </label>
+                                                                        <input type="text" id="name" class="form-control text-center" value="{{$deceased->name}}" name="name" placeholder="إسم المتوفي">
+                                                                    </div>
+                                                                    <div class="form-group mt-3">
+                                                                        <label for="death_place">
+                                                                            <b>مكان الوفاة</b>
+                                                                        </label>
+                                                                        <input type="text" id="death_place" class="form-control text-center" value="{{$deceased->death_place}}" name="death_place" placeholder="مكان الوفاة">
+                                                                    </div>
+                                                                    <div class="form-group mt-3">
+                                                                        <label for="death_date">
+                                                                            <b>تاريخ الوفاة</b>
+                                                                        </label>
+                                                                        <input type="date" id="death_date" class="form-control text-center" value="{{$deceased->death_date}}" name="death_date" placeholder="تاريخ الوفاة">
+                                                                    </div>
+                                                                    <div class="form-group mt-3">
+                                                                        <label for="burial_date">
+                                                                            <b>تاريخ الدفن</b>
+                                                                        </label>
+                                                                        <input type="date" id="burial_date" class="form-control text-center" value="{{$deceased->burial_date}}" name="burial_date" placeholder="تاريخ الدفن">
+                                                                    </div>
+                                                                    <div class="form-group mt-3">
+                                                                        <label for="files">
+                                                                            <b>ملفات</b>
+                                                                        </label>
+                                                                        <img src="{{asset('build/assets/backend/files/tombs/imgs/'.$deceased->files)}}" alt="{{$deceased->name}}">
+                                                                    </div>
+                                                                    <div class="form-group mt-3">
+                                                                        <label for="files">
+                                                                            <b>ملفات PDF</b>
+                                                                        </label>
+                                                                        <a href="{{asset('build/assets/backend/files/tombs/pdf/'.$deceased->pdf_files)}}" class="d-block">
+                                                                            <i class="fas fa-file-pdf fa-3x"></i>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <input type="text" name="deah_place" value="{{$deceased->death_place}}" placeholder="مكان الوفاه" class="form-control mb-3 text-center">
+                                                                <div class="col-6">
+                                                                    <div class="form-group mt-3">
+                                                                        <label for="the_washer">
+                                                                            <b>القائم بالغسل</b>
+                                                                        </label>
+                                                                        <input type="text" id="the_washer" class="form-control text-center" name="washer" placeholder="القائم بالغسل">
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <input type="date" name="death_date" value="{{$deceased->death_date}}" placeholder="تاريخ الوفاه" class="form-control mb-3 text-center" >
+                                                                    <div class="form-group mt-3">
+                                                                        <label for="the_carrier">
+                                                                            <b>القائم بالنقل</b>
+                                                                        </label>
+                                                                        <input type="text" id="the_carrier" class="form-control text-center" name="carrier" placeholder="القائم بالنقل">
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <input type="date" name="burial_date" value="{{$deceased->burial_date}}" placeholder="تاريخ الدفن" class="form-control mb-3 text-center" >
+                                                                    <div class="form-group mt-3">
+                                                                        <label for="region">
+                                                                            <b>المنطقة</b>
+                                                                        </label>
+                                                                        <select name="region" id="region" class="form-control">
+                                                                            <option value="0" selected>-- إختار المنطقة --</option>
+                                                                            @foreach ($regions as $region)
+                                                                                <option value="{{ $region->name }}">{{ $region->name }}</option>
+                                                                            @endforeach
+                                                                        </select>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <input type="text" name="washer" value="{{$deceased->washer}}" placeholder="القائم بالغسل" class="form-control mb-3 text-center" >
+                                                                    <div class="form-group mt-3">
+                                                                        <label for="tomb">
+                                                                            <b>إسم المقبرة</b>
+                                                                        </label>
+                                                                        <select name="tomb" id="regionTomb" class="form-control regionTomb">
+                                                                            <option value="0" selected>-- إختار المقبرة --</option>
+                                                                        </select>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <input type="text" name="carrier" value="{{$deceased->carrier}}" placeholder="القائم بالنقل" class="form-control mb-3 text-center">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <input type="text" name="region" value="{{$deceased->region}}" placeholder="المنطقة" class="form-control mb-3 text-center">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <input type="text" name="tomb" value="{{$deceased->tomb}}" placeholder="المقبرة" class="form-control mb-3 text-center">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <input type="text" name="room" value="{{$deceased->room}}" placeholder="الغرفة" class="form-control mb-3 text-center">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <input type="text" name="notes" value="{{$deceased->notes}}" placeholder="ملاحظات" class="form-control mb-3 text-center">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <input type="text" name="notes" value="{{$deceased->notes}}" placeholder="ملاحظات" class="form-control mb-3 text-center">
+                                                                    <div class="form-group mt-3">
+                                                                        <label for="room">
+                                                                            <b>رقم الغرفة</b>
+                                                                        </label>
+                                                                        <select name="room" id="room" class="form-control roomTomb">
+                                                                            <option value="">-- إختار الغرفة --</option>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
-                                                                    <div class="field">
-                                                                        <input type="submit" value="تعديل" class="btn btn-success w-100">
+                                                                    <div class="textarea mt-4">
+                                                                        <label for="notes">
+                                                                            <b>ملاحظـــــــات</b>
+                                                                        </label>
+                                                                        <textarea id="notes" class="form-control text-center" name="notes" rows="5" placeholder="ملاحظـــــــات"></textarea>
+                                                                    </div>
+                                                                    <div class="field mt-3">
+                                                                        <button type="submit" class="btn btn-success w-100 text-white">
+                                                                            <b>إضافة المتوفي</b>
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -197,6 +233,117 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة متوفي جديد</h1>
+                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('deceased.store')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group mt-3">
+                                        <label for="name">
+                                            <b>إسم المتوفي</b>
+                                        </label>
+                                        <input type="text" id="name" class="form-control text-center" name="name" placeholder="إسم المتوفي">
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="death_place">
+                                            <b>مكان الوفاة</b>
+                                        </label>
+                                        <input type="text" id="death_place" class="form-control text-center" name="death_place" placeholder="مكان الوفاة">
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="death_date">
+                                            <b>تاريخ الوفاة</b>
+                                        </label>
+                                        <input type="date" id="death_date" class="form-control text-center" name="death_date" placeholder="تاريخ الوفاة">
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="burial_date">
+                                            <b>تاريخ الدفن</b>
+                                        </label>
+                                        <input type="date" id="burial_date" class="form-control text-center" name="burial_date" placeholder="تاريخ الدفن">
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="files">
+                                            <b>ملفات</b>
+                                        </label>
+                                        <input type="file" name="files" id="files" class="form-control text-center" accept="image/*">
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="files">
+                                            <b>ملفات PDF</b>
+                                        </label>
+                                        <input type="file" name="pdf_files" id="files" class="form-control text-center" accept="application/pdf">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group mt-3">
+                                        <label for="the_washer">
+                                            <b>القائم بالغسل</b>
+                                        </label>
+                                        <input type="text" id="the_washer" class="form-control text-center" name="washer" placeholder="القائم بالغسل">
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="the_carrier">
+                                            <b>القائم بالنقل</b>
+                                        </label>
+                                        <input type="text" id="the_carrier" class="form-control text-center" name="carrier" placeholder="القائم بالنقل">
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="region">
+                                            <b>المنطقة</b>
+                                        </label>
+                                        <select name="region" id="region" class="form-control">
+                                            <option value="0" selected>-- إختار المنطقة --</option>
+                                            @foreach ($regions as $region)
+                                                <option value="{{ $region->name }}">{{ $region->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="tomb">
+                                            <b>إسم المقبرة</b>
+                                        </label>
+                                        <select name="tomb" id="regionTomb" class="form-control regionTomb">
+                                            <option value="0" selected>-- إختار المقبرة --</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="room">
+                                            <b>رقم الغرفة</b>
+                                        </label>
+                                        <select name="room" id="room" class="form-control roomTomb">
+                                            <option value="">-- إختار الغرفة --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="textarea mt-4">
+                                        <label for="notes">
+                                            <b>ملاحظـــــــات</b>
+                                        </label>
+                                        <textarea id="notes" class="form-control text-center" name="notes" rows="5" placeholder="ملاحظـــــــات"></textarea>
+                                    </div>
+                                    <div class="field mt-3">
+                                        <button type="submit" class="btn btn-success w-100 text-white">
+                                            <b>إضافة المتوفي</b>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
