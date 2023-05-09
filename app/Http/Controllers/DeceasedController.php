@@ -34,7 +34,8 @@ class DeceasedController extends Controller
             'tomb' => 'required|string',
             'room' => 'required|string',
             'notes' => 'nullable',
-            'files.*' => 'required|mimes:pdf,png,jpg,jpeg,webp|max:3072',
+            'files' => 'required|mimes:pdf,png,jpg,jpeg,webp|max:3072',
+            'pdf_files' => 'required|mimes:pdf',
         ]);
         $room = Rooms::where('name', $validated['room'])->first();
         if ($room) {
@@ -49,7 +50,6 @@ class DeceasedController extends Controller
             $deceased->tomb = $validated['tomb'];
             $deceased->room = $validated['room'];
             $deceased->notes = $validated['notes'];
-            $names = [];
             if ($request->hasFile('files')) {
                 $file = $request->file('files');
                 $name = time() . '.' . $file->getClientOriginalExtension();
@@ -94,7 +94,8 @@ class DeceasedController extends Controller
             'tomb' => 'required|string',
             'room' => 'required|string',
             'notes' => 'nullable',
-            'files.*' => 'required|mimes:pdf,png,jpg,jpeg,webp|max:3072',
+            'pdf_files' => 'required|mimes:pdf',
+            'files' => 'required|mimes:png,jpg,jpeg,webp|max:3072',
         ]);
         $deceased = Deceased::find($request->id);
         if ($deceased) {
@@ -103,14 +104,16 @@ class DeceasedController extends Controller
                 $name = time() . '.' . $uploadFile->getClientOriginalExtension();
                 $destinationPath = public_path('build/assets/backend/files/tombs/imgs/');
                 $uploadFile->move($destinationPath, $name);
+                $deceased->files = $name;
             }
-            if ($request->hasFile('pdf_files')) {
+            if ($request->hasFile('pdf_files') && $request->file('pdf_files')->isValid()) {
                 $files = $request->file('pdf_files');
                 $file_name = time() . '.' . $files->getClientOriginalExtension();
                 $Path = public_path('build/assets/backend/files/tombs/pdf/');
                 $files->move($Path, $file_name);
+                $deceased->pdf_files = $file_name;
             }
-            $store = $deceased->update([
+            $update = $deceased->update([
                 'name' => $validated['name'],
                 'death_place' => $validated['death_place'],
                 'death_date' => $validated['death_date'],
@@ -121,10 +124,8 @@ class DeceasedController extends Controller
                 'tomb' => $validated['tomb'],
                 'room' => $validated['room'],
                 'notes' => $validated['notes'],
-                'files' => $name,
-                'pdf_files' => $file_name
             ]);
-            if ($store) {
+            if ($update) {
                 return redirect()->route('deceased.index')->with('success', 'تم التعديل بنجاح');
             }
             return redirect()->route('deceased.index')->withErrors($validated);

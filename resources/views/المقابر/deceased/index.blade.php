@@ -123,7 +123,7 @@
                                                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{route('deceased.update')}}" method="post">
+                                                    <form action="{{route('deceased.update')}}" method="post" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="container-fluid">
                                                             <div class="row">
@@ -152,16 +152,18 @@
                                                                         </label>
                                                                         <input type="date" id="burial_date" class="form-control text-center" value="{{$deceased->burial_date}}" name="burial_date" placeholder="تاريخ الدفن">
                                                                     </div>
-                                                                    <div class="form-group mt-3">
+                                                                    <div class="form-group mt-3 text-center">
                                                                         <label for="files">
                                                                             <b>ملفات</b>
                                                                         </label>
-                                                                        <img src="{{asset('build/assets/backend/files/tombs/imgs/'.$deceased->files)}}" alt="{{$deceased->name}}">
+                                                                        <input type="file" name="files" value="{{$deceased->files}}" class="form-control mb-3" accept="image/*">
+                                                                        <img src="{{asset('build/assets/backend/files/tombs/imgs/'.$deceased->files)}}" class="rounded-circle d-block mx-auto" width="100" alt="{{$deceased->name}}">
                                                                     </div>
                                                                     <div class="form-group mt-3">
                                                                         <label for="files">
                                                                             <b>ملفات PDF</b>
                                                                         </label>
+                                                                        <input type="file" name="pdf_files" value="{{$deceased->pdf_files}}" class="form-control mb-3" accept="application/pdf">
                                                                         <a href="{{asset('build/assets/backend/files/tombs/pdf/'.$deceased->pdf_files)}}" class="d-block">
                                                                             <i class="fas fa-file-pdf fa-3x"></i>
                                                                         </a>
@@ -172,13 +174,13 @@
                                                                         <label for="the_washer">
                                                                             <b>القائم بالغسل</b>
                                                                         </label>
-                                                                        <input type="text" id="the_washer" class="form-control text-center" name="washer" placeholder="القائم بالغسل">
+                                                                        <input type="text" id="the_washer" class="form-control text-center" value="{{$deceased->washer}}" name="washer" placeholder="القائم بالغسل">
                                                                     </div>
                                                                     <div class="form-group mt-3">
                                                                         <label for="the_carrier">
                                                                             <b>القائم بالنقل</b>
                                                                         </label>
-                                                                        <input type="text" id="the_carrier" class="form-control text-center" name="carrier" placeholder="القائم بالنقل">
+                                                                        <input type="text" id="the_carrier" class="form-control text-center" value="{{$deceased->carrier}}" name="carrier" placeholder="القائم بالنقل">
                                                                     </div>
                                                                     <div class="form-group mt-3">
                                                                         <label for="region">
@@ -213,11 +215,11 @@
                                                                         <label for="notes">
                                                                             <b>ملاحظـــــــات</b>
                                                                         </label>
-                                                                        <textarea id="notes" class="form-control text-center" name="notes" rows="5" placeholder="ملاحظـــــــات"></textarea>
+                                                                        <textarea id="notes" class="form-control text-center" name="notes" rows="5" placeholder="ملاحظـــــــات">{{$deceased->notes}}</textarea>
                                                                     </div>
                                                                     <div class="field mt-3">
                                                                         <button type="submit" class="btn btn-success w-100 text-white">
-                                                                            <b>إضافة المتوفي</b>
+                                                                            <b>تعديل</b>
                                                                         </button>
                                                                     </div>
                                                                 </div>
