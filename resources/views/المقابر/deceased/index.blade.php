@@ -109,6 +109,89 @@
                                     <a href="{{url('delete_deceased/'.$deceased->id)}}" class="btn btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </a>
+                                    <button type="button" class="btn btn-warning rounded" data-coreui-toggle="modal" data-coreui-target="#edit{{$deceased->id}}" data-coreui-whatever="@mdo">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <div class="modal fade" id="edit{{$deceased->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">تعديل {{$deceased->name}}</h1>
+                                                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{route('deceased.update')}}" method="post">
+                                                        @csrf
+                                                        <div class="container-fluid">
+                                                            <div class="row">
+                                                                <input type="hidden" name="id" value="{{$deceased->id}}">
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="text" name="name" value="{{$deceased->name}}" placeholder="إسم المتوفي" class="form-control mb-3 text-center">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="text" name="deah_place" value="{{$deceased->death_place}}" placeholder="مكان الوفاه" class="form-control mb-3 text-center">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="date" name="death_date" value="{{$deceased->death_date}}" placeholder="تاريخ الوفاه" class="form-control mb-3 text-center" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="date" name="burial_date" value="{{$deceased->burial_date}}" placeholder="تاريخ الدفن" class="form-control mb-3 text-center" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="text" name="washer" value="{{$deceased->washer}}" placeholder="القائم بالغسل" class="form-control mb-3 text-center" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="text" name="carrier" value="{{$deceased->carrier}}" placeholder="القائم بالنقل" class="form-control mb-3 text-center">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="text" name="region" value="{{$deceased->region}}" placeholder="المنطقة" class="form-control mb-3 text-center">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="text" name="tomb" value="{{$deceased->tomb}}" placeholder="المقبرة" class="form-control mb-3 text-center">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="text" name="room" value="{{$deceased->room}}" placeholder="الغرفة" class="form-control mb-3 text-center">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="text" name="notes" value="{{$deceased->notes}}" placeholder="ملاحظات" class="form-control mb-3 text-center">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="text" name="notes" value="{{$deceased->notes}}" placeholder="ملاحظات" class="form-control mb-3 text-center">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="field">
+                                                                        <input type="submit" value="تعديل" class="btn btn-success w-100">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach

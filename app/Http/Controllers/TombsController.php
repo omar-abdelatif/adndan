@@ -63,7 +63,7 @@ class TombsController extends Controller
             'power' => 'required|numeric',
             'type' => 'required|string|in:لحد,عيون',
             'annual_cost' => 'required|numeric',
-            'region' => 'required|string|in:6 أكتوبر,الغفير,القطامية,الفيوم,زينهم,15 مايو'
+            'region' => 'required|string|in:أكتوبر,الغفير,القطامية,الفيوم,زينهم,مايو'
         ]);
         $tomb = Tomb::find($request->id);
         if ($tomb) {

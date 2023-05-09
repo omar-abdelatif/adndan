@@ -75,4 +75,24 @@ class DeceasedController extends Controller
         }
         return redirect()->route('deceased.index')->withErrors('حدث خطأ أثناء الحذف');
     }
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'death_place' => 'required|string',
+            'death_date' => 'required|date',
+            'burial_date' => 'required|date',
+            'washer' => 'required|string',
+            'carrier' => 'required|string',
+            'region' => 'required|string',
+            'tomb' => 'required|string',
+            'room' => 'required|string',
+            'notes' => 'nullable',
+            'files.*' => 'required|mimes:pdf,png,jpg,jpeg,webp|max:3072',
+        ]);
+        $deceased = Deceased::find($request->id);
+        if ($deceased) {
+            
+        }
+    }
 }

@@ -99,4 +99,5 @@ Route::middleware('auth')->group(function () {
     Route::get('new_deceased', [DeceasedController::class, 'addnew'])->name('deceased.addnew');
     Route::post('store_deceased', [DeceasedController::class, 'storeDeceased'])->name('deceased.store');
     Route::get('delete_deceased/{id}', [DeceasedController::class, 'destroy'])->name('deceased.delete');
+    Route::post('update_deceased', [DeceasedController::class, 'update'])->name('deceased.update');
 });
