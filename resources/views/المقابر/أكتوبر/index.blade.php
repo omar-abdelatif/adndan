@@ -286,9 +286,17 @@
                                                                             <td>0</td>
                                                                             <td>0</td>
                                                                             <td>
-                                                                                <a href="" class="btn btn-primary">
+                                                                                <button type="button" class="btn btn-primary rounded" data-coreui-toggle="modal" data-coreui-target="#show{{$room->id}}" data-coreui-whatever="@mdo">
                                                                                     <b>عرض</b>
-                                                                                </a>
+                                                                                </button>
+                                                                                <div class="modal fade" id="show{{$room->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                                    <div class="modal-dialog">
+                                                                                        <div class="modal-header">
+                                                                                            <h3 class="modal-title text-decoration-underline" id="exampleModalLabel">عرض بيانات {{$room->name}}</h3>
+                                                                                            <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
                                                                                 <a href="" class="btn btn-warning">
                                                                                     <b>تعديل</b>
                                                                                 </a>

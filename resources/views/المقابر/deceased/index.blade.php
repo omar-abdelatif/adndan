@@ -127,6 +127,7 @@
                                                         @csrf
                                                         <div class="container-fluid">
                                                             <div class="row">
+                                                                <input type="text" class="form-control" name="id" value="{{$deceased->id}}">
                                                                 <div class="col-6">
                                                                     <div class="form-group mt-3">
                                                                         <label for="name">
@@ -246,44 +247,44 @@
                     <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة متوفي جديد</h1>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body bg-dark-gradient">
                     <form action="{{route('deceased.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group mt-3">
-                                        <label for="name">
+                                        <label for="name" class="text-white">
                                             <b>إسم المتوفي</b>
                                         </label>
                                         <input type="text" id="name" class="form-control text-center" name="name" placeholder="إسم المتوفي">
                                     </div>
                                     <div class="form-group mt-3">
-                                        <label for="death_place">
+                                        <label for="death_place" class="text-white">
                                             <b>مكان الوفاة</b>
                                         </label>
                                         <input type="text" id="death_place" class="form-control text-center" name="death_place" placeholder="مكان الوفاة">
                                     </div>
                                     <div class="form-group mt-3">
-                                        <label for="death_date">
+                                        <label for="death_date" class="text-white">
                                             <b>تاريخ الوفاة</b>
                                         </label>
                                         <input type="date" id="death_date" class="form-control text-center" name="death_date" placeholder="تاريخ الوفاة">
                                     </div>
                                     <div class="form-group mt-3">
-                                        <label for="burial_date">
+                                        <label for="burial_date" class="text-white">
                                             <b>تاريخ الدفن</b>
                                         </label>
                                         <input type="date" id="burial_date" class="form-control text-center" name="burial_date" placeholder="تاريخ الدفن">
                                     </div>
                                     <div class="form-group mt-3">
-                                        <label for="files">
+                                        <label for="files" class="text-white">
                                             <b>ملفات</b>
                                         </label>
                                         <input type="file" name="files" id="files" class="form-control text-center" accept="image/*">
                                     </div>
                                     <div class="form-group mt-3">
-                                        <label for="files">
+                                        <label for="files" class="text-white">
                                             <b>ملفات PDF</b>
                                         </label>
                                         <input type="file" name="pdf_files" id="files" class="form-control text-center" accept="application/pdf">
@@ -291,19 +292,19 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group mt-3">
-                                        <label for="the_washer">
+                                        <label for="the_washer" class="text-white">
                                             <b>القائم بالغسل</b>
                                         </label>
                                         <input type="text" id="the_washer" class="form-control text-center" name="washer" placeholder="القائم بالغسل">
                                     </div>
                                     <div class="form-group mt-3">
-                                        <label for="the_carrier">
+                                        <label for="the_carrier" class="text-white">
                                             <b>القائم بالنقل</b>
                                         </label>
                                         <input type="text" id="the_carrier" class="form-control text-center" name="carrier" placeholder="القائم بالنقل">
                                     </div>
                                     <div class="form-group mt-3">
-                                        <label for="region">
+                                        <label for="region" class="text-white">
                                             <b>المنطقة</b>
                                         </label>
                                         <select name="region" id="region" class="form-control">
@@ -314,7 +315,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group mt-3">
-                                        <label for="tomb">
+                                        <label for="tomb" class="text-white">
                                             <b>إسم المقبرة</b>
                                         </label>
                                         <select name="tomb" id="regionTomb" class="form-control regionTomb">
@@ -322,7 +323,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group mt-3">
-                                        <label for="room">
+                                        <label for="room" class="text-white">
                                             <b>رقم الغرفة</b>
                                         </label>
                                         <select name="room" id="room" class="form-control roomTomb">
@@ -332,7 +333,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="textarea mt-4">
-                                        <label for="notes">
+                                        <label for="notes" class="text-white">
                                             <b>ملاحظـــــــات</b>
                                         </label>
                                         <textarea id="notes" class="form-control text-center" name="notes" rows="5" placeholder="ملاحظـــــــات"></textarea>

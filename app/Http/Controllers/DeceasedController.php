@@ -76,6 +76,18 @@ class DeceasedController extends Controller
     {
         $deceased = Deceased::find($id);
         if ($deceased) {
+            if ($deceased->files !== null) {
+                $oldImagePath = public_path('build/assets/backend/files/tomb/imgs/' . $deceased->files);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+            if ($deceased->pdf_files !== null) {
+                $oldPdfPath = public_path('build/assets/backend/files/tomb/pdf/' . $deceased->pdf_files);
+                if (file_exists($oldPdfPath)) {
+                    unlink($oldPdfPath);
+                }
+            }
             $deceased->delete();
             return redirect()->route('deceased.index')->with('success', 'تم الحذف بنجاح');
         }
@@ -83,52 +95,38 @@ class DeceasedController extends Controller
     }
     public function update(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string',
-            'death_place' => 'required|string',
-            'death_date' => 'required|date',
-            'burial_date' => 'required|date',
-            'washer' => 'required|string',
-            'carrier' => 'required|string',
-            'region' => 'required|string',
-            'tomb' => 'required|string',
-            'room' => 'required|string',
-            'notes' => 'nullable',
-            'pdf_files' => 'required|mimes:pdf',
-            'files' => 'required|mimes:png,jpg,jpeg,webp|max:3072',
-        ]);
         $deceased = Deceased::find($request->id);
+        $room = Rooms::where('name', $request->room)->first();
         if ($deceased) {
             if ($request->hasFile('files') && $request->file('files')->isValid()) {
-                $uploadFile = $request->file('files');
-                $name = time() . '.' . $uploadFile->getClientOriginalExtension();
+                $img = $request->file('files');
+                $name = time() . '.' . $img->getClientOriginalExtension();
                 $destinationPath = public_path('build/assets/backend/files/tombs/imgs/');
-                $uploadFile->move($destinationPath, $name);
+                $img->move($destinationPath, $name);
                 $deceased->files = $name;
             }
             if ($request->hasFile('pdf_files') && $request->file('pdf_files')->isValid()) {
-                $files = $request->file('pdf_files');
-                $file_name = time() . '.' . $files->getClientOriginalExtension();
-                $Path = public_path('build/assets/backend/files/tombs/pdf/');
-                $files->move($Path, $file_name);
-                $deceased->pdf_files = $file_name;
+                $file = $request->file('pdf_files');
+                $pdf = time() . '.' . $file->getClientOriginalExtension();
+                $destinationPath = public_path('build/assets/backend/files/tombs/pdf/');
+                $file->move($destinationPath, $pdf);
+                $deceased->pdf_files = $pdf;
             }
-            $update = $deceased->update([
-                'name' => $validated['name'],
-                'death_place' => $validated['death_place'],
-                'death_date' => $validated['death_date'],
-                'burial_date' => $validated['burial_date'],
-                'washer' => $validated['washer'],
-                'carrier' => $validated['carrier'],
-                'region' => $validated['region'],
-                'tomb' => $validated['tomb'],
-                'room' => $validated['room'],
-                'notes' => $validated['notes'],
-            ]);
+            $deceased->name = $request->name;
+            $deceased->death_place = $request->death_place;
+            $deceased->death_date = $request->death_date;
+            $deceased->burial_date = $request->burial_date;
+            $deceased->washer = $request->washer;
+            $deceased->carrier = $request->carrier;
+            $deceased->region = $request->region;
+            $deceased->tomb = $request->tomb;
+            $deceased->notes = $request->notes;
+            $deceased->rooms_id = $room->id;
+            $update = $deceased->save();
             if ($update) {
                 return redirect()->route('deceased.index')->with('success', 'تم التعديل بنجاح');
             }
-            return redirect()->route('deceased.index')->withErrors($validated);
         }
+        return redirect()->route('deceased.index')->withErrors('حدث خطأ أثناء التحديث');
     }
 }
