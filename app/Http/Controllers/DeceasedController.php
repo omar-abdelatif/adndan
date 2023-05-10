@@ -77,13 +77,13 @@ class DeceasedController extends Controller
         $deceased = Deceased::find($id);
         if ($deceased) {
             if ($deceased->files !== null) {
-                $oldImagePath = public_path('build/assets/backend/files/tomb/imgs/' . $deceased->files);
+                $oldImagePath = public_path('build/assets/backend/files/tombs/imgs/' . $deceased->files);
                 if (file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }
             }
             if ($deceased->pdf_files !== null) {
-                $oldPdfPath = public_path('build/assets/backend/files/tomb/pdf/' . $deceased->pdf_files);
+                $oldPdfPath = public_path('build/assets/backend/files/tombs/pdf/' . $deceased->pdf_files);
                 if (file_exists($oldPdfPath)) {
                     unlink($oldPdfPath);
                 }

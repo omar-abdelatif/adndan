@@ -260,6 +260,10 @@
                                                                 <b>المتاح المقبرة:</b>
                                                                 .....
                                                             </p>
+                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                <b>تاريخ أخر دفنة:</b>
+                                                                .....
+                                                            </p>
                                                         </div>
                                                     </div>
                                                     <div class="rooms bg-success rounded p-3 mt-3">
@@ -286,28 +290,35 @@
                                                                             <td>0</td>
                                                                             <td>0</td>
                                                                             <td>
-                                                                                <button type="button" class="btn btn-primary rounded" data-coreui-toggle="modal" data-coreui-target="#show{{$room->id}}" data-coreui-whatever="@mdo">
-                                                                                    <b>عرض</b>
-                                                                                </button>
-                                                                                <div class="modal fade" id="show{{$room->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                                    <div class="modal-dialog">
-                                                                                        <div class="modal-header">
-                                                                                            <h3 class="modal-title text-decoration-underline" id="exampleModalLabel">عرض بيانات {{$room->name}}</h3>
-                                                                                            <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <a href="" class="btn btn-warning">
-                                                                                    <b>تعديل</b>
+                                                                                <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
+                                                                                    <i class="fa fa-eye"></i>
                                                                                 </a>
-                                                                                {{-- <a href="" class="btn btn-danger">
-                                                                                    <b>حذف</b>
-                                                                                </a> --}}
                                                                             </td>
                                                                         </tr>
                                                                     @endforeach
                                                                 </tbody>
                                                             </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="last-burial-info bg-warning rounded p-3 mt-3">
+                                                        <div class="last-burial-title mb-3">
+                                                            <h2 class="text-center text-decoration-underline">بيانات أخر دفنة</h2>
+                                                        </div>
+                                                        <div class="last-burial-content">
+                                                            <div class="details d-flex align-items-center justify-content-evenly">
+                                                                <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                    <b>إسم المتوفي:</b>
+                                                                    .....
+                                                                </p>
+                                                                <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                    <b>تاريخ الدفن:</b>
+                                                                    .....
+                                                                </p>
+                                                                <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                    <b>القائم بالنقل:</b>
+                                                                    .....
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

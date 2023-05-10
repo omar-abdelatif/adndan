@@ -106,9 +106,9 @@
                                 <td class="text-center">{{$deceased->death_date}}</td>
                                 <td class="text-center">{{$deceased->burial_date}}</td>
                                 <td class="text-center">
-                                    <a href="{{route('deceased.index', $deceased->id)}}" class="btn btn-info">
+                                    {{-- <a href="{{route('deceased.index', $deceased->id)}}" class="btn btn-info">
                                         <i class="fa fa-eye"></i>
-                                    </a>
+                                    </a> --}}
                                     <a href="{{url('delete_deceased/'.$deceased->id)}}" class="btn btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </a>

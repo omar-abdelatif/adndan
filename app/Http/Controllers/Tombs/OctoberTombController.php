@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tombs;
 use App\Models\Tomb;
 use App\Models\Rooms;
 use App\Models\Region;
+use App\Models\Deceased;
 use App\Models\OctoberTomb;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -47,10 +48,24 @@ class OctoberTombController extends Controller
         }
         return redirect()->route('october.index')->withErrors('خطأ أثناء الحذف');
     }
-    public function showRooms($tombId)
+    // public function showRoom($id)
+    // {
+    //     $region = Region::where('name', 'أكتوبر')->first();
+    //     $tomb = Tomb::firstOrFail($id);
+    //     $room = Rooms::findOrFail($id);
+    //     $deceased = Deceased::where('room', $room->name)->get();
+    //     // $tomb = $deceased->tomb;
+    //     $tombName = $tomb ? $tomb->name : '';
+    //     return view('المقابر.أكتوبر.room', compact('region', 'room', 'deceased', 'tombName'));
+    // }
+    public function showRoom($tombId, $roomId)
     {
-        $tombRoom = Tomb::firstOrFail($tombId);
-        $rooms = $tombRoom->rooms;
-        return view('المقابر.أكتوبر.index', compact('tombRoom', 'rooms'));
+        $region = Region::where('name', 'أكتوبر')->firstOrFail();
+        $tomb = Tomb::findOrFail($tombId);
+        $room = Rooms::findOrFail($roomId);
+        $deceased = Deceased::where('room', $room->name)->get();
+        $tombName = $tomb->name;
+        return view('المقابر.أكتوبر.room', compact('region', 'room', 'deceased', 'tombName'));
     }
+
 }

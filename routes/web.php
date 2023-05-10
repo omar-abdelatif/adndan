@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::get('october_tombs', [OctoberTombController::class, 'index'])->name('october.index');
     Route::get('destroy_october_tomb/{id}', [OctoberTombController::class, 'destroyTomb'])->name('october.destroy');
     Route::post('update_october_tomb', [OctoberTombController::class, 'updateTomb'])->name('october.update');
+    Route::get('october/tombs/{tombId}/rooms/{roomId}', [OctoberTombController::class, 'showRoom'])->name('october.rooms');
     //! Fayum Routes
     Route::get('fayum_tombs', [FayumTombController::class, 'index'])->name('fayum.index');
     Route::get('destroy_fayum_tomb/{id}', [FayumTombController::class, 'destroyTomb'])->name('fayum.destroy');
