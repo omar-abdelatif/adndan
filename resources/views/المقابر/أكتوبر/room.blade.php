@@ -101,7 +101,7 @@
                                         <td class="text-center">{{$deceased->death_date}}</td>
                                         <td class="text-center">{{$deceased->burial_date}}</td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-success rounded" data-coreui-toggle="modal" data-coreui-target="#edit{{$deceased->id}}" data-coreui-whatever="@mdo">
+                                            <button type="button" class="btn btn-warning rounded" data-coreui-toggle="modal" data-coreui-target="#edit{{$deceased->id}}" data-coreui-whatever="@mdo">
                                                 <i class="fa-solid fa-edit fa-fade fa-lg"></i>
                                             </button>
                                             <div class="modal fade" id="edit{{$deceased->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -220,9 +220,43 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="button" class="btn btn-success rounded" data-coreui-toggle="modal" data-coreui-target="#show{{$deceased->id}}" data-coreui-whatever="@mdo">
+                                            <button type="button" class="btn btn-danger rounded" data-coreui-toggle="modal" data-coreui-target="#delete{{$deceased->id}}" data-coreui-whatever="@mdo">
                                                 <i class="fa-solid fa-trash fa-fade fa-lg"></i>
                                             </button>
+                                            <div class="modal fade" id="delete{{$deceased->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h3 class="modal-title text-decoration-underline" id="exampleModalLabel">حذف مقبرة {{$deceased->name}}</h3>
+                                                            <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{route('october.destroy', $deceased->id)}}" method="get">
+                                                                @csrf
+                                                                <div class="container-fluid">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div class="confirm_msg mb-3">
+                                                                                <h2 class="text-center">هل أنت متأكد من الحذف ؟</h2>
+                                                                            </div>
+                                                                            <div class="modal-footer d-flex justify-content-center w-100">
+                                                                                <div class="field">
+                                                                                    <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+                                                                                </div>
+                                                                                <div class="field">
+                                                                                    <button type="submit" class="btn btn-danger w-100 text-white">
+                                                                                        <b>حذف</b>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

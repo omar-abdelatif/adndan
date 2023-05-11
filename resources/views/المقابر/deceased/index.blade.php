@@ -155,7 +155,9 @@
                                                                             <b>ملفات</b>
                                                                         </label>
                                                                         <input type="file" name="files" value="{{$deceased->files}}" class="form-control mb-3" accept="image/*">
-                                                                        <img src="{{asset('build/assets/backend/files/tombs/imgs/'.$deceased->files)}}" class="rounded-circle d-block mx-auto" width="100" alt="{{$deceased->name}}">
+                                                                        <a href="{{url('build/assets/backend/files/tombs/imgs/'.$deceased->files)}}" target="_blank">
+                                                                            <img src="{{asset('build/assets/backend/files/tombs/imgs/'.$deceased->files)}}" class="rounded-circle d-block mx-auto" width="100" alt="{{$deceased->name}}">
+                                                                        </a>
                                                                     </div>
                                                                     <div class="form-group mt-3">
                                                                         <label for="files">
@@ -182,7 +184,8 @@
                                                                     </div>
                                                                     <div class="form-group mt-3">
                                                                         <label for="region">
-                                                                            <b>المنطقة</b>
+                                                                            <b>المنطقة:</b>
+                                                                            {{$deceased->region}}
                                                                         </label>
                                                                         <select name="region" id="region" class="form-control">
                                                                             <option value="0" selected>-- إختار المنطقة --</option>
@@ -193,7 +196,8 @@
                                                                     </div>
                                                                     <div class="form-group mt-3">
                                                                         <label for="tomb">
-                                                                            <b>إسم المقبرة</b>
+                                                                            <b>إسم المقبرة:</b>
+                                                                            {{$deceased->tomb}}
                                                                         </label>
                                                                         <select name="tomb" id="regionTomb" class="form-control regionTomb">
                                                                             <option value="0" selected>-- إختار المقبرة --</option>
@@ -201,11 +205,50 @@
                                                                     </div>
                                                                     <div class="form-group mt-3">
                                                                         <label for="room">
-                                                                            <b>رقم الغرفة</b>
+                                                                            <b>رقم الغرفة:</b>
+                                                                            {{$deceased->room}}
                                                                         </label>
                                                                         <select name="room" id="room" class="form-control roomTomb">
                                                                             <option value="">-- إختار الغرفة --</option>
                                                                         </select>
+                                                                    </div>
+                                                                    <div class="form-data mt-3">
+                                                                        <label for="burial_date">
+                                                                            <b>النوع</b>
+                                                                        </label>
+                                                                        <div class="gender mt-3 d-flex justify-content-evenly align-items-center">
+                                                                            <div class="male">
+                                                                                <input type="radio" name="gender" value="ذكر" id="male" {{$deceased->gender == 'ذكر' ? 'checked' : ''}}>
+                                                                                <label for="male">
+                                                                                    <b>ذكر</b>
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="female">
+                                                                                <input type="radio" name="gender" id="female" value="أنثى" {{$deceased->gender == 'أنثى' ? 'checked' : ''}}>
+                                                                                <label for="female">
+                                                                                    <b>أنثى</b>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-data mt-3">
+                                                                        <label for="burial_date">
+                                                                            <b>الحجم</b>
+                                                                        </label>
+                                                                        <div class="gender mt-3 d-flex justify-content-evenly align-items-center">
+                                                                            <div class="male">
+                                                                                <input type="radio" name="size" value="1" id="one" {{$deceased->size == 1 ? 'checked' : ''}}>
+                                                                                <label for="male">
+                                                                                    <b>فردي</b>
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="female">
+                                                                                <input type="radio" name="size" value="2" id="two" {{$deceased->size == 2 ? 'checked' : ''}}>
+                                                                                <label for="female">
+                                                                                    <b>زوجي</b>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
@@ -274,6 +317,46 @@
                                         </label>
                                         <input type="date" id="burial_date" class="form-control text-center" name="burial_date" placeholder="تاريخ الدفن">
                                     </div>
+                                    <div class="form-data mt-3">
+                                        <label for="burial_date" class="text-white">
+                                            <b>النوع</b>
+                                        </label>
+                                        <div class="gender mt-3 d-flex justify-content-evenly align-items-center">
+                                            <div class="male">
+                                                <input type="radio" name="gender" value="ذكر" id="male">
+                                                <label for="male" class="text-white">
+                                                    ذكر
+                                                </label>
+                                            </div>
+                                            <div class="female">
+                                                <input type="radio" name="gender" id="female" value="أنثى">
+                                                <label for="female" class="text-white">
+                                                    أنثى
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-data mt-3">
+                                        <label for="burial_date" class="text-white">
+                                            <b>الحجم</b>
+                                        </label>
+                                        <div class="gender mt-3 d-flex justify-content-evenly align-items-center">
+                                            <div class="male">
+                                                <input type="radio" name="size" value="1" id="one">
+                                                <label for="male" class="text-white">
+                                                    <b>فردي</b>
+                                                </label>
+                                            </div>
+                                            <div class="female">
+                                                <input type="radio" name="size" value="2" id="two">
+                                                <label for="female" class="text-white">
+                                                    <b>زوجي</b>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
                                     <div class="form-group mt-3">
                                         <label for="files" class="text-white">
                                             <b>ملفات</b>
@@ -286,8 +369,6 @@
                                         </label>
                                         <input type="file" name="pdf_files" id="files" class="form-control text-center" accept="application/pdf">
                                     </div>
-                                </div>
-                                <div class="col-6">
                                     <div class="form-group mt-3">
                                         <label for="the_washer" class="text-white">
                                             <b>القائم بالغسل</b>

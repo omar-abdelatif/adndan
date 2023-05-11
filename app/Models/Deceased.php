@@ -11,6 +11,8 @@ class Deceased extends Model
     protected $table = 'deceaseds';
     protected $fillable = [
         'name',
+        'gender',
+        'size',
         'death_place',
         'death_date',
         'burial_date',
