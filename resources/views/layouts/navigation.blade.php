@@ -93,13 +93,7 @@
                     <b>كل المناطق</b>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('tomb.add')}}" target="_top">
-                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    <b>إضافة مقبرة</b>
-                </a>
-            </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{route('tombs.all')}}" target="_top">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
                     <b>كل المقابر</b>
@@ -110,13 +104,7 @@
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
                     <b>كل الغرف</b>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('deceased.addnew')}}" target="_top">
-                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    <b>إضافة متوفي</b>
-                </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{route('deceased.index')}}" target="_top">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">

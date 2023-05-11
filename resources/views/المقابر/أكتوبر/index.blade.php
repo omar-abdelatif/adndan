@@ -241,10 +241,23 @@
                                                                 <b>إسم المنطقة:</b>
                                                                 {{$tomb->region}}
                                                             </p>
-                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
-                                                                <b>المتاح:</b>
-                                                                .....
-                                                            </p>
+                                                            <div class="available bg-primary p-2 rounded">
+                                                                <div class="available-title">
+                                                                    <p class="mb-0 ms-3 text-white text-decoration-underline">
+                                                                        <b>المتاح</b>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="available-body text-white">
+                                                                    <span>
+                                                                        <b>رجال:</b>
+                                                                        .....
+                                                                    </span>
+                                                                    <span>
+                                                                        <b>سيدات:</b>
+                                                                        ......
+                                                                    </span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="tomb-status bg-info rounded p-3 mt-3">
@@ -256,10 +269,23 @@
                                                                 <b>قوة المقبرة:</b>
                                                                 {{$tomb->power}}
                                                             </p>
-                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
-                                                                <b>المتاح المقبرة:</b>
-                                                                .....
-                                                            </p>
+                                                            <div class="available bg-primary p-2 rounded">
+                                                                <div class="available-title">
+                                                                    <p class="mb-0 ms-3 text-white text-decoration-underline">
+                                                                        <b>المتاح</b>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="available-body text-white">
+                                                                    <span>
+                                                                        <b>رجال:</b>
+                                                                        .....
+                                                                    </span>
+                                                                    <span>
+                                                                        <b>سيدات:</b>
+                                                                        ......
+                                                                    </span>
+                                                                </div>
+                                                            </div>
                                                             <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
                                                                 <b>تاريخ أخر دفنة:</b>
                                                                 .....
@@ -276,7 +302,7 @@
                                                                     <th class="text-center">id</th>
                                                                     <th class="text-center">إسم الغرفة</th>
                                                                     <th class="text-center">قوة الغرفة</th>
-                                                                    <th class="text-center">المتاح</th>
+                                                                    <th class="text-center">المتاح ( رجال / سيدات )</th>
                                                                     <th class="text-center">تاريخ أخر دفنة</th>
                                                                     <th class="text-center">Actions</th>
                                                                 </thead>
@@ -312,10 +338,6 @@
                                                                 </p>
                                                                 <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
                                                                     <b>تاريخ الدفن:</b>
-                                                                    .....
-                                                                </p>
-                                                                <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
-                                                                    <b>القائم بالنقل:</b>
                                                                     .....
                                                                 </p>
                                                             </div>
