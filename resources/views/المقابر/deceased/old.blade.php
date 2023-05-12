@@ -56,8 +56,8 @@
                                 <li class="breadcrumb-item active">المتوفيين السابقين</li>
                             </ol>
                             <div class="buttons">
-                                <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button>
-                                <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> إضافة متوفي سابق جديد </button>
+                                <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#addcsv" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button>
+                                <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#addnew" data-coreui-whatever="@mdo"> إضافة متوفي سابق جديد </button>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
         </div>
     </div>
     <div class="upload-csv mt-1">
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addcsv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -145,21 +145,52 @@
         </div>
     </div>
     <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة متوفي جديد</h1>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body bg-dark-gradient">
                     <form action="{{ route('old.store') }}" method="post">
                         @csrf
-                        <div class="form-group">
-                            <label for="name">الاسم</label>
+                        <div class="form-group mb-3">
+                            <label for="name" class="text-white">
+                                <b>الاسم</b>
+                            </label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="الاسم">
                         </div>
+                        <div class="form-group mb-3">
+                            <label for="burial_place" class="text-white">
+                                <b>مكان الدفن</b>
+                            </label>
+                            <select name="region" id="region" class="form-control">
+                                <option value="0" selected>-- إختار المنطقة --</option>
+                                @foreach ($regions as $region)
+                                    <option value="{{ $region->name }}">{{ $region->name }}</option>
+                                @endforeach
+                            </select>
+                            <select name="tomb" id="regionTomb" class="form-control regionTomb mt-2">
+                                <option value="0" selected>-- إختار المقبرة --</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="death_date" class="text-white">
+                                <b>تاريخ الوفاه</b>
+                            </label>
+                            <input type="date" name="death_date" class="form-control">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="" class="text-white">
+                                <b>تاريخ الدفن</b>
+                            </label>
+                            <input type="date" name="burial_date" class="form-control">
+                        </div>
                         <div class="form-group">
-                            <label for="burial_place">مكان الوفاه</label>
+                            <button type="submit" class="btn bg-success-gradient w-100 text-white">
+                                <b>إضافة</b>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
