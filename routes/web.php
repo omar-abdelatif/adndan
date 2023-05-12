@@ -103,4 +103,6 @@ Route::middleware('auth')->group(function () {
     Route::post('update_deceased', [DeceasedController::class, 'update'])->name('deceased.update');
     //! Old Deceased Routes
     Route::get('all_old_deceased', [OldDeceasedController::class, 'index'])->name('old.index');
+    Route::post('create_old_deceased', [OldDeceasedController::class, ''])->name('old.import');
+    Route::post('store_old_deceased', [OldDeceasedController::class, ''])->name('store.old');
 });

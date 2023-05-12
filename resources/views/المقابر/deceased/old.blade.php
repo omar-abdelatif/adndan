@@ -45,8 +45,8 @@
         </div>
         <div class="header-divider"></div>
         <section class="content-header w-100">
-            <div class="container-fluid d-flex">
-                <div class="row align-items-center">
+            <div class="container-fluid">
+                <div class="row">
                     <div class="col-sm-12">
                         <div class="d-flex justify-content-between w-100 align-items-center">
                             <ol class="breadcrumb">
@@ -55,6 +55,7 @@
                                 </li>
                                 <li class="breadcrumb-item active">المتوفيين السابقين</li>
                             </ol>
+                            <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button>
                         </div>
                     </div>
                 </div>
@@ -68,7 +69,32 @@
             <div class="old-title mt-5 bg-primary-gradient rounded w-50 mx-auto text-white p-3 text-center">
                 <h1>كل المتوفيين</h1>
             </div>
-            
+
+        </div>
+    </div>
+    <div class="upload-csv mt-1">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">إضافة مجموعة متوفيين</h5>
+                        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('old.import') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="file" name="excel" class="form-control">
+                                        <input type="submit" class="btn btn-primary mt-3 d-block w-100" height="50px" value="Submit">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
