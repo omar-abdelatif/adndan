@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('old_deceaseds', function (Blueprint $table) {
-            $table->dropColumn('burial_place', 'region');
+            $table->string('death_date')->change();
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('old_deceaseds', function (Blueprint $table) {
-            //
+            $table->string('death_date')->change();
         });
     }
 };

@@ -17,7 +17,9 @@ class OldDeceasedImport implements WithHeadingRow, WithBatchInserts, SkipsEmptyR
             OldDeceased::create([
                 'name' => $row['name'],
                 'burial_date' => $row['burial_date'],
-                'burial_place' => $row['burial_place'],
+                'death_date' => $row['death_date'],
+                'region' => $row['region'],
+                'tomb' => $row['tomb'],
             ]);
         }
     }

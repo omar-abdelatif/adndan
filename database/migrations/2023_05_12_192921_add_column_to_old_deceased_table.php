@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('old_deceaseds', function (Blueprint $table) {
-            $table->dateTime('death_date')->after('burial_place')->nullable();
+            $table->dateTime('death_date')->after('burial_place');
             $table->string('region')->after('death_date');
             $table->string('tomb')->after('region');
         });

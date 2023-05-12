@@ -23,10 +23,10 @@ class OldDeceasedController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string',
-            'gender' => 'required',
-            'size' => 'required',
             'burial_date' => 'required|date',
-            'burial_place' => 'required|string',
+            'death_date' => 'required|date',
+            'region' => 'required|string',
+            'tomb' => 'required|string'
         ]);
         $oldDeceased = OldDeceased::create($validated);
         if ($oldDeceased) {

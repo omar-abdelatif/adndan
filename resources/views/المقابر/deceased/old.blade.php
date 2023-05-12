@@ -100,7 +100,7 @@
                         <tr>
                             <td class="text-center">{{$i++}}</td>
                             <td class="text-center">{{$oldDeceased->name}}</td>
-                            <td class="text-center">{{$oldDeceased->burial_place}}</td>
+                            <td class="text-center">{{$oldDeceased->region}} / {{$oldDeceased->tomb}}</td>
                             <td class="text-center">{{$oldDeceased->death_date}}</td>
                             <td class="text-center">{{$oldDeceased->burial_date}}</td>
                             <td class="text-center">

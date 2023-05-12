@@ -12,6 +12,8 @@ class OldDeceased extends Model
     protected $fillable = [
         'name',
         'burial_date',
-        'burial_place',
+        'death_date',
+        'region',
+        'tomb'
     ];
 }

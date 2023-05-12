@@ -9,6 +9,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->call(CaseSeed::class);
+        $this->call([
+            CaseSeed::class,
+            RegionSeeders::class
+        ]);
     }
 }
