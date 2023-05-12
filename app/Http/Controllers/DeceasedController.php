@@ -6,7 +6,11 @@ use App\Models\Tomb;
 use App\Models\Rooms;
 use App\Models\Region;
 use App\Models\Deceased;
+// use App\Imports\OldDeceasedImport;
 use Illuminate\Http\Request;
+use App\Imports\OldDeceasedImport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class DeceasedController extends Controller
 {
@@ -134,5 +138,10 @@ class DeceasedController extends Controller
             }
         }
         return redirect()->route('deceased.index')->withErrors('حدث خطأ أثناء التحديث');
+    }
+    public function importDeceased(Request $request)
+    {
+        Excel::import(new OldDeceasedImport, $request->file('excel'));
+        return redirect()->route('showall')->with('success', 'تم الإسترداد بنجاح');
     }
 }

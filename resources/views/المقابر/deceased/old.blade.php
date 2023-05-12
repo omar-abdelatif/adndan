@@ -69,7 +69,20 @@
             <div class="old-title mt-5 bg-primary-gradient rounded w-50 mx-auto text-white p-3 text-center">
                 <h1>كل المتوفيين</h1>
             </div>
-
+            <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>الاسم</th>
+                        <th>مكان الوفاه</th>
+                        <th>تاريخ الوفاه</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i=1 ?>
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="upload-csv mt-1">

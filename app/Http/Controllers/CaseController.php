@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 use App\Models\TableCase;
 use App\Imports\UserImport;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class CaseController extends Controller
