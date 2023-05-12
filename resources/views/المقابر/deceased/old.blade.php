@@ -72,15 +72,31 @@
             <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>الاسم</th>
-                        <th>مكان الوفاه</th>
-                        <th>تاريخ الوفاه</th>
-                        <th>Actions</th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">الاسم</th>
+                        <th class="text-center">مكان الوفاه</th>
+                        <th class="text-center">تاريخ الوفاه</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $i=1 ?>
+                    @foreach ($oldDeceased as $oldDeceased)
+                        <tr>
+                            <td class="text-center">{{$i++}}</td>
+                            <td class="text-center">{{$oldDeceased->name}}</td>
+                            <td class="text-center">{{$oldDeceased->burial_place}}</td>
+                            <td class="text-center">{{$oldDeceased->burial_date}}</td>
+                            <td class="text-center">
+                                <a href="" class="btn btn-warning">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
