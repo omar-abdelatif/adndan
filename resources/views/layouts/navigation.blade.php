@@ -37,50 +37,6 @@
             </li>
         </ul>
     </li>
-    {{-- <li class="nav-group" aria-expanded="false">
-        <a class="nav-link nav-group-toggle" href="#">
-            <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-            <b>المقابر</b>
-        </a>
-        <ul class="nav-group-items" style="height: 0px;">
-            <li class="nav-item">
-                <a href="{{route('october.index')}}" class="nav-link">
-                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    <b>6 أكتوبر</b>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('october.index')}}" class="nav-link">
-                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    <b>الغفير</b>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('october.index')}}" class="nav-link">
-                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    <b>الفيوم</b>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('october.index')}}" class="nav-link">
-                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    <b>زينهم</b>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('october.index')}}" class="nav-link">
-                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    <b>القطامية</b>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('october.index')}}" class="nav-link">
-                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    <b>15 مايو</b>
-                </a>
-            </li>
-        </ul>
-    </li> --}}
     <li class="nav-group" aria-expanded="false">
         <a class="nav-link nav-group-toggle" href="#">
             <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
@@ -88,23 +44,17 @@
         </a>
         <ul class="nav-group-items" style="height: 0px;">
             <li class="nav-item">
-                <a class="nav-link" href="{{route('region.index')}}" target="_top">
+                <a class="nav-link" href="all_old_deceased" target="_top">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
                     <b>كل المناطق</b>
                 </a>
             </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="{{route('tombs.all')}}" target="_top">
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('old.index')}}" target="_top">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    <b>كل المقابر</b>
+                    <b>المتوفيين السابقين</b>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('rooms.all')}}" target="_top">
-                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
-                    <b>كل الغرف</b>
-                </a>
-            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{route('deceased.index')}}" target="_top">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">

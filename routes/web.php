@@ -7,6 +7,7 @@ use App\Http\Controllers\DonatorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeceasedController;
 use App\Http\Controllers\DonationHistoryController;
+use App\Http\Controllers\OldDeceasedController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoomsController;
@@ -94,11 +95,12 @@ Route::middleware('auth')->group(function () {
     //! Rooms Routes
     Route::get('all_rooms', [RoomsController::class, 'index'])->name('rooms.all');
     Route::get('/get-rooms', [RoomsController::class, 'getRooms'])->name('getRooms');
-    // Route::post('/tomb/create-rooms', [TombsController::class, 'addTomb'])->name('room.create');
     //! Deceased Routes
     Route::get('all_deceased', [DeceasedController::class, 'index'])->name('deceased.index');
     Route::get('new_deceased', [DeceasedController::class, 'addnew'])->name('deceased.addnew');
     Route::post('store_deceased', [DeceasedController::class, 'storeDeceased'])->name('deceased.store');
     Route::get('delete_deceased/{id}', [DeceasedController::class, 'destroy'])->name('deceased.delete');
     Route::post('update_deceased', [DeceasedController::class, 'update'])->name('deceased.update');
+    //! Old Deceased Routes
+    Route::get('all_old_deceased', [OldDeceasedController::class, 'index'])->name('old.index');
 });

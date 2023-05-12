@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('header')
+{{-- @section('header')
     <header class="header header-sticky">
         <div class="container-fluid">
             <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
@@ -429,4 +429,4 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection --}}
