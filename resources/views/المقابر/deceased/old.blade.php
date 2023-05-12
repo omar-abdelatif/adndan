@@ -55,7 +55,10 @@
                                 </li>
                                 <li class="breadcrumb-item active">المتوفيين السابقين</li>
                             </ol>
-                            <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button>
+                            <div class="buttons">
+                                <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button>
+                                <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> إضافة متوفي سابق جديد </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -69,13 +72,25 @@
             <div class="old-title mt-5 bg-primary-gradient rounded w-50 mx-auto text-white p-3 text-center">
                 <h1>كل المتوفيين</h1>
             </div>
+            @if (session('success'))
+                <div class="alert alert-success text-center mt-5">
+                    <p class="mb-0">{{ session('success') }}</p>
+                </div>
+            @elseif ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger text-center mt-5">
+                        <p class="mb-0">{{ $error }}</p>
+                    </div>
+                @endforeach
+            @endif
             <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                 <thead>
                     <tr>
                         <th class="text-center">#</th>
                         <th class="text-center">الاسم</th>
-                        <th class="text-center">مكان الوفاه</th>
+                        <th class="text-center">مكان الدفن</th>
                         <th class="text-center">تاريخ الوفاه</th>
+                        <th class="text-center">تاريخ الدفن</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -86,11 +101,14 @@
                             <td class="text-center">{{$i++}}</td>
                             <td class="text-center">{{$oldDeceased->name}}</td>
                             <td class="text-center">{{$oldDeceased->burial_place}}</td>
+                            <td class="text-center">{{$oldDeceased->death_date}}</td>
                             <td class="text-center">{{$oldDeceased->burial_date}}</td>
                             <td class="text-center">
                                 <a href="" class="btn btn-warning">
                                     <i class="fa fa-edit"></i>
                                 </a>
+                                {{-- <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button>
+                                <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button> --}}
                                 <a href="" class="btn btn-danger">
                                     <i class="fa fa-trash"></i>
                                 </a>
@@ -122,6 +140,27 @@
                             </div>
                         </form>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة متوفي جديد</h1>
+                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('old.store') }}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <label for="name">الاسم</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="الاسم">
+                        </div>
+                        <div class="form-group">
+                            <label for="burial_place">مكان الوفاه</label>
+                    </form>
                 </div>
             </div>
         </div>

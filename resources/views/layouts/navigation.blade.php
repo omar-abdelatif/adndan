@@ -44,7 +44,7 @@
         </a>
         <ul class="nav-group-items" style="height: 0px;">
             <li class="nav-item">
-                <a class="nav-link" href="all_old_deceased" target="_top">
+                <a class="nav-link" href="{{route('region.index')}}" target="_top">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
                     <b>كل المناطق</b>
                 </a>
