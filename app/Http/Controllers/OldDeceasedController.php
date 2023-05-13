@@ -36,4 +36,30 @@ class OldDeceasedController extends Controller
         }
         return redirect()->route('old.index')->withErrors($validated);
     }
+    public function destroy($id)
+    {
+        $oldDeceased = OldDeceased::find($id);
+        if ($oldDeceased) {
+            $oldDeceased->delete();
+            return redirect()->route('old.index')->with('success', 'تم الحذف بنجاح');
+        }
+        return redirect()->route('old.index')->withErrors('هذا العنصر غير موجود');
+    }
+    public function edit(Request $request)
+    {
+        $id = $request->id;
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'burial_date' => 'required|date',
+            'death_date' => 'required|date',
+            'region' => 'required|string',
+            'tomb' => 'required|string'
+        ]);
+        $oldDeceased = OldDeceased::find($id);
+        if ($oldDeceased) {
+            $oldDeceased->update($validated);
+            return redirect()->route('old.index')->with('success', 'تم التعديل بنجاح');
+        }
+        return redirect()->route('old.index')->withErrors($validated);
+    }
 }

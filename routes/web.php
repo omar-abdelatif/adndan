@@ -105,4 +105,6 @@ Route::middleware('auth')->group(function () {
     Route::get('all_old_deceased', [OldDeceasedController::class, 'index'])->name('old.index');
     Route::post('create_old_deceased', [OldDeceasedController::class, 'importDeceased'])->name('old.import');
     Route::post('store_old_deceased', [OldDeceasedController::class, 'store'])->name('old.store');
+    Route::get('delete_old_deceased/{id}', [OldDeceasedController::class, 'destroy'])->name('old.delete');
+    Route::post('update_old_deceased', [OldDeceasedController::class, 'edit'])->name('old.update');
 });

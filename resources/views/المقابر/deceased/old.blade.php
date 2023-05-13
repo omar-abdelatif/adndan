@@ -104,14 +104,127 @@
                             <td class="text-center">{{$oldDeceased->death_date}}</td>
                             <td class="text-center">{{$oldDeceased->burial_date}}</td>
                             <td class="text-center">
-                                <a href="" class="btn btn-warning">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                {{-- <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button>
-                                <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button> --}}
-                                <a href="" class="btn btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </a>
+                                <button type="button" class="btn btn-warning rounded" data-coreui-toggle="modal" data-coreui-target="#edit{{$oldDeceased->id}}" data-coreui-whatever="@mdo">
+                                    <i class="fa fa-edit fa-fade fa-lg"></i>
+                                    <b class="fa-fade">تعديل</b>
+                                </button>
+                                <div class="modal fade" id="edit{{$oldDeceased->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">تعديل {{$oldDeceased->name}}</h1>
+                                                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body bg-dark-gradient">
+                                                <form action="{{route('old.update')}}" method="post">
+                                                    @csrf
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <input type="hidden" name="id" value="{{$oldDeceased->id}}">
+                                                            <div class="col-lg-6">
+                                                                <div class="field mt-2">
+                                                                    <div class="form-group">
+                                                                        <label for="name" class="label text-white">
+                                                                            <b>الاسم</b>
+                                                                        </label>
+                                                                        <input type="text" name="name" class="form-control" id="name" value="{{$oldDeceased->name}}" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="field mt-2">
+                                                                    <div class="form-group">
+                                                                        <label for="region" class="label text-white">
+                                                                            <b>المنطقة</b>
+                                                                        </label>
+                                                                        <input type="text" name="region" class="form-control" id="region" value="{{$oldDeceased->region}}" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="field mt-2">
+                                                                    <div class="form-group">
+                                                                        <label for="tomb" class="label text-white">
+                                                                            <b>المقبره</b>
+                                                                        </label>
+                                                                        <input type="text" name="tomb" class="form-control" id="tomb" value="{{$oldDeceased->tomb}}" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="field mt-2">
+                                                                    <div class="form-group">
+                                                                        <label for="death_date" class="label text-white">
+                                                                            <b>تاريخ الوفاة</b>
+                                                                        </label>
+                                                                        <input type="date" name="death_date" class="form-control" id="death_date" value="{{$oldDeceased->death_date}}" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="field mt-2">
+                                                                    <div class="form-group">
+                                                                        <label for="burial_date" class="label text-white">
+                                                                            <b>تاريخ الدفن</b>
+                                                                        </label>
+                                                                        <input type="date" name="burial_date" class="form-control" id="burial_date" value="{{$oldDeceased->burial_date}}" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="field mt-3">
+                                                                    <div class="form-group">
+                                                                        <button type="submit" class="btn btn-success w-100">
+                                                                            <b>تعديل</b>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-danger rounded ms-2" data-coreui-toggle="modal" data-coreui-target="#delete{{$oldDeceased->id}}" data-coreui-whatever="@mdo">
+                                    <i class="fa-solid fa-trash fa-fade fa-lg"></i>
+                                    <b class="fa-fade">حذف</b>
+                                </button>
+                                <div class="modal fade" id="delete{{$oldDeceased->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title text-decoration-underline" id="exampleModalLabel">حذف {{$oldDeceased->name}}</h3>
+                                                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="{{route('old.delete', $oldDeceased->id)}}" method="get">
+                                                    @csrf
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="confirm_msg mb-3">
+                                                                    <h2 class="text-center">هل أنت متأكد من الحذف ؟</h2>
+                                                                </div>
+                                                                <div class="modal-footer d-flex justify-content-center w-100">
+                                                                    <div class="field">
+                                                                        <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                    <div class="field">
+                                                                        <button type="submit" class="btn btn-danger w-100 text-white">
+                                                                            <b>حذف</b>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -181,7 +294,7 @@
                             <input type="date" name="death_date" class="form-control">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="" class="text-white">
+                            <label for="burial_date" class="text-white">
                                 <b>تاريخ الدفن</b>
                             </label>
                             <input type="date" name="burial_date" class="form-control">

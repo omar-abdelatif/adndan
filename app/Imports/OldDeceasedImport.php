@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use Carbon\Carbon;
 use App\Models\OldDeceased;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -16,8 +17,8 @@ class OldDeceasedImport implements WithHeadingRow, WithBatchInserts, SkipsEmptyR
         foreach ($rows as $row) {
             OldDeceased::create([
                 'name' => $row['name'],
-                'burial_date' => $row['burial_date'],
-                'death_date' => $row['death_date'],
+                'burial_date' => Carbon::createFromFormat('d-m-Y', $row['burial_date'])->toDateString(),
+                'death_date' => Carbon::createFromFormat('d-m-Y', $row['death_date'])->toDateString(),
                 'region' => $row['region'],
                 'tomb' => $row['tomb'],
             ]);
@@ -29,7 +30,9 @@ class OldDeceasedImport implements WithHeadingRow, WithBatchInserts, SkipsEmptyR
         return [
             'name' => 'required',
             'burial_date' => 'required',
-            'burial_place' => 'required'
+            'death_date' => 'required',
+            'region' => 'required',
+            'tomb' => 'required',
         ];
     }
 
@@ -42,4 +45,14 @@ class OldDeceasedImport implements WithHeadingRow, WithBatchInserts, SkipsEmptyR
     {
         return 100;
     }
+
+    // public function map($row): array
+    // {
+    //     return [
+    //         'burial_date' => Carbon::createFromFormat('d-m-Y', $row['burial_date'])->toDateString(),
+    //         'death_date' => Carbon::createFromFormat('d-m-Y', $row['death_date'])->toDateString(),
+    //         'burial_date' => Carbon::parse($row['burial_date'])->format('Y-m-d'),
+    //         'death_date' => Carbon::parse($row['death_date'])->format('Y-m-d'),
+    //     ];
+    // }
 }
