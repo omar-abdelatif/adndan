@@ -12,6 +12,7 @@ use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\SMSController;
+use App\Http\Controllers\TombReportController;
 use App\Http\Controllers\Tombs\FayumTombController;
 use App\Http\Controllers\Tombs\GafeerTombController;
 use App\Http\Controllers\Tombs\KatamyaTombController;
@@ -112,4 +113,6 @@ Route::middleware('auth')->group(function () {
     Route::post('store_old_deceased', [OldDeceasedController::class, 'store'])->name('old.store');
     Route::get('delete_old_deceased/{id}', [OldDeceasedController::class, 'destroy'])->name('old.delete');
     Route::post('update_old_deceased', [OldDeceasedController::class, 'edit'])->name('old.update');
+    //! Tombs Reports
+    Route::get('tombs_reports', [TombReportController::class, 'index'])->name('tombs.report');
 });

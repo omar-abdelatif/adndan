@@ -49,6 +49,6 @@ class May15TombController extends Controller
         $room = Rooms::findOrFail($roomId);
         $deceased = Deceased::where('room', $room->name)->get();
         $tombName = $tomb->name;
-        return view('المقابر.مايو.room', compact('region', 'room', 'deceased', 'tombName'));
+        return view('المقابر.15-مايو.room', compact('region', 'room', 'deceased', 'tombName'));
     }
 }
