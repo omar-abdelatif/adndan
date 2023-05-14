@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Tombs;
 
 use App\Models\Tomb;
+use App\Models\Rooms;
 use App\Models\Region;
+use App\Models\Deceased;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -39,5 +41,14 @@ class ZenhomTombController extends Controller
             return redirect()->route('zenhom.index')->with('success', 'تمت حذف المقبرة بنجاح.');
         }
         return redirect()->route('zenhom.index')->withErrors('خطأ أثناء الحذف');
+    }
+    public function showRoom($tombId, $roomId)
+    {
+        $region = Region::where('name', 'زينهم')->firstOrFail();
+        $tomb = Tomb::findOrFail($tombId);
+        $room = Rooms::findOrFail($roomId);
+        $deceased = Deceased::where('room', $room->name)->get();
+        $tombName = $tomb->name;
+        return view('المقابر.زينهم.room', compact('region', 'room', 'deceased', 'tombName'));
     }
 }

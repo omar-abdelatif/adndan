@@ -241,10 +241,23 @@
                                                                 <b>إسم المنطقة:</b>
                                                                 {{$tomb->region}}
                                                             </p>
-                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
-                                                                <b>المتاح:</b>
-                                                                .....
-                                                            </p>
+                                                            <div class="available bg-primary p-2 rounded">
+                                                                <div class="available-title">
+                                                                    <p class="mb-0 ms-3 text-white text-decoration-underline">
+                                                                        <b>المتاح</b>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="available-body text-white">
+                                                                    <span>
+                                                                        <b>رجال:</b>
+                                                                        .....
+                                                                    </span>
+                                                                    <span>
+                                                                        <b>سيدات:</b>
+                                                                        ......
+                                                                    </span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="tomb-status bg-info rounded p-3 mt-3">
@@ -256,8 +269,25 @@
                                                                 <b>قوة المقبرة:</b>
                                                                 {{$tomb->power}}
                                                             </p>
+                                                            <div class="available bg-primary p-2 rounded">
+                                                                <div class="available-title">
+                                                                    <p class="mb-0 ms-3 text-white text-decoration-underline">
+                                                                        <b>المتاح</b>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="available-body text-white">
+                                                                    <span>
+                                                                        <b>رجال:</b>
+                                                                        .....
+                                                                    </span>
+                                                                    <span>
+                                                                        <b>سيدات:</b>
+                                                                        ......
+                                                                    </span>
+                                                                </div>
+                                                            </div>
                                                             <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
-                                                                <b>المتاح المقبرة:</b>
+                                                                <b>تاريخ أخر دفنة:</b>
                                                                 .....
                                                             </p>
                                                         </div>
@@ -272,7 +302,7 @@
                                                                     <th class="text-center">id</th>
                                                                     <th class="text-center">إسم الغرفة</th>
                                                                     <th class="text-center">قوة الغرفة</th>
-                                                                    <th class="text-center">المتاح</th>
+                                                                    <th class="text-center">المتاح ( رجال / سيدات )</th>
                                                                     <th class="text-center">تاريخ أخر دفنة</th>
                                                                     <th class="text-center">Actions</th>
                                                                 </thead>
@@ -286,20 +316,31 @@
                                                                             <td>0</td>
                                                                             <td>0</td>
                                                                             <td>
-                                                                                <a href="" class="btn btn-primary">
-                                                                                    <b>عرض</b>
-                                                                                </a>
-                                                                                <a href="" class="btn btn-warning">
-                                                                                    <b>تعديل</b>
-                                                                                </a>
-                                                                                <a href="" class="btn btn-danger">
-                                                                                    <b>حذف</b>
+                                                                                <a href="{{ route('katamya.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
+                                                                                    <i class="fa fa-eye"></i>
                                                                                 </a>
                                                                             </td>
                                                                         </tr>
                                                                     @endforeach
                                                                 </tbody>
                                                             </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="last-burial-info bg-warning rounded p-3 mt-3">
+                                                        <div class="last-burial-title mb-3">
+                                                            <h2 class="text-center text-decoration-underline">بيانات أخر دفنة</h2>
+                                                        </div>
+                                                        <div class="last-burial-content">
+                                                            <div class="details d-flex align-items-center justify-content-evenly">
+                                                                <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                    <b>إسم المتوفي:</b>
+                                                                    .....
+                                                                </p>
+                                                                <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                    <b>تاريخ الدفن:</b>
+                                                                    .....
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

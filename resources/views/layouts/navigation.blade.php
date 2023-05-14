@@ -50,6 +50,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{route('tombs.all')}}" target="_top">
+                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
+                    <b>كل المقابر</b>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{route('old.index')}}" target="_top">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
                     <b>المتوفيين السابقين</b>
