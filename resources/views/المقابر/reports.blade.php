@@ -71,7 +71,71 @@
                     <h2>تقارير المقابر</h2>
                 </div>
                 <div class="report-content">
-                    <div class="row"></div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="filter-to">
+                                <form action="" method="" class="d-flex align-items-center justify-content-evenly">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label">
+                                            <b>من تاريخ</b>
+                                        </label>
+                                        <input type="date" class="form-control" name="from" id="" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label">
+                                            <b>الى تاريخ</b>
+                                        </label>
+                                        <input type="date" class="form-control" name="to" id="" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="col-form-label">
+                                            <b>المنطقة</b>
+                                        </label>
+                                            <select name="region" id="region" class="form-control">
+                                            <option value="0" selected>-- إختار المنطقة --</option>
+                                            @foreach ($regions as $region)
+                                                <option value="{{ $region->name }}">{{ $region->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tomb">
+                                            <b>إسم المقبرة</b>
+                                        </label>
+                                        <select name="tomb" id="regionTomb" class="form-control regionTomb">
+                                            <option value="0" selected>-- إختار المقبرة --</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success">
+                                            <b>تصفح</b>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6"></div>
+                        <div class="col-lg-12">
+                            <div class="filter"></div>
+                            <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th class="text-center">إسم المتوفي</th>
+                                        <th class="text-center">النوع</th>
+                                        <th class="text-center">المكان</th>
+                                        <th class="text-center">تاريخ الدفن</th>
+                                        <th class="text-center">تاريخ الوفاه</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

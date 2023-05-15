@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Region;
 use Illuminate\Http\Request;
 
 class TombReportController extends Controller
 {
     public function index()
     {
-        return view('المقابر.reports');
+        $regions = Region::all();
+        return view('المقابر.reports', compact('regions'));
     }
 }

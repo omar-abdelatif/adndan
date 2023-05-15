@@ -37,4 +37,8 @@ class Tomb extends Model
             $room->save();
         }
     }
+    public function lastBurialDate()
+    {
+        return $this->rooms()->max('burial_date');
+    }
 }

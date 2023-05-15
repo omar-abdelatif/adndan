@@ -26,4 +26,8 @@ class Rooms extends Model
     {
         return $this->deceased()->count() >= $this->capacity;
     }
+    public function lastBurialDate()
+    {
+        return $this->max('burial_date');
+    }
 }
