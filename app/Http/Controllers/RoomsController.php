@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Tomb;
 use App\Models\Rooms;
+use App\Models\Deceased;
 use Illuminate\Http\Request;
 
 class RoomsController extends Controller
 {
     public function index()
     {
+        Rooms::updateBurialDates();
         $rooms = Rooms::all();
         return view('rooms.index', compact('rooms'));
     }

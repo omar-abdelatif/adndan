@@ -302,8 +302,8 @@
                                                                     <th class="text-center">id</th>
                                                                     <th class="text-center">إسم الغرفة</th>
                                                                     <th class="text-center">قوة الغرفة</th>
-                                                                    <th class="text-center">المتاح ( رجال / سيدات )</th>
                                                                     <th class="text-center">تاريخ أخر دفنة</th>
+                                                                    <th class="text-center">المتاح ( رجال / سيدات )</th>
                                                                     <th class="text-center">Actions</th>
                                                                 </thead>
                                                                 <tbody>
@@ -313,7 +313,7 @@
                                                                             <td>{{ $j++ }}</td>
                                                                             <td>{{$room->name}}</td>
                                                                             <td>{{$room->capacity}}</td>
-                                                                            <td>0</td>
+                                                                            <td>{{$room->burial_date}}</td>
                                                                             <td>0</td>
                                                                             <td>
                                                                                 <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
@@ -338,6 +338,10 @@
                                                                 </p>
                                                                 <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
                                                                     <b>تاريخ الدفن:</b>
+                                                                    .....
+                                                                </p>
+                                                                <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                    <b>الغرفة:</b>
                                                                     .....
                                                                 </p>
                                                             </div>

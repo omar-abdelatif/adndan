@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Rooms extends Model
 {
@@ -22,12 +23,17 @@ class Rooms extends Model
     {
         return $this->hasMany(Deceased::class);
     }
-    public function isFull()
+    public static function updateBurialDates()
     {
-        return $this->deceased()->count() >= $this->capacity;
+        $lastBurialDates = Deceased::groupBy('room_id')
+        ->select('room_id', DB::raw('MAX(burial_date) AS last_burial_date'))
+        ->pluck('last_burial_date', 'room_id');
+
+        foreach ($lastBurialDates as $roomId => $lastBurialDate) {
+            $room = Rooms::find($roomId);
+            $room->burial_date = $lastBurialDate;
+            $room->save();
+        }
     }
-    public function lastBurialDate()
-    {
-        return $this->max('burial_date');
-    }
+
 }

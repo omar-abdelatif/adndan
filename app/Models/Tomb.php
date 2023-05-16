@@ -41,4 +41,13 @@ class Tomb extends Model
     {
         return $this->rooms()->max('burial_date');
     }
+    // public function getLastBurialDateAttribute()
+    // {
+    //     if ($this->deceased->isEmpty()) {
+    //         return null;
+    //     }
+
+    //     return $this->deceased->max('burial_date');
+    // }
+
 }
