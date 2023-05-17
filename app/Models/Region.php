@@ -18,4 +18,11 @@ class Region extends Model
     {
         return $this->hasMany(Tomb::class);
     }
+
+    public function updateTombsRoomsBurialDates()
+    {
+        foreach ($this->tombs as $tomb) {
+            $tomb->updateRoomsBurialDates();
+        }
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Deceased;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,17 +24,9 @@ class Rooms extends Model
     {
         return $this->hasMany(Deceased::class);
     }
-    public static function updateBurialDates()
+    public function updateRoomsBurialDates()
     {
-        $lastBurialDates = Deceased::groupBy('room_id')
-        ->select('room_id', DB::raw('MAX(burial_date) AS last_burial_date'))
-        ->pluck('last_burial_date', 'room_id');
-
-        foreach ($lastBurialDates as $roomId => $lastBurialDate) {
-            $room = Rooms::find($roomId);
-            $room->burial_date = $lastBurialDate;
-            $room->save();
-        }
+        $lastBurialDate = Deceased::max('burial_date');
+        return $lastBurialDate;
     }
-
 }
