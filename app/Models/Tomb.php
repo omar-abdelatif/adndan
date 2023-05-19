@@ -29,14 +29,11 @@ class Tomb extends Model
     public function createRooms()
     {
         $power = $this->power;
-        $roomsModel = new Rooms();
-        $lastBurialDate = $roomsModel->updateRoomsBurialDates();
 
         for ($i = 1; $i <= $power; $i++) {
             $room = new Rooms;
             $room->name = "غرفة " . $i;
             $room->capacity = 6;
-            $room->burial_date = $lastBurialDate;
             $room->tomb_id = $this->id;
             $room->save();
         }

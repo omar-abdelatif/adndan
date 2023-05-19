@@ -30,4 +30,23 @@ class Deceased extends Model
     {
         return $this->belongsTo(Rooms::class);
     }
+    public static function boot()
+    {
+        parent::boot();
+
+        self::created(function ($deceased) {
+            $room = $deceased->rooms()->first();
+            if ($room) {
+                $room->burial_date = $deceased->burial_date;
+                $room->save();
+            }
+        });
+        self::updated(function ($deceased) {
+            $room = $deceased->rooms()->first();
+            if ($room) {
+                $room->burial_date = $deceased->burial_date;
+                $room->save();
+            }
+        });
+    }
 }
