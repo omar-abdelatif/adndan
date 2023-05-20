@@ -308,12 +308,13 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php $j=1 ?>
-                                                                    @foreach ($tomb->rooms as $room)
+
+                                                                    @foreach ($rooms as $room)
                                                                         <tr>
                                                                             <td>{{ $j++ }}</td>
                                                                             <td>{{$room->name}}</td>
                                                                             <td>{{$room->capacity}}</td>
-                                                                            <td>{{$room->burial_date}}</td>
+                                                                            <td>{{ $room->burial_date }}</td>
                                                                             <td>0</td>
                                                                             <td>
                                                                                 <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">

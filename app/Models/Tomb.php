@@ -33,6 +33,7 @@ class Tomb extends Model
         for ($i = 1; $i <= $power; $i++) {
             $room = new Rooms;
             $room->name = "غرفة " . $i;
+            $room->burial_date = null;
             $room->capacity = 6;
             $room->tomb_id = $this->id;
             $room->save();

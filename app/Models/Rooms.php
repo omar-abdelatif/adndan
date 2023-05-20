@@ -24,9 +24,4 @@ class Rooms extends Model
     {
         return $this->hasMany(Deceased::class);
     }
-    public function updateRoomsBurialDates()
-    {
-        $lastBurialDate = Deceased::max('burial_date');
-        return $lastBurialDate;
-    }
 }

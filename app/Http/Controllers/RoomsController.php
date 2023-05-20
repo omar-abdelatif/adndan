@@ -5,17 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Tomb;
 use App\Models\Rooms;
 use App\Models\Region;
-// use App\Models\Deceased;
 use Illuminate\Http\Request;
 
 class RoomsController extends Controller
 {
-    public function index($roomId)
+    public function index()
     {
-        $room = Rooms::find($roomId);
-        dd($room->updateTombsRoomsBurialDates());
         $rooms = Rooms::all();
-        return view('rooms.index', compact('rooms', 'room'));
+        return view('rooms.index', compact('rooms'));
     }
     public function getRooms(Request $request)
     {

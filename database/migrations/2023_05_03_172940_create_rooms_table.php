@@ -13,10 +13,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rooms', function (Blueprint $table) {
-            $table->increments('id');
+            $table->engine = 'InnoDB';
+            $table->bigInteger('id');
             $table->string('name');
             $table->integer('capacity');
-            $table->foreignId('tomb_id')->constrained();
+            $table->integer('tomb_id')->index()->references('id')->on('tombs')->onDelete('cascade');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

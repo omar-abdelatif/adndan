@@ -11,7 +11,7 @@
     @vite('resources/sass/app.scss')
     {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-ecdc8d53.css') }}"> --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
-    <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@4.4.3/dist/css/coreui.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="{{ asset('build/assets/backend/css/style.css') }}">

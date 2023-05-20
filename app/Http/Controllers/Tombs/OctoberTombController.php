@@ -21,7 +21,7 @@ class OctoberTombController extends Controller
             $rooms = $tomb->rooms;
             $tombRooms[$tomb->id] = $rooms;
         }
-        return view('المقابر.أكتوبر.index', compact('region', 'tombs', 'tombRooms'));
+        return view('المقابر.أكتوبر.index', compact('region', 'tombs', 'tombRooms', 'rooms'));
     }
     public function updateTomb(Request $request)
     {
@@ -58,6 +58,6 @@ class OctoberTombController extends Controller
         return view('المقابر.أكتوبر.room', compact('region', 'room', 'deceased', 'tombName'));
     }
     // create a function to check if the tomb capacity = to the number of the fulled rooms, if true disabled it, if not remains as it is in laravel ?
-    
+
 
 }

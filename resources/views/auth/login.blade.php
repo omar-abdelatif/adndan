@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="col-lg-8">
+        <div class="logo text-center mb-3">
+            <img src="{{ asset('icons/download.png') }}" alt="logo" class="img-fluid" style="width: 130px;">
+        </div>
         <div class="card-group d-block d-md-flex row">
             <div class="card col-md-7 p-4 mb-0">
                 <div class="card-body">

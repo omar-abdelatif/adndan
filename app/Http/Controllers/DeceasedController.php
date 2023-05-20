@@ -40,8 +40,6 @@ class DeceasedController extends Controller
             'pdf_files' => 'required|mimes:pdf',
         ]);
         $room = Rooms::where('name', $validated['room'])->first();
-        $roomId = Rooms::where('id', $request->id);
-        // $allRooms = Rooms::all;
 
         if ($room) {
             $deceased = new Deceased();
@@ -72,18 +70,14 @@ class DeceasedController extends Controller
             $deceased->files = $name;
             $deceased->pdf_files = $file_name;
             $deceased->rooms_id = $room->id;
+            $room = $deceased->rooms;
+            $room->burial_date = $deceased->burial_date;
+            $room->save();
             $store = $deceased->save();
-            if ($roomId) {
-                $roomId->update([
-                    'burial_date' => $validated['burial_date'],
-                ]);
-            }
             if ($store) {
                 return redirect()->route('deceased.index')->with('success', 'تمت الإضافة بنجاح');
             }
-
         }
-
         return redirect()->route('deceased.index')->with('error', $validated);
     }
     public function destroy($id)
