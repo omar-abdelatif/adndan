@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Tomb;
 use App\Models\Deceased;
+use App\Observers\TombObserver;
 use App\Observers\DeceasedObserver;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
@@ -29,6 +31,7 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
         Deceased::observe(DeceasedObserver::class);
+        Tomb::observe(TombObserver::class);
     }
 
     /**

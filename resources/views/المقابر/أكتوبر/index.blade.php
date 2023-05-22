@@ -93,6 +93,7 @@
                         <td class="text-center">قوة المقبرة</td>
                         <td class="text-center">المنطقة</td>
                         <td class="text-center">قمة الدفع السنوي</td>
+                        <td class="text-center">تاريخ أخر دفنة</td>
                         <td class="text-center">Actions</td>
                     </tr>
                 </thead>
@@ -106,6 +107,7 @@
                             <td>{{$tomb->power}}</td>
                             <td>{{$tomb->region}}</td>
                             <td>{{$tomb->annual_cost}}</td>
+                            <td>{{$tomb->burial_date}}</td>
                             <td>
                                 <div class="btn-group align-items-center justify-content-evenly">
                                     <button type="button" class="btn btn-warning rounded" data-coreui-toggle="modal" data-coreui-target="#edit{{$tomb->id}}" data-coreui-whatever="@mdo">

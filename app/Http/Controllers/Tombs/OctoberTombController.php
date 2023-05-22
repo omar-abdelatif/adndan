@@ -6,7 +6,6 @@ use App\Models\Tomb;
 use App\Models\Rooms;
 use App\Models\Region;
 use App\Models\Deceased;
-// use App\Models\OctoberTomb;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -57,7 +56,4 @@ class OctoberTombController extends Controller
         $tombName = $tomb->name;
         return view('المقابر.أكتوبر.room', compact('region', 'room', 'deceased', 'tombName'));
     }
-    // create a function to check if the tomb capacity = to the number of the fulled rooms, if true disabled it, if not remains as it is in laravel ?
-
-
 }
