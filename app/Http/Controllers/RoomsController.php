@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Deceased;
 use App\Models\Tomb;
 use App\Models\Rooms;
 use App\Models\Region;
@@ -17,7 +18,15 @@ class RoomsController extends Controller
     public function getRooms(Request $request)
     {
         $tomb = Tomb::where('name', $request->input('name'))->first();
-        $rooms = Rooms::select('name')->where('tomb_id', $tomb->id)->get();
+        $rooms = Rooms::where('tomb_id', $tomb->id)->withCount('deceased')->get();
         return response()->json($rooms);
     }
+
+
+    // public function isDisabled($room)
+    // {
+    //     $deceasedcount = Deceased::where('room_id', $room->id)->count();
+    //     $true = $deceasedcount == $room->capacity ? 'disabled' : '';
+    //     return $true;
+    // }
 }

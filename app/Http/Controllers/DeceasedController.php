@@ -139,4 +139,9 @@ class DeceasedController extends Controller
         }
         return redirect()->route('deceased.index')->withErrors('حدث خطأ أثناء التحديث');
     }
+    public function getDeceased(Request $request)
+    {
+        $rooms = Rooms::where('name', $request->input('name'))->first();
+        $deceased = Deceased::where('room_id', );
+    }
 }

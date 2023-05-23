@@ -67,6 +67,12 @@
                     <b>كل المتوفيين</b>
                 </a>
             </li>
+            {{-- <li class="nav-item">
+                <a class="nav-link" href="{{route('deceased.addnew')}}" target="_top">
+                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
+                    <b>إضافة متوفي</b>
+                </a>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{route('tombs.report')}}" target="_top">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">

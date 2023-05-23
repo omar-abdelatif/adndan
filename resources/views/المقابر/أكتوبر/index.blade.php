@@ -252,7 +252,7 @@
                                                                 <div class="available-body text-white">
                                                                     <span>
                                                                         <b>رجال:</b>
-                                                                        .....
+                                                                        {{4*2}}
                                                                     </span>
                                                                     <span>
                                                                         <b>سيدات:</b>
@@ -288,10 +288,6 @@
                                                                     </span>
                                                                 </div>
                                                             </div>
-                                                            <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
-                                                                <b>تاريخ أخر دفنة:</b>
-                                                                .....
-                                                            </p>
                                                         </div>
                                                     </div>
                                                     <div class="rooms bg-success rounded p-3 mt-3">
