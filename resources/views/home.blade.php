@@ -58,7 +58,7 @@
                             <use xlink:href="{{ asset('icons/coreui.svg#cil-people') }}"></use>
                         </svg>
                     </div>
-                    <div class="ms-4">
+                    <div>
                         <div class="fs-6 fw-semibold text-primary me-3">{{ $count }}</div>
                         <div class="text-medium-emphasis text-uppercase fw-semibold small me-3">إجمالي الحالات</div>
                     </div>
@@ -73,7 +73,7 @@
                             <use xlink:href="{{ asset('icons/coreui.svg#cil-people') }}"></use>
                         </svg>
                     </div>
-                    <div class="ms-4">
+                    <div>
                         <div class="fs-6 fw-semibold text-primary me-3">0</div>
                         <div class="text-medium-emphasis text-uppercase fw-semibold small me-3">إجمالي الحالات المستحقة</div>
                     </div>
@@ -88,7 +88,7 @@
                             <use xlink:href="{{ asset('icons/coreui.svg#cil-money') }}"></use>
                         </svg>
                     </div>
-                    <div class="ms-4">
+                    <div>
                         <div class="fs-6 fw-semibold text-primary">
                             <p id="totalAmountHome" class="mb-0 me-3"></p>
                         </div>
@@ -105,7 +105,7 @@
                             <use xlink:href="{{ asset('icons/coreui.svg#cil-settings') }}"></use>
                         </svg>
                     </div>
-                    <div class="ms-4">
+                    <div>
                         <div class="fs-6 fw-semibold text-primary">
                             <p class="mb-0 me-3">{{ $fullDate }}</p>
                         </div>
