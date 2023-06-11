@@ -112,7 +112,7 @@
                                                             <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{route('deceased.update')}}" method="post" enctype="multipart/form-data">
+                                                            <form action="{{route('october-deceased.update')}}" method="post" enctype="multipart/form-data">
                                                                 @csrf
                                                                 <div class="container-fluid">
                                                                     <div class="row">

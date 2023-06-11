@@ -112,7 +112,7 @@
                                                             <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{route('zenhom.update')}}" method="post" enctype="multipart/form-data">
+                                                            <form action="{{route('zenhom-deceased.update')}}" method="post" enctype="multipart/form-data">
                                                                 @csrf
                                                                 <div class="container-fluid">
                                                                     <div class="row">
@@ -231,7 +231,7 @@
                                                             <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{route('zenhom.destroy', $deceased->id)}}" method="get">
+                                                            <form action="{{route('zenhom-deceased.destroy', $deceased->id)}}" method="get">
                                                                 @csrf
                                                                 <div class="container-fluid">
                                                                     <div class="row">

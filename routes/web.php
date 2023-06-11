@@ -74,31 +74,42 @@ Route::middleware('auth')->group(function () {
     Route::post('update_october_tomb', [OctoberTombController::class, 'updateTomb'])->name('october.update');
     Route::get('october/tombs/{tombId}/rooms/{roomId}', [OctoberTombController::class, 'showRoom'])->name('october.rooms');
     Route::get('delete_october_deceased/{id}', [OctoberTombController::class, 'deleteDeceased'])->name('october-deceased.destroy');
+    Route::post('update_october_deceased', [OctoberTombController::class, 'updateDeceased'])->name('october-deceased.update');
     //! Fayum Routes
     Route::get('fayum_tombs', [FayumTombController::class, 'index'])->name('fayum.index');
     Route::get('destroy_fayum_tomb/{id}', [FayumTombController::class, 'destroyTomb'])->name('fayum.destroy');
     Route::post('update_fayum_tomb', [FayumTombController::class, 'updateTomb'])->name('fayum.update');
     Route::get('fayum/tombs/{tombId}/rooms/{roomId}', [FayumTombController::class, 'showRoom'])->name('fayum.rooms');
+    Route::get('delete_fayum_deceased/{id}', [FayumTombController::class, 'deleteDeceased'])->name('fayum-deceased.destroy');
+    Route::post('update_fayum_deceased', [FayumTombController::class, 'updateDeceased'])->name('fayum-deceased.update');
     //! Gafeer Routes
     Route::get('gafeer_tombs', [GafeerTombController::class, 'index'])->name('gafeer.index');
     Route::get('destroy_gafeer_tomb/{id}', [GafeerTombController::class, 'destroyTomb'])->name('gafeer.destroy');
     Route::post('update_gafeer_tomb', [GafeerTombController::class, 'updateTomb'])->name('gafeer.update');
     Route::get('gafeer/tombs/{tombId}/rooms/{roomId}', [GafeerTombController::class, 'showRoom'])->name('gafeer.rooms');
+    Route::get('delete_gafeer_deceased/{id}', [GafeerTombController::class, 'deleteDeceased'])->name('gafeer-deceased.destroy');
+    Route::post('update_gafeer_deceased', [GafeerTombController::class, 'updateDeceased'])->name('gafeer-deceased.update');
     //! Zenhom Routes
     Route::get('zenhom_tombs', [ZenhomTombController::class, 'index'])->name('zenhom.index');
     Route::get('destroy_zenhom_tomb/{id}', [ZenhomTombController::class, 'destroyTomb'])->name('zenhom.destroy');
     Route::post('update_zenhom_tomb', [ZenhomTombController::class, 'updateTomb'])->name('zenhom.update');
     Route::get('zenhom/tombs/{tombId}/rooms/{roomId}', [ZenhomTombController::class, 'showRoom'])->name('zenhom.rooms');
+    Route::get('delete_zenhom_deceased/{id}', [ZenhomTombController::class, 'deleteDeceased'])->name('zenhom-deceased.destroy');
+    Route::post('update_zenhom_deceased', [ZenhomTombController::class, 'updateDeceased'])->name('zenhom-deceased.update');
     //! Katamya Routes
     Route::get('katamya_tombs', [KatamyaTombController::class, 'index'])->name('katamya.index');
     Route::get('destroy_katamya_tomb/{id}', [KatamyaTombController::class, 'destroyTomb'])->name('katamya.destroy');
     Route::post('update_katamya_tomb', [KatamyaTombController::class, 'updateTomb'])->name('katamya.update');
     Route::get('katamya/tombs/{tombId}/rooms/{roomId}', [KatamyaTombController::class, 'showRoom'])->name('katamya.rooms');
+    Route::get('delete_katamya_deceased/{id}', [KatamyaTombController::class, 'deleteDeceased'])->name('katamya-deceased.destroy');
+    Route::post('update_katamya_deceased', [KatamyaTombController::class, 'updateDeceased'])->name('katamya-deceased.update');
     //! 15 May Routes
     Route::get('15may_tombs', [May15TombController::class, 'index'])->name('15may.index');
     Route::get('destroy_15may_tomb/{id}', [May15TombController::class, 'destroyTomb'])->name('15may.destroy');
     Route::post('update_15may_tomb', [May15TombController::class, 'updateTomb'])->name('15may.update');
     Route::get('15may/tombs/{tombId}/rooms/{roomId}', [May15TombController::class, 'showRoom'])->name('15may.rooms');
+    Route::get('delete_15may_deceased/{id}', [May15TombController::class, 'deleteDeceased'])->name('15may-deceased.destroy');
+    Route::post('update_15may_deceased', [May15TombController::class, 'updateDeceased'])->name('15may-deceased.update');
     //! Rooms Routes
     Route::get('all_rooms', [RoomsController::class, 'index'])->name('rooms.all');
     Route::get('/get-rooms', [RoomsController::class, 'getRooms'])->name('getRooms');

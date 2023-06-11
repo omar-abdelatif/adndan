@@ -50,6 +50,64 @@ class FayumTombController extends Controller
         $deceased = Deceased::where('room', $room->name)->get();
         $tombName = $tomb->name;
         return view('المقابر.الفيوم.room', compact('region', 'room', 'deceased', 'tombName'));
-
+    }
+    public function deleteDeceased($id)
+    {
+        $deceased = Deceased::find($id);
+        if ($deceased) {
+            if ($deceased->files !== null) {
+                $oldImagePath = public_path('build/assets/backend/files/tombs/imgs/' . $deceased->files);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+            if ($deceased->pdf_files !== null) {
+                $oldPdfPath = public_path('build/assets/backend/files/tombs/pdf/' . $deceased->pdf_files);
+                if (file_exists($oldPdfPath)) {
+                    unlink($oldPdfPath);
+                }
+            }
+            $deceased->delete();
+            return redirect()->route('fayum.index')->with('تم الحذف بنجاح');
+        }
+        return redirect()->route('fayum.index')->withErrors('خطأ أثناء الحذف');
+    }
+    public function updateDeceased(Request $request)
+    {
+        $deceased = Deceased::find($request->id);
+        $room = Rooms::where('name', $request->room)->first();
+        if ($deceased) {
+            if ($request->hasFile('files') && $request->file('files')->isValid()) {
+                $img = $request->file('files');
+                $name = time() . '.' . $img->getClientOriginalExtension();
+                $destinationPath = public_path('build/assets/backend/files/tombs/imgs/');
+                $img->move($destinationPath, $name);
+                $deceased->files = $name;
+            }
+            if ($request->hasFile('pdf_files') && $request->file('pdf_files')->isValid()) {
+                $file = $request->file('pdf_files');
+                $pdf = time() . '.' . $file->getClientOriginalExtension();
+                $destinationPath = public_path('build/assets/backend/files/tombs/pdf/');
+                $file->move($destinationPath, $pdf);
+                $deceased->pdf_files = $pdf;
+            }
+            $deceased->name = $request->name;
+            $deceased->gender = $request->gender;
+            $deceased->size = $request->size;
+            $deceased->death_place = $request->death_place;
+            $deceased->death_date = $request->death_date;
+            $deceased->burial_date = $request->burial_date;
+            $deceased->washer = $request->washer;
+            $deceased->carrier = $request->carrier;
+            $deceased->region = $request->region;
+            $deceased->tomb = $request->tomb;
+            $deceased->notes = $request->notes;
+            $deceased->rooms_id = $room->id;
+            $update = $deceased->save();
+            if ($update) {
+                return redirect()->route('fayum.index')->with('success', 'تم التعديل بنجاح');
+            }
+        }
+        return redirect()->route('fayum.index')->withErrors('حدث خطأ أثناء التحديث');
     }
 }
