@@ -5,6 +5,7 @@
             <b>لوحة التحكم</b>
         </a>
     </li>
+
     <li class="nav-group" aria-expanded="false">
         <a class="nav-link nav-group-toggle" href="#">
             <img src="{{ asset('icons/icons8-donate-40.png') }}" alt="donate">
@@ -37,8 +38,9 @@
             </li>
         </ul>
     </li>
+
     <li class="nav-group" aria-expanded="false">
-        <a class="nav-link nav-group-toggle" href="#">
+        <a class="nav-link nav-group-toggle" href="">
             <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
             <b>المقابر</b>
         </a>
@@ -81,6 +83,7 @@
             </li>
         </ul>
     </li>
+
     <li class="nav-group" aria-expanded="false">
         <a class="nav-link nav-group-toggle" href="#">
             <img src="{{ asset('icons/icons8-service-30.png') }}" alt="donate">
@@ -101,7 +104,9 @@
             </li>
         </ul>
     </li>
+
     {{-- <li class="nav-group" aria-expanded="false"></li>
+
     <li class="nav-group" aria-expanded="false">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">

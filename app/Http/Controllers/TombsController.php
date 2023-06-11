@@ -84,7 +84,8 @@ class TombsController extends Controller
     public function getTombs(Request $request)
     {
         $region = Region::where('name', $request->input('name'))->first();
-        $tombs = Tomb::select('name')->where('region_id', $region->id)->get();
-        return response()->json($tombs);
+        $tombs = Tomb::where('region_id', $region->id)->get();
+        $disabledRoomCount = Rooms::where('tomb_id', $tombs->id)->where('disabled', true)->count();
+        return response()->json($disabledRoomCount);
     }
 }

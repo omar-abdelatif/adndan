@@ -22,11 +22,4 @@ class RoomsController extends Controller
         return response()->json($rooms);
     }
 
-
-    // public function isDisabled($room)
-    // {
-    //     $deceasedcount = Deceased::where('room_id', $room->id)->count();
-    //     $true = $deceasedcount == $room->capacity ? 'disabled' : '';
-    //     return $true;
-    // }
 }
