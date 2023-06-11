@@ -227,11 +227,11 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h3 class="modal-title text-decoration-underline" id="exampleModalLabel">حذف مقبرة {{$deceased->name}}</h3>
+                                                            <h3 class="modal-title text-decoration-underline" id="exampleModalLabel">حذف {{$deceased->name}}</h3>
                                                             <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{route('october.destroy', $deceased->id)}}" method="get">
+                                                            <form action="{{route('october-deceased.destroy', $deceased->id)}}" method="get">
                                                                 @csrf
                                                                 <div class="container-fluid">
                                                                     <div class="row">

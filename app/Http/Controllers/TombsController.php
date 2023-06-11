@@ -10,7 +10,7 @@ use PHPUnit\Framework\Assert;
 
 class TombsController extends Controller
 {
-    public function AllTombs($tombId)
+    public function AllTombs()
     {
         $tomb = Tomb::all();
         $region = Region::all();

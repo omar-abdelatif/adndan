@@ -47,6 +47,15 @@ class OctoberTombController extends Controller
         }
         return redirect()->route('october.index')->withErrors('خطأ أثناء الحذف');
     }
+    public function deleteDeceased($id)
+    {
+        $deceased = Deceased::find($id);
+        if ($deceased) {
+            $deceased->delete();
+            return redirect()->route('october.index')->with('تم الحذف بنجاح');
+        }
+        return redirect()->route('october.index')->withErrors('خطأ أثناء الحذف');
+    }
     public function showRoom($tombId, $roomId)
     {
         $region = Region::where('name', 'أكتوبر')->firstOrFail();

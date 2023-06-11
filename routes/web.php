@@ -73,6 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::get('destroy_october_tomb/{id}', [OctoberTombController::class, 'destroyTomb'])->name('october.destroy');
     Route::post('update_october_tomb', [OctoberTombController::class, 'updateTomb'])->name('october.update');
     Route::get('october/tombs/{tombId}/rooms/{roomId}', [OctoberTombController::class, 'showRoom'])->name('october.rooms');
+    Route::get('delete_october_deceased/{id}', [OctoberTombController::class, 'deleteDeceased'])->name('october-deceased.destroy');
     //! Fayum Routes
     Route::get('fayum_tombs', [FayumTombController::class, 'index'])->name('fayum.index');
     Route::get('destroy_fayum_tomb/{id}', [FayumTombController::class, 'destroyTomb'])->name('fayum.destroy');
@@ -107,6 +108,7 @@ Route::middleware('auth')->group(function () {
     Route::post('store_deceased', [DeceasedController::class, 'storeDeceased'])->name('deceased.store');
     Route::get('delete_deceased/{id}', [DeceasedController::class, 'destroy'])->name('deceased.delete');
     Route::post('update_deceased', [DeceasedController::class, 'update'])->name('deceased.update');
+    Route::get('/get-deceased-sum', [DeceasedController::class, 'getDeceaseds'])->name('getDeceaseds');
     //! Old Deceased Routes
     Route::get('all_old_deceased', [OldDeceasedController::class, 'index'])->name('old.index');
     Route::post('create_old_deceased', [OldDeceasedController::class, 'importDeceased'])->name('old.import');

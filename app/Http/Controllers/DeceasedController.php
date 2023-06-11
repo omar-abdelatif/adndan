@@ -139,9 +139,19 @@ class DeceasedController extends Controller
         }
         return redirect()->route('deceased.index')->withErrors('حدث خطأ أثناء التحديث');
     }
-    public function getDeceased(Request $request)
+
+    public function getDeceaseds(Request $request)
     {
-        $rooms = Rooms::where('name', $request->input('name'))->first();
-        $deceased = Deceased::where('room_id', );
+        $roomName = $request->input('name');
+        $room = Rooms::where('name', $roomName)->first();
+        if ($room) {
+            $sumSize = 0;
+            foreach ($room->deceased as $deceased) {
+                $sumSize += $deceased->size;
+            }
+            return response()->json(['sumSize' => $sumSize]);
+        } else {
+            return response()->json(['sumSize' => 1000]);
+        }
     }
 }
