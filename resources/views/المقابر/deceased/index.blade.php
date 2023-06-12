@@ -119,7 +119,7 @@
                                                     <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">تعديل {{$deceased->name}}</h1>
                                                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <div class="modal-body">
+                                                <div class="modal-body bg-dark">
                                                     <form action="{{route('deceased.update')}}" method="post" enctype="multipart/form-data">
                                                         @csrf
                                                         <div class="container-fluid">
@@ -127,31 +127,31 @@
                                                                 <input type="hidden" class="form-control" name="id" value="{{$deceased->id}}">
                                                                 <div class="col-6">
                                                                     <div class="form-group mt-3">
-                                                                        <label for="name">
+                                                                        <label class="text-white" for="name">
                                                                             <b>إسم المتوفي</b>
                                                                         </label>
                                                                         <input type="text" id="name" class="form-control text-center" value="{{$deceased->name}}" name="name" placeholder="إسم المتوفي">
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <label for="death_place">
+                                                                        <label class="text-white" for="death_place">
                                                                             <b>مكان الوفاة</b>
                                                                         </label>
                                                                         <input type="text" id="death_place" class="form-control text-center" value="{{$deceased->death_place}}" name="death_place" placeholder="مكان الوفاة">
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <label for="death_date">
+                                                                        <label class="text-white" for="death_date">
                                                                             <b>تاريخ الوفاة</b>
                                                                         </label>
                                                                         <input type="date" id="death_date" class="form-control text-center" value="{{$deceased->death_date}}" name="death_date" placeholder="تاريخ الوفاة">
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <label for="burial_date">
+                                                                        <label class="text-white" for="burial_date">
                                                                             <b>تاريخ الدفن</b>
                                                                         </label>
                                                                         <input type="date" id="burial_date" class="form-control text-center" value="{{$deceased->burial_date}}" name="burial_date" placeholder="تاريخ الدفن">
                                                                     </div>
                                                                     <div class="form-group mt-3 text-center">
-                                                                        <label for="files">
+                                                                        <label class="text-white" for="files">
                                                                             <b>ملفات</b>
                                                                         </label>
                                                                         <input type="file" name="files" value="{{$deceased->files}}" class="form-control mb-3" accept="image/*">
@@ -160,30 +160,30 @@
                                                                         </a>
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <label for="files">
+                                                                        <label class="text-white" for="files">
                                                                             <b>ملفات PDF</b>
                                                                         </label>
                                                                         <input type="file" name="pdf_files" value="{{$deceased->pdf_files}}" class="form-control mb-3" accept="application/pdf">
-                                                                        <a href="{{asset('build/assets/backend/files/tombs/pdf/'.$deceased->pdf_files)}}" class="d-block">
+                                                                        <a href="{{asset('build/assets/backend/files/tombs/pdf/'.$deceased->pdf_files)}}" class="d-block text-white">
                                                                             <i class="fas fa-file-pdf fa-3x"></i>
                                                                         </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <div class="form-group mt-3">
-                                                                        <label for="the_washer">
+                                                                        <label class="text-white" for="the_washer">
                                                                             <b>القائم بالغسل</b>
                                                                         </label>
                                                                         <input type="text" id="the_washer" class="form-control text-center" value="{{$deceased->washer}}" name="washer" placeholder="القائم بالغسل">
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <label for="the_carrier">
+                                                                        <label class="text-white" for="the_carrier">
                                                                             <b>القائم بالنقل</b>
                                                                         </label>
                                                                         <input type="text" id="the_carrier" class="form-control text-center" value="{{$deceased->carrier}}" name="carrier" placeholder="القائم بالنقل">
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <label for="region">
+                                                                        <label class="text-white" for="region">
                                                                             <b>المنطقة:</b>
                                                                             {{$deceased->region}}
                                                                         </label>
@@ -195,7 +195,7 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <label for="tomb">
+                                                                        <label class="text-white" for="tomb">
                                                                             <b>إسم المقبرة:</b>
                                                                             {{$deceased->tomb}}
                                                                         </label>
@@ -204,7 +204,7 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="form-group mt-3">
-                                                                        <label for="room">
+                                                                        <label class="text-white" for="room">
                                                                             <b>رقم الغرفة:</b>
                                                                             {{$deceased->room}}
                                                                         </label>
@@ -213,38 +213,38 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="form-data mt-3">
-                                                                        <label for="burial_date">
+                                                                        <label class="text-white" for="burial_date">
                                                                             <b>النوع</b>
                                                                         </label>
                                                                         <div class="gender mt-3 d-flex justify-content-evenly align-items-center">
                                                                             <div class="male">
                                                                                 <input type="radio" name="gender" value="ذكر" id="male" {{$deceased->gender == 'ذكر' ? 'checked' : ''}}>
-                                                                                <label for="male">
+                                                                                <label class="text-white" for="male">
                                                                                     <b>ذكر</b>
                                                                                 </label>
                                                                             </div>
                                                                             <div class="female">
                                                                                 <input type="radio" name="gender" id="female" value="أنثى" {{$deceased->gender == 'أنثى' ? 'checked' : ''}}>
-                                                                                <label for="female">
+                                                                                <label class="text-white" for="female">
                                                                                     <b>أنثى</b>
                                                                                 </label>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-data mt-3">
-                                                                        <label for="burial_date">
+                                                                        <label class="text-white" for="burial_date">
                                                                             <b>الحجم</b>
                                                                         </label>
                                                                         <div class="gender mt-3 d-flex justify-content-evenly align-items-center">
                                                                             <div class="male">
                                                                                 <input type="radio" name="size" value="1" id="one" {{$deceased->size == 1 ? 'checked' : ''}}>
-                                                                                <label for="male">
+                                                                                <label class="text-white" for="male">
                                                                                     <b>فردي</b>
                                                                                 </label>
                                                                             </div>
                                                                             <div class="female">
                                                                                 <input type="radio" name="size" value="2" id="two" {{$deceased->size == 2 ? 'checked' : ''}}>
-                                                                                <label for="female">
+                                                                                <label class="text-white" for="female">
                                                                                     <b>زوجي</b>
                                                                                 </label>
                                                                             </div>
@@ -253,7 +253,7 @@
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="textarea mt-4">
-                                                                        <label for="notes">
+                                                                        <label class="text-white" for="notes">
                                                                             <b>ملاحظـــــــات</b>
                                                                         </label>
                                                                         <textarea id="notes" class="form-control text-center" name="notes" rows="5" placeholder="ملاحظـــــــات">{{$deceased->notes}}</textarea>

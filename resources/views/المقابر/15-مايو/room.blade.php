@@ -178,9 +178,6 @@
                                                                                 </label>
                                                                                 <select name="region" id="region" class="form-control">
                                                                                     <option value="0" selected>-- إختار المنطقة --</option>
-                                                                                    {{-- @foreach ($regions as $region)
-                                                                                        <option value="{{ $region->name }}">{{ $region->name }}</option>
-                                                                                    @endforeach --}}
                                                                                 </select>
                                                                             </div>
                                                                             <div class="form-group mt-3">

@@ -104,7 +104,8 @@ class DeceasedController extends Controller
     public function update(Request $request)
     {
         $deceased = Deceased::find($request->id);
-        $room = Rooms::where('name', $request->room)->first();
+        $room = Rooms::where('name', $request->input('room'))->first();
+        dd($room);
         if ($deceased) {
             if ($request->hasFile('files') && $request->file('files')->isValid()) {
                 $img = $request->file('files');
