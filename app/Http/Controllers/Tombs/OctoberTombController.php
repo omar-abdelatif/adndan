@@ -80,7 +80,8 @@ class OctoberTombController extends Controller
     public function updateDeceased(Request $request)
     {
         $deceased = Deceased::find($request->id);
-        $room = Rooms::where('name', $request->room)->first();
+        $room = Rooms::where('name', $request->name)->first();
+        dd($deceased->id, $room);
         if ($deceased) {
             if ($request->hasFile('files') && $request->file('files')->isValid()) {
                 $img = $request->file('files');

@@ -30,6 +30,5 @@ class SMSController extends Controller
             'verify' => false, // to disable SSL certificate verification
         ]);
         return $response->getBody()->getContents();
-        // dd($response);
     }
 }

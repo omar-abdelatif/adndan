@@ -18,8 +18,7 @@ class RoomsController extends Controller
     public function getRooms(Request $request)
     {
         $tomb = Tomb::where('name', $request->input('name'))->first();
-        $rooms = Rooms::where('tomb_id', $tomb->id)->withCount('deceased')->get();
+        $rooms = Rooms::where('tomb_id', $tomb->id)->get();
         return response()->json($rooms);
     }
-
 }
