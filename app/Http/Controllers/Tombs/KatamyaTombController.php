@@ -75,7 +75,6 @@ class KatamyaTombController extends Controller
     public function updateDeceased(Request $request)
     {
         $deceased = Deceased::find($request->id);
-        $room = Rooms::where('name', $request->room)->first();
         if ($deceased) {
             if ($request->hasFile('files') && $request->file('files')->isValid()) {
                 $img = $request->file('files');
@@ -101,8 +100,9 @@ class KatamyaTombController extends Controller
             $deceased->carrier = $request->carrier;
             $deceased->region = $request->region;
             $deceased->tomb = $request->tomb;
+            $deceased->room = $request->room;
             $deceased->notes = $request->notes;
-            $deceased->rooms_id = $room->id;
+            $deceased->rooms_id = $deceased->rooms_id;
             $update = $deceased->save();
             if ($update) {
                 return redirect()->route('katamya.index')->with('success', 'تم التعديل بنجاح');

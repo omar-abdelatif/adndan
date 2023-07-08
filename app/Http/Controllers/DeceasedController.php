@@ -104,42 +104,39 @@ class DeceasedController extends Controller
     public function update(Request $request)
     {
         $deceased = Deceased::find($request->id);
-        $room = Rooms::where('name', $request->name)->first();
-        dd($room);
         if ($deceased) {
-            // if ($request->hasFile('files') && $request->file('files')->isValid()) {
-            //     $img = $request->file('files');
-            //     $name = time() . '.' . $img->getClientOriginalExtension();
-            //     $destinationPath = public_path('build/assets/backend/files/tombs/imgs/');
-            //     $img->move($destinationPath, $name);
-            //     $deceased->files = $name;
-            // }
-            // if ($request->hasFile('pdf_files') && $request->file('pdf_files')->isValid()) {
-            //     $file = $request->file('pdf_files');
-            //     $pdf = time() . '.' . $file->getClientOriginalExtension();
-            //     $destinationPath = public_path('build/assets/backend/files/tombs/pdf/');
-            //     $file->move($destinationPath, $pdf);
-            //     $deceased->pdf_files = $pdf;
-            // }
-            // $deceased->name = $request->name;
-            // $deceased->gender = $request->gender;
-            // $deceased->size = $request->size;
-            // $deceased->death_place = $request->death_place;
-            // $deceased->death_date = $request->death_date;
-            // $deceased->burial_date = $request->burial_date;
-            // $deceased->washer = $request->washer;
-            // $deceased->carrier = $request->carrier;
-            // $deceased->region = $request->region;
-            // $deceased->tomb = $request->tomb;
-            // $deceased->notes = $request->notes;
-            // $deceased->rooms_id = $room->id;
-            // $update = $deceased->save();
-            // if ($update) {
-            //     return redirect()->route('deceased.index')->with('success', 'تم التعديل بنجاح');
-            // }
+            if ($request->hasFile('files') && $request->file('files')->isValid()) {
+                $img = $request->file('files');
+                $name = time() . '.' . $img->getClientOriginalExtension();
+                $destinationPath = public_path('build/assets/backend/files/tombs/imgs/');
+                $img->move($destinationPath, $name);
+                $deceased->files = $name;
+            }
+            if ($request->hasFile('pdf_files') && $request->file('pdf_files')->isValid()) {
+                $file = $request->file('pdf_files');
+                $pdf = time() . '.' . $file->getClientOriginalExtension();
+                $destinationPath = public_path('build/assets/backend/files/tombs/pdf/');
+                $file->move($destinationPath, $pdf);
+                $deceased->pdf_files = $pdf;
+            }
+            $deceased->name = $request->name;
+            $deceased->gender = $request->gender;
+            $deceased->size = $request->size;
+            $deceased->death_place = $request->death_place;
+            $deceased->death_date = $request->death_date;
+            $deceased->burial_date = $request->burial_date;
+            $deceased->washer = $request->washer;
+            $deceased->carrier = $request->carrier;
+            $deceased->region = $request->region;
+            $deceased->tomb = $request->tomb;
+            $deceased->room = $request->room;
+            $deceased->notes = $request->notes;
+            $update = $deceased->save();
+            if ($update) {
+                return redirect()->route('deceased.index')->with('success', 'تم التعديل بنجاح');
+            }
         }
-        dd(false);
-        // return redirect()->route('deceased.index')->withErrors('حدث خطأ أثناء التحديث');
+        return redirect()->route('deceased.index')->withErrors('حدث خطأ أثناء التحديث');
     }
 
     public function getDeceaseds(Request $request)

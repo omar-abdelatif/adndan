@@ -14,10 +14,10 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->bigInteger('id');
+            $table->increments('id')->autoIncrement();
             $table->string('name');
             $table->integer('capacity');
-            $table->integer('tomb_id')->index()->references('id')->on('tombs')->onDelete('cascade');
+            $table->integer('tomb_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

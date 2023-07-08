@@ -20,12 +20,8 @@
 <body>
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
         <div class="sidebar-brand d-none d-md-flex">
-            <div class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
-                <img src="{{ asset('icons/full-logo.png') }}" class="mr-2" width="80%" height="46%" alt="">
-            </div>
-            <div class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
-                <img src="{{ asset('icons/download.png') }}" width="80%" alt="">
-            </div>
+            <img src="{{ asset('icons/full-logo.png') }}" class="mr-2 sidebar-brand-full text-center" width="80%" height="80%" alt="CoreUI Logo">
+            <img src="{{ asset('icons/download.png') }}" class="sidebar-brand-narrow text-center" width="46" height="46" alt="CoreUI Logo">
         </div>
         @include('layouts.navigation')
         <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>

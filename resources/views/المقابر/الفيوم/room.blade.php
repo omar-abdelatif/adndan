@@ -54,13 +54,13 @@
                                     <a href="{{ route('home') }}">الرئيسية</a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="{{ route('region.index') }}">كل المقابر</a>
+                                    <a href="{{ route('region.index') }}">كل المناطق</a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="{{ route('october.index') }}">مقابر {{$region->name}}</a>
+                                    <a href="{{ route('fayum.index') }}">مقابر {{$region->name}}</a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="{{ route('october.index') }}">{{$tombName}}</a>
+                                    <a href="{{ route('fayum.index') }}">{{$tombName}}</a>
                                 </li>
                                 <li class="breadcrumb-item active">{{$room->name}}</li>
                             </ol>
@@ -93,7 +93,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($deceased as $deceased)
+                                @foreach ($deceaseds as $deceased)
                                     <tr>
                                         <td class="text-center">{{$k++}}</td>
                                         <td class="text-center">{{$deceased->name}}</td>
@@ -178,9 +178,9 @@
                                                                                 </label>
                                                                                 <select name="region" id="region" class="form-control">
                                                                                     <option value="0" selected>-- إختار المنطقة --</option>
-                                                                                    {{-- @foreach ($regions as $region)
+                                                                                    @foreach ($regions as $region)
                                                                                         <option value="{{ $region->name }}">{{ $region->name }}</option>
-                                                                                    @endforeach --}}
+                                                                                    @endforeach
                                                                                 </select>
                                                                             </div>
                                                                             <div class="form-group mt-3">

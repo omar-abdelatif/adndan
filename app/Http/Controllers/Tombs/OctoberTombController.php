@@ -47,6 +47,16 @@ class OctoberTombController extends Controller
         }
         return redirect()->route('october.index')->withErrors('خطأ أثناء الحذف');
     }
+    public function showRoom($tombId, $roomId)
+    {
+        $regions = Region::all();
+        $region = Region::where('name', 'أكتوبر')->firstOrFail();
+        $tomb = $region->tombs()->findOrFail($tombId);
+        $room = $tomb->rooms()->findOrFail($roomId);
+        $deceased = $room->deceased()->get();
+        $tombName = $tomb->name;
+        return view('المقابر.أكتوبر.room', compact('region', 'room', 'deceased', 'tombName', 'regions'));
+    }
     public function deleteDeceased($id)
     {
         $deceased = Deceased::find($id);
@@ -68,20 +78,9 @@ class OctoberTombController extends Controller
         }
         return redirect()->route('october.index')->withErrors('خطأ أثناء الحذف');
     }
-    public function showRoom($tombId, $roomId)
-    {
-        $region = Region::where('name', 'أكتوبر')->firstOrFail();
-        $tomb = Tomb::findOrFail($tombId);
-        $room = Rooms::findOrFail($roomId);
-        $deceased = Deceased::where('room', $room->name)->get();
-        $tombName = $tomb->name;
-        return view('المقابر.أكتوبر.room', compact('region', 'room', 'deceased', 'tombName'));
-    }
     public function updateDeceased(Request $request)
     {
         $deceased = Deceased::find($request->id);
-        $room = Rooms::where('name', $request->name)->first();
-        dd($deceased->id, $room);
         if ($deceased) {
             if ($request->hasFile('files') && $request->file('files')->isValid()) {
                 $img = $request->file('files');
@@ -107,8 +106,8 @@ class OctoberTombController extends Controller
             $deceased->carrier = $request->carrier;
             $deceased->region = $request->region;
             $deceased->tomb = $request->tomb;
+            $deceased->room = $request->room;
             $deceased->notes = $request->notes;
-            $deceased->rooms_id = $room->id;
             $update = $deceased->save();
             if ($update) {
                 return redirect()->route('october.index')->with('success', 'تم التعديل بنجاح');

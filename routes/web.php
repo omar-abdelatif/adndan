@@ -82,6 +82,7 @@ Route::middleware('auth')->group(function () {
     Route::get('fayum/tombs/{tombId}/rooms/{roomId}', [FayumTombController::class, 'showRoom'])->name('fayum.rooms');
     Route::get('delete_fayum_deceased/{id}', [FayumTombController::class, 'deleteDeceased'])->name('fayum-deceased.destroy');
     Route::post('update_fayum_deceased', [FayumTombController::class, 'updateDeceased'])->name('fayum-deceased.update');
+    Route::get('get_deceased/{id}', [FayumTombController::class, 'showDeceased'])->name('fayum.showDeceased');
     //! Gafeer Routes
     Route::get('gafeer_tombs', [GafeerTombController::class, 'index'])->name('gafeer.index');
     Route::get('destroy_gafeer_tomb/{id}', [GafeerTombController::class, 'destroyTomb'])->name('gafeer.destroy');

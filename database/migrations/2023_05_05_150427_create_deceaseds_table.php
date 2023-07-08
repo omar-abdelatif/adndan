@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('room');
             $table->longText('notes');
             $table->string('files');
-            $table->foreignId('rooms_id')->constrained();
+            $table->integer('rooms_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

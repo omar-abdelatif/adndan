@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('power');
             $table->string('type');
-            $table->integer('region_id')->index()->references('id')->on('regions')->onDelete('cascade');
+            $table->integer('region_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

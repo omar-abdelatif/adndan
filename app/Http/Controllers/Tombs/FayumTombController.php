@@ -44,13 +44,28 @@ class FayumTombController extends Controller
     }
     public function showRoom($tombId, $roomId)
     {
+        $regions = Region::all();
         $region = Region::where('name', 'الفيوم')->firstOrFail();
-        $tomb = Tomb::findOrFail($tombId);
-        $room = Rooms::findOrFail($roomId);
-        $deceased = Deceased::where('room', $room->name)->get();
+        $tomb = Tomb::where('region_id', $region->id)->findOrFail($tombId);
+        $room = Rooms::where('tomb_id', $tomb->id)->findOrFail($roomId);
+        $deceaseds = Deceased::where('rooms_id', $room->id)->get();
+        // dd($deceaseds);
         $tombName = $tomb->name;
-        return view('المقابر.الفيوم.room', compact('region', 'room', 'deceased', 'tombName'));
+
+        return view('المقابر.الفيوم.room', compact('region', 'room', 'tombName', 'deceaseds', 'regions'));
     }
+
+    public function showDeceased($tombId)
+    {
+        $tomb = Tomb::findOrFail($tombId);
+        $rooms = $tomb->rooms()->get();
+        $deceased = collect();
+        foreach ($rooms as $room) {
+            $deceased = $deceased->merge($room->deceased);
+        }
+        return view('المقابر.الفيوم.room', compact('deceased', 'tomb'));
+    }
+
     public function deleteDeceased($id)
     {
         $deceased = Deceased::find($id);
@@ -75,7 +90,6 @@ class FayumTombController extends Controller
     public function updateDeceased(Request $request)
     {
         $deceased = Deceased::find($request->id);
-        $room = Rooms::where('name', $request->room)->first();
         if ($deceased) {
             if ($request->hasFile('files') && $request->file('files')->isValid()) {
                 $img = $request->file('files');
@@ -101,8 +115,9 @@ class FayumTombController extends Controller
             $deceased->carrier = $request->carrier;
             $deceased->region = $request->region;
             $deceased->tomb = $request->tomb;
+            $deceased->room = $request->room;
             $deceased->notes = $request->notes;
-            $deceased->rooms_id = $room->id;
+            $deceased->rooms_id = $deceased->rooms_id;
             $update = $deceased->save();
             if ($update) {
                 return redirect()->route('fayum.index')->with('success', 'تم التعديل بنجاح');
