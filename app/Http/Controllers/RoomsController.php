@@ -24,4 +24,38 @@ class RoomsController extends Controller
         }
         return response()->json([]);
     }
+    public function getRoomsByTombId($id)
+    {
+        $rooms = Rooms::where('tomb_id', $id)->get();
+
+        foreach ($rooms as $room) {
+            $sumSize = 0;
+            foreach ($room->deceased as $deceased) {
+                $sumSize += $deceased->size;
+            }
+            $room->disabled = ($sumSize === $room->capacity);
+        }
+
+        return response()->json([
+            'rooms' => $rooms,
+        ]);
+    }
+
+
+
+
+    public function getSumOfDisabledRooms(Request $request)
+    {
+        $tombName = $request->input('name');
+        $tomb = Tomb::where('name', $tombName)->get();
+        if ($tomb) {
+            $sumTotal = 0;
+            foreach ($tomb->rooms as $tombRoom) {
+                $sumTotal += $tombRoom->power;
+            }
+            return response()->json($sumTotal);
+        } else {
+            return response()->json([]);
+        }
+    }
 }

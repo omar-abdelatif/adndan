@@ -2,24 +2,24 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SMSController;
 use App\Http\Controllers\CaseController;
-use App\Http\Controllers\DonatorController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DeceasedController;
-use App\Http\Controllers\DonationHistoryController;
-use App\Http\Controllers\OldDeceasedController;
+use App\Http\Controllers\TombsController;
+use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\RoomsController;
-use App\Http\Controllers\SMSController;
+use App\Http\Controllers\DonatorController;
+use App\Http\Controllers\DeceasedController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TombReportController;
+use App\Http\Controllers\OldDeceasedController;
+use App\Http\Controllers\DonationHistoryController;
 use App\Http\Controllers\Tombs\FayumTombController;
-use App\Http\Controllers\Tombs\GafeerTombController;
-use App\Http\Controllers\Tombs\KatamyaTombController;
 use App\Http\Controllers\Tombs\May15TombController;
-use App\Http\Controllers\Tombs\OctoberTombController;
+use App\Http\Controllers\Tombs\GafeerTombController;
 use App\Http\Controllers\Tombs\ZenhomTombController;
-use App\Http\Controllers\TombsController;
+use App\Http\Controllers\Tombs\KatamyaTombController;
+use App\Http\Controllers\Tombs\OctoberTombController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -114,6 +114,7 @@ Route::middleware('auth')->group(function () {
     //! Rooms Routes
     Route::get('all_rooms', [RoomsController::class, 'index'])->name('rooms.all');
     Route::get('/get-rooms', [RoomsController::class, 'getRooms'])->name('getRooms');
+    Route::get('get-rooms-by-tomb-id/{id}', [RoomsController::class, 'getRoomsByTombId']);
     //! Deceased Routes
     Route::get('all_deceased', [DeceasedController::class, 'index'])->name('deceased.index');
     Route::get('new_deceased', [DeceasedController::class, 'addnew'])->name('deceased.addnew');
