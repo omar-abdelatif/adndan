@@ -26,13 +26,14 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true]);
-Route::middleware('auth')->group(function () {
+
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('about', 'about')->name('about');
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
     //! Home Routes
-    Route::get('home', [DashboardController::class, 'index'])->name('home');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('home');
     //! Case Routes
     Route::view('addnew', 'الكفالة.addnew')->name('addnew');
     Route::get('showall', [CaseController::class, 'ViewData'])->name('showall');

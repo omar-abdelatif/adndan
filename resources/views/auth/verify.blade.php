@@ -4,7 +4,7 @@
     <div class="col-md-6">
         <div class="card mb-4 mx-4">
             <div class="card-body p-4">
-                <h1>{{ __('Please confirm your password before continuing.') }}</h1>
+                <h1>{{ __('Please confirm your data before continuing.') }}</h1>
 
                 @if (session('resent'))
                     <div class="alert alert-success" role="alert">
