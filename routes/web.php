@@ -25,6 +25,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Auth::routes();
+
 Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
