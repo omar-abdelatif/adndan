@@ -1,0 +1,35 @@
+[
+    {
+        "_id": "377011f1-f23f-4927-a57d-a7ba9a4229a7",
+        "colId": "history",
+        "containerId": "",
+        "name": "http://127.0.0.1:8000/api/send-email",
+        "url": "http://127.0.0.1:8000/api/send-email",
+        "method": "POST",
+        "sortNum": 0,
+        "created": "2023-07-11T12:23:03.279Z",
+        "modified": "2023-07-11T12:26:49.880Z",
+        "headers": [
+            {
+                "name": "Accept",
+                "value": "application/json"
+            },
+            {
+                "name": "Content-Type",
+                "value": "application/json"
+            },
+            {
+                "name": "User-Agent",
+                "value": "Thunder Client (https://www.thunderclient.com)",
+                "isDisabled": true
+            }
+        ],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n  \"email\": \"omaraboregela100@gmail.com\",\n  \"msg\": \"Hello From Test Email Api\"\n}",
+            "form": []
+        },
+        "tests": []
+    }
+]

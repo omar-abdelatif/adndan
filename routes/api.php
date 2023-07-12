@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\EmailVerificationController;
 use App\Http\Controllers\Api\TombController;
 use App\Http\Controllers\SMSController;
 use Illuminate\Http\Request;
@@ -21,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('get-tombs-data', TombController::class);
+// Route::post('send-email', [EmailVerificationController::class, 'send']);
