@@ -350,15 +350,6 @@
                                                                             {{ $tomb->getBurialDateAttribute()['room'] }}
                                                                         </p>
                                                                     </div>
-                                                                    {{-- @if ($tomb->getBurialDateAttribute())
-                                                                    <p>The last burial in this tomb was on {{ $tomb->getBurialDateAttribute()['burial_date'] }}</p>
-                                                                    <p>The deceased person was {{ $tomb->getBurialDateAttribute()['name'] }}</p>
-                                                                    <p>The deceased person died on {{ $tomb->getBurialDateAttribute()['burial_date'] }}</p>
-                                                                    <p>The deceased person's age was {{ $tomb->getBurialDateAttribute()['age'] }}</p>
-                                                                    <p>The deceased person's gender was {{ $tomb->getBurialDateAttribute()['gender'] }}</p>
-                                                                @else
-                                                                    <p>There have been no burials in this tomb yet</p>
-                                                                @endif --}}
                                                                 </div>
                                                             </div>
                                                         </div>

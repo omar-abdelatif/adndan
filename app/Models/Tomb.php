@@ -66,6 +66,4 @@ class Tomb extends Model
             return null;
         }
     }
-
-
 }
