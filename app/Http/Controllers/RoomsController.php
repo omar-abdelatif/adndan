@@ -40,10 +40,7 @@ class RoomsController extends Controller
             'rooms' => $rooms,
         ]);
     }
-
-
-
-
+    
     public function getSumOfDisabledRooms(Request $request)
     {
         $tombName = $request->input('name');

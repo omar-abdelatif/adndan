@@ -107,7 +107,7 @@
                             <td>{{$tomb->power}}</td>
                             <td>{{$tomb->region}}</td>
                             <td>{{$tomb->annual_cost}}</td>
-                            <td>{{$tomb->burial_date}}</td>
+                            <td>{{$tomb->getBurialDateAttribute()['burial_date']}}</td>
                             <td>
                                 <div class="btn-group align-items-center justify-content-evenly">
                                     <button type="button" class="btn btn-warning rounded" data-coreui-toggle="modal" data-coreui-target="#edit{{$tomb->id}}" data-coreui-whatever="@mdo">
@@ -331,18 +331,35 @@
                                                         </div>
                                                         <div class="last-burial-content">
                                                             <div class="details d-flex align-items-center justify-content-evenly">
-                                                                <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
-                                                                    <b>إسم المتوفي:</b>
-                                                                    .....
-                                                                </p>
-                                                                <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
-                                                                    <b>تاريخ الدفن:</b>
-                                                                    .....
-                                                                </p>
-                                                                <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
-                                                                    <b>الغرفة:</b>
-                                                                    .....
-                                                                </p>
+                                                                <div class="last-burial-content">
+                                                                    <div class="details d-flex align-items-center justify-content-evenly">
+                                                                        <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                            <b class="text-decoration-underline">إسم المتوفي:</b>
+                                                                            {{ $tomb->getBurialDateAttribute()['name'] }}
+                                                                        </p>
+                                                                        <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                            <b class="text-decoration-underline">الجنس:</b>
+                                                                            {{ $tomb->getBurialDateAttribute()['gender'] }}
+                                                                        </p>
+                                                                        <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                            <b class="text-decoration-underline">تاريخ الدفن:</b>
+                                                                            {{ $tomb->getBurialDateAttribute()['burial_date'] }}
+                                                                        </p>
+                                                                        <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
+                                                                            <b class="text-decoration-underline">مكان الدفن:</b>
+                                                                            {{ $tomb->getBurialDateAttribute()['room'] }}
+                                                                        </p>
+                                                                    </div>
+                                                                    {{-- @if ($tomb->getBurialDateAttribute())
+                                                                    <p>The last burial in this tomb was on {{ $tomb->getBurialDateAttribute()['burial_date'] }}</p>
+                                                                    <p>The deceased person was {{ $tomb->getBurialDateAttribute()['name'] }}</p>
+                                                                    <p>The deceased person died on {{ $tomb->getBurialDateAttribute()['burial_date'] }}</p>
+                                                                    <p>The deceased person's age was {{ $tomb->getBurialDateAttribute()['age'] }}</p>
+                                                                    <p>The deceased person's gender was {{ $tomb->getBurialDateAttribute()['gender'] }}</p>
+                                                                @else
+                                                                    <p>There have been no burials in this tomb yet</p>
+                                                                @endif --}}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
