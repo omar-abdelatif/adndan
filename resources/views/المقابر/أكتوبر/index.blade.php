@@ -246,17 +246,17 @@
                                                             <div class="available bg-primary p-2 rounded">
                                                                 <div class="available-title">
                                                                     <p class="mb-0 ms-3 text-white text-decoration-underline">
-                                                                        <b>المتاح</b>
+                                                                        <b>الإجمالي</b>
                                                                     </p>
                                                                 </div>
                                                                 <div class="available-body text-white">
                                                                     <span>
                                                                         <b>رجال:</b>
-                                                                        {{4*2}}
+                                                                        {{ $tomb->getTotalPlaces()['male'] }}
                                                                     </span>
                                                                     <span>
                                                                         <b>سيدات:</b>
-                                                                        ......
+                                                                        {{ $tomb->getTotalPlaces()['female'] }}
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -306,14 +306,15 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php $j=1 ?>
-
                                                                     @foreach ($rooms as $room)
                                                                         <tr>
                                                                             <td>{{ $j++ }}</td>
                                                                             <td>{{$room->name}}</td>
                                                                             <td>{{$room->capacity}}</td>
                                                                             <td>{{ $room->burial_date }}</td>
-                                                                            <td>0</td>
+                                                                            <td>
+                                                                                0
+                                                                            </td>
                                                                             <td>
                                                                                 <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
                                                                                     <i class="fa fa-eye"></i>
@@ -321,6 +322,7 @@
                                                                             </td>
                                                                         </tr>
                                                                     @endforeach
+
                                                                 </tbody>
                                                             </table>
                                                         </div>

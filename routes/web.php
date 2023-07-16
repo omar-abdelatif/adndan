@@ -85,7 +85,6 @@ Route::middleware('auth')->group(function () {
     Route::get('october/tombs/{tombId}/rooms/{roomId}', [OctoberTombController::class, 'showRoom'])->name('october.rooms');
     Route::get('delete_october_deceased/{id}', [OctoberTombController::class, 'deleteDeceased'])->name('october-deceased.destroy');
     Route::post('update_october_deceased', [OctoberTombController::class, 'updateDeceased'])->name('october-deceased.update');
-    Route::get('last-burial-info', [OctoberTombController::class, 'lastBurialInfo']);
 
     //! Fayum Routes
     Route::get('fayum_tombs', [FayumTombController::class, 'index'])->name('fayum.index');
