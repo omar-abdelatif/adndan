@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tomb extends Model
 {
     use HasFactory;
+
     protected $table = 'tombs';
     protected $fillable = [
         'name',
@@ -45,4 +47,24 @@ class Tomb extends Model
     {
         return $this->rooms()->max('burial_date');
     }
+
+    public function getTotalPlaces()
+    {
+        foreach ($this->rooms as $room) {
+            $totalTomb = 0;
+            $male = 0;
+            $female = 0;
+            $power = $this->power;
+            $roomCapacity = 0;
+            $roomCapacity = $room->getCapacity();
+            $totalTomb += $roomCapacity * $power;
+            $male = $totalTomb / 2;
+            $female = $totalTomb / 2;
+        }
+        return [
+            'male' => $male,
+            'female' => $female,
+        ];
+    }
+    // public function getRemaining(){}
 }

@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Rooms extends Model
 {
     use HasFactory;
+    public $capacity = 6;
+    public $gender;
     protected $table = 'rooms';
     protected $fillable = [
         'name',
@@ -23,5 +25,9 @@ class Rooms extends Model
     public function deceased()
     {
         return $this->hasMany(Deceased::class);
+    }
+    public function getCapacity()
+    {
+        return $this->capacity;
     }
 }
