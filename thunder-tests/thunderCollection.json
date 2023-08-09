@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "c3a4edcf-1ba7-4149-99cf-88d44191b60e",
+    "colName": "Portfolio",
+    "created": "2023-06-19T20:43:06.630Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "dd9376d0-7612-45d7-bcf6-e8aaee94bb40",
+        "name": "Skills",
+        "containerId": "",
+        "created": "2023-06-19T20:44:31.037Z",
+        "sortNum": 10000
+      },
+      {
+        "_id": "56f2204a-92bc-4fc1-9ff0-1cec8dd05e80",
+        "name": "Services",
+        "containerId": "",
+        "created": "2023-06-19T20:44:38.009Z",
+        "sortNum": 5000
+      }
+    ]
+  }
+]

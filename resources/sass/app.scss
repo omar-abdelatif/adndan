@@ -5,7 +5,7 @@ $enable-ltr: true; /* stylelint-disable-line scss/dollar-variable-default */
 $enable-rtl: true; /* stylelint-disable-line scss/dollar-variable-default */
 
 // Import styles
-@import "@coreui/coreui/scss/coreui";
+@import "@coreui/coreui-pro/scss/coreui.rtl";
 
 @import "layout";
 

@@ -84,27 +84,6 @@
         </ul>
     </li>
 
-    <li class="nav-group" aria-expanded="false">
-        <a class="nav-link nav-group-toggle" href="#">
-            <img src="{{ asset('icons/icons8-service-30.png') }}" alt="donate">
-            <b>الخدمات</b>
-        </a>
-        <ul class="nav-group-items" style="height: 0px;">
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('text.add')}}" target="_top">
-                    <img src="{{ asset('icons/icons8-sms-30.png') }}" alt="donate">
-                    <b>الرسائل النصية</b>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('text.add')}}" target="_top">
-                    <img src="{{ asset('icons/subscription.png') }}" alt="subscription">
-                    <b>الإشتراكات</b>
-                </a>
-            </li>
-        </ul>
-    </li>
-
     {{-- <li class="nav-group" aria-expanded="false"></li>
 
     <li class="nav-group" aria-expanded="false">

@@ -5,7 +5,7 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@coreui/coreui": "^4.0.2",
+        "@coreui/coreui-pro": "^4.6.1",
         "@popperjs/core": "^2.11.6",
         "axios": "^1.1.2",
         "bootstrap": "~5.1.3",

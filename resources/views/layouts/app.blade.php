@@ -12,9 +12,9 @@
     {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-ecdc8d53.css') }}"> --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui-pro@4.5.0/dist/css/coreui.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui-pro@4.5.0/dist/css/coreui.rtl.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="{{ asset('build/assets/backend/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/backend/css/style.css') }}">
 </head>
 
 <body>
@@ -27,6 +27,7 @@
         <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
     </div>
     <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+        @include('layouts.upper-header')
         @yield('header')
         <div class="body flex-grow-1 px-3">
             <div class="container-lg">
@@ -48,11 +49,11 @@
         </footer>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="{{asset('build/assets/backend/js/jquery.js')}}"></script>
+    <script src="{{asset('assets/backend/js/jquery.js')}}"></script>
     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
     <script src="https://unpkg.com/@coreui/coreui-pro@4.5.0/dist/js/coreui.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-    <script src="{{ asset('build/assets/backend/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/custom.js') }}"></script>
 </body>
 
 </html>

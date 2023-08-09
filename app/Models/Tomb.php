@@ -41,29 +41,8 @@ class Tomb extends Model
             $room->save();
         }
     }
-
     public function getBurialDateAttribute()
     {
-        $lastDeceased = null;
-
-        foreach ($this->rooms as $room) {
-            $deceased = $room->deceased->first();
-            if ($deceased) {
-                if (!$lastDeceased || $deceased->burial_date > $lastDeceased->burial_date) {
-                    $lastDeceased = $deceased;
-                }
-            }
-        }
-
-        if ($lastDeceased) {
-            return [
-                'burial_date' => $lastDeceased->burial_date,
-                'name' => $lastDeceased->name,
-                'room' => $lastDeceased->room,
-                'gender' => $lastDeceased->gender,
-            ];
-        } else {
-            return null;
-        }
+        return $this->rooms()->max('burial_date');
     }
 }

@@ -1,0 +1,52 @@
+.text-right {
+    text-align: right !important;
+}
+.nav-link img {
+    width: 30px !important;
+    margin-left: 20px;
+}
+.dataTables_wrapper {
+    margin-top: 3rem;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 7px;
+    border: 2px solid #000;
+}
+.inputs-body {
+    border: 2px solid #000;
+    border-radius: 0.375rem;
+    padding: 1rem;
+}
+select option {
+    text-align: center;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+    margin-bottom: 0;
+}
+.breadcrumb{
+    margin-bottom: 0 !important;
+}
+hr
+{
+    border-width: thick;
+}
+#totalAmount{
+    font-weight: bolder;
+}
+.room-details{
+    border-top: 2px solid #33333394;
+}
+.room-title{
+    border-bottom: 1px solid #00000038;
+}
+

@@ -1,27 +1,26 @@
 @extends('layouts.guest')
 
 @section('content')
-    <div class="col-md-6">
+    <div class="col-lg-12">
         <div class="card mb-4 mx-4">
             <div class="card-body p-4">
-                <h1>{{ __('Please confirm your data before continuing.') }}</h1>
+                <h1 class="text-decoration-underline">يرجى تأكيد كلمة المرور الخاصة بك قبل المتابعة.</h1>
 
                 @if (session('resent'))
                     <div class="alert alert-success" role="alert">
-                        {{ __('A fresh verification link has been sent to your email address.') }}
+                        تم إرسال رابط تحقق جديد إلى عنوان بريدك الإلكتروني.
                     </div>
                 @endif
 
-                <p class="text-medium-emphasis">{{ __('Before proceeding, please check your email for a verification link.') }}</p>
-                <p class="text-medium-emphasis">{{ __('If you did not receive the email') }},</p>
+                <p class="text-medium-emphasis">قبل المتابعة ، يرجى التحقق من بريدك الإلكتروني للحصول على رابط التحقق</p>
+                <p class="text-medium-emphasis">إذا لم تستلم البريد الإلكتروني,</p>
 
                 <form method="POST" action="{{ route('verification.resend') }}">
                     @csrf
 
                     <div class="row">
                         <div class="col-12">
-                            <button class="btn btn-primary px-4"
-                                    type="submit">{{ __('click here to request another') }}</button>
+                            <button class="btn btn-primary px-4" type="submit">إضغط هنا لطلب آخر</button>
                         </div>
                     </div>
                 </form>
