@@ -22,19 +22,19 @@
                     {{ Auth::user()->name }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-end pt-0">
-                    <a class="dropdown-item" href="{{ route('profile.show') }}">
+                    <a class="dropdown-item text-right" href="{{ route('profile.show') }}">
                         <svg class="icon me-2">
                             <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
                         </svg>
-                        {{ __('My profile') }}
+                        صفحتي
                     </a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                        <a class="dropdown-item text-right" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
                             <svg class="icon me-2">
                                 <use xlink:href="{{ asset('icons/coreui.svg#cil-account-logout') }}"></use>
                             </svg>
-                            {{ __('Logout') }}
+                            تسجيل خروج
                         </a>
                     </form>
                 </div>
