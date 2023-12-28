@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="{{ asset('icons/download.png') }}" type="image/x-icon">
     <title>جمعية أدندان الخيرية</title>
     <meta name="theme-color" content="#ffffff">
+    {{-- <link rel="stylesheet" href="http://192.168.68.103:8000/assets/backend/css/style.css"> --}}
     @vite('resources/sass/app.scss')
 </head>
 <body>

@@ -16,6 +16,7 @@ class DonationHistory extends Model
         'mobile_phone',
         'amount',
         'selected_duration',
+        'invoice_no',
         'donator_id',
     ];
 

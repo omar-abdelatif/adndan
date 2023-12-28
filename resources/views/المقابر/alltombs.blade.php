@@ -67,6 +67,7 @@
     <div class="row">
         <div class="col-12">
             <div class="alltombs">
+
                 @if (session('success'))
                     <div class="alert alert-success text-center mt-5">
                         <p class="mb-0">{{ session('success') }}</p>
@@ -78,6 +79,7 @@
                         </div>
                     @endforeach
                 @endif
+                
                 <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                 <thead>
                     <tr>
