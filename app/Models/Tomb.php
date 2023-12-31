@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Tomb extends Model
 {
     use HasFactory;
-
     protected $table = 'tombs';
     protected $fillable = [
         'name',
@@ -19,7 +18,6 @@ class Tomb extends Model
         'annual_cost',
         'region_id'
     ];
-
     public function regions()
     {
         return $this->belongsTo(Region::class);
@@ -47,7 +45,6 @@ class Tomb extends Model
     {
         return $this->rooms()->max('burial_date');
     }
-
     public function getTotalPlaces()
     {
         foreach ($this->rooms as $room) {
@@ -66,5 +63,4 @@ class Tomb extends Model
             'female' => $female,
         ];
     }
-    // public function getRemaining(){}
 }

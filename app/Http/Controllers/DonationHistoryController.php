@@ -35,6 +35,7 @@ class DonationHistoryController extends Controller
             $donation->mobile_phone = $request->mobile_phone;
             $donation->amount = $request->amount;
             $donation->duration = $duration;
+            $donation->invoice_no = $request->invoice_no;
             $donation->donator_id = $donator->id;
             $store = $donation->save();
         }

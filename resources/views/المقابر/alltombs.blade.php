@@ -79,108 +79,108 @@
                         </div>
                     @endforeach
                 @endif
-                
+
                 <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
-                <thead>
-                    <tr>
-                        <td class="text-center">id</td>
-                        <td class="text-center">الإسم</td>
-                        <td class="text-center">نوع المقبرة</td>
-                        <td class="text-center">قوة المقبرة</td>
-                        <td class="text-center">المنطقة</td>
-                        <td class="text-center">قمة الدفع السنوي</td>
-                        <td class="text-center">Actions</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $i = 1 ?>
-                    @foreach ($tomb as $tomb)
+                    <thead>
                         <tr>
-                            <td>{{$i++}}</td>
-                            <td>{{$tomb->name}}</td>
-                            <td>{{$tomb->type}}</td>
-                            <td>{{$tomb->power}}</td>
-                            <td>{{$tomb->region}}</td>
-                            <td>{{$tomb->annual_cost}}</td>
-                            <td>
-                                <button type="button" class="btn btn-warning" data-coreui-toggle="modal" data-coreui-target="#edit{{$tomb->id}}" data-coreui-whatever="@mdo">
-                                    <b>تعديل</b>
-                                </button>
-                                <div class="modal fade" id="edit{{$tomb->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">تعديل مقبرة {{$tomb->name}}</h1>
-                                                <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="{{route('tomb.update')}}" method="post" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <input type="hidden" name="id" value="{{$tomb->id}}">
-                                                            <div class="col-lg-6">
-                                                                <div class="field">
-                                                                    <input type="text" name="name" value="{{$tomb->name}}" placeholder="إسم المقبرة" class="form-control mb-3 text-center">
+                            <td class="text-center">id</td>
+                            <td class="text-center">الإسم</td>
+                            <td class="text-center">نوع المقبرة</td>
+                            <td class="text-center">قوة المقبرة</td>
+                            <td class="text-center">المنطقة</td>
+                            <td class="text-center">قمة الدفع السنوي</td>
+                            <td class="text-center">Actions</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1 ?>
+                        @foreach ($tomb as $tomb)
+                            <tr>
+                                <td>{{$i++}}</td>
+                                <td>{{$tomb->name}}</td>
+                                <td>{{$tomb->type}}</td>
+                                <td>{{$tomb->power}}</td>
+                                <td>{{$tomb->region}}</td>
+                                <td>{{$tomb->annual_cost}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning" data-coreui-toggle="modal" data-coreui-target="#edit{{$tomb->id}}" data-coreui-whatever="@mdo">
+                                        <b>تعديل</b>
+                                    </button>
+                                    <div class="modal fade" id="edit{{$tomb->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">تعديل مقبرة {{$tomb->name}}</h1>
+                                                    <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{route('tomb.update')}}" method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="container-fluid">
+                                                            <div class="row">
+                                                                <input type="hidden" name="id" value="{{$tomb->id}}">
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="text" name="name" value="{{$tomb->name}}" placeholder="إسم المقبرة" class="form-control mb-3 text-center">
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="field">
-                                                                    <select name="power" class="form-control mb-2">
-                                                                        <option class="text-center" selected>قوة المقبرة</option>
-                                                                        <option value="1" {{$tomb->power  == '1' ? 'selected' : ''}}>1</option>
-                                                                        <option value="2" {{$tomb->power  == '2' ? 'selected' : ''}}>2</option>
-                                                                        <option value="3" {{$tomb->power  == '3' ? 'selected' : ''}}>3</option>
-                                                                        <option value="4" {{$tomb->power  == '4' ? 'selected' : ''}}>4</option>
-                                                                        <option value="5" {{$tomb->power  == '5' ? 'selected' : ''}}>5</option>
-                                                                        <option value="6" {{$tomb->power  == '6' ? 'selected' : ''}}>6</option>
-                                                                    </select>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <select name="power" class="form-control mb-2">
+                                                                            <option class="text-center" selected>قوة المقبرة</option>
+                                                                            <option value="1" {{$tomb->power  == '1' ? 'selected' : ''}}>1</option>
+                                                                            <option value="2" {{$tomb->power  == '2' ? 'selected' : ''}}>2</option>
+                                                                            <option value="3" {{$tomb->power  == '3' ? 'selected' : ''}}>3</option>
+                                                                            <option value="4" {{$tomb->power  == '4' ? 'selected' : ''}}>4</option>
+                                                                            <option value="5" {{$tomb->power  == '5' ? 'selected' : ''}}>5</option>
+                                                                            <option value="6" {{$tomb->power  == '6' ? 'selected' : ''}}>6</option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="field">
-                                                                    <select name="type" class="form-control mb-2">
-                                                                        <option class="text-center" selected>إختار نوع المقبرة</option>
-                                                                        <option value="لحد" {{$tomb->type  == 'لحد' ? 'selected' : ''}}>لحد</option>
-                                                                        <option value="عيون" {{$tomb->type  == 'عيون' ? 'selected' : ''}}>عيون</option>
-                                                                    </select>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <select name="type" class="form-control mb-2">
+                                                                            <option class="text-center" selected>إختار نوع المقبرة</option>
+                                                                            <option value="لحد" {{$tomb->type  == 'لحد' ? 'selected' : ''}}>لحد</option>
+                                                                            <option value="عيون" {{$tomb->type  == 'عيون' ? 'selected' : ''}}>عيون</option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="field">
-                                                                    <select name="region" class="form-control">
-                                                                        <option selected>إختار المنطقة</option>
-                                                                        @if ($regionCount > 0)
-                                                                            @foreach ($region as $regions)
-                                                                                <option value="{{$regions->name}}" {{$tomb->region == $regions->name ? 'selected' : ''}}>{{$regions->name}}</option>
-                                                                            @endforeach
-                                                                        @endif
-                                                                    </select>
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <select name="region" class="form-control">
+                                                                            <option selected>إختار المنطقة</option>
+                                                                            @if ($regionCount > 0)
+                                                                                @foreach ($region as $regions)
+                                                                                    <option value="{{$regions->name}}" {{$tomb->region == $regions->name ? 'selected' : ''}}>{{$regions->name}}</option>
+                                                                                @endforeach
+                                                                            @endif
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="field">
-                                                                    <input type="number" name="annual_cost" value="{{$tomb->annual_cost}}" class="form-control mb-3 text-center" placeholder="قيمة الدفع السنوي">
+                                                                <div class="col-lg-6">
+                                                                    <div class="field">
+                                                                        <input type="number" name="annual_cost" value="{{$tomb->annual_cost}}" class="form-control mb-3 text-center" placeholder="قيمة الدفع السنوي">
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <div class="field">
-                                                                    <input type="submit" value="تعديل" class="btn btn-success w-100">
+                                                                <div class="col-12">
+                                                                    <div class="field">
+                                                                        <input type="submit" value="تعديل" class="btn btn-success w-100">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <a href="{{url('destroy_tomb/'.$tomb->id)}}" class="btn btn-danger">حذف</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                    <a href="{{url('destroy_tomb/'.$tomb->id)}}" class="btn btn-danger">حذف</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -73,67 +73,43 @@
                 <div class="report-content">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="filter-to">
-                                <form action="" method="" class="d-flex align-items-center justify-content-evenly">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="" class="col-form-label">
-                                            <b>من تاريخ</b>
-                                        </label>
-                                        <input type="date" class="form-control" name="from" id="" value="">
+                            <div class="all-regions mt-5">
+                                @foreach ($regions as $region)
+                                    <div class="card card-shadow rounded position-relative border-2 border-secondary p-4 mt-5">
+                                        <div class="card-header position-absolute bg-secondary rounded-pill w-25" style="margin-top: -55px; margin-right: 15px">
+                                            <h5 class="text-center p-2">
+                                                <b>{{$region->name}}</b>
+                                            </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table borderd-table display align-middle text-center" id="table{{$region->id}}" data-order='[[ 4, "asc" ]]' data-page-length='10'>
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center">إسم المقبره</th>
+                                                            <th class="text-center">القوه</th>
+                                                            <th class="text-center">المتاح رجال</th>
+                                                            <th class="text-center">المتاح سيدات</th>
+                                                            <th class="text-center">تاريخ أخر دفنه</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($region->tombs as $tomb)
+                                                            <tr>
+                                                                <td>{{$tomb->name}}</td>
+                                                                <td>{{$tomb->power}} غرف</td>
+                                                                <td>0</td>
+                                                                <td>0</td>
+                                                                <td>{{$tomb->burial_date}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="" class="col-form-label">
-                                            <b>الى تاريخ</b>
-                                        </label>
-                                        <input type="date" class="form-control" name="to" id="" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="" class="col-form-label">
-                                            <b>المنطقة</b>
-                                        </label>
-                                            <select name="region" id="region" class="form-control">
-                                            <option value="0" selected>-- إختار المنطقة --</option>
-                                            @foreach ($regions as $region)
-                                                <option value="{{ $region->name }}">{{ $region->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tomb">
-                                            <b>إسم المقبرة</b>
-                                        </label>
-                                        <select name="tomb" id="regionTomb" class="form-control regionTomb">
-                                            <option value="0" selected>-- إختار المقبرة --</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-success">
-                                            <b>تصفح</b>
-                                        </button>
-                                    </div>
-                                </form>
+                                @endforeach
                             </div>
-                        </div>
-                        <div class="col-lg-6"></div>
-                        <div class="col-lg-12">
-                            <div class="filter"></div>
-                            <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">#</th>
-                                        <th class="text-center">إسم المتوفي</th>
-                                        <th class="text-center">النوع</th>
-                                        <th class="text-center">المكان</th>
-                                        <th class="text-center">تاريخ الدفن</th>
-                                        <th class="text-center">تاريخ الوفاه</th>
-                                        <th class="text-center">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>

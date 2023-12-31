@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\DonationHistory;
+use App\Models\Region;
+use App\Models\Tomb;
 
 class ReportController extends Controller
 {
@@ -20,6 +22,8 @@ class ReportController extends Controller
         } else {
             $get_all_donations = DonationHistory::all();
         }
-        return view('reports.index', compact('get_all_donations'));
+        $regions = Region::all();
+        $tombs = Tomb::all();
+        return view('reports.index', compact('get_all_donations', 'regions', 'tombs'));
     }
 }

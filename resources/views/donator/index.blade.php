@@ -101,11 +101,11 @@
                                                                     </label>
                                                                     <select name="duration" class="form-control w-50 border-dark ms-3">
                                                                         <option selected>إختار المدة</option>
-                                                                        <option value="1month" {{ $donate->duration == '1month' ? 'selected' : '' }}>شهري</option>
-                                                                        <option value="3month" {{ $donate->duration == '3month' ? 'selected' : '' }}>3 شهور</option>
-                                                                        <option value="6month" {{ $donate->duration == '6month' ? 'selected' : '' }}>6 شهور</option>
-                                                                        <option value="annually" {{ $donate->duration == 'annually' ? 'selected' : '' }}>سنوي</option>
-                                                                        <option value="other" {{ $donate->duration == 'other' ? 'selected' : '' }}>أخرى</option>
+                                                                        <option value="شهري" {{ $donate->duration == 'شهري' ? 'selected' : '' }}>شهري</option>
+                                                                        <option value="3 شهور" {{ $donate->duration == '3 شهور' ? 'selected' : '' }}>3 شهور</option>
+                                                                        <option value="6 شهور" {{ $donate->duration == '6 شهور' ? 'selected' : '' }}>6 شهور</option>
+                                                                        <option value="سنوي" {{ $donate->duration == 'سنوي' ? 'selected' : '' }}>سنوي</option>
+                                                                        <option value="مرة واحدة" {{ $donate->duration == 'مرة واحدة' ? 'selected' : '' }}>مرة واحدة</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
