@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\DonationHistory;
+use App\Models\Donator;
 use App\Models\Region;
 use App\Models\Tomb;
 
@@ -13,6 +14,10 @@ class ReportController extends Controller
 {
     public function index(Request $request)
     {
+        $regions = Region::all();
+        $tombs = Tomb::all();
+        $monthly = Donator::where('duration', 'شهري')->get();
+        $seasonly = Donator::where('duration', 'شهري')->get();
         $month = $request->input('date');
         if ($month) {
             $get_all_donations = DonationHistory::whereDate('created_at', '=', $month)->get();
@@ -22,8 +27,6 @@ class ReportController extends Controller
         } else {
             $get_all_donations = DonationHistory::all();
         }
-        $regions = Region::all();
-        $tombs = Tomb::all();
-        return view('reports.index', compact('get_all_donations', 'regions', 'tombs'));
+        return view('reports.index', compact('get_all_donations', 'regions', 'tombs', 'monthly', 'seasonly'));
     }
 }

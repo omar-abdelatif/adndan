@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('header')
     <header class="header header-sticky">
+        @include('layouts.upper-header')
         <div class="header-divider"></div>
         <section class="content-header w-100">
             <div class="container-fluid">
@@ -83,30 +84,23 @@
                                                             </div>
                                                             <div class="inputs-body">
                                                                 <input type="hidden" name="id" value="{{ $donate->id }}">
-                                                                <div class="form-groups d-flex align-items-center mb-2">
+                                                                <div class="form-groups mb-2">
                                                                     <label for="name">
                                                                         <b>الإسم الكامل:</b>
                                                                     </label>
-                                                                    <input type="text" id="name" name="name" value="{{ $donate->name }}" class="form-control text-center w-50 border-dark ms-3" placeholder="إسم المتبرع">
+                                                                    <input type="text" id="name" name="name" value="{{ $donate->name }}" class="form-control text-center border-dark" placeholder="إسم المتبرع">
                                                                 </div>
-                                                                <div class="form-groups d-flex align-items-center mb-2">
+                                                                <div class="form-groups mb-2">
                                                                     <label for="phone_number">
                                                                         <b>رقم المحمول:</b>
                                                                     </label>
-                                                                    <input type="number" id="phone_number" name="mobile_phone" value="{{ $donate->mobile_phone }}" class="form-control text-center w-50 border-dark ms-3" placeholder="رقم المحمول">
+                                                                    <input type="number" id="phone_number" name="mobile_phone" value="{{ $donate->mobile_phone }}" class="form-control text-center border-dark" placeholder="رقم المحمول">
                                                                 </div>
-                                                                <div class="form-groups d-flex align-items-center mb-2">
+                                                                <div class="form-groups mb-2">
                                                                     <label for="address">
                                                                         <b>المدة الزمنية:</b>
                                                                     </label>
-                                                                    <select name="duration" class="form-control w-50 border-dark ms-3">
-                                                                        <option selected>إختار المدة</option>
-                                                                        <option value="شهري" {{ $donate->duration == 'شهري' ? 'selected' : '' }}>شهري</option>
-                                                                        <option value="3 شهور" {{ $donate->duration == '3 شهور' ? 'selected' : '' }}>3 شهور</option>
-                                                                        <option value="6 شهور" {{ $donate->duration == '6 شهور' ? 'selected' : '' }}>6 شهور</option>
-                                                                        <option value="سنوي" {{ $donate->duration == 'سنوي' ? 'selected' : '' }}>سنوي</option>
-                                                                        <option value="مرة واحدة" {{ $donate->duration == 'مرة واحدة' ? 'selected' : '' }}>مرة واحدة</option>
-                                                                    </select>
+                                                                    <input type="text" name="duration" class="form-control text-center border-dark" value="{{$donate->duration}}" placeholder="المدة الزمنية">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -215,14 +209,12 @@
                                     <input type="number" name="mobile_phone" class="form-control text-center" placeholder="رقم المحمول">
                                 </div>
                                 <div class="form-group mb-2">
-                                    <select name="duration" class="form-control">
-                                        <option selected>إختار المدة</option>
-                                        <option value="1month">شهري</option>
-                                        <option value="3month">3 شهور</option>
-                                        <option value="6month">6 شهور</option>
-                                        <option value="annually">سنوي</option>
-                                        <option value="other">أخرى</option>
+                                    <select name="duration" class="form-select" id="">
+                                        <option>إختر نوع المتبرع</option>
+                                        <option value="شهري">شهري</option>
+                                        <option value="أخرى">أخرى</option>
                                     </select>
+                                    {{-- <input type="text" name="duration" class="form-control text-center mt-2" placeholder="حدد المده"> --}}
                                 </div>
                             </div>
                         </div>

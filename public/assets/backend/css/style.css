@@ -1,3 +1,6 @@
+*{
+    scroll-behavior: smooth;
+}
 .text-right {
     text-align: right !important;
 }
@@ -50,3 +53,12 @@ hr
     border-bottom: 1px solid #00000038;
 }
 
+.form-control {
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.sidebar-nav .nav-link {
+    transition: background .15s ease,color .15s ease;
+}
+.fade {
+    transition: opacity .15s linear;
+}

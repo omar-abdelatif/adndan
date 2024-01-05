@@ -5,13 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card mb-4 mx-4">
-                    <h1 class="card-header text-decoration-underline">{{ __('Reset Password') }}</h1>
+                    <h1 class="card-header text-decoration-underline">إعادة تعيين كلمة المرور</h1>
                     <div class="card-body p-4">
                         <form method="POST" action="{{ route('password.update') }}">
                             @csrf
-
                             <input type="hidden" name="token" value="{{ $token }}">
-
                             <div class="row mb-3 justify-content-center">
                                 <div class="input-group mb-4 justify-content-center">
                                     <span class="input-group-text">
@@ -20,7 +18,6 @@
                                         </svg>
                                     </span>
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -28,7 +25,6 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="row mb-3 justify-content-center">
                                 <div class="input-group mb-4 justify-content-center">
                                     <span class="input-group-text">
@@ -44,7 +40,6 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="row mb-3">
                                 <div class="input-group mb-4 justify-content-center">
                                     <span class="input-group-text">
@@ -60,9 +55,9 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            <button class="btn btn-block btn-success" type="submit">{{ __('Reset Password') }}</button>
-
+                            <button class="btn btn-block btn-success" type="submit">
+                                <b>تأكيد</b>
+                            </button>
                         </form>
                     </div>
                 </div>

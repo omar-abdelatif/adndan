@@ -359,7 +359,7 @@
                                 <div class="col-6">
                                     <div class="form-group mt-3">
                                         <label for="files" class="text-white">
-                                            <b>ملفات</b>
+                                            <b>صور</b>
                                         </label>
                                         <input type="file" name="files" id="files" class="form-control text-center" accept="image/*">
                                     </div>

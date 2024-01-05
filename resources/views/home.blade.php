@@ -1,5 +1,9 @@
 @extends('layouts.app')
-
+@section('header')
+    <header class="header header-sticky">
+        @include('layouts.upper-header')
+    </header>
+@endsection
 @section('content')
     <div class="row mt-5">
         <div class="col-6 col-lg-3">

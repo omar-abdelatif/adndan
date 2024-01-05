@@ -1,5 +1,6 @@
 //! Design The DataTable
 const tables = [
+    "table",
     "table1",
     "table2",
     "table3",
@@ -17,7 +18,6 @@ for (let i = 0; i < tables.length; i++) {
         select: true,
         autoWidth: true,
         searching: true,
-        pageLength: 20,
         pagingTag: "button",
         pagingType: "simple_numbers",
     });

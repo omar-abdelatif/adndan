@@ -46,6 +46,7 @@
                 <td class="text-center">الإسم</td>
                 <td class="text-center">رقم التلفون</td>
                 <td class="text-center">المبلغ</td>
+                <td class="text-center">رقم الإيصال</td>
                 <td class="text-center">المدة الزمنية</td>
                 <td class="text-center">تاريخ التسجيل</td>
                 <td class="text-center">Actions</td>
@@ -59,6 +60,7 @@
                     <td>{{ $history->name }}</td>
                     <td>{{$history->mobile_phone}}</td>
                     <td>{{ $history->amount }}</td>
+                    <td>{{ $history->invoice_no }}</td>
                     <td>{{ $history->duration }}</td>
                     <td>{{ $history->created_at->format('M d, Y') }}</td>
                     <td>

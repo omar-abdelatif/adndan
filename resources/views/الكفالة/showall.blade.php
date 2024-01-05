@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('header')
     <header class="header header-sticky d-block">
+        @include('layouts.upper-header')
+        <div class="header-divider"></div>
         <section class="content-header w-100">
             <div class="container-fluid">
                 <div class="row">

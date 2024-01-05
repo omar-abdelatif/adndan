@@ -26,6 +26,7 @@ class DonationHistoryController extends Controller
             'amount' => 'required|numeric',
             'duration' => 'required|in:يناير,فبراير,مارس,إبريل,مايو,يونيه,يوليو,أغسطس,سبتمبر,أكتوبر,نوفمبر,ديسمبر|array',
             'duration.*' => 'required|string|distinct|max:255',
+            'invoice_no' => 'required'
         ]);
         $donator = Donator::where('mobile_phone', $request->mobile_phone)->first();
         $duration = implode(',', $request->input('duration'));
