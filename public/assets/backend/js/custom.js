@@ -28,3 +28,11 @@ const currentYear = new Date().getFullYear();
 document.getElementById("year").innerHTML = currentYear;
 //! WOW Animation
 new WOW().init();
+
+let SelectedOption = document.getElementById("duration");
+SelectedOption.addEventListener("change", function () {
+    var selectedOption = this.options[this.selectedIndex].value;
+    var otherCraftInput = document.getElementsByName("other_duration")[0];
+    otherCraftInput.value = "";
+    otherCraftInput.disabled = selectedOption !== "أخرى";
+});

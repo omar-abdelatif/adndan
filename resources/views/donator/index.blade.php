@@ -209,12 +209,12 @@
                                     <input type="number" name="mobile_phone" class="form-control text-center" placeholder="رقم المحمول">
                                 </div>
                                 <div class="form-group mb-2">
-                                    <select name="duration" class="form-select" id="">
+                                    <select name="duration" class="form-select" id="duration">
                                         <option>إختر نوع المتبرع</option>
                                         <option value="شهري">شهري</option>
                                         <option value="أخرى">أخرى</option>
                                     </select>
-                                    {{-- <input type="text" name="duration" class="form-control text-center mt-2" placeholder="حدد المده"> --}}
+                                    <input type="text" name="other_duration" class="form-control text-center mt-2" placeholder="حدد المده" disabled>
                                 </div>
                             </div>
                         </div>
