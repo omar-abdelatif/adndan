@@ -38,9 +38,9 @@ class DeceasedController extends Controller
             'notes' => 'nullable',
             'files' => 'required|mimes:pdf,png,jpg,jpeg,webp|max:3072',
             'pdf_files' => 'required|mimes:pdf',
+            'burial_cost' => 'required|integer'
         ]);
         $room = Rooms::where('name', $validated['room'])->first();
-
         if ($room) {
             $deceased = new Deceased();
             $deceased->name = $validated['name'];
@@ -55,6 +55,7 @@ class DeceasedController extends Controller
             $deceased->tomb = $validated['tomb'];
             $deceased->room = $validated['room'];
             $deceased->notes = $validated['notes'];
+            $deceased->burial_cost = $validated['burial_cost'];
             if ($request->hasFile('files')) {
                 $file = $request->file('files');
                 $name = time() . '.' . $file->getClientOriginalExtension();
@@ -71,7 +72,7 @@ class DeceasedController extends Controller
             $deceased->pdf_files = $file_name;
             $deceased->rooms_id = $room->id;
             $room = $deceased->rooms;
-            $room->burial_date = $deceased->burial_date;
+            $room->burial_date = $validated['burial_date'];
             $room->save();
             $store = $deceased->save();
             if ($store) {
@@ -131,6 +132,7 @@ class DeceasedController extends Controller
             $deceased->tomb = $request->tomb;
             $deceased->room = $request->room;
             $deceased->notes = $request->notes;
+            $deceased->burial_cost = $request->burial_cost;
             $update = $deceased->save();
             if ($update) {
                 return redirect()->route('deceased.index')->with('success', 'تم التعديل بنجاح');
@@ -138,7 +140,6 @@ class DeceasedController extends Controller
         }
         return redirect()->route('deceased.index')->withErrors('حدث خطأ أثناء التحديث');
     }
-
     public function getDeceaseds(Request $request)
     {
         $roomName = $request->input('name');

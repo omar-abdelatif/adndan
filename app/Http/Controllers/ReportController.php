@@ -17,7 +17,7 @@ class ReportController extends Controller
         $regions = Region::all();
         $tombs = Tomb::all();
         $monthly = Donator::where('duration', 'شهري')->get();
-        $seasonly = Donator::where('duration', 'شهري')->get();
+        $seasonly = Donator::where('duration', 'أخرى')->get();
         $month = $request->input('date');
         if ($month) {
             $get_all_donations = DonationHistory::whereDate('created_at', '=', $month)->get();

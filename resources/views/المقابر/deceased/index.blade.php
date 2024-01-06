@@ -252,6 +252,12 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
+                                                                    <div class="form-data mt-3">
+                                                                        <label for="burial_cost" class="text-white">
+                                                                            <b>تكلفة الدفن</b>
+                                                                        </label>
+                                                                        <input type="number" id="burial_cost" class="form-control text-center" value="{{$deceased->burial_cost}}" name="burial_cost" placeholder="تكلفة الدفن">
+                                                                    </div>
                                                                     <div class="textarea mt-4">
                                                                         <label class="text-white" for="notes">
                                                                             <b>ملاحظـــــــات</b>
@@ -316,6 +322,12 @@
                                             <b>تاريخ الدفن</b>
                                         </label>
                                         <input type="date" id="burial_date" class="form-control text-center" name="burial_date" placeholder="تاريخ الدفن">
+                                    </div>
+                                    <div class="form-data mt-3">
+                                        <label for="burial_cost" class="text-white">
+                                            <b>تكلفة الدفن</b>
+                                        </label>
+                                        <input type="number" id="burial_cost" class="form-control text-center" name="burial_cost" placeholder="تكلفة الدفن">
                                     </div>
                                     <div class="form-data mt-3">
                                         <label for="burial_date" class="text-white">

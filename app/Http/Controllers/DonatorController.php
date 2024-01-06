@@ -21,13 +21,10 @@ class DonatorController extends Controller
         $validator = $request->validate([
             'name' => 'required|string',
             'mobile_phone' => 'required|numeric',
-            'duration' => 'required|string'
+            'duration' => 'required|string',
+            'other_duration' => 'string'
         ]);
-        $store = Donator::create([
-            'name' => $request->name,
-            'mobile_phone' => $request->mobile_phone,
-            'duration' => $request->duration
-        ]);
+        $store = Donator::create($validator);
         if ($store) {
             return redirect()->route('donator.index')->with('success', 'تم الإضافة بنجاح');
         }
@@ -52,12 +49,11 @@ class DonatorController extends Controller
     public function update(Request $request)
     {
         $donator = Donator::find($request->id);
-        $donator->name = $request->name;
-        $donator->mobile_phone = $request->mobile_phone;
-        $donator->duration = $request->duration;
-        $update = $donator->save();
-        if ($update) {
-            return redirect()->route('donator.index')->with('success', 'تم التعديل بنجاح');
+        if ($donator) {
+            $update = $donator->update($request->all());
+            if ($update) {
+                return redirect()->route('donator.index')->with('success', 'تم التعديل بنجاح');
+            }
         }
         return redirect()->route('donator.index')->withErrors('خطأ أثناء التحديث');
     }

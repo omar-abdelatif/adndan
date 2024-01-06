@@ -16,6 +16,7 @@ class Deceased extends Model
         'death_place',
         'death_date',
         'burial_date',
+        'burial_cost',
         'washer',
         'carrier',
         'region',
