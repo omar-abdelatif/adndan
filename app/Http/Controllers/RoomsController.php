@@ -27,7 +27,6 @@ class RoomsController extends Controller
     public function getRoomsByTombId($id)
     {
         $rooms = Rooms::where('tomb_id', $id)->get();
-
         foreach ($rooms as $room) {
             $sumSize = 0;
             foreach ($room->deceased as $deceased) {
@@ -35,7 +34,6 @@ class RoomsController extends Controller
             }
             $room->disabled = ($sumSize === $room->capacity);
         }
-
         return response()->json([
             'rooms' => $rooms,
         ]);

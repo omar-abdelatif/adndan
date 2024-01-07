@@ -16,7 +16,7 @@ return new class extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id')->autoIncrement();
             $table->string('name');
-            $table->integer('capacity');
+            $table->integer('capacity')->default(6);
             $table->integer('tomb_id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));

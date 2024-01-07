@@ -31,16 +31,23 @@ class Tomb extends Model
         $region = $this->region;
         $name = $this->name;
         $power = $this->power;
-
-        for ($i = 1; $i <= $power; $i++) {
-            $room = new Rooms;
-            $room->name = "غرفة " . $i . " - " . $name . " - " . $region;
-            $room->burial_date = null;
-            $room->capacity = 6;
-            $room->tomb_id = $this->id;
-            $room->save();
+        try {
+            for ($i = 1; $i <= $power; $i++) {
+                $room = new Rooms;
+                $room->name = "غرفة " . $i . " - " . $name . " - " . $region;
+                $room->burial_date = null;
+                $room->capacity = 6;
+                $room->tomb_id = $this->id;
+                $room->save();
+            }
+            return "Rooms created successfully";
+        } catch (\Exception $e) {
+            return "Error creating rooms: " . $e->getMessage();
         }
     }
+
+    
+
     public function getBurialDateAttribute()
     {
         return $this->rooms()->max('burial_date');

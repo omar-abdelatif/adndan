@@ -11,16 +11,11 @@ use App\Http\Controllers\Controller;
 
 class OctoberTombController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $region = Region::where('name', 'أكتوبر')->first();
+        $region = Region::where('name', 'أكتوبر')->firstOrFail();
         $tombs = $region->tombs;
-        $tombRooms = [];
-        foreach ($tombs as $tomb) {
-            $rooms = $tomb->rooms;
-            $tombRooms[$tomb->id] = $rooms;
-        }
-        return view('المقابر.أكتوبر.index', compact('region', 'tombs', 'tombRooms', 'rooms'));
+        return view('المقابر.أكتوبر.index', compact('region', 'tombs'));
     }
     public function updateTomb(Request $request)
     {

@@ -76,7 +76,11 @@ class TombsController extends Controller
     {
         $tomb = Tomb::find($id);
         if ($tomb) {
+            $rooms = Rooms::where('tomb_id', $tomb->id)->get();
             $tomb->delete();
+            foreach ($rooms as $room) {
+                $room->delete();
+            }
             return redirect()->route('tombs.all')->with('success', 'تمت حذف المقبرة بنجاح.');
         }
         return redirect()->route('tombs.all')->withErrors('خطأ أثناء الحذف');

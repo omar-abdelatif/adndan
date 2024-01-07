@@ -49,12 +49,9 @@ class FayumTombController extends Controller
         $tomb = Tomb::where('region_id', $region->id)->findOrFail($tombId);
         $room = Rooms::where('tomb_id', $tomb->id)->findOrFail($roomId);
         $deceaseds = Deceased::where('rooms_id', $room->id)->get();
-        // dd($deceaseds);
         $tombName = $tomb->name;
-
         return view('المقابر.الفيوم.room', compact('region', 'room', 'tombName', 'deceaseds', 'regions'));
     }
-
     public function showDeceased($tombId)
     {
         $tomb = Tomb::findOrFail($tombId);
@@ -65,7 +62,6 @@ class FayumTombController extends Controller
         }
         return view('المقابر.الفيوم.room', compact('deceased', 'tomb'));
     }
-
     public function deleteDeceased($id)
     {
         $deceased = Deceased::find($id);
