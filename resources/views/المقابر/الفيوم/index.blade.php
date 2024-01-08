@@ -318,7 +318,8 @@
                                                                                 <td>{{$room->capacity}}</td>
                                                                                 <td>0</td>
                                                                                 <td>{{ $room->burial_date }}</td>
-                                                                                <td>
+                                                                                <td id="roomButtonsContainer">
+                                                                                    <p class="roomButtonsContainer"></p>
                                                                                     <a href="{{ route('fayum.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
                                                                                         <i class="fa fa-eye"></i>
                                                                                     </a>

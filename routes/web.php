@@ -111,7 +111,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('all_rooms', [RoomsController::class, 'index'])->name('rooms.all');
     Route::get('/get-rooms', [RoomsController::class, 'getRooms'])->name('getRooms');
     Route::get('get-rooms-by-tomb-id/{id}', [RoomsController::class, 'getRoomsByTombId']);
-    Route::post('move_to_old_deceased/{id}', [RoomsController::class, 'moveToOldDeceased'])->name('rooms.oldDeceased');
+    Route::post('move_to_old_deceased/{roomId}', [RoomsController::class, 'moveToOldDeceased'])->name('rooms.oldDeceased');
     //! Deceased Routes
     Route::get('all_deceased', [DeceasedController::class, 'index'])->name('deceased.index');
     Route::get('new_deceased', [DeceasedController::class, 'addnew'])->name('deceased.addnew');

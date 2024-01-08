@@ -21,9 +21,11 @@ document.getElementById("year").innerHTML = currentYear;
 new WOW().init();
 
 let SelectedOption = document.getElementById("duration");
-SelectedOption.addEventListener("change", function () {
-    var selectedOption = this.options[this.selectedIndex].value;
-    var otherCraftInput = document.getElementsByName("other_duration")[0];
-    otherCraftInput.value = "";
-    otherCraftInput.disabled = selectedOption !== "أخرى";
-});
+if (SelectedOption) {
+    SelectedOption.addEventListener("change", function () {
+        var selectedOption = this.options[this.selectedIndex].value;
+        var otherCraftInput = document.getElementsByName("other_duration")[0];
+        otherCraftInput.value = "";
+        otherCraftInput.disabled = selectedOption !== "أخرى";
+    });
+}

@@ -65,6 +65,7 @@
         </section>
     </header>
 @endsection
+
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -309,6 +310,9 @@
                                                                     <tbody>
                                                                         <?php $j=1 ?>
                                                                         @foreach ($tomb->rooms as $room)
+                                                                            {{-- @php
+                                                                                $isDisabled = $room->   ? true : false;
+                                                                            @endphp --}}
                                                                             <tr>
                                                                                 <td>{{ $j++ }}</td>
                                                                                 <td>{{$room->name}}</td>
@@ -316,15 +320,14 @@
                                                                                 <td>{{ $room->burial_date }}</td>
                                                                                 <td>0</td>
                                                                                 <td>0</td>
-                                                                                <td>
-                                                                                    <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
+                                                                                <td id="roomButtonsContainer">
+                                                                                    <p class="roomButtonsContainer"></p>
+                                                                                    <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info ms-2">
                                                                                         <i class="fa fa-eye"></i>
                                                                                     </a>
-                                                                                    @if($tomb->power !== $room->capacity)
-                                                                                        <p class="mb-0 text-white">yaaaaaay</p>
-                                                                                    @else
-                                                                                        <p class="mb-0 text-white">booooo</p>
-                                                                                    @endif
+                                                                                    <a type="button" class="btn btn-warning" href="{{route('rooms.oldDeceased', $room->id)}}">
+                                                                                        <b>تطهير</b>
+                                                                                    </a>
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach

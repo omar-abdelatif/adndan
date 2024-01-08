@@ -38,7 +38,6 @@ $(function () {
                     let tombId = tomb.id;
                     let tombPower = tomb.power;
                     let allRoomsDisabled = true;
-
                     $.ajax({
                         type: "get",
                         url: `get-rooms-by-tomb-id/${tombId}`,
@@ -46,28 +45,28 @@ $(function () {
                         dataType: "json",
                         success: function (response) {
                             let rooms = response.rooms;
-                            let disabledRoomsCount = 0;
+                            // let disabledRoomsCount = 0;
 
-                            for (let j = 0; j < rooms.length; j++) {
-                                if (rooms[j].disabled) {
-                                    disabledRoomsCount++;
-                                } else {
-                                    allRoomsDisabled = false;
-                                }
-                            }
+                            // for (let j = 0; j < rooms.length; j++) {
+                            //     if (rooms[j].disabled) {
+                            //         disabledRoomsCount++;
+                            //     } else {
+                            //         allRoomsDisabled = false;
+                            //     }
+                            // }
 
-                            let Disabled =
-                                disabledRoomsCount === tombPower
-                                    ? "disabled"
-                                    : "";
-                            option +=
-                                '<option value="' +
-                                tombName +
-                                '" ' +
-                                Disabled +
-                                ">" +
-                                tombName +
-                                "</option>";
+                            // let Disabled =
+                            //     disabledRoomsCount === tombPower
+                            //         ? "disabled"
+                            //         : "";
+                            // option +=
+                            //     '<option value="' +
+                            //     tombName +
+                            //     '" ' +
+                            //     Disabled +
+                            //     ">" +
+                            //     tombName +
+                            //     "</option>";
 
                             $(".regionTomb").empty();
                             $(".regionTomb").append(option);
@@ -97,7 +96,6 @@ $(function () {
                     '<option value="" selected> -- إختار الغرفة -- </option>';
                 for (let i = 0; i < data.length; i++) {
                     let room = data[i];
-                    let roomId = room.id;
                     let roomName = room.name;
                     let roomCapacity = room.capacity;
                     $.ajax({
@@ -110,34 +108,28 @@ $(function () {
                             let isDisabled =
                                 sumSize === roomCapacity ? "disabled" : "";
                             options +=
-                                '<option value="' + roomName + '" ' + isDisabled + ">" + roomName + "</option>";
+                                '<option value="' +
+                                roomName +
+                                '" ' +
+                                isDisabled +
+                                ">" +
+                                roomName +
+                                "</option>";
                             $(".roomTomb").empty();
                             $(".roomTomb").append(options);
                         },
                         error: function () {
-                            alert("Error fetching deceased data for room: " + roomName)
+                            alert(
+                                "Error fetching deceased data for room: " +
+                                    roomName
+                            );
                         },
                     });
                 }
             },
             error: function () {
-                console.log("Error fetching rooms data");
+                alert("Error fetching rooms data");
             },
         });
     });
 });
-// $(function () {
-//     new DataTable("#table", {
-//         paging: true,
-//         scrollY: "auto",
-//         ordering: true,
-//         select: true,
-//         autoWidth: true,
-//         searching: true,
-//         pagingTag: "button",
-//         pagingType: "simple_numbers",
-//         dom: "Bfrtip",
-//         select: true,
-//         buttons: ["copyHtml5", "excelHtml5", "csvHtml5", "pdfHtml5", "print"],
-//     });
-// });
