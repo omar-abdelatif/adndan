@@ -45,28 +45,28 @@ $(function () {
                         dataType: "json",
                         success: function (response) {
                             let rooms = response.rooms;
-                            // let disabledRoomsCount = 0;
+                            let disabledRoomsCount = 0;
 
-                            // for (let j = 0; j < rooms.length; j++) {
-                            //     if (rooms[j].disabled) {
-                            //         disabledRoomsCount++;
-                            //     } else {
-                            //         allRoomsDisabled = false;
-                            //     }
-                            // }
+                            for (let j = 0; j < rooms.length; j++) {
+                                if (rooms[j].disabled) {
+                                    disabledRoomsCount++;
+                                } else {
+                                    allRoomsDisabled = false;
+                                }
+                            }
 
-                            // let Disabled =
-                            //     disabledRoomsCount === tombPower
-                            //         ? "disabled"
-                            //         : "";
-                            // option +=
-                            //     '<option value="' +
-                            //     tombName +
-                            //     '" ' +
-                            //     Disabled +
-                            //     ">" +
-                            //     tombName +
-                            //     "</option>";
+                            let Disabled =
+                                disabledRoomsCount === tombPower
+                                    ? "disabled"
+                                    : "";
+                            option +=
+                                '<option value="' +
+                                tombName +
+                                '" ' +
+                                Disabled +
+                                ">" +
+                                tombName +
+                                "</option>";
 
                             $(".regionTomb").empty();
                             $(".regionTomb").append(option);

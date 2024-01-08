@@ -325,9 +325,12 @@
                                                                                     <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info ms-2">
                                                                                         <i class="fa fa-eye"></i>
                                                                                     </a>
-                                                                                    <a type="button" class="btn btn-warning" href="{{route('rooms.oldDeceased', $room->id)}}">
-                                                                                        <b>تطهير</b>
-                                                                                    </a>
+                                                                                    <form action="{{route('rooms.oldDeceased', $room->id)}}" method="post">
+                                                                                        @csrf
+                                                                                        <button type="submit" class="btn btn-warning">
+                                                                                            <b>تطهير</b>
+                                                                                        </button>
+                                                                                    </form>
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach

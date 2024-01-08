@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deceased;
+use App\Models\OldDeceased;
 use App\Models\Tomb;
 use App\Models\Rooms;
 use App\Models\Region;
@@ -55,9 +56,23 @@ class RoomsController extends Controller
     public function moveToOldDeceased($roomId)
     {
         $room = Rooms::findOrFail($roomId);
-        if ($room) {
-            dd($room->id);
+        if ($room && $room->deceased) {
+            $roomDeceased = $room->deceased;
+            foreach ($roomDeceased as $deceased) {
+                $deceasedData = [
+                    'name' => $deceased->name,
+                    'death_date' => $deceased->death_date,
+                    'region' => $deceased->region,
+                    'tomb' => $deceased->tomb,
+                    'burial_date' => $deceased->burial_date,
+                ];
+                $move = OldDeceased::create($deceasedData);
+                $deceased->delete();
+            }
+            if ($move) {
+                return redirect()->route('october.index')->withSuccess('تم التطهير بنجااح');
+            }
         }
-        dd('cannot fetch room id');
+        return redirect()->route('october.index')->withErrors('حدث خطأ أثناء التطهير');
     }
 }
