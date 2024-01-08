@@ -38,10 +38,6 @@ class RoomsController extends Controller
             'rooms' => $rooms,
         ]);
     }
-
-
-
-
     public function getSumOfDisabledRooms(Request $request)
     {
         $tombName = $request->input('name');
@@ -55,5 +51,13 @@ class RoomsController extends Controller
         } else {
             return response()->json([]);
         }
+    }
+    public function moveToOldDeceased($roomId)
+    {
+        $room = Rooms::findOrFail($roomId);
+        if ($room) {
+            dd($room->id);
+        }
+        dd('cannot fetch room id');
     }
 }

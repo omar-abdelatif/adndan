@@ -110,21 +110,12 @@ $(function () {
                             let isDisabled =
                                 sumSize === roomCapacity ? "disabled" : "";
                             options +=
-                                '<option value="' +
-                                roomName +
-                                '" ' +
-                                isDisabled +
-                                ">" +
-                                roomName +
-                                "</option>";
+                                '<option value="' + roomName + '" ' + isDisabled + ">" + roomName + "</option>";
                             $(".roomTomb").empty();
                             $(".roomTomb").append(options);
                         },
                         error: function () {
-                            console.log(
-                                "Error fetching deceased data for room: " +
-                                    roomName
-                            );
+                            alert("Error fetching deceased data for room: " + roomName)
                         },
                     });
                 }

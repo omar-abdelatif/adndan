@@ -14,7 +14,6 @@ for (let i = 0; i < 100; i++) {
         buttons: ["copyHtml5", "excelHtml5", "csvHtml5", "pdfHtml5", "print"],
     });
 }
-
 //! Calculate The Year
 const currentYear = new Date().getFullYear();
 document.getElementById("year").innerHTML = currentYear;

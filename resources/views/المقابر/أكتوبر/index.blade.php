@@ -314,16 +314,17 @@
                                                                                 <td>{{$room->name}}</td>
                                                                                 <td>{{$room->capacity}}</td>
                                                                                 <td>{{ $room->burial_date }}</td>
-                                                                                <td>
-                                                                                    0
-                                                                                </td>
-                                                                                <td>
-                                                                                    0
-                                                                                </td>
+                                                                                <td>0</td>
+                                                                                <td>0</td>
                                                                                 <td>
                                                                                     <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
                                                                                         <i class="fa fa-eye"></i>
                                                                                     </a>
+                                                                                    @if($tomb->power !== $room->capacity)
+                                                                                        <p class="mb-0 text-white">yaaaaaay</p>
+                                                                                    @else
+                                                                                        <p class="mb-0 text-white">booooo</p>
+                                                                                    @endif
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach

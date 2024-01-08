@@ -45,9 +45,6 @@ class Tomb extends Model
             return "Error creating rooms: " . $e->getMessage();
         }
     }
-
-    
-
     public function getBurialDateAttribute()
     {
         return $this->rooms()->max('burial_date');
