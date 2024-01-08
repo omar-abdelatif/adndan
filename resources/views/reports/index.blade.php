@@ -54,7 +54,7 @@
                                 </div>
                             @endforeach
                         @endif
-                        <table class="table borderd-table table-striped display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                        <table class="table borderd-table table-striped display align-middle text-center" id="table2" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                             <thead>
                                 <tr>
                                     <td class="text-center">id</td>
@@ -102,7 +102,7 @@
             <h3 class="text-center text-decoration-underline">المتبرعيين الشهريين</h3>
         </div>
         <div class="section-content">
-            <table class="table borderd-table table-striped display align-middle text-center" id="table0" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+            <table class="table borderd-table table-striped display align-middle text-center" id="table3" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                 <thead>
                     <tr>
                         <th class="text-center">إسم المتبرع</th>
@@ -128,7 +128,7 @@
             <h3 class="text-center text-decoration-underline">المتبرعيين الموسميين</h3>
         </div>
         <div class="section-content">
-            <table class="table borderd-table table-striped display align-middle text-center" id="table1" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+            <table class="table borderd-table table-striped display align-middle text-center" id="table4" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                 <thead>
                     <tr>
                         <th class="text-center">إسم المتبرع</th>

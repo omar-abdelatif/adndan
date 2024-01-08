@@ -1,25 +1,17 @@
 //! Design The DataTable
-const tables = [
-    "table",
-    "table1",
-    "table2",
-    "table3",
-    "table4",
-    "table5",
-    "table6",
-    "table7",
-];
-
-for (let i = 0; i < tables.length; i++) {
+for (let i = 0; i < 100; i++) {
     let table = new DataTable("#table" + i, {
         paging: true,
-        scrollY: tables[i],
+        scrollY: "auto",
         ordering: true,
         select: true,
         autoWidth: true,
         searching: true,
         pagingTag: "button",
         pagingType: "simple_numbers",
+        dom: "Bfrtip",
+        select: true,
+        buttons: ["copyHtml5", "excelHtml5", "csvHtml5", "pdfHtml5", "print"],
     });
 }
 

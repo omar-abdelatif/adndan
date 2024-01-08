@@ -87,7 +87,7 @@
                             </div>
                         @endforeach
                     @endif
-                    <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                    <table class="table borderd-table display align-middle text-center" id="table9" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                         <thead>
                             <th class="text-center">#</th>
                             <th class="text-center">إسم المتوفي</th>

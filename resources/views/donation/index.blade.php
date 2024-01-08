@@ -39,7 +39,7 @@
         @endforeach
     @endif
     <h1 class="text-center pt-4">التبرعات السابقة ل{{ $donator->name }}</h1>
-    <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+    <table class="table borderd-table display align-middle text-center" id="table0" data-order='[[ 0, "asc" ]]' data-page-length='10'>
         <thead>
             <tr>
                 <td class="text-center">id</td>

@@ -78,7 +78,7 @@
                     </div>
                 @endforeach
             @endif
-            <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+            <table class="table borderd-table display align-middle text-center" id="table5" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                 <thead>
                     <th class="text-center">id</th>
                     <th class="text-center">الإسم</th>
