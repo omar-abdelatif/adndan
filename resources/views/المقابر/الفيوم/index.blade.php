@@ -247,17 +247,17 @@
                                                                 <div class="available bg-primary p-2 rounded">
                                                                     <div class="available-title">
                                                                         <p class="mb-0 ms-3 text-white text-decoration-underline">
-                                                                            <b>المتاح</b>
+                                                                            <b>الإجمالي</b>
                                                                         </p>
                                                                     </div>
                                                                     <div class="available-body text-white">
                                                                         <span>
                                                                             <b>رجال:</b>
-                                                                            .....
+                                                                            {{ $tomb->getTotalPlaces()['male'] }}
                                                                         </span>
                                                                         <span>
                                                                             <b>سيدات:</b>
-                                                                            ......
+                                                                            {{ $tomb->getTotalPlaces()['female'] }}
                                                                         </span>
                                                                     </div>
                                                                 </div>

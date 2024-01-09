@@ -73,6 +73,14 @@ class DeceasedController extends Controller
             $deceased->rooms_id = $room->id;
             $room = $deceased->rooms;
             $room->burial_date = $validated['burial_date'];
+            $tomb = $room->tomb;
+            if ($deceased->gender === 'ذكر') {
+                $tomb->male -= 1;
+                $room->maleDeceased -= 1;
+            } elseif ($deceased->gender === 'أنثى') {
+                $tomb->female -= 1;
+                $room->femaleDeceased -= 1;
+            }
             $room->save();
             $store = $deceased->save();
             if ($store) {

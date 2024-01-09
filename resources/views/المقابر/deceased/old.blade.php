@@ -70,7 +70,7 @@
     <div class="row">
         <div class="col-12">
             <div class="old-title mt-5 bg-primary-gradient rounded w-50 mx-auto text-white p-3 text-center">
-                <h1>كل المتوفيين</h1>
+                <h1>المتوفيين السابقين</h1>
             </div>
             @if (session('success'))
                 <div class="alert alert-success text-center mt-5">

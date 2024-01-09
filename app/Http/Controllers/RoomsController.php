@@ -79,5 +79,13 @@ class RoomsController extends Controller
         }
         return redirect()->route('october.index')->withErrors('حدث خطأ أثناء التطهير');
     }
-    public function showPurifyButton(){}
+    public function countDeceaseds()
+    {
+        $tombs = Tomb::all();
+        $rooms = $tombs->rooms;
+        $deceased = $rooms->deceased;
+        $male = $deceased->where('gender', 'ذكر')->count();
+        $female = $deceased->where('gender', 'أنثى')->count();
+        return view("", compact('male', 'female'));
+    }
 }

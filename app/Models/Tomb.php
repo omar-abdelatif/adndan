@@ -51,16 +51,14 @@ class Tomb extends Model
     }
     public function getTotalPlaces()
     {
+        $male = 0;
+        $female = 0;
         foreach ($this->rooms as $room) {
-            $totalTomb = 0;
-            $male = 0;
-            $female = 0;
             $power = $this->power;
-            $roomCapacity = 0;
             $roomCapacity = $room->getCapacity();
-            $totalTomb += $roomCapacity * $power;
-            $male = $totalTomb / 2;
-            $female = $totalTomb / 2;
+            $totalDeceased = $roomCapacity * $power;
+            $male = $totalDeceased / 2;
+            $female = $totalDeceased / 2;
         }
         return [
             'male' => $male,
