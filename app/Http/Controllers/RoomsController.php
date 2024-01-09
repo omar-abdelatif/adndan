@@ -69,10 +69,15 @@ class RoomsController extends Controller
                 $move = OldDeceased::create($deceasedData);
                 $deceased->delete();
             }
+            $sumSize = $room->deceased->sum('size');
+            if ($sumSize >= $room->capacity) {
+                $room->update(['isDisabled' => 1]);
+            }
             if ($move) {
                 return redirect()->route('october.index')->withSuccess('تم التطهير بنجااح');
             }
         }
         return redirect()->route('october.index')->withErrors('حدث خطأ أثناء التطهير');
     }
+    public function showPurifyButton(){}
 }

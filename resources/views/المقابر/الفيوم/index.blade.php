@@ -318,11 +318,21 @@
                                                                                 <td>{{$room->capacity}}</td>
                                                                                 <td>0</td>
                                                                                 <td>{{ $room->burial_date }}</td>
-                                                                                <td id="roomButtonsContainer">
-                                                                                    <p class="roomButtonsContainer"></p>
+                                                                                <td>
                                                                                     <a href="{{ route('fayum.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
                                                                                         <i class="fa fa-eye"></i>
                                                                                     </a>
+                                                                                    @php
+                                                                                        $sumSize = $room->deceased->sum('size');
+                                                                                    @endphp
+                                                                                    @if ($sumSize >= $room->capacity)
+                                                                                        <form action="{{route('rooms.oldDeceased', $room->id)}}" method="post">
+                                                                                            @csrf
+                                                                                            <button type="submit" class="btn btn-warning purify" data-room-id={{$room->id}}>
+                                                                                                <b>تطهير</b>
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    @endif
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach

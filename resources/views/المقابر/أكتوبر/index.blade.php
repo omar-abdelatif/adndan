@@ -310,9 +310,7 @@
                                                                     <tbody>
                                                                         <?php $j=1 ?>
                                                                         @foreach ($tomb->rooms as $room)
-                                                                            {{-- @php
-                                                                                $isDisabled = $room->   ? true : false;
-                                                                            @endphp --}}
+                                                                        <input type="hidden" id="roomIsDisabled" name="isDisabled" value="{{ $room->isDisabled }}">
                                                                             <tr>
                                                                                 <td>{{ $j++ }}</td>
                                                                                 <td>{{$room->name}}</td>
@@ -320,17 +318,21 @@
                                                                                 <td>{{ $room->burial_date }}</td>
                                                                                 <td>0</td>
                                                                                 <td>0</td>
-                                                                                <td id="roomButtonsContainer">
-                                                                                    <p class="roomButtonsContainer"></p>
+                                                                                <td>
                                                                                     <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info ms-2">
                                                                                         <i class="fa fa-eye"></i>
                                                                                     </a>
-                                                                                    <form action="{{route('rooms.oldDeceased', $room->id)}}" method="post">
-                                                                                        @csrf
-                                                                                        <button type="submit" class="btn btn-warning">
-                                                                                            <b>تطهير</b>
-                                                                                        </button>
-                                                                                    </form>
+                                                                                    @php
+                                                                                        $sumSize = $room->deceased->sum('size');
+                                                                                    @endphp
+                                                                                    @if ($sumSize >= $room->capacity)
+                                                                                        <form action="{{route('rooms.oldDeceased', $room->id)}}" method="post">
+                                                                                            @csrf
+                                                                                            <button type="submit" class="btn btn-warning purify" data-room-id={{$room->id}}>
+                                                                                                <b>تطهير</b>
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    @endif
                                                                                 </td>
                                                                             </tr>
                                                                         @endforeach

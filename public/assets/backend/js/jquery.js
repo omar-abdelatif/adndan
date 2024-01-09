@@ -46,7 +46,6 @@ $(function () {
                         success: function (response) {
                             let rooms = response.rooms;
                             let disabledRoomsCount = 0;
-
                             for (let j = 0; j < rooms.length; j++) {
                                 if (rooms[j].disabled) {
                                     disabledRoomsCount++;
@@ -54,7 +53,6 @@ $(function () {
                                     allRoomsDisabled = false;
                                 }
                             }
-
                             let Disabled =
                                 disabledRoomsCount === tombPower
                                     ? "disabled"
@@ -67,7 +65,6 @@ $(function () {
                                 ">" +
                                 tombName +
                                 "</option>";
-
                             $(".regionTomb").empty();
                             $(".regionTomb").append(option);
                         },
@@ -82,7 +79,6 @@ $(function () {
             },
         });
     });
-
     $(document).on("change", "#regionTomb", function () {
         let selectedTomb = $(this).val();
         let options = "";
