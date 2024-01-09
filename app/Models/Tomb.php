@@ -53,6 +53,8 @@ class Tomb extends Model
     {
         $male = 0;
         $female = 0;
+        $availableMales = 0;
+        $availableFemales = 0;
         foreach ($this->rooms as $room) {
             $power = $this->power;
             $roomCapacity = $room->getCapacity();
@@ -63,6 +65,8 @@ class Tomb extends Model
         return [
             'male' => $male,
             'female' => $female,
+            'availableMales' => $availableMales,
+            'availableFemales' => $availableFemales,
         ];
     }
 }

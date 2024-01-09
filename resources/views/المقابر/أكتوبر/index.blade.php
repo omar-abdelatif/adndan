@@ -282,11 +282,11 @@
                                                                     <div class="available-body text-white">
                                                                         <span>
                                                                             <b>رجال:</b>
-                                                                            .....
+                                                                            {{$tomb->getTotalPlaces()['availableMales']}}
                                                                         </span>
                                                                         <span>
                                                                             <b>سيدات:</b>
-                                                                            ......
+                                                                            {{$tomb->getTotalPlaces()['availableFemales']}}
                                                                         </span>
                                                                     </div>
                                                                 </div>

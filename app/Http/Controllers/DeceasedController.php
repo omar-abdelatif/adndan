@@ -40,6 +40,7 @@ class DeceasedController extends Controller
             'pdf_files' => 'required|mimes:pdf',
             'burial_cost' => 'required|integer'
         ]);
+        $regions = Region::all();
         $room = Rooms::where('name', $validated['room'])->first();
         if ($room) {
             $deceased = new Deceased();
@@ -73,13 +74,17 @@ class DeceasedController extends Controller
             $deceased->rooms_id = $room->id;
             $room = $deceased->rooms;
             $room->burial_date = $validated['burial_date'];
-            $tomb = $room->tomb;
+            $tomb = $regions->tomb;
             if ($deceased->gender === 'ذكر') {
-                $tomb->male -= 1;
-                $room->maleDeceased -= 1;
+                if ($tomb) {
+                    $tomb->male -= $deceased->size;
+                    $tomb->save();
+                }
             } elseif ($deceased->gender === 'أنثى') {
-                $tomb->female -= 1;
-                $room->femaleDeceased -= 1;
+                if ($tomb) {
+                    $tomb->female -= $deceased->size;
+                    $tomb->save();
+                }
             }
             $room->save();
             $store = $deceased->save();
