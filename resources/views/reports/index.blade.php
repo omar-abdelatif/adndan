@@ -60,7 +60,6 @@
                         <table class="table borderd-table table-striped display align-middle text-center" id="table2" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                             <thead>
                                 <tr>
-                                    <td class="text-center">id</td>
                                     <td class="text-center">الإسم</td>
                                     <td class="text-center">رقم التلفون</td>
                                     <td class="text-center">تاريخ التبرع</td>
@@ -68,22 +67,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 1 ?>
                                 @foreach($get_all_donations as $donation)
                                     <tr>
-                                        <td scope="row">{{ $i++ }}</td>
                                         <td>{{ $donation->name }}</td>
                                         <td>{{ $donation->mobile_phone }}</td>
                                         <td>{{ $donation->created_at->format('Y-m-d') }}</td>
                                         <td>{{ $donation->amount }}</td>
                                     </tr>
                                 @endforeach
-                                {{-- @if ($get_all_donations->count() === 0)
-                                    <tr>
-                                        <th colspan="5">No records found for the selected month.</th>
-                                    </tr>
-                                @else
-                                @endif --}}
                             </tbody>
                             <tfoot>
                                 <tr>
