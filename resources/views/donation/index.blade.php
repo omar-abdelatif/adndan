@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('header')
     <header class="header header-sticky">
+        @include('layouts.upper-header')
         <div class="header-divider"></div>
         <section class="content-header w-100">
             <div class="container-fluid d-flex">
@@ -62,7 +63,7 @@
                     <td>{{ $history->amount }}</td>
                     <td>{{ $history->invoice_no }}</td>
                     <td>{{ $history->duration }}</td>
-                    <td>{{ $history->created_at->format('M d, Y') }}</td>
+                    <td>{{ $history->created_at->format('Y-m-d') }}</td>
                     <td>
                         <a href="{{url('delete_donation/' . $history->id)}}" class="btn btn-danger text-white">
                             <b>حذف</b>

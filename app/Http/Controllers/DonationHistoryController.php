@@ -26,6 +26,7 @@ class DonationHistoryController extends Controller
             'amount' => 'required|numeric',
             'duration' => 'required|in:يناير,فبراير,مارس,إبريل,مايو,يونيه,يوليو,أغسطس,سبتمبر,أكتوبر,نوفمبر,ديسمبر|array',
             'duration.*' => 'required|string|distinct|max:255',
+            'donation_type' => 'required',
             'invoice_no' => 'required'
         ]);
         $donator = Donator::where('mobile_phone', $request->mobile_phone)->first();
@@ -37,6 +38,8 @@ class DonationHistoryController extends Controller
             $donation->amount = $request->amount;
             $donation->duration = $duration;
             $donation->invoice_no = $request->invoice_no;
+            $donation->donation_type = $request->donation_type;
+            $donation->other_type = $request->other_type;
             $donation->donator_id = $donator->id;
             $store = $donation->save();
         }

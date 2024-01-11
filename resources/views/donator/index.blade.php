@@ -140,6 +140,7 @@
                                                         <tr>
                                                             <td class="text-center">الإسم</td>
                                                             <td class="text-center">رقم التلفون</td>
+                                                            <td class="text-center">نوع التبرع</td>
                                                             <td class="text-center">المبلغ</td>
                                                             <td class="text-center">رقم الإيصال</td>
                                                             <td class="text-center">المدة الزمنية</td>
@@ -152,6 +153,14 @@
                                                             </td>
                                                             <td>
                                                                 <input type="number" id="phone_number" name="mobile_phone" value="{{ $donate->mobile_phone }}" class="form-control text-center border-dark" placeholder="رقم المحمول" readonly>
+                                                            </td>
+                                                            <td>
+                                                                <select name="donation_type" class="form-select" id="donationType">
+                                                                    <option selected>نوع التبرع</option>
+                                                                    <option value="نقدي">نقدي</option>
+                                                                    <option value="أخرى">أخرى</option>
+                                                                </select>
+                                                                <input type="text" name="other_type" class="form-control mt-2" disabled placeholder="نوع التبرع الأخر">
                                                             </td>
                                                             <td>
                                                                 <input type="number" name="amount" class="form-control text-center" placeholder="المبلغ المتبرع">

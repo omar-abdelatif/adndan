@@ -19,16 +19,15 @@ class ReportController extends Controller
         $monthly = Donator::where('duration', 'شهري')->get();
         $seasonly = Donator::where('duration', 'أخرى')->get();
         $month = $request->input('date');
+        $donators = Donator::with('donationHistory')->get();
+        $donations = DonationHistory::with('donator')->get();
+        // dd($donations);
         if ($month) {
-            // $get_all_donations = DonationHistory::whereDate('created_at', '=', $month)->get();
-            // if ($get_all_donations->isEmpty()) {
-            //     return redirect()->route('reports.index')->withErrors('لا توجد بيانات في هذا اليوم');
-            // }
             $get_all_donations = DonationHistory::whereYear('created_at', '=', date('Y', strtotime($month)))->whereMonth('created_at', '=', date('m', strtotime($month)))->get();
         } else {
             $get_all_donations = DonationHistory::all();
         }
-        return view('reports.index', compact('get_all_donations', 'regions', 'tombs', 'monthly', 'seasonly'));
+        return view('reports.index', compact('get_all_donations', 'regions', 'tombs', 'monthly', 'seasonly', 'donators', 'donations'));
     }
     public function kfala(Request $request)
     {

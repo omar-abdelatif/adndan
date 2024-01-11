@@ -21,10 +21,19 @@ document.getElementById("year").innerHTML = currentYear;
 new WOW().init();
 
 let SelectedOption = document.getElementById("duration");
+let SelectedDonation = document.getElementById("donationType");
 if (SelectedOption) {
     SelectedOption.addEventListener("change", function () {
         var selectedOption = this.options[this.selectedIndex].value;
         var otherCraftInput = document.getElementsByName("other_duration")[0];
+        otherCraftInput.value = "";
+        otherCraftInput.disabled = selectedOption !== "أخرى";
+    });
+}
+if (SelectedDonation) {
+    SelectedDonation.addEventListener("change", function () {
+        var selectedOption = this.options[this.selectedIndex].value;
+        var otherCraftInput = document.getElementsByName("other_type")[0];
         otherCraftInput.value = "";
         otherCraftInput.disabled = selectedOption !== "أخرى";
     });

@@ -4,7 +4,7 @@ $(function () {
     let totalAmount = 0;
     table.rows().every(function () {
         let row = this.data();
-        let amount = parseFloat(row[3].replace(",", ""));
+        let amount = parseFloat(row[7].replace(",", ""));
         if (!isNaN(amount)) {
             totalAmount += amount;
         }

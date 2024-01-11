@@ -60,18 +60,41 @@
                         <table class="table borderd-table table-striped display align-middle text-center" id="table2" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                             <thead>
                                 <tr>
-                                    <td class="text-center">الإسم</td>
-                                    <td class="text-center">رقم التلفون</td>
-                                    <td class="text-center">تاريخ التبرع</td>
-                                    <td class="text-center">مبلغ التبرع</td>
+                                    {{-- <th class="text-center">#</th> --}}
+                                    <th class="text-center">الإسم</th>
+                                    <th class="text-center">رقم التلفون</th>
+                                    <th class="text-center">نوع التبرع</th>
+                                    <th class="text-center">نوع أخر</th>
+                                    <th class="text-center">تاريخ التبرع</th>
+                                    <th class="text-center">مده التبرع</th>
+                                    <th class="text-center">أخرى</th>
+                                    <th class="text-center">مبلغ التبرع</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($get_all_donations as $donation)
+                                {{-- <?php $i = 1 ?> --}}
+                                @foreach($donations as $donation)
                                     <tr>
-                                        <td>{{ $donation->name }}</td>
-                                        <td>{{ $donation->mobile_phone }}</td>
+                                        {{-- <td>{{ $i++ }}</td> --}}
+                                        <td>{{ $donation->donator->name }}</td>
+                                        <td>{{ $donation->donator->mobile_phone }}</td>
+                                        @if ($donation->donation_type)
+                                            <td>{{$donation->donation_type}}</td>
+                                        @else
+                                            <td>-</td>
+                                        @endif
+                                        @if ($donation->other_type)
+                                            <td>{{$donation->other_type}}</td>
+                                        @else
+                                            <td>-</td>
+                                        @endif
                                         <td>{{ $donation->created_at->format('Y-m-d') }}</td>
+                                        <td>{{ $donation->donator->duration }}</td>
+                                        @if ($donation->donator->other_duration)
+                                            <td>{{ $donation->donator->other_duration }}</td>
+                                        @else
+                                            <td>-</td>
+                                        @endif
                                         <td>{{ $donation->amount }}</td>
                                     </tr>
                                 @endforeach
@@ -90,58 +113,4 @@
             </div>
         </div>
     </div>
-    {{-- ! Monthly Donators ! --}}
-    <section class="donator-report p-3 rounded bg-secondary mt-5">
-        <div class="section-title mb-5">
-            <h3 class="text-center text-decoration-underline">المتبرعيين الشهريين</h3>
-        </div>
-        <div class="section-content">
-            <table class="table borderd-table table-striped display align-middle text-center" id="table3" data-order='[[ 0, "asc" ]]' data-page-length='10'>
-                <thead>
-                    <tr>
-                        <th class="text-center">إسم المتبرع</th>
-                        <th class="text-center">رقم التلفون</th>
-                        <th class="text-center">نوع المتبرع</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($monthly as $donator)
-                        <tr>
-                            <td>{{$donator->name}}</td>
-                            <td>{{$donator->mobile_phone}}</td>
-                            <td>{{$donator->duration}}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </section>
-    {{-- ! Seasonly Donators ! --}}
-    <section class="donator-report p-3 rounded bg-secondary mt-5">
-        <div class="section-title mb-5">
-            <h3 class="text-center text-decoration-underline">المتبرعيين الموسميين</h3>
-        </div>
-        <div class="section-content">
-            <table class="table borderd-table table-striped display align-middle text-center" id="table4" data-order='[[ 0, "asc" ]]' data-page-length='10'>
-                <thead>
-                    <tr>
-                        <th class="text-center">إسم المتبرع</th>
-                        <th class="text-center">رقم التلفون</th>
-                        <th class="text-center">نوع المتبرع</th>
-                        <th class="text-center">أخرى</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($seasonly as $donator)
-                        <tr>
-                            <td>{{$donator->name}}</td>
-                            <td>{{$donator->mobile_phone}}</td>
-                            <td>{{$donator->duration}}</td>
-                            <td>{{$donator->other_duration}}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </section>
 @endsection

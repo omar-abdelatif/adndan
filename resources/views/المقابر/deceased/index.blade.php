@@ -150,6 +150,7 @@
                                                                         </label>
                                                                         <input type="date" id="burial_date" class="form-control text-center" value="{{$deceased->burial_date}}" name="burial_date" placeholder="تاريخ الدفن">
                                                                     </div>
+                                                                    
                                                                     <div class="form-group mt-3 text-center">
                                                                         <label class="text-white" for="files">
                                                                             <b>ملفات</b>
