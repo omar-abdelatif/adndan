@@ -31,13 +31,13 @@
                 </a>
                 <ul class="nav-group-items" style="height: 0px;">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('reports.index')}}" target="_top">
+                        <a class="nav-link justify-content-center" href="{{route('reports.index')}}" target="_top">
                             <img src="{{asset('icons/all_cases.png')}}" width="100" alt="alcases">
                             التبرعات
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('donator.index')}}" target="_top">
+                        <a class="nav-link justify-content-center" href="{{route('reports.kfala')}}" target="_top">
                             <img src="{{asset('icons/donator.png')}}" width="100" alt="alcases">
                             الكفالة
                         </a>

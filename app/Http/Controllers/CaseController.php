@@ -20,17 +20,18 @@ class CaseController extends Controller
     public function storecase(Request $request)
     {
         //! Validations
-        $request->validate([
+        $validation = $request->validate([
             'fullname' => 'required|min:3',
             'ssn' => 'required|unique:table_case,ssn',
-            'phone_number' => 'required|unique:table_case,phone_number',
+            'phone_number' => 'unique:table_case,phone_number',
             'age' => 'required',
             'address' => 'required',
             'monthly_income' => 'required|numeric',
             'another_source' => 'required|numeric',
-            'income_type' => 'required|in:retire,without,other',
-            'benefit_type' => 'required|in:money,food, monthly, seasonal',
-            'marital_status' => 'required|in:single,married,widow,divorced',
+            'income_type' => 'required',
+            'benefit_type' => 'required',
+            'benefit_duration' => 'required',
+            'marital_status' => 'required',
             'retire_income' => 'required|numeric',
             'total_income' => 'required|numeric',
             'health_status' => 'required',
@@ -57,6 +58,7 @@ class CaseController extends Controller
             'another_source' => $request->another_source,
             'income_type' => $request->income_type,
             'benefit_type' => $request->benefit_type,
+            'benefit_duration' => $request->benefit_duration,
             'marital_status' => $request->marital_status,
             'retire_income' => $request->retire_income,
             'total_income' => $request->total_income,
@@ -69,7 +71,7 @@ class CaseController extends Controller
         if ($store) {
             return redirect()->route('showall')->with('success', 'تمت الإضافة بنجاح');
         }
-        return redirect()->route('showall')->withErrors($request->validate());
+        return redirect()->route('showall')->withErrors($validation);
     }
     public function delete($id)
     {
@@ -112,6 +114,7 @@ class CaseController extends Controller
         $case->address = $request->address;
         $case->income_type = $request->income_type;
         $case->benefit_type = $request->benefit_type;
+        $case->benefit_duration = $request->benefit_duration;
         $case->monthly_income = $request->monthly_income;
         $case->another_source = $request->another_source;
         $case->retire_income = $request->retire_income;

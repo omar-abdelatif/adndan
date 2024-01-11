@@ -58,9 +58,15 @@
         </div>
     </div>
     @if (session('success'))
-        <div class="alert alert-success text-center mt-5">
+        <div class="alert alert-success text-center mt-5 w-50 mx-auto">
             <p class="mb-0">{{ session('success') }}</p>
         </div>
+    @elseif ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger text-center mt-5 w-50 mx-auto">
+                <p class="mb-0">{{ $error }}</p>
+            </div>
+        @endforeach
     @endif
     <table class="table borderd-table display align-middle text-center" id="table6" data-order='[[ 0, "asc" ]]' data-page-length='10'>
         <thead>
@@ -82,33 +88,6 @@
                         <td>{{ $case->phone_number }}</td>
                         <td>{{ $case->created_at->format('Y-m-d') }}</td>
                         <td>
-                            {{-- <button type="button" style="border-radius: 40px" class="btn btn-success" data-coreui-toggle="modal" data-coreui-target="#history{{$case->id}}" data-coreui-whatever="@mdo">
-                                <b>History</b>
-                            </button>
-                            <div class="modal fade" id="history{{$case->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">بيانات الحالة كاملة</h5>
-                                            <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
-                                                <thead>
-                                                    <tr>
-                                                        <td class="text-center">id</td>
-                                                        <td class="text-center">الإسم</td>
-                                                        <td class="text-center">رقم التلفون</td>
-                                                        <td class="text-center">تاريخ التسجيل</td>
-                                                        <td class="text-center">Actions</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
                             <a class="btn btn-danger" style="border-radius: 40px" href='{{ url("delete/$case->id") }}'>
                                 <b>حذف</b>
                             </a>
@@ -172,9 +151,9 @@
                                                                     </label>
                                                                     <select name="income_type" class="form-control">
                                                                         <option class="text-center" selected>إختار نوع الدخل للحالة</option>
-                                                                        <option value="retire" {{ $case->income_type == 'retire' ? 'selected' : '' }}> معاش</option>
-                                                                        <option value="without" {{ $case->income_type == 'without' ? 'selected' : '' }}> بدون</option>
-                                                                        <option value="other" {{ $case->income_type == 'other' ? 'selected' : '' }}> مصدر أخر</option>
+                                                                        <option value="معاش" {{ $case->income_type == 'معاش' ? 'selected' : '' }}> معاش</option>
+                                                                        <option value="بدون" {{ $case->income_type == 'بدون' ? 'selected' : '' }}> بدون</option>
+                                                                        <option value="مصدر_أخر" {{ $case->income_type == 'مصدر_أخر' ? 'selected' : '' }}> مصدر أخر</option>
                                                                     </select>
                                                                     <label class="mt-2">
                                                                         <b>دخل المعاش</b>
@@ -189,10 +168,16 @@
                                                                     </label>
                                                                     <select name="benefit_type" class="form-control">
                                                                         <option class="text-center" selected>إختار نوع الإستفادة للحالة</option>
-                                                                        <option value="food" {{ $case->benefit_type == 'food' ? 'selected' : '' }}> عينية</option>
-                                                                        <option value="money" {{ $case->benefit_type == 'money' ? 'selected' : '' }}>نقدية</option>
-                                                                        <option value="monthly" {{ $case->benefit_type == 'monthly' ? 'selected' : '' }}>شهري</option>
-                                                                        <option value="seasonal" {{ $case->benefit_type == 'seasonal' ? 'selected' : '' }}>موسمي</option>
+                                                                        <option value="عينية" {{ $case->benefit_type == 'عينية' ? 'selected' : '' }}> عينية</option>
+                                                                        <option value="نقدية" {{ $case->benefit_type == 'نقدية' ? 'selected' : '' }}>نقدية</option>
+                                                                    </select>
+                                                                    <label for="" class="mt-2">
+                                                                        <b>إختار مدة الإستفادة</b>
+                                                                    </label>
+                                                                    <select name="benefit_duration" class="form-control mb-2">
+                                                                        <option class="text-center" selected>إختار مدة الإستفادة</option>
+                                                                        <option value="شهرية" {{$case->benefit_duration == 'شهرية' ? 'selected' : '' }}>شهرية</option>
+                                                                        <option value="موسمية" {{$case->benefit_duration == 'موسمية' ? 'selected' : '' }}>موسمية</option>
                                                                     </select>
                                                                     <label class="mt-2">
                                                                         <b>الدخل الشهري</b>
@@ -317,9 +302,9 @@
                                     <div class="field">
                                         <select name="income_type" class="form-control mb-3">
                                             <option class="text-center" selected>إختار نوع الدخل</option>
-                                            <option value="retire">معاش</option>
-                                            <option value="without">بدون</option>
-                                            <option value="other">مصدر أخر</option>
+                                            <option value="معاش">معاش</option>
+                                            <option value="بدون">بدون</option>
+                                            <option value="مصدر_أخر">مصدر أخر</option>
                                         </select>
                                     </div>
                                 </div>
@@ -337,10 +322,17 @@
                                     <div class="field">
                                         <select name="benefit_type" class="form-control mb-2">
                                             <option class="text-center" selected>إختار نوع الإستفادة</option>
-                                            <option value="food">عينية</option>
-                                            <option value="money">نقدية</option>
-                                            <option value="monthly">شهري</option>
-                                            <option value="seasonal">موسمي</option>
+                                            <option value="عينية">عينية</option>
+                                            <option value="نقدية">نقدية</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="field">
+                                        <select name="benefit_duration" class="form-control mb-2">
+                                            <option class="text-center" selected>إختار مدة الإستفادة</option>
+                                            <option value="شهرية">شهرية</option>
+                                            <option value="موسمية">موسمية</option>
                                         </select>
                                     </div>
                                 </div>

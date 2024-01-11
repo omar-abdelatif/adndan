@@ -54,6 +54,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('delete_donation/{id}', [DonationHistoryController::class, 'destroy'])->name('donation.destroy');
     //! Reports Routes
     Route::get('allreports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('all_kfala_reports', [ReportController::class, 'kfala'])->name('reports.kfala');
     //! Region  Routes
     Route::get('allregions', [RegionController::class, 'index'])->name('region.index');
     Route::post('store_region', [RegionController::class, 'regionStore'])->name('region.store');

@@ -19,6 +19,7 @@ class TableCase extends Model
         'address',
         'income_type',
         'benefit_type',
+        'benefit_duration',
         'monthly_income',
         'another_source',
         'retire_income',

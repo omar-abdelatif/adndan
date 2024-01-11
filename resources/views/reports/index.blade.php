@@ -13,7 +13,7 @@
                                     <a href="{{ route('home') }}">الرئيسية</a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="{{ route('showall') }}">الكفالة</a>
+                                    <a href="{{ route('showall') }}">التبرعات</a>
                                 </li>
                                 <li class="breadcrumb-item active">كل التقارير</li>
                             </ol>
@@ -27,9 +27,12 @@
 @section('content')
     {{-- ! Total Donation Report ! --}}
     <div class="report text-center">
-        <div class="report-logo mt-4 ms-5 d-flex align-items-center justify-content-center">
-            <img src="{{asset('icons/download.png')}}" width="90" alt="logo">
-            <h1 class="ps-3">جمعية أدندان الخيرية ( التقارير )</h1>
+        <div class="report-logo">
+            <div class="report-title mt-4 ms-5 d-flex align-items-center justify-content-center">
+                <img src="{{asset('icons/download.png')}}" width="90" alt="logo">
+                <h1 class="ps-3 d-block">جمعية أدندان الخيرية ( مشروع الكفالة )</h1>
+            </div>
+            <p class="text-center fw-bold fs-3 text-decoration-underline">تقارير التبرعات</p>
         </div>
         <div class="report-content bg-secondary p-3 rounded w-100 mt-4">
             <div class="sub-logo">
@@ -42,7 +45,7 @@
                             <div class="date-filter text-center text-white w-50 mx-auto">
                                 <form action="{{route('reports.index')}}" method="get" class="d-flex">
                                     @csrf
-                                    <input type="date" name="date" class="form-control">
+                                    <input type="month" name="date" class="form-control">
                                     <input type="submit" value="Submit" class="btn btn-primary mr-2">
                                 </form>
                             </div>
@@ -65,22 +68,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($get_all_donations->count() === 0)
+                                <?php $i = 1 ?>
+                                @foreach($get_all_donations as $donation)
                                     <tr>
-                                        <td colspan="5">No records found for the selected month.</td>
+                                        <td scope="row">{{ $i++ }}</td>
+                                        <td>{{ $donation->name }}</td>
+                                        <td>{{ $donation->mobile_phone }}</td>
+                                        <td>{{ $donation->created_at->format('Y-m-d') }}</td>
+                                        <td>{{ $donation->amount }}</td>
+                                    </tr>
+                                @endforeach
+                                {{-- @if ($get_all_donations->count() === 0)
+                                    <tr>
+                                        <th colspan="5">No records found for the selected month.</th>
                                     </tr>
                                 @else
-                                    <?php $i = 1 ?>
-                                    @foreach($get_all_donations as $donation)
-                                        <tr>
-                                            <th scope="row">{{ $i++ }}</th>
-                                            <td>{{ $donation->name }}</td>
-                                            <td>{{ $donation->mobile_phone }}</td>
-                                            <td>{{ $donation->created_at->format('Y-m-d') }}</td>
-                                            <td>{{ $donation->amount }}</td>
-                                        </tr>
-                                    @endforeach
-                                @endif
+                                @endif --}}
                             </tbody>
                             <tfoot>
                                 <tr>

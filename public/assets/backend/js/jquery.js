@@ -4,20 +4,36 @@ $(function () {
     let totalAmount = 0;
     table.rows().every(function () {
         let row = this.data();
-        let amount = parseFloat(row[4].replace(',', ''));
+        let amount = parseFloat(row[4].replace(",", ""));
         if (!isNaN(amount)) {
             totalAmount += amount;
         }
     });
-    $('#totalAmount').text(totalAmount.toFixed(2));
+    $("#totalAmount").text(totalAmount.toFixed(2));
     //! Calculate The Total Income of The Case
-    $('input[name="monthly_income"], input[name="another_source"], input[name="retire_income"]').on('input', function () {
-        let monthly_income = parseInt($('input[name="monthly_income"]').val()) || 0;
-        let another_source = parseInt($('input[name="another_source"]').val()) || 0;
-        let retire_income = parseInt($('input[name="retire_income"]').val()) || 0;
+    $(
+        'input[name="monthly_income"], input[name="another_source"], input[name="retire_income"]'
+    ).on("input", function () {
+        let monthly_income =
+            parseInt($('input[name="monthly_income"]').val()) || 0;
+        let another_source =
+            parseInt($('input[name="another_source"]').val()) || 0;
+        let retire_income =
+            parseInt($('input[name="retire_income"]').val()) || 0;
         let total = monthly_income + another_source + retire_income;
         $('input[name="total_income"]').val(total);
     });
+    //! Calculate the total amount of kfala cases monthly income
+    let table30 = $("#table30").DataTable();
+    let kfalaTotal = 0;
+    table30.rows().every(function () {
+        let row = this.data();
+        let amounts = parseFloat(row[3].replace(",", ""));
+        if (!isNaN(amounts)) {
+            kfalaTotal += amounts;
+        }
+    });
+    $("#kfalaTotal").text(kfalaTotal.toFixed(2));
 });
 $(function () {
     $(document).on("change", "#region", function () {
