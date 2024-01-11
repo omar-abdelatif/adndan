@@ -14,21 +14,16 @@ class ReportController extends Controller
 {
     public function index(Request $request)
     {
-        $regions = Region::all();
-        $tombs = Tomb::all();
-        $monthly = Donator::where('duration', 'شهري')->get();
-        $seasonly = Donator::where('duration', 'أخرى')->get();
         $month = $request->input('date');
-        $donators = Donator::with('donationHistory')->get();
-        $donations = DonationHistory::with('donator')->get();
-        // dd($donations);
+        $donations = DonationHistory::with('donator');
         if ($month) {
-            $get_all_donations = DonationHistory::whereYear('created_at', '=', date('Y', strtotime($month)))->whereMonth('created_at', '=', date('m', strtotime($month)))->get();
+            $donations = $donations->whereYear('created_at', '=', date('Y', strtotime($month)))->whereMonth('created_at', '=', date('m', strtotime($month)))->get();
         } else {
-            $get_all_donations = DonationHistory::all();
+            $donations = $donations->get();
         }
-        return view('reports.index', compact('get_all_donations', 'regions', 'tombs', 'monthly', 'seasonly', 'donators', 'donations'));
+        return view('reports.index', compact('donations'));
     }
+
     public function kfala(Request $request)
     {
         $cases = TableCase::get();
