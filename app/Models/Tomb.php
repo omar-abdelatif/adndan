@@ -51,20 +51,24 @@ class Tomb extends Model
     }
     public function getTotalPlaces()
     {
-        $male = 0;
-        $female = 0;
+        $totalMale = 0;
+        $totalFemale = 0;
         $availableMales = 0;
         $availableFemales = 0;
         foreach ($this->rooms as $room) {
             $power = $this->power;
             $roomCapacity = $room->getCapacity();
             $totalDeceased = $roomCapacity * $power;
-            $male = $totalDeceased / 2;
-            $female = $totalDeceased / 2;
+            //! Update total male and female counts
+            $totalMale += $totalDeceased / 2;
+            $totalFemale += $totalDeceased / 2;
+            //! Update available male and female counts based on the available slots in the room
+            $availableMales += $room->availableMaleSlots();
+            $availableFemales += $room->availableFemaleSlots();
         }
         return [
-            'male' => $male,
-            'female' => $female,
+            'male' => $totalMale,
+            'female' => $totalFemale,
             'availableMales' => $availableMales,
             'availableFemales' => $availableFemales,
         ];

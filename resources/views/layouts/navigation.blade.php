@@ -18,23 +18,31 @@
                     إجمالي الحالات
                 </a>
             </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="{{route('addnew')}}" target="_top">
-                    <img src="{{asset('icons/add_case.png')}}" width="120" alt="alcases">
-                    إضافة حالة
-                </a>
-            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{route('donator.index')}}" target="_top">
                     <img src="{{asset('icons/donator.png')}}" width="100" alt="alcases">
                     المتبرع
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('reports.index')}}" target="_top">
+            <li class="nav-group" aria-expanded="false">
+                <a class="nav-link nav-group-toggle" href="" target="_top">
                     <img src="{{asset('icons/report.png')}}" width="100" alt="alcases">
                     تقارير
                 </a>
+                <ul class="nav-group-items" style="height: 0px;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('reports.index')}}" target="_top">
+                            <img src="{{asset('icons/all_cases.png')}}" width="100" alt="alcases">
+                            التبرعات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('donator.index')}}" target="_top">
+                            <img src="{{asset('icons/donator.png')}}" width="100" alt="alcases">
+                            الكفالة
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </li>

@@ -52,7 +52,6 @@ hr
 .room-title{
     border-bottom: 1px solid #00000038;
 }
-
 .form-control {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -61,4 +60,10 @@ hr
 }
 .fade {
     transition: opacity .15s linear;
+}
+.sidebar-nav .nav-group{
+    transition: background .15s ease-in-out;
+}
+.sidebar-nav .nav-group .nav-group-items{
+    transition: height .15s ease;
 }

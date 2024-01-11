@@ -29,4 +29,27 @@ class Rooms extends Model
     {
         return $this->capacity;
     }
+    public function availableMaleSlots()
+    {
+        $tomb = $this->tombs()->first();
+        if ($tomb) {
+            $totalMale = $tomb->totalMale;
+            $occupiedMale = $this->deceased()->where('gender', 'ذكر')->sum('size');
+            dd(["occupiedMales" => $occupiedMale]);
+            return max(0, $totalMale - $occupiedMale);
+        }
+        return 0;
+    }
+
+    public function availableFemaleSlots()
+    {
+        $tomb = $this->tombs()->first();
+        if ($tomb) {
+            $totalFemale = $tomb->totalFemale;
+            $occupiedFemale = $this->deceased()->where('gender', 'أنثى')->sum('size');
+            dd(["occupiedMales" => $occupiedFemale]);
+            return max(0, $totalFemale - $occupiedFemale);
+        }
+        return 0;
+    }
 }

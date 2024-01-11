@@ -73,19 +73,16 @@ class DeceasedController extends Controller
             $deceased->pdf_files = $file_name;
             $deceased->rooms_id = $room->id;
             $room = $deceased->rooms;
-            $room->burial_date = $validated['burial_date'];
-            $tomb = $regions->tomb;
-            if ($deceased->gender === 'ذكر') {
-                if ($tomb) {
+            $tomb = $regions->first()->tomb;
+            if ($tomb) {
+                if ($deceased->gender === 'ذكر') {
                     $tomb->male -= $deceased->size;
-                    $tomb->save();
-                }
-            } elseif ($deceased->gender === 'أنثى') {
-                if ($tomb) {
+                } elseif ($deceased->gender === 'أنثى') {
                     $tomb->female -= $deceased->size;
-                    $tomb->save();
                 }
+                $tomb->save();
             }
+            $room->burial_date = $validated['burial_date'];
             $room->save();
             $store = $deceased->save();
             if ($store) {
