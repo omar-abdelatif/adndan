@@ -15,7 +15,8 @@
                                 <li class="breadcrumb-item">
                                     <a href="{{ route('showall') }}">الكفالة</a>
                                 </li>
-                                <li class="breadcrumb-item active">كل التقارير</li>
+                                <li class="breadcrumb-item">التقارير</li>
+                                <li class="breadcrumb-item active">الكفالة</li>
                             </ol>
                         </div>
                     </div>

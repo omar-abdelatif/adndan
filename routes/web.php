@@ -56,7 +56,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('repotrs/allreports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('reports/all_kfala_reports', [ReportController::class, 'kfala'])->name('reports.kfala');
     Route::get('reports/safe_reports', [ReportController::class, 'safeReports'])->name('reports.safe');
-    Route::get('report_safe', [ReportController::class, 'safeMonthlyReport'])->name('reports.safeFilter');
     //! Region  Routes
     Route::get('allregions', [RegionController::class, 'index'])->name('region.index');
     Route::post('store_region', [RegionController::class, 'regionStore'])->name('region.store');
