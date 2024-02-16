@@ -102,4 +102,45 @@
             </table>
         </div>
     </div>
+    {{-- ! تفاصيل المصروفات لكل حالة ! --}}
+    <div class="table-responsive">
+        <div class="table-title mt-5 mb-3 bg-primary rounded mx-auto w-50 p-2 text-center text-white">
+            <h3>تفاصيل المصروفات لكل حالة</h3>
+        </div>
+        <table class="table borderd-table display align-middle text-center" id="table31" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+            <thead>
+                <tr>
+                    <th class="text-center">الإسم</th>
+                    <th class="text-center">الرقم القومي</th>
+                    <th class="text-center">رقم المحمول</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($expenseDetails as $item)
+                    <tr>
+                        <td>{{$item->fullname}}</td>
+                        <td>{{$item->ssn}}</td>
+                        <td>{{$item->phone_number}}</td>
+                        <td>
+                            <button class="btn btn-outline-success" data-coreui-toggle="modal" data-coreui-target="#showDetails" data-coreui-whatever="@mdo">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                            <div class="modal fade" id="showDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">تفاصيل {{$item->fullname}}</h1>
+                                            <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection

@@ -90,7 +90,7 @@
                             <div class="col-lg-6">
                                 <div class="field">
                                     <select name="power" class="form-control mb-2">
-                                        <option class="text-center" selected>قوة المقبرة</option>
+                                        <option class="text-center" selected>قوة المقبرة (بالغرف)</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>

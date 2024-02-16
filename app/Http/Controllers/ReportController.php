@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Deceased;
 use Illuminate\Http\Request;
 use App\Models\DonationHistory;
-use App\Models\Donator;
-use App\Models\Region;
 use App\Models\TableCase;
-use App\Models\Tomb;
 
 class ReportController extends Controller
 {
@@ -23,7 +19,6 @@ class ReportController extends Controller
         }
         return view('reports.index', compact('donations'));
     }
-
     public function kfala(Request $request)
     {
         $cases = TableCase::get();
@@ -33,13 +28,20 @@ class ReportController extends Controller
         $season_benefit_count = $cases->where('benefit_duration', 'موسمية')->count();
         $monthly_cases = TableCase::where('monthly_income', '!=', null)->get();
         $monthly_sum = $monthly_cases->sum('monthly_income');
+        $expenseDetails = $this->expensesDetails();
         return view('reports.kfala', compact([
             'money_benefit_count',
             'food_benefit_count',
             'monthly_benefit_count',
             'season_benefit_count',
             'monthly_cases',
-            'monthly_sum'
+            'monthly_sum',
+            'expenseDetails'
         ]));
+    }
+    public function expensesDetails()
+    {
+        $cases = TableCase::where('benefit_type', 'نقدية')->get();
+        return $cases;
     }
 }
