@@ -44,4 +44,14 @@ class ReportController extends Controller
         $cases = TableCase::where('benefit_type', 'نقدية')->get();
         return $cases;
     }
+    public function safeReports(Request $request)
+    {
+        $month = $request->input('date');
+        if($month){
+
+        } else {
+
+        }
+        return view('reports.safe');
+    }
 }

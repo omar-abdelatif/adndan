@@ -60,7 +60,6 @@
                         <table class="table borderd-table table-striped display align-middle text-center" id="table2" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                             <thead>
                                 <tr>
-                                    {{-- <th class="text-center">#</th> --}}
                                     <th class="text-center">الإسم</th>
                                     <th class="text-center">رقم التلفون</th>
                                     <th class="text-center">نوع التبرع</th>
@@ -72,10 +71,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- <?php $i = 1 ?> --}}
                                 @foreach($donations as $donation)
                                     <tr>
-                                        {{-- <td>{{ $i++ }}</td> --}}
                                         <td>{{ $donation->donator->name }}</td>
                                         <td>{{ $donation->donator->mobile_phone }}</td>
                                         @if ($donation->donation_type)

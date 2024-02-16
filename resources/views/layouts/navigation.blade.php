@@ -26,20 +26,26 @@
             </li>
             <li class="nav-group" aria-expanded="false">
                 <a class="nav-link nav-group-toggle" href="" target="_top">
-                    <img src="{{asset('icons/report.png')}}" width="100" alt="alcases">
+                    <img src="{{asset('icons/report.png')}}" alt="alcases">
                     تقارير
                 </a>
                 <ul class="nav-group-items" style="height: 0px;">
                     <li class="nav-item">
                         <a class="nav-link justify-content-center" href="{{route('reports.index')}}" target="_top">
-                            <img src="{{asset('icons/all_cases.png')}}" width="100" alt="alcases">
+                            <img src="{{asset('icons/all_cases.png')}}" alt="alcases">
                             التبرعات
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link justify-content-center" href="{{route('reports.kfala')}}" target="_top">
-                            <img src="{{asset('icons/donator.png')}}" width="100" alt="alcases">
+                            <img src="{{asset('icons/donator.png')}}" alt="alcases">
                             الكفالة
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link justify-content-center" href="{{route('reports.safe')}}" target="_top">
+                            <img src="https://img.icons8.com/external-filled-color-icons-papa-vector/150/external-Safe-money-filled-color-icons-papa-vector.png" style="width: 50px !important" alt="external-Safe-money-filled-color-icons-papa-vector"/>
+                            الخزنة
                         </a>
                     </li>
                 </ul>
