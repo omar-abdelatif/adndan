@@ -201,10 +201,10 @@
                                                                     </label>
                                                                     <select name="marital_status" class="form-control mb-2">
                                                                         <option class="text-center" selected>إختار الحالة الاجتماعية للحالة</option>
-                                                                        <option value="single" {{ $case->marital_status == 'single' ? 'selected' : '' }}> أعزب</option>
-                                                                        <option value="married" {{ $case->marital_status == 'married' ? 'selected' : '' }}> متزوج/ة</option>
-                                                                        <option value="widow"{{ $case->marital_status == 'widow' ? 'selected' : '' }}> أرمل/ة</option>
-                                                                        <option value="divorced"{{ $case->marital_status == 'divorced' ? 'selected' : '' }}> مطلق/ة</option>
+                                                                        <option value="أعزب" {{ $case->marital_status == 'أعزب' ? 'selected' : '' }}> أعزب</option>
+                                                                        <option value="متزوج/ة" {{ $case->marital_status == 'متزوج/ة' ? 'selected' : '' }}> متزوج/ة</option>
+                                                                        <option value="أرمل/ة"{{ $case->marital_status == 'أرمل/ة' ? 'selected' : '' }}> أرمل/ة</option>
+                                                                        <option value="مطلق/ة"{{ $case->marital_status == 'مطلق/ة' ? 'selected' : '' }}> مطلق/ة</option>
                                                                     </select>
                                                                     <label class="mb-2">
                                                                         <b>الحالة الصحية</b>
