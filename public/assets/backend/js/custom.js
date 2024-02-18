@@ -21,7 +21,7 @@ document.getElementById("year").innerHTML = currentYear;
 new WOW().init();
 
 let SelectedOption = document.getElementById("duration");
-let SelectedDonation = document.getElementById("donationType");
+let SelectedDonation = document.querySelectorAll(".donationType");
 if (SelectedOption) {
     SelectedOption.addEventListener("change", function () {
         var selectedOption = this.options[this.selectedIndex].value;
@@ -31,10 +31,21 @@ if (SelectedOption) {
     });
 }
 if (SelectedDonation) {
-    SelectedDonation.addEventListener("change", function () {
-        var selectedOption = this.options[this.selectedIndex].value;
-        var otherCraftInput = document.getElementsByName("other_type")[0];
-        otherCraftInput.value = "";
-        otherCraftInput.disabled = selectedOption !== "أخرى";
+    SelectedDonation.forEach(function (selectedDonation) {
+        selectedDonation.addEventListener("change", function () {
+            let selectedOption = this.options[this.selectedIndex].value;
+            let otherCraftInput = this.closest('.record').querySelector("[name='other_type']");
+            let moneyType = this.closest('.record').querySelector("[name='money_type']");
+            if (selectedOption == "أخرى") {
+                otherCraftInput.classList.remove("d-none");
+                moneyType.classList.add("d-none");
+            } else if (selectedOption == "نقدي") {
+                moneyType.classList.remove("d-none");
+                otherCraftInput.classList.add("d-none");
+            } else {
+                moneyType.classList.add("d-none");
+                otherCraftInput.classList.add("d-none");
+            }
+        });
     });
 }

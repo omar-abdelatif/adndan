@@ -155,12 +155,20 @@
                                                                 <input type="number" id="phone_number" name="mobile_phone" value="{{ $donate->mobile_phone }}" class="form-control text-center border-dark" placeholder="رقم المحمول" readonly>
                                                             </td>
                                                             <td>
-                                                                <select name="donation_type" class="form-select" id="donationType">
-                                                                    <option selected>نوع التبرع</option>
-                                                                    <option value="نقدي">نقدي</option>
-                                                                    <option value="أخرى">أخرى</option>
-                                                                </select>
-                                                                <input type="text" name="other_type" class="form-control mt-2" disabled placeholder="نوع التبرع الأخر">
+                                                                <div class="record">
+                                                                    <select name="donation_type" class="form-select donationType" id="donationType">
+                                                                        <option selected>نوع التبرع</option>
+                                                                        <option value="نقدي">نقدي</option>
+                                                                        <option value="أخرى">أخرى</option>
+                                                                    </select>
+                                                                    <input type="text" name="other_type" class="form-control other_type mt-2 d-none" placeholder="نوع التبرع الأخر">
+                                                                    <select name="money_type" class="form-select money_type d-none mt-2" id="money_type">
+                                                                        <option selected>نوع التبرع النقدي</option>
+                                                                        <option value="صدقات">صدقات</option>
+                                                                        <option value="نقدي">ذكات فطر</option>
+                                                                        <option value="أخرى">ذكات مال</option>
+                                                                    </select>
+                                                                </div>
                                                             </td>
                                                             <td>
                                                                 <input type="number" name="amount" class="form-control text-center" placeholder="المبلغ المتبرع">

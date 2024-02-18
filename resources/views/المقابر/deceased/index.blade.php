@@ -150,7 +150,7 @@
                                                                         </label>
                                                                         <input type="date" id="burial_date" class="form-control text-center" value="{{$deceased->burial_date}}" name="burial_date" placeholder="تاريخ الدفن">
                                                                     </div>
-                                                                    
+
                                                                     <div class="form-group mt-3 text-center">
                                                                         <label class="text-white" for="files">
                                                                             <b>ملفات</b>
@@ -215,7 +215,7 @@
                                                                     </div>
                                                                     <div class="form-data mt-3">
                                                                         <label class="text-white" for="burial_date">
-                                                                            <b>النوع</b>
+                                                                            <b>الجنس</b>
                                                                         </label>
                                                                         <div class="gender mt-3 d-flex justify-content-evenly align-items-center">
                                                                             <div class="male">
@@ -247,6 +247,31 @@
                                                                                 <input type="radio" name="size" value="2" id="two" {{$deceased->size == 2 ? 'checked' : ''}}>
                                                                                 <label class="text-white" for="female">
                                                                                     <b>زوجي</b>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group mt-3">
+                                                                        <label class="text-white">
+                                                                            <b>العمر</b>
+                                                                        </label>
+                                                                        <div class="gender mt-3 d-flex justify-content-evenly align-items-center">
+                                                                            <div class="adult">
+                                                                                <input type="radio" name="age" value="بالغ" {{$deceased->age === 'بالغ' ? 'checked' : ''}}>
+                                                                                <label for="adult" class="text-white">
+                                                                                    <b>بالغ</b>
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="kid">
+                                                                                <input type="radio" name="age" value="طفل" {{$deceased->age === 'طفل' ? 'checked' : ''}}>
+                                                                                <label for="kid" class="text-white">
+                                                                                    <b>طفل</b>
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="part">
+                                                                                <input type="radio" name="age" value="عضو" {{$deceased->age === 'عضو' ? 'checked' : ''}}>
+                                                                                <label for="part" class="text-white">
+                                                                                    <b>عضو</b>
                                                                                 </label>
                                                                             </div>
                                                                         </div>
@@ -324,15 +349,15 @@
                                         </label>
                                         <input type="date" id="burial_date" class="form-control text-center" name="burial_date" placeholder="تاريخ الدفن">
                                     </div>
-                                    <div class="form-data mt-3">
+                                    <div class="form-group mt-3">
                                         <label for="burial_cost" class="text-white">
                                             <b>تكلفة الدفن</b>
                                         </label>
                                         <input type="number" id="burial_cost" class="form-control text-center" name="burial_cost" placeholder="تكلفة الدفن">
                                     </div>
-                                    <div class="form-data mt-3">
+                                    <div class="form-group mt-3">
                                         <label for="burial_date" class="text-white">
-                                            <b>النوع</b>
+                                            <b>الجنس</b>
                                         </label>
                                         <div class="gender mt-3 d-flex justify-content-evenly align-items-center">
                                             <div class="male">
@@ -349,7 +374,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-data mt-3">
+                                    <div class="form-group mt-3">
                                         <label for="burial_date" class="text-white">
                                             <b>الحجم</b>
                                         </label>
@@ -364,6 +389,31 @@
                                                 <input type="radio" name="size" value="2" id="two">
                                                 <label for="female" class="text-white">
                                                     <b>زوجي</b>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label class="text-white">
+                                            <b>العمر</b>
+                                        </label>
+                                        <div class="gender mt-3 d-flex justify-content-evenly align-items-center">
+                                            <div class="adult">
+                                                <input type="radio" name="age" value="بالغ">
+                                                <label class="text-white">
+                                                    <b>بالغ</b>
+                                                </label>
+                                            </div>
+                                            <div class="kid">
+                                                <input type="radio" name="age" value="طفل">
+                                                <label class="text-white">
+                                                    <b>طفل</b>
+                                                </label>
+                                            </div>
+                                            <div class="part">
+                                                <input type="radio" name="age" value="عضو">
+                                                <label class="text-white">
+                                                    <b>عضو</b>
                                                 </label>
                                             </div>
                                         </div>

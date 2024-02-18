@@ -18,6 +18,7 @@ class DonationHistory extends Model
         'selected_duration',
         'invoice_no',
         'donation_type',
+        'money_type',
         'other_type',
         'donator_id',
     ];

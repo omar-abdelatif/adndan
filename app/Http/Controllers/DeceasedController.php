@@ -26,7 +26,8 @@ class DeceasedController extends Controller
         $validated = $request->validate([
             'name' => 'required|string',
             'gender' => 'required|string',
-            'size' => 'required|numeric',
+            'size' => 'required',
+            'age' => 'nullable|string',
             'death_place' => 'required|string',
             'death_date' => 'required|date',
             'burial_date' => 'required|date',
@@ -47,6 +48,7 @@ class DeceasedController extends Controller
             $deceased->name = $validated['name'];
             $deceased->gender = $validated['gender'];
             $deceased->size = $validated['size'];
+            $deceased->age = $validated['age'];
             $deceased->death_place = $validated['death_place'];
             $deceased->death_date = $validated['death_date'];
             $deceased->burial_date = $validated['burial_date'];
@@ -133,6 +135,7 @@ class DeceasedController extends Controller
             $deceased->name = $request->name;
             $deceased->gender = $request->gender;
             $deceased->size = $request->size;
+            $deceased->age = $request->age;
             $deceased->death_place = $request->death_place;
             $deceased->death_date = $request->death_date;
             $deceased->burial_date = $request->burial_date;

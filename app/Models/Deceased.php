@@ -13,6 +13,7 @@ class Deceased extends Model
         'name',
         'gender',
         'size',
+        'age',
         'death_place',
         'death_date',
         'burial_date',
