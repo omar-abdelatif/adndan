@@ -90,7 +90,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('tombs.report')}}" target="_top">
+                <a class="nav-link" href="{{route('tomb.index')}}" target="_top">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
                     <b>التبرعات</b>
                 </a>

@@ -40,6 +40,7 @@ class DonationHistoryController extends Controller
             $donation->invoice_no = $request->invoice_no;
             $donation->donation_type = $request->donation_type;
             $donation->other_type = $request->other_type;
+            $donation->money_type = $request->money_type;
             $donation->donator_id = $donator->id;
             $store = $donation->save();
         }

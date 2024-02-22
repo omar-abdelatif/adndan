@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TombReportController;
 use App\Http\Controllers\OldDeceasedController;
 use App\Http\Controllers\DonationHistoryController;
+use App\Http\Controllers\TombDonationsController;
 use App\Http\Controllers\Tombs\FayumTombController;
 use App\Http\Controllers\Tombs\May15TombController;
 use App\Http\Controllers\Tombs\GafeerTombController;
@@ -129,4 +130,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('update_old_deceased', [OldDeceasedController::class, 'edit'])->name('old.update');
     //! Tombs Reports
     Route::get('tombs_reports', [TombReportController::class, 'index'])->name('tombs.report');
+    //! Tomb Donations
+    Route::controller(TombDonationsController::class)->group(function () {
+        Route::get('tombs', 'index')->name('tomb.index');
+    });
 });
