@@ -11,15 +11,10 @@ $(function () {
     });
     $("#totalAmount").text(totalAmount.toFixed(2));
     //! Calculate The Total Income of The Case
-    $(
-        'input[name="monthly_income"], input[name="another_source"], input[name="retire_income"]'
-    ).on("input", function () {
-        let monthly_income =
-            parseInt($('input[name="monthly_income"]').val()) || 0;
-        let another_source =
-            parseInt($('input[name="another_source"]').val()) || 0;
-        let retire_income =
-            parseInt($('input[name="retire_income"]').val()) || 0;
+    $('input[name="monthly_income"], input[name="another_source"], input[name="retire_income"]').on("input", function () {
+        let monthly_income =parseInt($('input[name="monthly_income"]').val()) || 0;
+        let another_source =parseInt($('input[name="another_source"]').val()) || 0;
+        let retire_income =parseInt($('input[name="retire_income"]').val()) || 0;
         let total = monthly_income + another_source + retire_income;
         $('input[name="total_income"]').val(total);
     });
@@ -45,6 +40,7 @@ $(function () {
             data: { name: selectedRegion },
             dataType: "json",
             success: function (data) {
+                console.log(data);
                 let option = "";
                 option +=
                     '<option value="" selected> -- إختار المقبره -- </option>';

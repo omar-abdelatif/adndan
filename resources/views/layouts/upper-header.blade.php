@@ -27,7 +27,7 @@
                     </svg>
                     صفحتي
                 </a>
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('logout') }}" id="logout-form">
                     @csrf
                     <a class="dropdown-item text-right" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
                         <svg class="icon me-2">

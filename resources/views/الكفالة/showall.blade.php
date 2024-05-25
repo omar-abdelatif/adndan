@@ -269,81 +269,74 @@
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ 'storecase' }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ 'storecase' }}" method="post" enctype="multipart/form-data" id="CaseTable">
                         @csrf
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="text" name="fullname" placeholder="إسم الحالة" class="form-control mb-3 text-center">
+                                    <div class="form-group mb-3">
+                                        <input type="text" name="fullname" placeholder="إسم الحالة" id="CaseFullName" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" class="form-control text-center" required>
+                                        <p id="CaseReq" class="required text-danger fw-bold d-none mb-0">هذا الحقل مطلوب</p>
+                                        <p id="CaseMsg" class="required text-danger fw-bold d-none mb-0">الأسم باللغة العربية فقط ولا يقل عن 3 أحرف</p>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="text" name="ssn" id="ssn" placeholder="الرقم القومي" maxlength="14" class="form-control text-center" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        <p id="ssnReq" class="d-none required text-danger fw-bold mb-0">هذا الحقل مطلوب</p>
+                                        <p id="ssnMsg" class="d-none required text-danger fw-bold mb-0">يجب ان بكون الرقم القومي 14 رقماً لا غير</p>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="text" name="phone_number" id="mobile_no" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="رقم المحمول" class="form-control text-center" required>
+                                        <p id="mobileReq" class="required fw-bold text-danger d-none mb-0">هذا الحقل مطلوب</p>
+                                        <p id="mobileMsg" class=" required fw-bold text-danger d-none mb-0">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="text" name="address" placeholder="العنوان" id="address" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" class="form-control text-center" required>
+                                        <p class="required d-none mb-0 text-danger fw-bold" id="addressReq">هذا الحقل مطلوب</p>
+                                        <p class="required d-none mb-0 text-danger fw-bold" id="addressMsg">يجب ان يكون العنوان باللغة العربية ولا يقل عن 5 احرف</p>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="text" name="age" placeholder="سن الحالة" id="age" class="form-control text-center" maxlength="2" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                        <p class="required d-none mb-0 fw-bold text-danger" id="ageReq">هذا الحقل مطلوب</p>
+                                        <p class="required d-none mb-0 fw-bold text-danger" id="ageMsg">يجب ان يكون السن مكون من 2 رقم فقط</p>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="number" name="retire_income" class="form-control text-center" placeholder="دخل المعاش">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="number" name="monthly_income" class="form-control text-center" placeholder="الدخل الشهري">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="number" name="another_source" class="form-control text-center" placeholder="مصدر أخر">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input id="total_income" type="number" name="total_income" class="form-control text-center" placeholder="إجمالي الدخل" readonly autofocus="none">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="number" name="ssn" placeholder="الرقم القومي" class="form-control mb-3 text-center">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="number" name="phone_number" placeholder="رقم المحمول" class="form-control mb-3 text-center">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="number" name="age" placeholder="سن الحالة" class="form-control mb-3 text-center">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="text" name="address" placeholder="العنوان" class="form-control mb-3 text-center">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <select name="income_type" class="form-control mb-3">
+                                    <div class="form-group mb-3">
+                                        <select name="income_type" class="form-control">
                                             <option class="text-center" selected>إختار نوع الدخل</option>
                                             <option value="معاش">معاش</option>
                                             <option value="بدون">بدون</option>
                                             <option value="مصدر_أخر">مصدر أخر</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="number" name="another_source" class="form-control mb-3 text-center" placeholder="مصدر أخر">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="number" name="retire_income" class="form-control mb-3 text-center" placeholder="دخل المعاش">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <select name="benefit_type" class="form-control mb-2">
-                                            <option class="text-center" selected>إختار نوع الإستفادة</option>
-                                            <option value="عينية">عينية</option>
-                                            <option value="نقدية">نقدية</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <select name="benefit_duration" class="form-control mb-2">
+                                    <div class="form-group mb-3">
+                                        <select name="benefit_duration" class="form-control">
                                             <option class="text-center" selected>إختار مدة الإستفادة</option>
                                             <option value="شهرية">شهرية</option>
                                             <option value="موسمية">موسمية</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="number" name="monthly_income" class="form-control mb-3 text-center" placeholder="الدخل الشهري">
+                                    <div class="form-group mb-3">
+                                        <select name="benefit_type" class="form-control">
+                                            <option class="text-center" selected>إختار نوع الإستفادة</option>
+                                            <option value="عينية">عينية</option>
+                                            <option value="نقدية">نقدية</option>
+                                        </select>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <select name="marital_status" class="form-control mb-2">
+                                    <div class="form-group mb-3">
+                                        <select name="marital_status" class="form-control">
                                             <option class="text-center" selected>إختار الحالة الاجتماعية للحالة</option>
                                             <option value="single">أعزب</option>
                                             <option value="married">متزوج/ة</option>
@@ -351,40 +344,28 @@
                                             <option value="divorced">مطلق/ة</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="number" name="sons" class="form-control text-center mb-3" placeholder="عدد الأولاد">
+                                    <div class="form-group mb-3">
+                                        <input type="number" name="sons" class="form-control text-center" placeholder="عدد الأولاد">
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="number" name="daughters" class="form-control text-center mb-3" placeholder="عدد البنات">
+                                    <div class="form-group mb-3">
+                                        <input type="number" name="daughters" class="form-control text-center" placeholder="عدد البنات">
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="text" name="health_status" class="form-control mb-3 text-center"placeholder="الحالة الصحية">
+                                    <div class="form-group mb-3">
+                                        <input type="text" name="health_status" class="form-control text-center"placeholder="الحالة الصحية">
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="text" name="gov" class="form-control mb-3 text-center" placeholder="المحافظة">
+                                    <div class="form-group mb-3">
+                                        <input type="text" name="gov" class="form-control text-center" placeholder="المحافظة">
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <input id="total_income" type="number" name="total_income" class="form-control mb-3 text-center" placeholder="إجمالي الدخل" readonly autofocus="none">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="file" name="files" class="form-control mb-3 text-center" accept="image/*">
+                                    <div class="form-group mb-3">
+                                        <input type="file" name="files" class="form-control text-center" id="files" accept="image/*">
+                                        <p class="required d-none fw-bold text-danger mb-0" id="filesReq">هذا الحقل مطلوب</p>
+                                        <p class="required d-none fw-bold text-danger mb-0" id="filesExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
+                                        <p class="required d-none fw-bold text-danger mb-0" id="filesSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="field">
-                                        <input type="submit" value="إضافة" class="btn btn-success w-100">
+                                    <div class="form-group">
+                                        <input type="submit" id="CaseForm" value="إضافة" class="btn btn-success w-100">
                                     </div>
                                 </div>
                             </div>

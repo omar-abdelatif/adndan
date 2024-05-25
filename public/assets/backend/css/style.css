@@ -42,8 +42,7 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
 .breadcrumb{
     margin-bottom: 0 !important;
 }
-hr
-{
+hr{
     border-width: thick;
 }
 #totalAmount{
@@ -69,4 +68,14 @@ hr
 }
 .sidebar-nav .nav-group .nav-group-items{
     transition: height .15s ease;
+}
+.error {
+	border: 3px solid rgb(194, 23, 23) !important;
+}
+.good {
+	border: 3px solid rgb(23, 194, 23) !important;
+}
+.modal.fade .modal-dialog {
+    transition: transform .3s ease-out;
+    transform: translate(0, -50px);
 }
