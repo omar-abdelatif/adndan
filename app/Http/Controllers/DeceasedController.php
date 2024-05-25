@@ -37,8 +37,8 @@ class DeceasedController extends Controller
             'tomb' => 'required|string',
             'room' => 'required|string',
             'notes' => 'nullable',
-            'files' => 'required|mimes:pdf,png,jpg,jpeg,webp|max:3072',
-            'pdf_files' => 'required|mimes:pdf',
+            'files' => 'mimes:pdf,png,jpg,jpeg,webp|max:3072',
+            'pdf_files' => 'mimes:pdf',
             'burial_cost' => 'required|integer'
         ]);
         $regions = Region::all();
