@@ -158,7 +158,6 @@
                                                                 <option value="أخرى">أخرى</option>
                                                             </select>
                                                             <p class="required d-none text-danger fw-bold mb-0 donationtypeReq" data-donationtype-id={{$donate->id}}>أختر من القائمة اعلاه</p>
-
                                                             <select name="money_type" class="form-select money_type d-none mt-2" data-donationmoneytype-id={{$donate->id}} id="money_type">
                                                                 <option selected disabled>نوع التبرع النقدي</option>
                                                                 <option value="صدقات">صدقات</option>
@@ -166,17 +165,18 @@
                                                                 <option value="أخرى">ذكات مال</option>
                                                             </select>
                                                             <p class="required d-none text-danger fw-bold mb-0 donationmoneytype" data-donationmoneytype-id={{$donate->id}}>أختر من القائمة اعلاه</p>
-
                                                             <input type="text" name="other_type" class="form-control otherDonationType mt-2 d-none" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" data-donationothertype-id={{$donate->id}} placeholder="نوع التبرع الأخر">
                                                             <p class="required d-none text-danger fw-bold mb-0 donationothertype" data-donationothertype-id={{$donate->id}}>هذا الحقل مطلوب</p>
                                                         </div>
                                                         <div class="form-group mb-2">
-                                                            <input type="number" name="amount" class="form-control text-center amount" placeholder="المبلغ المتبرع" data-amount-id={{$donate->id}} required>
-                                                            <p class="required d-none text-danger fw-bold mb-0" data-amount-id={{$donate->id}}>هذا الحقل مطلوب</p>
+                                                            <input type="text" name="amount" class="form-control text-center amount" minlength="2" placeholder="المبلغ المتبرع" data-donationamount-id={{$donate->id}} required>
+                                                            <p class="required d-none text-danger fw-bold mb-0 donationamountReq" data-donationamount-id={{$donate->id}}>هذا الحقل مطلوب</p>
+                                                            <p class="required d-none text-danger fw-bold mb-0 donationamountMsg" data-donationamount-id={{$donate->id}}>يجب ان يكون المبلغ لا يقل عن 2 رقم</p>
                                                         </div>
                                                         <div class="form-group mb-2">
-                                                            <input type="number" name="invoice_no" class="form-control text-center invoice" placeholder="رقم الإيصال" data-inv-id={{$donate->id}} required>
-                                                            <p class="required d-none text-danger fw-bold mb-0" data-inv-id={{$donate->id}}>هذا الحقل مطلوب</p>
+                                                            <input type="text" name="invoice_no" class="form-control text-center invoice" placeholder="رقم الإيصال" data-inv-id={{$donate->id}} required>
+                                                            <p class="required d-none text-danger fw-bold mb-0 invReq" data-inv-id={{$donate->id}}>هذا الحقل مطلوب</p>
+                                                            <p class="required d-none text-danger fw-bold mb-0 invMsg" data-inv-id={{$donate->id}}>يجل ان يكون رقم اليصال مكون من 5 أرقام</p>
                                                         </div>
                                                         <div class="form-group mb-2">
                                                             <select name="duration[]" class="form-multi-select duration" data-duration-id={{$donate->id}} multiple required>
@@ -193,8 +193,7 @@
                                                                 <option value="نوفمبر">نوفمبر</option>
                                                                 <option value="ديسمبر">ديسمبر</option>
                                                             </select>
-                                                            <p class="required d-none text-danger fw-bold mb-0" data-duration-id={{$donate->id}}></p>
-                                                            <p class="required d-none text-danger fw-bold mb-0" data-duration-id={{$donate->id}}></p>
+                                                            <p class="required d-none text-danger fw-bold mb-0 durReq" data-duration-id={{$donate->id}}>إختر من القائمة أعلاه</p>
                                                         </div>
                                                         <div class="form-group">
                                                             <input type="submit" data-donationSubmit-id={{$donate->id}} class="btn btn-primary mt-3 d-block w-100 text-white" value="إرسال">
