@@ -67,7 +67,6 @@
     <div class="row">
         <div class="col-12">
             <div class="alltombs">
-
                 @if (session('success'))
                     <div class="alert alert-success text-center mt-5">
                         <p class="mb-0">{{ session('success') }}</p>
@@ -79,7 +78,6 @@
                         </div>
                     @endforeach
                 @endif
-
                 <table class="table borderd-table display align-middle text-center" id="table21" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                     <thead>
                         <tr>
@@ -120,13 +118,13 @@
                                                             <div class="row">
                                                                 <input type="hidden" name="id" value="{{$tomb->id}}">
                                                                 <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <input type="text" name="name" value="{{$tomb->name}}" placeholder="إسم المقبرة" class="form-control mb-3 text-center">
+                                                                    <div class="form-group mb-2">
+                                                                        <input type="text" name="name" value="{{$tomb->name}}" placeholder="إسم المقبرة" class="form-control text-center">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <select name="power" class="form-control mb-2">
+                                                                    <div class="form-group mb-2">
+                                                                        <select name="power" class="form-select">
                                                                             <option class="text-center" selected>قوة المقبرة</option>
                                                                             <option value="1" {{$tomb->power  == '1' ? 'selected' : ''}}>1</option>
                                                                             <option value="2" {{$tomb->power  == '2' ? 'selected' : ''}}>2</option>
@@ -138,7 +136,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6">
-                                                                    <div class="field">
+                                                                    <div class="form-group">
                                                                         <select name="type" class="form-control mb-2">
                                                                             <option class="text-center" selected>إختار نوع المقبرة</option>
                                                                             <option value="لحد" {{$tomb->type  == 'لحد' ? 'selected' : ''}}>لحد</option>
@@ -147,7 +145,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6">
-                                                                    <div class="field">
+                                                                    <div class="form-group mb-2">
                                                                         <select name="region" class="form-control">
                                                                             <option selected>إختار المنطقة</option>
                                                                             @if ($regionCount > 0)
@@ -159,12 +157,12 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6">
-                                                                    <div class="field">
-                                                                        <input type="number" name="annual_cost" value="{{$tomb->annual_cost}}" class="form-control mb-3 text-center" placeholder="قيمة الدفع السنوي">
+                                                                    <div class="form-group mb-2">
+                                                                        <input type="number" name="annual_cost" value="{{$tomb->annual_cost}}" class="form-control text-center" placeholder="قيمة الدفع السنوي">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
-                                                                    <div class="field">
+                                                                    <div class="form-group">
                                                                         <input type="submit" value="تعديل" class="btn btn-success w-100">
                                                                     </div>
                                                                 </div>
@@ -185,59 +183,66 @@
         </div>
     </div>
     <div class="modal fade" id="addtomb" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة مقبرة جديدة</h1>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('tombs.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('tombs.store')}}" method="post" id="newTombForm">
                         @csrf
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="text" name="name" placeholder="إسم المقبرة" class="form-control mb-3 text-center">
+                                    <div class="form-group mb-2">
+                                        <input type="text" name="name" placeholder="إسم المقبرة" id="tombName" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" class="form-control text-center" required>
+                                        <p class="required d-none text-danger mb-0 fw-bold" id="tombReq">هذا الحقل مطلوب</p>
+                                        <p class="required d-none text-danger mb-0 fw-bold" id="tombMsg">يجب ان يكون اسم المقبره مكون من 3 احرف على الاقل</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="field">
-                                        <select name="power" class="form-control mb-2">
-                                            <option class="text-center" selected>قوة المقبرة (بالغرف)</option>
+                                    <div class="form-group mb-2">
+                                        <select name="power" class="form-select" id="tombPower" required>
+                                            <option class="text-center" selected disabled>قوة المقبرة (بالغرف)</option>
                                             <option value="2">2</option>
                                             <option value="4">4</option>
                                             <option value="6">6</option>
                                         </select>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="powerReq">اختار من القائمة اعلاه</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="field">
-                                        <select name="type" class="form-control mb-2">
-                                            <option class="text-center" selected>إختار نوع المقبرة</option>
+                                    <div class="form-group mb-2">
+                                        <select name="type" class="form-select" id="tombType" required>
+                                            <option class="text-center" selected disabled>نوع المقبرة</option>
                                             <option value="لحد">لحد</option>
                                             <option value="عيون">عيون</option>
                                         </select>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="typeReq">اختار من القائمة اعلاه</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="field">
-                                        <select name="region" class="form-control">
-                                            <option selected>إختار المنطقة</option>
+                                    <div class="form-group mb-2">
+                                        <select name="region" class="form-select" id="tombRegion" required>
+                                            <option selected disabled>المنطقة</option>
                                             @foreach ($region as $region)
                                                 <option value="{{$region->name}}">{{$region->name}}</option>
                                             @endforeach
                                         </select>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="regionReq">اختار من القائمة اعلاه</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="number" name="annual_cost" class="form-control mb-3 text-center" placeholder="قيمة الدفع السنوي">
+                                    <div class="form-group mb-2">
+                                        <input type="text" name="annual_cost" class="form-control text-center" minlength="2" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="tombCost" placeholder="قيمة الدفع السنوي" required>
+                                        <p class="required text-danger mb-0 fw-bold d-none" id="costReq">هذا الحقل مطلوب</p>
+                                        <p class="required text-danger mb-0 fw-bold d-none" id="costMsg">يجب ان لا يقل المبلغ عن 2 رقم</p>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="field">
-                                        <input type="submit" value="إضافة" class="btn btn-success w-100">
+                                    <div class="form-group">
+                                        <input type="submit" value="إضافة" id="tombSubmit" class="btn btn-success w-100">
                                     </div>
                                 </div>
                             </div>

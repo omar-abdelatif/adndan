@@ -19,7 +19,15 @@ function validateForm(form) {
     const categorySelects = form.querySelectorAll("select[required]");
     categorySelects.forEach(function (select) {
         let categoryErrorMsg = select.nextElementSibling;
-        if ( select.value === "التصنيف" || select.value === "المنطقة" || select.value === "نوع المتبرع" || select.value === "نوع التبرع النقدي" || select.value === "نوع التبرع" || select.value === "") {
+        if (
+            select.value === "التصنيف" ||
+            select.value === "المنطقة" ||
+            select.value === "نوع المتبرع" ||
+            select.value === "نوع التبرع النقدي" ||
+            select.value === "نوع التبرع" ||
+            select.value === "قوة المقبرة (بالغرف)" ||
+            select.value === "نوع المقبرة"
+        ) {
             select.classList.add("error");
             select.classList.remove("good");
             categoryErrorMsg.classList.remove("d-none");
@@ -130,7 +138,7 @@ if (CaseTable) {
     const ssnMsg = document.getElementById("ssnMsg");
     const ssnReq = document.getElementById("ssnReq");
     ssn.addEventListener("input", function () {
-        let letters = /(?=.{14,})/;
+        let letters = /^[0-9]{14}/;
         if (this.value.trim() === "") {
             ssnReq.classList.remove("d-none");
             ssnMsg.classList.add("d-none");
@@ -163,7 +171,7 @@ if (CaseTable) {
     const mobReq = document.getElementById("mobileReq");
     const mobMsg = document.getElementById("mobileMsg");
     mobile.addEventListener("input", function () {
-        let letters = /(?=.{11,})/;
+        let letters = /^[0-9]{11}/;
         if (mobile.value.trim() === "") {
             mobReq.classList.remove("d-none");
             mobMsg.classList.add("d-none");
@@ -378,26 +386,41 @@ let DonationsForm = document.querySelectorAll("[data-donation-id]");
 if (DonationsForm) {
     DonationsForm.forEach((form) => {
         let DonationType = form.querySelectorAll("[data-donationtype-id]");
-        let DonationMoneyType = form.querySelectorAll("[data-donationmoneytype-id]");
-        let DonationOtherType = form.querySelectorAll("[data-donationothertype-id]");
+        let DonationMoneyType = form.querySelectorAll(
+            "[data-donationmoneytype-id]"
+        );
+        let DonationOtherType = form.querySelectorAll(
+            "[data-donationothertype-id]"
+        );
         let DonationAmount = form.querySelectorAll("[data-donationamount-id]");
         let DonationInvoice = form.querySelectorAll("[data-inv-id]");
         let DonationDuration = form.querySelectorAll("[data-duration-id]");
         //! Donation Type Validation
         DonationType.forEach((type) => {
-            const typeSelect = form.querySelector(`select[name="donation_type"][data-donationtype-id="${type.dataset.donationtypeId}"]`);
-            const typeReq = form.querySelector(`p.donationtypeReq[data-donationtype-id="${type.dataset.donationtypeId}"]`);
+            const typeSelect = form.querySelector(
+                `select[name="donation_type"][data-donationtype-id="${type.dataset.donationtypeId}"]`
+            );
+            const typeReq = form.querySelector(
+                `p.donationtypeReq[data-donationtype-id="${type.dataset.donationtypeId}"]`
+            );
             if (typeSelect) {
                 typeSelect.addEventListener("change", function () {
-                    let selectedDonation = typeSelect.options[typeSelect.selectedIndex].value;
+                    let selectedDonation =
+                        typeSelect.options[typeSelect.selectedIndex].value;
                     if (selectedDonation === "نقدي") {
                         typeSelect.classList.add("good");
                         typeSelect.classList.remove("error");
                         typeReq.classList.add("d-none");
                         DonationMoneyType.forEach((other) => {
-                            const otherSelect = form.querySelector(`select[name="money_type"][data-donationmoneytype-id="${other.dataset.donationmoneytypeId}"]`);
-                            const otherSelectReq = form.querySelector(`p.donationmoneytype[data-donationmoneytype-id="${other.dataset.donationmoneytypeId}"]`);
-                            const otherOptions = otherSelect.options[otherSelect.selectedIndex].value;
+                            const otherSelect = form.querySelector(
+                                `select[name="money_type"][data-donationmoneytype-id="${other.dataset.donationmoneytypeId}"]`
+                            );
+                            const otherSelectReq = form.querySelector(
+                                `p.donationmoneytype[data-donationmoneytype-id="${other.dataset.donationmoneytypeId}"]`
+                            );
+                            const otherOptions =
+                                otherSelect.options[otherSelect.selectedIndex]
+                                    .value;
                             if (otherOptions === "نوع التبرع النقدي") {
                                 otherSelect.classList.remove("d-none");
                                 otherSelect.classList.add("error");
@@ -410,8 +433,12 @@ if (DonationsForm) {
                             }
                         });
                         DonationOtherType.forEach((other) => {
-                            const OtherType = form.querySelector(`input[name="other_type"][data-donationothertype-id="${other.dataset.donationothertypeId}"]`);
-                            const OtherTypeReq = form.querySelector(`p.donationothertype[data-donationothertype-id="${other.dataset.donationothertypeId}"]`);
+                            const OtherType = form.querySelector(
+                                `input[name="other_type"][data-donationothertype-id="${other.dataset.donationothertypeId}"]`
+                            );
+                            const OtherTypeReq = form.querySelector(
+                                `p.donationothertype[data-donationothertype-id="${other.dataset.donationothertypeId}"]`
+                            );
                             if (OtherType) {
                                 OtherType.classList.add("d-none");
                                 OtherType.classList.remove("error");
@@ -427,8 +454,12 @@ if (DonationsForm) {
                         typeSelect.classList.remove("error");
                         typeReq.classList.add("d-none");
                         DonationMoneyType.forEach((money) => {
-                            const MoneyType = form.querySelector(`select[name="money_type"][data-donationmoneytype-id="${money.dataset.donationmoneytypeId}"]`);
-                            const MoneyTypeReq = form.querySelector(`p.donationmoneytype[data-donationmoneytype-id="${money.dataset.donationmoneytypeId}"]`)
+                            const MoneyType = form.querySelector(
+                                `select[name="money_type"][data-donationmoneytype-id="${money.dataset.donationmoneytypeId}"]`
+                            );
+                            const MoneyTypeReq = form.querySelector(
+                                `p.donationmoneytype[data-donationmoneytype-id="${money.dataset.donationmoneytypeId}"]`
+                            );
                             if (MoneyType) {
                                 MoneyType.classList.add("d-none");
                                 MoneyType.classList.remove("error");
@@ -436,8 +467,12 @@ if (DonationsForm) {
                             }
                         });
                         DonationOtherType.forEach((other) => {
-                            const OtherDonationType = form.querySelector(`input[name="other_type"][data-donationothertype-id="${other.dataset.donationothertypeId}"]`);
-                            const OtherTypeReq = form.querySelector(`p.donationothertype[data-donationothertype-id="${other.dataset.donationothertypeId}"]`);
+                            const OtherDonationType = form.querySelector(
+                                `input[name="other_type"][data-donationothertype-id="${other.dataset.donationothertypeId}"]`
+                            );
+                            const OtherTypeReq = form.querySelector(
+                                `p.donationothertype[data-donationothertype-id="${other.dataset.donationothertypeId}"]`
+                            );
                             if (OtherDonationType) {
                                 OtherDonationType.classList.remove("d-none");
                                 if (OtherDonationType.value.trim() === "") {
@@ -456,11 +491,16 @@ if (DonationsForm) {
         });
         //! Other Donation Money Type Validation
         DonationMoneyType.forEach((other) => {
-            const otherSelect = form.querySelector(`select[name="money_type"][data-donationmoneytype-id="${other.dataset.donationmoneytypeId}"]`);
-            const otherReq = form.querySelector(`p.donationmoneytype[data-donationmoneytype-id="${other.dataset.donationmoneytypeId}"]`);
+            const otherSelect = form.querySelector(
+                `select[name="money_type"][data-donationmoneytype-id="${other.dataset.donationmoneytypeId}"]`
+            );
+            const otherReq = form.querySelector(
+                `p.donationmoneytype[data-donationmoneytype-id="${other.dataset.donationmoneytypeId}"]`
+            );
             if (otherSelect) {
                 otherSelect.addEventListener("change", function () {
-                    let selectedDonation = otherSelect.options[otherSelect.selectedIndex].value;
+                    let selectedDonation =
+                        otherSelect.options[otherSelect.selectedIndex].value;
                     if (selectedDonation === "نوع التبرع النقدي") {
                         otherSelect.classList.remove("good");
                         otherSelect.classList.add("error");
@@ -475,8 +515,12 @@ if (DonationsForm) {
         });
         //! Other Donation Validation
         DonationOtherType.forEach((other) => {
-            const otherInput = form.querySelector(`input[name="other_type"][data-donationothertype-id="${other.dataset.donationothertypeId}"]`);
-            const otherInputReq = form.querySelector(`p.donationothertype[data-donationothertype-id="${other.dataset.donationothertypeId}"]`);
+            const otherInput = form.querySelector(
+                `input[name="other_type"][data-donationothertype-id="${other.dataset.donationothertypeId}"]`
+            );
+            const otherInputReq = form.querySelector(
+                `p.donationothertype[data-donationothertype-id="${other.dataset.donationothertypeId}"]`
+            );
             if (otherInput) {
                 otherInput.addEventListener("input", function () {
                     let letters = /(?=.{3,})/;
@@ -495,14 +539,20 @@ if (DonationsForm) {
                             otherInputReq.classList.remove("d-none");
                         }
                     }
-                })
+                });
             }
-        })
+        });
         //! Donation Amount Validation
         DonationAmount.forEach((amount) => {
-            const amountInput = form.querySelector(`input[name="amount"][data-donationamount-id="${amount.dataset.donationamountId}"]`)
-            const amountInputReq = form.querySelector(`p.donationamountReq[data-donationamount-id="${amount.dataset.donationamountId}"]`)
-            const amountInputMsg = form.querySelector(`p.donationamountMsg[data-donationamount-id="${amount.dataset.donationamountId}"]`);
+            const amountInput = form.querySelector(
+                `input[name="amount"][data-donationamount-id="${amount.dataset.donationamountId}"]`
+            );
+            const amountInputReq = form.querySelector(
+                `p.donationamountReq[data-donationamount-id="${amount.dataset.donationamountId}"]`
+            );
+            const amountInputMsg = form.querySelector(
+                `p.donationamountMsg[data-donationamount-id="${amount.dataset.donationamountId}"]`
+            );
             if (amountInput) {
                 amountInput.addEventListener("input", function () {
                     let letters = /^\d{2,}$/;
@@ -524,14 +574,20 @@ if (DonationsForm) {
                             amountInputReq.classList.add("d-none");
                         }
                     }
-                })
+                });
             }
-        })
+        });
         //! Donation Invoice Validation
         DonationInvoice.forEach((inv) => {
-            const invInput = form.querySelector(`input[name="invoice_no"][data-inv-id="${inv.dataset.invId}"]`);
-            const invInputReq = form.querySelector(`p.invReq[data-inv-id="${inv.dataset.invId}"]`);
-            const invInputMsg = form.querySelector(`p.invMsg[data-inv-id="${inv.dataset.invId}"]`);
+            const invInput = form.querySelector(
+                `input[name="invoice_no"][data-inv-id="${inv.dataset.invId}"]`
+            );
+            const invInputReq = form.querySelector(
+                `p.invReq[data-inv-id="${inv.dataset.invId}"]`
+            );
+            const invInputMsg = form.querySelector(
+                `p.invMsg[data-inv-id="${inv.dataset.invId}"]`
+            );
             if (invInput) {
                 invInput.addEventListener("input", function () {
                     let letters = /^\d{5}$/;
@@ -553,13 +609,15 @@ if (DonationsForm) {
                             invInputReq.classList.add("d-none");
                         }
                     }
-                })
+                });
             }
-        })
+        });
         //! Donation Duration Validation
         DonationDuration.forEach((dur) => {
-            const durInput = form.querySelector(`.duration`)
-            const durInputReq = form.querySelector(`p.durReq[data-duration-id="${dur.dataset.durationId}"]`)
+            const durInput = form.querySelector(`.duration`);
+            const durInputReq = form.querySelector(
+                `p.durReq[data-duration-id="${dur.dataset.durationId}"]`
+            );
             if (durInput) {
                 durInput.addEventListener("change", function () {
                     if (dur.selectedOptions.length === 0) {
@@ -571,11 +629,13 @@ if (DonationsForm) {
                         durInput.classList.remove("error");
                         durInputReq.classList.add("d-none");
                     }
-                })
+                });
             }
-        })
+        });
         //! Donation Submition Validation
-        const AllDonationSubmit = form.querySelectorAll("[data-donationSubmit-id]");
+        const AllDonationSubmit = form.querySelectorAll(
+            "[data-donationSubmit-id]"
+        );
         if (AllDonationSubmit) {
             AllDonationSubmit.forEach((donation) => {
                 donation.addEventListener("click", function (event) {
@@ -587,4 +647,127 @@ if (DonationsForm) {
             });
         }
     });
+}
+//! Add Tombs Validation
+const tombForm = document.getElementById("newTombForm");
+if (tombForm) {
+    //! Tomb Name Validation
+    const tombName = tombForm.querySelector("#tombName");
+    const tombReq = tombForm.querySelector("#tombReq");
+    const tombMsg = tombForm.querySelector("#tombMsg");
+    if (tombName) {
+        tombName.addEventListener("input", function () {
+            let letters = /^[\u0600-\u06FF\s]{3,}$/;
+            if (this.value.trim() === "") {
+                tombReq.classList.remove("d-none");
+                tombMsg.classList.add("d-none");
+                tombName.classList.remove("good");
+                tombName.classList.add("error");
+            } else {
+                if (letters.test(this.value)) {
+                    tombName.classList.add("good");
+                    tombName.classList.remove("error");
+                    tombMsg.classList.add("d-none");
+                    tombReq.classList.add("d-none");
+                } else {
+                    tombName.classList.remove("good");
+                    tombName.classList.add("error");
+                    tombMsg.classList.remove("d-none");
+                    tombReq.classList.add("d-none");
+                }
+            }
+        });
+    }
+    //! Tomb Power Validation
+    const tombPower = tombForm.querySelector("#tombPower");
+    const tombPowerReq = tombForm.querySelector("#powerReq");
+    if (tombPower) {
+        tombPower.addEventListener("change", function () {
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "قوة المقبرة (بالغرف)") {
+                tombPower.classList.add("error");
+                tombPower.classList.remove("good");
+                tombPowerReq.classList.remove("d-none");
+            } else {
+                tombPower.classList.remove("error");
+                tombPower.classList.add("good");
+                tombPowerReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Tomb Type Validation
+    const tombType = tombForm.querySelector("#tombType");
+    const tombTypeReq = tombForm.querySelector("#typeReq");
+    if (tombType) {
+        tombType.addEventListener("change", function () {
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "نوع المقبرة") {
+                tombType.classList.add("error");
+                tombType.classList.remove("good");
+                tombTypeReq.classList.remove("d-none");
+            } else {
+                tombType.classList.remove("error");
+                tombType.classList.add("good");
+                tombTypeReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Tomb Region Validation
+    const tombRegion = tombForm.querySelector("#tombRegion");
+    const tombRegionReq = tombForm.querySelector("#regionReq");
+    if (tombRegion) {
+        tombRegion.addEventListener("change", function () {
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "المنطقة") {
+                tombRegion.classList.add("error");
+                tombRegion.classList.remove("good");
+                tombRegionReq.classList.remove("d-none");
+            } else {
+                tombRegion.classList.remove("error");
+                tombRegion.classList.add("good");
+                tombRegionReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Tomb Annual Cost Validation
+    const tombCost = tombForm.querySelector("#tombCost");
+    const costReq = tombForm.querySelector("#costReq");
+    const costMsg = tombForm.querySelector("#costMsg");
+    if (tombCost) {
+        tombCost.addEventListener("input", function () {
+            let letters = /^[0-9]{2,}$/;
+            if (this.value.trim() === "") {
+                costReq.classList.remove("d-none");
+                costMsg.classList.add("d-none");
+                tombCost.classList.remove("good");
+                tombCost.classList.add("error");
+            } else {
+                if (letters.test(this.value)) {
+                    tombCost.classList.add("good");
+                    tombCost.classList.remove("error");
+                    costMsg.classList.add("d-none");
+                    costReq.classList.add("d-none");
+                } else {
+                    tombCost.classList.remove("good");
+                    tombCost.classList.add("error");
+                    costMsg.classList.remove("d-none");
+                    costReq.classList.add("d-none");
+                }
+            }
+        });
+    }
+    //! Tomb Power Validation
+    //! Tomb Type Validation
+    //! Tomb Region Validation
+    //! Tomb Annual Cost Validation
+    //! Tomb Submition Validation
+    const tombSubmition = tombForm.querySelector("#tombSubmit");
+    if (tombSubmition) {
+        tombSubmition.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (validateForm(tombForm)) {
+                tombForm.submit();
+            }
+        });
+    }
 }
