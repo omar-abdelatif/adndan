@@ -145,30 +145,33 @@
         </div>
     </div>
     <div class="modal fade" id="addregion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة منطقة جديدة</h1>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('region.store') }}" method="post">
+                    <form action="{{ route('region.store') }}" method="post" id="regionForm">
                         @csrf
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="text" name="name" placeholder="إسم المنطقة" class="form-control mb-3 text-center">
+                                    <div class="form-group mb-2">
+                                        <input type="text" name="name" placeholder="إسم المنطقة" id="regionName" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" class="form-control text-center" required>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="regionNameReq">هذا الحقل مطلوب</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="field">
-                                        <input type="number" name="capacity" class="form-control mb-3 text-center" placeholder="قوة المنطقة">
+                                    <div class="form-group mb-2">
+                                        <input type="text" name="capacity" maxlength="2" class="form-control text-center" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="regionPower" placeholder="قوة المنطقة" required>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="regionPowerReq">هذا الحقل مطلوب</p>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="regionPowerMsg">يجب ان يكون الحقل مكون من 2 رقم</p>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="field">
-                                        <input type="submit" value='إضافة' class="btn btn-success w-100">
+                                    <div class="form-group">
+                                        <input type="submit" value='إضافة' id="regionSubmition" class="btn btn-success w-100">
                                     </div>
                                 </div>
                             </div>

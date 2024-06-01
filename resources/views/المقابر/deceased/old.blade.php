@@ -224,42 +224,50 @@
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body bg-dark-gradient">
-                    <form action="{{ route('old.store') }}" method="post">
+                    <form action="{{ route('old.store') }}" method="post" id="OldDeceasedForm">
                         @csrf
                         <div class="form-group mb-3">
-                            <label for="name" class="text-white">
+                            <label for="oldDeceasedName" class="text-white">
                                 <b>الاسم</b>
                             </label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="الاسم">
+                            <input type="text" class="form-control" id="oldDeceasedName" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" name="name" placeholder="الاسم" required>
+                            <p class="required d-none text-danger mb-0 fw-bold" id="oldReq">هذا الحقل مطلوب</p>
+                            <p class="required d-none text-danger mb-0 fw-bold" id="oldMsg">يجب ان يكون اسم المتوفي مكون من 3 احرف على الاقل</p>
                         </div>
                         <div class="form-group mb-3">
                             <label for="burial_place" class="text-white">
                                 <b>مكان الدفن</b>
                             </label>
-                            <select name="region" id="region" class="form-control">
-                                <option value="0" selected>-- إختار المنطقة --</option>
+                            <select name="region" id="region" class="form-select" required>
+                                <option selected disabled>المنطقة</option>
                                 @foreach ($regions as $region)
                                     <option value="{{ $region->name }}">{{ $region->name }}</option>
                                 @endforeach
                             </select>
-                            <select name="tomb" id="regionTomb" class="form-control regionTomb mt-2">
-                                <option value="0" selected>-- إختار المقبرة --</option>
+                            <p class="required d-none text-danger mb-0 fw-bold" id="regionSelectReq">إختر من القائمة أغلاه</p>
+                            <select name="tomb" id="regionTomb" class="form-select regionTomb mt-2" required>
+                                <option selected disabled>المقبرة</option>
                             </select>
+                            <p class="required d-none text-danger mb-0 fw-bold" id="tombSelectReq">إختر من القائمة أغلاه</p>
                         </div>
                         <div class="form-group mb-3">
                             <label for="death_date" class="text-white">
                                 <b>تاريخ الوفاه</b>
                             </label>
-                            <input type="date" name="death_date" class="form-control">
+                            <input type="date" name="death_date" id="deceasedDeath" class="form-control" required>
+                            <p class="required d-none text-danger fw-bold mb-0" id="deathDateReq">هذا الحقل مطلوب</p>
+                            {{-- <p class="required d-none text-danger fw-bold mb-0" id="deathMsg">تاريخ الوفاه لا يمكن أن يكون في المستقبل</p> --}}
                         </div>
                         <div class="form-group mb-3">
                             <label for="burial_date" class="text-white">
                                 <b>تاريخ الدفن</b>
                             </label>
-                            <input type="date" name="burial_date" class="form-control">
+                            <input type="date" name="burial_date" id="deceasedBurial" class="form-control" required>
+                            <p class="required d-none text-danger fw-bold mb-0" id="burialReq">هذا الحقل مطلوب</p>
+                            {{-- <p class="required d-none text-danger fw-bold mb-0" id="burialMsg">تاريخ الدفن لا يمكن أن يكون قبل تاريخ الوفاه</p> --}}
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn bg-success-gradient w-100 text-white">
+                            <button type="submit" id="OldSubmit" class="btn bg-success-gradient w-100 text-white">
                                 <b>إضافة</b>
                             </button>
                         </div>

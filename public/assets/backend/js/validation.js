@@ -26,7 +26,8 @@ function validateForm(form) {
             select.value === "نوع التبرع النقدي" ||
             select.value === "نوع التبرع" ||
             select.value === "قوة المقبرة (بالغرف)" ||
-            select.value === "نوع المقبرة"
+            select.value === "نوع المقبرة" ||
+            select.value === "المقبرة"
         ) {
             select.classList.add("error");
             select.classList.remove("good");
@@ -45,6 +46,18 @@ function validateForm(form) {
             img.classList.add("error");
             imgError.classList.remove("d-none");
             isValid = false;
+        }
+    });
+    const InputDates = form.querySelectorAll('input[type="date"][required]');
+    InputDates.forEach((date) => {
+        let dateErrorMsg = date.nextElementSibling;
+        if (date.value === "") {
+            date.classList.add("error");
+            dateErrorMsg.classList.remove("d-none");
+            isValid = false;
+        } else {
+            date.classList.remove("error");
+            dateErrorMsg.classList.add("d-none");
         }
     });
     const textareas = form.querySelectorAll("textarea[required]");
@@ -769,5 +782,178 @@ if (tombForm) {
                 tombForm.submit();
             }
         });
+    }
+}
+//! Old Deceased Validation
+const OldDeceasedForm = document.getElementById("OldDeceasedForm");
+if (OldDeceasedForm) {
+    //! Old Deceased Name Validation
+    const oldDeceasedName = OldDeceasedForm.querySelector("#oldDeceasedName");
+    const nameReq = OldDeceasedForm.querySelector("#oldReq");
+    const nameMsg = OldDeceasedForm.querySelector("#oldMsg");
+    if (oldDeceasedName) {
+        oldDeceasedName.addEventListener("input", function () {
+            let letters = /^[\u0600-\u06FF\s]{3,}$/;
+            if (this.value.trim() === "") {
+                nameReq.classList.remove("d-none");
+                nameMsg.classList.add("d-none");
+                oldDeceasedName.classList.remove("good");
+                oldDeceasedName.classList.add("error");
+            } else {
+                if (letters.test(this.value)) {
+                    oldDeceasedName.classList.add("good");
+                    oldDeceasedName.classList.remove("error");
+                    nameMsg.classList.add("d-none");
+                    nameReq.classList.add("d-none");
+                } else {
+                    oldDeceasedName.classList.remove("good");
+                    oldDeceasedName.classList.add("error");
+                    nameMsg.classList.remove("d-none");
+                    nameReq.classList.add("d-none");
+                }
+            }
+        });
+    }
+    //! Old Deceased Region Select Validation
+    const oldDeceasedRegion = OldDeceasedForm.querySelector("#region");
+    const regionReq = OldDeceasedForm.querySelector("#regionSelectReq");
+    if (oldDeceasedRegion) {
+        oldDeceasedRegion.addEventListener("change", function () {
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "المنطقة") {
+                oldDeceasedRegion.classList.add("error");
+                oldDeceasedRegion.classList.remove("good");
+                regionReq.classList.remove("d-none");
+            } else {
+                oldDeceasedRegion.classList.remove("error");
+                oldDeceasedRegion.classList.add("good");
+                regionReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Old Deceased Tomb Select Validation
+    const oldDeceasedTomb = OldDeceasedForm.querySelector("#regionTomb");
+    const tombReq = OldDeceasedForm.querySelector("#tombSelectReq");
+    if (oldDeceasedTomb) {
+        oldDeceasedTomb.addEventListener("change", function () {
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "المقبرة") {
+                oldDeceasedTomb.classList.add("error");
+                oldDeceasedTomb.classList.remove("good");
+                tombReq.classList.remove("d-none");
+            } else {
+                oldDeceasedTomb.classList.remove("error");
+                oldDeceasedTomb.classList.add("good");
+                tombReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Old Deceased Death Date Validation
+    const oldDeceasedDeathDate = OldDeceasedForm.querySelector("#deceasedDeath");
+    const deathDateReq = OldDeceasedForm.querySelector("#deathDateReq");
+    if (oldDeceasedDeathDate) {
+        oldDeceasedDeathDate.addEventListener("change", function () {
+            const deathDateValue = oldDeceasedDeathDate.value;
+            if (deathDateValue === "") {
+                oldDeceasedDeathDate.classList.add("error");
+                oldDeceasedDeathDate.classList.remove("good");
+                deathDateReq.classList.remove("d-none");
+            } else {
+                oldDeceasedDeathDate.classList.remove("error");
+                oldDeceasedDeathDate.classList.add("good");
+                deathDateReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Old Deceased Burial Date Validation
+    const oldDeceasedBurialDate = OldDeceasedForm.querySelector("#deceasedBurial");
+    const burialDateReq = OldDeceasedForm.querySelector("#burialReq");
+    if (oldDeceasedBurialDate) {
+        oldDeceasedBurialDate.addEventListener("change", function () {
+            const deathDateValue = oldDeceasedBurialDate.value;
+            if (deathDateValue === "") {
+                oldDeceasedBurialDate.classList.add("error");
+                oldDeceasedBurialDate.classList.remove("good");
+                burialDateReq.classList.remove("d-none");
+            } else {
+                oldDeceasedBurialDate.classList.remove("error");
+                oldDeceasedBurialDate.classList.add("good");
+                burialDateReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Old Deceased Submitition Validation
+    const OldSubmit = OldDeceasedForm.querySelector("#OldSubmit");
+    if (OldSubmit) {
+        OldSubmit.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (validateForm(OldDeceasedForm)) {
+                OldDeceasedForm.submit();
+            }
+        });
+    }
+}
+//! Region Form Validation
+const RegionForm = document.getElementById("regionForm");
+if (RegionForm) {
+    //! Region Name Validation
+    const regionName = RegionForm.querySelector("#regionName");
+    const regionNameReq = RegionForm.querySelector("#regionNameReq");
+    if (regionName) {
+        regionName.addEventListener("input", function () {
+            let letters = /^[\u0600-\u06FF\s]+$/;
+            if (this.value.trim() === "") {
+                regionNameReq.classList.remove("d-none");
+                regionName.classList.remove("good");
+                regionName.classList.add("error");
+            } else {
+                if (letters.test(this.value)) {
+                    regionName.classList.add("good");
+                    regionName.classList.remove("error");
+                    regionNameReq.classList.add("d-none");
+                } else {
+                    regionName.classList.remove("good");
+                    regionName.classList.add("error");
+                    regionNameReq.classList.add("d-none");
+                }
+            }
+        })
+    }
+    //! Region Power Validation
+    const regionPower = RegionForm.querySelector("#regionPower");
+    const regionPowerReq = RegionForm.querySelector("#regionPowerReq");
+    const regionPowerMsg = RegionForm.querySelector("#regionPowerMsg");
+    if (regionPower) {
+        regionPower.addEventListener("input", function () {
+            let letters = /^[0-9]{2}$/;
+            if (this.value.trim() === "") {
+                regionPower.classList.remove("good");
+                regionPower.classList.add("error");
+                regionPowerReq.classList.remove("d-none");
+                regionPowerMsg.classList.add("d-none");
+            } else {
+                if (letters.test(this.value)) {
+                    regionPower.classList.add("good");
+                    regionPower.classList.remove("error");
+                    regionPowerReq.classList.add("d-none");
+                    regionPowerMsg.classList.add("d-none");
+                } else {
+                    regionPower.classList.remove("good");
+                    regionPower.classList.add("error");
+                    regionPowerReq.classList.add("d-none");
+                    regionPowerMsg.classList.remove("d-none");
+                }
+            }
+        })
+    }
+    //! Region Submition Validation
+    const regionSubmition = RegionForm.querySelector("#regionSubmition");
+    if (regionSubmition) {
+        regionSubmition.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (validateForm(RegionForm)) {
+                RegionForm.submit();
+            }
+        })
     }
 }

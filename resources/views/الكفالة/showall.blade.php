@@ -277,7 +277,7 @@
                                     <div class="form-group mb-3">
                                         <input type="text" name="fullname" placeholder="إسم الحالة" id="CaseFullName" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" class="form-control text-center" required>
                                         <p id="CaseReq" class="required text-danger fw-bold d-none mb-0">هذا الحقل مطلوب</p>
-                                        <p id="CaseMsg" class="required text-danger fw-bold d-none mb-0">الأسم باللغة العربية فقط ولا يقل عن 3 أحرف</p>
+                                        <p id="CaseMsg" class="required text-danger fw-bold d-none mb-0">يجب ان يكون الحقل لا يقل عن 3 أحرف</p>
                                     </div>
                                     <div class="form-group mb-3">
                                         <input type="text" name="ssn" id="ssn" placeholder="الرقم القومي" maxlength="14" class="form-control text-center" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
