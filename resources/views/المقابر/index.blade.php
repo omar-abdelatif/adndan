@@ -23,7 +23,7 @@
     </header>
 @endsection
 @section('content')
-    <div class="row mt-5">
+    <div class="row mt-5 justify-content-center">
         @if (session('success'))
             <div class="alert alert-success text-center">
                 <p class="m-0">{{ session('success') }}</p>
@@ -138,6 +138,23 @@
                 </div>
                 <div class="item-footer">
                     <a href='{{route("15may.index")}}' class="btn btn-primary w-100 mt-3">
+                        <b>المزيد</b>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="items bg-info-gradient p-3 rounded overflow-hidden mt-4">
+                <div class="item-header">
+                    <div class="item-logo text-center">
+                        <img src="{{asset('icons/icons8-cemetery-30.png')}}" width="50" alt="cemetry logo">
+                    </div>
+                    <div class="item-title mt-2">
+                        <h3 class="text-white text-center text-decoration-underline">القرية</h3>
+                    </div>
+                </div>
+                <div class="item-footer">
+                    <a href='{{route("village.all")}}' class="btn btn-primary w-100 mt-3">
                         <b>المزيد</b>
                     </a>
                 </div>

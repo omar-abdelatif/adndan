@@ -122,6 +122,7 @@ function validateImage(img, imgReq, imgExt, invoice_img, imgSizeMsg) {
         imgSizeMsg.classList.add("d-none");
     }
 }
+//! Validation Files Function
 function validateFile(file, fileReq, fileExt, fileMsg, pdfs) {
     const allowedExtensions = ["application/pdf"];
     fileReq.classList.add("d-none");

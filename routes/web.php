@@ -20,6 +20,7 @@ use App\Http\Controllers\Tombs\GafeerTombController;
 use App\Http\Controllers\Tombs\ZenhomTombController;
 use App\Http\Controllers\Tombs\KatamyaTombController;
 use App\Http\Controllers\Tombs\OctoberTombController;
+use App\Http\Controllers\Tombs\VillageController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -110,6 +111,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('15may/tombs/{tombId}/rooms/{roomId}', [May15TombController::class, 'showRoom'])->name('15may.rooms');
     Route::get('delete_15may_deceased/{id}', [May15TombController::class, 'deleteDeceased'])->name('15may-deceased.destroy');
     Route::post('update_15may_deceased', [May15TombController::class, 'updateDeceased'])->name('15may-deceased.update');
+    //! Village Routes
+    Route::controller(VillageController::class)->group(function () {
+        Route::get('tombs/villages/all', 'index')->name('village.all');
+    });
     //! Rooms Routes
     Route::get('all_rooms', [RoomsController::class, 'index'])->name('rooms.all');
     Route::get('/get-rooms', [RoomsController::class, 'getRooms'])->name('getRooms');

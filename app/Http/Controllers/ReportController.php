@@ -48,7 +48,7 @@ class ReportController extends Controller
     {
         $month = $request->input('date');
         if($month){
-
+            
         } else {
 
         }
