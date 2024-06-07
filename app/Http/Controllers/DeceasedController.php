@@ -64,15 +64,15 @@ class DeceasedController extends Controller
                 $name = time() . '.' . $file->getClientOriginalExtension();
                 $destinationPath = public_path('build/assets/backend/files/tombs/imgs/');
                 $file->move($destinationPath, $name);
+                $deceased->files = $name;
             }
             if ($request->hasFile('pdf_files')) {
                 $files = $request->file('pdf_files');
                 $file_name = time() . '.' . $files->getClientOriginalExtension();
                 $Path = public_path('build/assets/backend/files/tombs/pdf/');
                 $files->move($Path, $file_name);
+                $deceased->pdf_files = $file_name;
             }
-            $deceased->files = $name;
-            $deceased->pdf_files = $file_name;
             $deceased->rooms_id = $room->id;
             $room = $deceased->rooms;
             $tomb = $regions->first()->tomb;
@@ -88,10 +88,10 @@ class DeceasedController extends Controller
             $room->save();
             $store = $deceased->save();
             if ($store) {
-                return redirect()->route('deceased.index')->with('success', 'تمت الإضافة بنجاح');
+                return redirect()->back()->with('success', 'تمت الإضافة بنجاح');
             }
         }
-        return redirect()->route('deceased.index')->with('error', $validated);
+        return redirect()->back()->with('error', $validated);
     }
     public function destroy($id)
     {

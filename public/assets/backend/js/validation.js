@@ -27,7 +27,11 @@ function validateForm(form) {
             select.value === "نوع التبرع" ||
             select.value === "قوة المقبرة (بالغرف)" ||
             select.value === "نوع المقبرة" ||
-            select.value === "المقبرة"
+            select.value === "المقبرة" ||
+            select.value === "الغرفة" ||
+            select.value === "جنس المتوفي" ||
+            select.value === "حجم المتوفي" ||
+            select.value === "سن المتوفي"
         ) {
             select.classList.add("error");
             select.classList.remove("good");
@@ -117,6 +121,44 @@ function validateImage(img, imgReq, imgExt, invoice_img, imgSizeMsg) {
         invoice_img.classList.add("good");
         imgSizeMsg.classList.add("d-none");
     }
+}
+function validateFile(file, fileReq, fileExt, fileMsg, pdfs) {
+    const allowedExtensions = ["application/pdf"];
+    fileReq.classList.add("d-none");
+    fileExt.classList.add("d-none");
+    fileMsg.classList.add("d-none");
+    if (!file) {
+        pdfs.classList.remove("good");
+        pdfs.classList.add("error");
+        fileReq.classList.remove("d-none");
+        return false;
+    } else {
+        pdfs.classList.add("good");
+        pdfs.classList.remove("error");
+        fileReq.classList.add("d-none");
+    }
+    if (!allowedExtensions.includes(file.type)) {
+        pdfs.classList.add("error");
+        pdfs.classList.remove("good");
+        fileExt.classList.remove("d-none");
+        return false;
+    } else {
+        pdfs.classList.remove("error");
+        pdfs.classList.add("good");
+        fileExt.classList.add("d-none");
+    }
+    const sizeLimit = 2048;
+    if (file.size / 1024 <= sizeLimit) {
+        pdfs.classList.add("error");
+        pdfs.classList.remove("good");
+        fileMsg.classList.remove("d-none");
+        return false;
+    } else {
+        pdfs.classList.remove("error");
+        pdfs.classList.add("good");
+        fileMsg.classList.add("d-none");
+    }
+    return true;
 }
 //! Cases Creation Form
 let CaseTable = document.getElementById("CaseTable");
@@ -849,7 +891,8 @@ if (OldDeceasedForm) {
         });
     }
     //! Old Deceased Death Date Validation
-    const oldDeceasedDeathDate = OldDeceasedForm.querySelector("#deceasedDeath");
+    const oldDeceasedDeathDate =
+        OldDeceasedForm.querySelector("#deceasedDeath");
     const deathDateReq = OldDeceasedForm.querySelector("#deathDateReq");
     if (oldDeceasedDeathDate) {
         oldDeceasedDeathDate.addEventListener("change", function () {
@@ -866,7 +909,8 @@ if (OldDeceasedForm) {
         });
     }
     //! Old Deceased Burial Date Validation
-    const oldDeceasedBurialDate = OldDeceasedForm.querySelector("#deceasedBurial");
+    const oldDeceasedBurialDate =
+        OldDeceasedForm.querySelector("#deceasedBurial");
     const burialDateReq = OldDeceasedForm.querySelector("#burialReq");
     if (oldDeceasedBurialDate) {
         oldDeceasedBurialDate.addEventListener("change", function () {
@@ -917,7 +961,7 @@ if (RegionForm) {
                     regionNameReq.classList.add("d-none");
                 }
             }
-        })
+        });
     }
     //! Region Power Validation
     const regionPower = RegionForm.querySelector("#regionPower");
@@ -944,7 +988,7 @@ if (RegionForm) {
                     regionPowerMsg.classList.remove("d-none");
                 }
             }
-        })
+        });
     }
     //! Region Submition Validation
     const regionSubmition = RegionForm.querySelector("#regionSubmition");
@@ -954,6 +998,348 @@ if (RegionForm) {
             if (validateForm(RegionForm)) {
                 RegionForm.submit();
             }
+        });
+    }
+}
+//! Deceased Form Validation
+const deceasedForm = document.getElementById("deceasedForm");
+if (deceasedForm) {
+    //! Deceased Name
+    let DeceasedName = deceasedForm.querySelector("#deceasedName");
+    let DeceasedNameReq = deceasedForm.querySelector("#deceasedNameReq");
+    let DeceasedNameMsg = deceasedForm.querySelector("#deceasedNameMsg");
+    if (DeceasedName) {
+        DeceasedName.addEventListener("input", function () {
+            let letters = /^[\u0600-\u06FF\s]{3,}$/;
+            if (this.value.trim() === "") {
+                DeceasedNameReq.classList.remove("d-none");
+                DeceasedNameMsg.classList.add("d-none");
+                DeceasedName.classList.remove("good");
+                DeceasedName.classList.add("error");
+            } else {
+                if (letters.test(this.value)) {
+                    DeceasedName.classList.add("good");
+                    DeceasedName.classList.remove("error");
+                    DeceasedNameMsg.classList.add("d-none");
+                    DeceasedNameReq.classList.add("d-none");
+                } else {
+                    DeceasedName.classList.remove("good");
+                    DeceasedName.classList.add("error");
+                    DeceasedNameMsg.classList.remove("d-none");
+                    DeceasedNameReq.classList.add("d-none");
+                }
+            }
+        });
+    }
+    //! Deceased Death Place
+    let DeceasedDeathPlace = deceasedForm.querySelector("#death_place");
+    let DeceasedDeathPlaceReq = deceasedForm.querySelector("#deathPlaceReq");
+    if (DeceasedDeathPlace) {
+        DeceasedDeathPlace.addEventListener("input", function () {
+            let letters = /^[\u0600-\u06FF\s]+$/;
+            if (this.value.trim() === "") {
+                DeceasedDeathPlace.classList.remove("good");
+                DeceasedDeathPlace.classList.add("error");
+                DeceasedDeathPlaceReq.classList.remove("d-none");
+            } else {
+                if (letters.test(this.value)) {
+                    DeceasedDeathPlace.classList.add("good");
+                    DeceasedDeathPlace.classList.remove("error");
+                    DeceasedDeathPlaceReq.classList.add("d-none");
+                } else {
+                    DeceasedDeathPlace.classList.remove("good");
+                    DeceasedDeathPlace.classList.add("error");
+                    DeceasedDeathPlaceReq.classList.add("d-none");
+                }
+            }
+        });
+    }
+    //! Deceased Death Date
+    const DeceasedDeathDate = deceasedForm.querySelector("#death_date");
+    const DeceasedDeathReq = deceasedForm.querySelector("#death_date_req");
+    if (DeceasedDeathDate) {
+        DeceasedDeathDate.addEventListener("change", function () {
+            const deathDateValue = DeceasedDeathDate.value;
+            if (deathDateValue === "") {
+                DeceasedDeathDate.classList.add("error");
+                DeceasedDeathDate.classList.remove("good");
+                DeceasedDeathReq.classList.remove("d-none");
+            } else {
+                DeceasedDeathDate.classList.remove("error");
+                DeceasedDeathDate.classList.add("good");
+                DeceasedDeathReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Deceased Burial Date
+    const BurialDate = deceasedForm.querySelector("#burial_date");
+    const BurialDateReq = deceasedForm.querySelector("#burial_date_req");
+    if (BurialDate) {
+        BurialDate.addEventListener("change", function () {
+            const deathDateValue = BurialDate.value;
+            if (deathDateValue === "") {
+                BurialDate.classList.add("error");
+                BurialDate.classList.remove("good");
+                BurialDateReq.classList.remove("d-none");
+            } else {
+                BurialDate.classList.remove("error");
+                BurialDate.classList.add("good");
+                BurialDateReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Deceased Burial Cost
+    let BurialCost = deceasedForm.querySelector("#burial_cost");
+    let BurialCostReq = deceasedForm.querySelector("#burial_cost_req");
+    if (BurialCost) {
+        BurialCost.addEventListener("input", function () {
+            let letters = /^\d+$/;
+            if (this.value.trim() === "") {
+                BurialCostReq.classList.remove("d-none");
+                BurialCost.classList.remove("good");
+                BurialCost.classList.add("error");
+            } else {
+                if (letters.test(this.value)) {
+                    BurialCost.classList.add("good");
+                    BurialCost.classList.remove("error");
+                    BurialCostReq.classList.add("d-none");
+                } else {
+                    BurialCost.classList.remove("good");
+                    BurialCost.classList.add("error");
+                    BurialCostReq.classList.add("d-none");
+                }
+            }
+        });
+    }
+    //! Deceased Gender
+    const DeceasedGender = deceasedForm.querySelector("#gender");
+    const GenderReq = deceasedForm.querySelector("#genReq");
+    if (DeceasedGender) {
+        DeceasedGender.addEventListener("change", function () {
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "جنس المتوفي") {
+                DeceasedGender.classList.add("error");
+                DeceasedGender.classList.remove("good");
+                GenderReq.classList.remove("d-none");
+            } else {
+                DeceasedGender.classList.remove("error");
+                DeceasedGender.classList.add("good");
+                GenderReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Deceased Size
+    const DeceasedSize = deceasedForm.querySelector("#size");
+    const SizeReq = deceasedForm.querySelector("#sizeReq");
+    if (DeceasedSize) {
+        DeceasedSize.addEventListener("change", function () {
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "حجم المتوفي") {
+                DeceasedSize.classList.add("error");
+                DeceasedSize.classList.remove("good");
+                SizeReq.classList.remove("d-none");
+            } else {
+                DeceasedSize.classList.remove("error");
+                DeceasedSize.classList.add("good");
+                SizeReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Deceased Age
+    const DeceasedAge = deceasedForm.querySelector("#age");
+    const AgeReq = deceasedForm.querySelector("#ageReq");
+    if (DeceasedAge) {
+        DeceasedAge.addEventListener("change", function () {
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "سن المتوفي") {
+                DeceasedAge.classList.add("error");
+                DeceasedAge.classList.remove("good");
+                AgeReq.classList.remove("d-none");
+            } else {
+                DeceasedAge.classList.remove("error");
+                DeceasedAge.classList.add("good");
+                AgeReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Deceased Images
+    const DeceasedImgsFiles = deceasedForm.querySelector("#imgs");
+    const DeceasedImgsFilesReq = deceasedForm.querySelector("#ImgsReq");
+    const DeceasedImgsFilesSize = deceasedForm.querySelector("#ImgsSize");
+    const DeceasedImgsFilesExt = deceasedForm.querySelector("#ImgsExt");
+    if (DeceasedImgsFiles) {
+        DeceasedImgsFiles.addEventListener("change", function () {
+            const img = DeceasedImgsFiles.files[0];
+            if (img) {
+                validateImage(
+                    img,
+                    DeceasedImgsFilesReq,
+                    DeceasedImgsFilesExt,
+                    DeceasedImgsFiles,
+                    DeceasedImgsFilesSize
+                );
+            } else {
+                DeceasedImgsFiles.classList.remove("good");
+                DeceasedImgsFiles.classList.add("error");
+                DeceasedImgsFilesReq.classList.remove("d-none");
+                DeceasedImgsFilesSize.classList.add("d-none");
+                DeceasedImgsFilesExt.classList.add("d-none");
+            }
+        });
+    }
+    //! Deceased PDF
+    const DeceasedPdfFiles = deceasedForm.querySelector("#pdfs");
+    const DeceasedPdfFilesReq = deceasedForm.querySelector("#PdfReq");
+    const DeceasedPdfFilesSize = deceasedForm.querySelector("#PdfSize");
+    const DeceasedPdfFilesExt = deceasedForm.querySelector("#PdfExt");
+    if (DeceasedPdfFiles) {
+        DeceasedPdfFiles.addEventListener("change", function () {
+            const file = DeceasedPdfFiles.files[0];
+            if (file) {
+                validateFile(
+                    file,
+                    DeceasedPdfFilesReq,
+                    DeceasedPdfFilesExt,
+                    DeceasedPdfFilesSize,
+                    DeceasedPdfFiles
+                );
+            } else {
+                DeceasedPdfFiles.classList.remove("good");
+                DeceasedPdfFiles.classList.add("error");
+                DeceasedPdfFilesReq.classList.remove("d-none");
+                DeceasedPdfFilesSize.classList.add("d-none");
+                DeceasedPdfFilesExt.classList.add("d-none");
+            }
         })
+    }
+    //! Deceased Washer
+    const DeceasedWasher = deceasedForm.querySelector("#the_washer");
+    const DeceasedWasherReq = deceasedForm.querySelector("#washerReq");
+    if (DeceasedWasher) {
+        DeceasedWasher.addEventListener("input", function () {
+            let letters = /^[\u0600-\u06FF\s]+$/;
+            if (this.value.trim() === "") {
+                DeceasedWasher.classList.remove("good");
+                DeceasedWasher.classList.add("error");
+                DeceasedWasherReq.classList.remove("d-none");
+            } else {
+                if (letters.test(this.value)) {
+                    DeceasedWasher.classList.add("good");
+                    DeceasedWasher.classList.remove("error");
+                    DeceasedWasherReq.classList.add("d-none");
+                } else {
+                    DeceasedWasher.classList.remove("good");
+                    DeceasedWasher.classList.add("error");
+                    DeceasedWasherReq.classList.add("d-none");
+                }
+            }
+        });
+    }
+    //! Deceased Transporter
+    const DeceasedCarrier = deceasedForm.querySelector("#the_carrier");
+    const DeceasedCarrierReq = deceasedForm.querySelector("#carrierReq");
+    if (DeceasedCarrier) {
+        DeceasedCarrier.addEventListener("input", function () {
+            let letters = /^[\u0600-\u06FF\s]+$/;
+            if (this.value.trim() === "") {
+                DeceasedCarrier.classList.remove("good");
+                DeceasedCarrier.classList.add("error");
+                DeceasedCarrierReq.classList.remove("d-none");
+            } else {
+                if (letters.test(this.value)) {
+                    DeceasedCarrier.classList.add("good");
+                    DeceasedCarrier.classList.remove("error");
+                    DeceasedCarrierReq.classList.add("d-none");
+                } else {
+                    DeceasedCarrier.classList.remove("good");
+                    DeceasedCarrier.classList.add("error");
+                    DeceasedCarrierReq.classList.add("d-none");
+                }
+            }
+        });
+    }
+    //! Deceased Region Name
+    const DeceasedRegion = deceasedForm.querySelector("#region");
+    const RegionReq = deceasedForm.querySelector("#regionReq");
+    if (DeceasedRegion) {
+        DeceasedRegion.addEventListener("change", function () {
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "المنطقة") {
+                DeceasedRegion.classList.add("error");
+                DeceasedRegion.classList.remove("good");
+                RegionReq.classList.remove("d-none");
+            } else {
+                DeceasedRegion.classList.remove("error");
+                DeceasedRegion.classList.add("good");
+                RegionReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Deceased Tomb Name
+    const DeceasedTomb = deceasedForm.querySelector("#regionTomb");
+    const TombReq = deceasedForm.querySelector("#tombReq");
+    if (DeceasedTomb) {
+        DeceasedTomb.addEventListener("change", function () {
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "المنطقة") {
+                DeceasedTomb.classList.add("error");
+                DeceasedTomb.classList.remove("good");
+                TombReq.classList.remove("d-none");
+            } else {
+                DeceasedTomb.classList.remove("error");
+                DeceasedTomb.classList.add("good");
+                TombReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Deceased Room Name
+    const DeceasedRoom = deceasedForm.querySelector("#room");
+    const RoomReq = deceasedForm.querySelector("#roomReq");
+    if (DeceasedRoom) {
+        DeceasedRoom.addEventListener("change", function () {
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "المنطقة") {
+                DeceasedRoom.classList.add("error");
+                DeceasedRoom.classList.remove("good");
+                RoomReq.classList.remove("d-none");
+            } else {
+                DeceasedRoom.classList.remove("error");
+                DeceasedRoom.classList.add("good");
+                RoomReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Deceased Notes
+    const DeceasedNotes = deceasedForm.querySelector("#notes");
+    const DeceasedNotesReq = deceasedForm.querySelector("#notesReq");
+    if (DeceasedNotes) {
+        DeceasedNotes.addEventListener("input", function () {
+            let letters = /^[\u0600-\u06FF\s]+$/;
+            if (this.value.trim() === "") {
+                DeceasedNotes.classList.remove("good");
+                DeceasedNotes.classList.add("error");
+                DeceasedNotesReq.classList.remove("d-none");
+            } else {
+                if (letters.test(this.value)) {
+                    DeceasedNotes.classList.add("good");
+                    DeceasedNotes.classList.remove("error");
+                    DeceasedNotesReq.classList.add("d-none");
+                } else {
+                    DeceasedNotes.classList.remove("good");
+                    DeceasedNotes.classList.add("error");
+                    DeceasedNotesReq.classList.add("d-none");
+                }
+            }
+        });
+    }
+    //! Deceased Submition
+    const DeceasedSubmition = deceasedForm.querySelector("#deceasedSubmit");
+    if (DeceasedSubmition) {
+        DeceasedSubmition.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (validateForm(deceasedForm)) {
+                deceasedForm.submit();
+            }
+        });
     }
 }

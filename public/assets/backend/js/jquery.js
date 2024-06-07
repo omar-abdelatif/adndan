@@ -33,17 +33,15 @@ $(function () {
 $(function () {
     $(document).on("change", "#region", function () {
         let selectedRegion = $(this).val();
-        let option = "";
+        // let option = "";
         $.ajax({
             type: "get",
             url: "get-tombs",
             data: { name: selectedRegion },
             dataType: "json",
             success: function (data) {
-                console.log(data);
                 let option = "";
-                option +=
-                    '<option value="" selected> -- إختار المقبره -- </option>';
+                option += '<option value="" selected>المقبرة</option>';
                 for (let i = 0; i < data.length; i++) {
                     let tomb = data[i];
                     let tombName = tomb.name;
@@ -65,18 +63,8 @@ $(function () {
                                     allRoomsDisabled = false;
                                 }
                             }
-                            let Disabled =
-                                disabledRoomsCount === tombPower
-                                    ? "disabled"
-                                    : "";
-                            option +=
-                                '<option value="' +
-                                tombName +
-                                '" ' +
-                                Disabled +
-                                ">" +
-                                tombName +
-                                "</option>";
+                            let Disabled = disabledRoomsCount === tombPower ? "disabled" : "";
+                            option += '<option value="' + tombName + '" ' + Disabled + ">" + tombName + "</option>";
                             $(".regionTomb").empty();
                             $(".regionTomb").append(option);
                         },
@@ -100,8 +88,7 @@ $(function () {
             data: { name: selectedTomb },
             dataType: "json",
             success: function (data) {
-                options +=
-                    '<option value="" selected> -- إختار الغرفة -- </option>';
+                options += '<option value="" selected>الغرفة</option>';
                 for (let i = 0; i < data.length; i++) {
                     let room = data[i];
                     let roomName = room.name;
@@ -113,24 +100,13 @@ $(function () {
                         dataType: "json",
                         success: function (response) {
                             let sumSize = response.sumSize;
-                            let isDisabled =
-                                sumSize === roomCapacity ? "disabled" : "";
-                            options +=
-                                '<option value="' +
-                                roomName +
-                                '" ' +
-                                isDisabled +
-                                ">" +
-                                roomName +
-                                "</option>";
+                            let isDisabled = sumSize === roomCapacity ? "disabled" : "";
+                            options += '<option value="' + roomName + '" ' + isDisabled + ">" + roomName + "</option>";
                             $(".roomTomb").empty();
                             $(".roomTomb").append(options);
                         },
                         error: function () {
-                            alert(
-                                "Error fetching deceased data for room: " +
-                                    roomName
-                            );
+                            alert( "Error fetching deceased data for room: " + roomName );
                         },
                     });
                 }

@@ -1,67 +1,24 @@
 @extends('layouts.app')
 @section('header')
     <header class="header header-sticky">
-        <div class="container-fluid">
-            <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
-                <svg class="icon icon-lg">
-                    <use xlink:href="{{ asset('icons/coreui.svg#cil-menu') }}"></use>
-                </svg>
-            </button>
-            <a class="header-brand d-md-none" href="#">
-                <svg width="118" height="46" alt="CoreUI Logo">
-                    <use xlink:href="{{ asset('icons/brand.svg#full') }}"></use>
-                </svg>
-            </a>
-            <ul class="header-nav d-none d-md-flex">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">لوحة التحكم</a>
-                </li>
-            </ul>
-            <ul class="header-nav ms-auto"></ul>
-            <ul class="header-nav ms-3">
-                <li class="nav-item dropdown">
-                    <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        {{ Auth::user()->name }}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end pt-0">
-                        <a class="dropdown-item" href="{{ route('profile.show') }}">
-                            <svg class="icon me-2">
-                                <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
-                            </svg>
-                            {{ __('My profile') }}
-                        </a>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                                <svg class="icon me-2">
-                                    <use xlink:href="{{ asset('icons/coreui.svg#cil-account-logout') }}"></use>
-                                </svg>
-                                {{ __('Logout') }}
-                            </a>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        @include('layouts.upper-header')
         <div class="header-divider"></div>
         <section class="content-header w-100">
-            <div class="container-fluid d-flex">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-12">
-                        <div class="d-flex justify-content-between w-100 align-items-center">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item">
-                                    <a href="{{ route('home') }}">الرئيسية</a>
-                                </li>
-                                <li class="breadcrumb-item">
-                                    <a href="{{ route('region.index') }}">كل المقابر</a>
-                                </li>
-                                <li class="breadcrumb-item active">كل المتوفيين</li>
-                            </ol>
-                            <button type="button" class="btn btn-success rounded" data-coreui-toggle="modal" data-coreui-target="#addnew" data-coreui-whatever="@mdo">
-                                <b>إضافة متوفي جديد</b>
-                            </button>
-                        </div>
+                    <div class="col-lg-12 d-inline-flex align-items-center justify-content-between">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item">
+                                <a href="{{ route('home') }}">الرئيسية</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{{ route('region.index') }}">كل المقابر</a>
+                            </li>
+                            <li class="breadcrumb-item active">كل المتوفيين</li>
+                        </ol>
+                        <button type="button" class="btn btn-success rounded" data-coreui-toggle="modal" data-coreui-target="#addnew" data-coreui-whatever="@mdo">
+                            <b>إضافة متوفي جديد</b>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -87,7 +44,7 @@
                             </div>
                         @endforeach
                     @endif
-                    <table class="table borderd-table display align-middle text-center" id="table9" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+                    <table class="table borderd-table display align-middle text-center datatable" id="table9" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                         <thead>
                             <th class="text-center">#</th>
                             <th class="text-center">إسم المتوفي</th>
@@ -150,7 +107,6 @@
                                                                         </label>
                                                                         <input type="date" id="burial_date" class="form-control text-center" value="{{$deceased->burial_date}}" name="burial_date" placeholder="تاريخ الدفن">
                                                                     </div>
-
                                                                     <div class="form-group mt-3 text-center">
                                                                         <label class="text-white" for="files">
                                                                             <b>ملفات</b>
@@ -313,163 +269,151 @@
         </div>
     </div>
     <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg ">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة متوفي جديد</h1>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body bg-dark-gradient">
-                    <form action="{{route('deceased.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('deceased.store')}}" method="post" enctype="multipart/form-data" id="deceasedForm">
                         @csrf
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-6">
-                                    <div class="form-group mt-3">
-                                        <label for="name" class="text-white">
+                                    <div class="form-group mt-2">
+                                        <label for="deceasedName" class="text-white">
                                             <b>إسم المتوفي</b>
                                         </label>
-                                        <input type="text" id="name" class="form-control text-center" name="name" placeholder="إسم المتوفي">
+                                        <input type="text" id="deceasedName" class="form-control text-center" name="name" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" placeholder="إسم المتوفي" required>
+                                        <p class="required d-none text-danger fw-bold mb-2" id="deceasedNameReq">هذا الحقل مطلوب</p>
+                                        <p class="required d-none text-danger fw-bold mb-2" id="deceasedNameMsg">يجب ان يكون الاسم مكون من 3 احرف على الاقل</p>
                                     </div>
-                                    <div class="form-group mt-3">
+                                    <div class="form-group mt-2">
                                         <label for="death_place" class="text-white">
                                             <b>مكان الوفاة</b>
                                         </label>
-                                        <input type="text" id="death_place" class="form-control text-center" name="death_place" placeholder="مكان الوفاة">
+                                        <input type="text" id="death_place" class="form-control text-center" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" name="death_place" placeholder="مكان الوفاة" required>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="deathPlaceReq">هذا الحقل مطلوب</p>
                                     </div>
-                                    <div class="form-group mt-3">
+                                    <div class="form-group mt-2">
                                         <label for="death_date" class="text-white">
                                             <b>تاريخ الوفاة</b>
                                         </label>
-                                        <input type="date" id="death_date" class="form-control text-center" name="death_date" placeholder="تاريخ الوفاة">
+                                        <input type="date" id="death_date" class="form-control text-center" name="death_date" placeholder="تاريخ الوفاة" required>
+                                        <p class="required d-none text-danger fw-bold mb-2" id="death_date_req">هذا الحقل مطلوب</p>
                                     </div>
-                                    <div class="form-group mt-3">
+                                    <div class="form-group mt-2">
                                         <label for="burial_date" class="text-white">
                                             <b>تاريخ الدفن</b>
                                         </label>
-                                        <input type="date" id="burial_date" class="form-control text-center" name="burial_date" placeholder="تاريخ الدفن">
+                                        <input type="date" id="burial_date" class="form-control text-center" name="burial_date" placeholder="تاريخ الدفن" required>
+                                        <p class="required d-none text-danger fw-bold mb-2" id="burial_date_req">هذا الحقل مطلوب</p>
                                     </div>
-                                    <div class="form-group mt-3">
+                                    <div class="form-group mt-2">
                                         <label for="burial_cost" class="text-white">
                                             <b>تكلفة الدفن</b>
                                         </label>
-                                        <input type="number" id="burial_cost" class="form-control text-center" name="burial_cost" placeholder="تكلفة الدفن">
+                                        <input type="text" id="burial_cost" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-control text-center" name="burial_cost" placeholder="تكلفة الدفن" required>
+                                        <p class="required d-none text-danger fw-bold mb-2" id="burial_cost_req">هذا الحقل مطلوب</p>
                                     </div>
-                                    <div class="form-group mt-3">
-                                        <label for="burial_date" class="text-white">
+                                    <div class="form-group mt-2">
+                                        <label for="gender" class="text-white">
                                             <b>الجنس</b>
                                         </label>
-                                        <div class="gender mt-3 d-flex justify-content-evenly align-items-center">
-                                            <div class="male">
-                                                <input type="radio" name="gender" value="ذكر" id="male">
-                                                <label for="male" class="text-white">
-                                                    ذكر
-                                                </label>
-                                            </div>
-                                            <div class="female">
-                                                <input type="radio" name="gender" id="female" value="أنثى">
-                                                <label for="female" class="text-white">
-                                                    أنثى
-                                                </label>
-                                            </div>
-                                        </div>
+                                        <select name="gender" class="form-select" id="gender" required>
+                                            <option selected disabled>جنس المتوفي</option>
+                                            <option value="ذكر">ذكر</option>
+                                            <option value="أنثى">أنثى</option>
+                                        </select>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="genReq">أختر من القائمة أعلاه</p>
                                     </div>
-                                    <div class="form-group mt-3">
-                                        <label for="burial_date" class="text-white">
+                                    <div class="form-group mt-2">
+                                        <label for="size" class="text-white">
                                             <b>الحجم</b>
                                         </label>
-                                        <div class="gender mt-3 d-flex justify-content-evenly align-items-center">
-                                            <div class="male">
-                                                <input type="radio" name="size" value="1" id="one">
-                                                <label for="male" class="text-white">
-                                                    <b>فردي</b>
-                                                </label>
-                                            </div>
-                                            <div class="female">
-                                                <input type="radio" name="size" value="2" id="two">
-                                                <label for="female" class="text-white">
-                                                    <b>زوجي</b>
-                                                </label>
-                                            </div>
-                                        </div>
+                                        <select name="size" class="form-select" id="size" required>
+                                            <option selected disabled>حجم المتوفي</option>
+                                            <option value="فردي">فردي</option>
+                                            <option value="زوجي">زوجي</option>
+                                        </select>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="sizeReq">أختر من القائمة أعلاه</p>
                                     </div>
-                                    <div class="form-group mt-3">
-                                        <label class="text-white">
+                                    <div class="form-group mt-2">
+                                        <label class="text-white" for="age">
                                             <b>العمر</b>
                                         </label>
-                                        <div class="gender mt-3 d-flex justify-content-evenly align-items-center">
-                                            <div class="adult">
-                                                <input type="radio" name="age" value="بالغ">
-                                                <label class="text-white">
-                                                    <b>بالغ</b>
-                                                </label>
-                                            </div>
-                                            <div class="kid">
-                                                <input type="radio" name="age" value="طفل">
-                                                <label class="text-white">
-                                                    <b>طفل</b>
-                                                </label>
-                                            </div>
-                                            <div class="part">
-                                                <input type="radio" name="age" value="عضو">
-                                                <label class="text-white">
-                                                    <b>عضو</b>
-                                                </label>
-                                            </div>
-                                        </div>
+                                        <select name="age" class="form-select" id="age" required>
+                                            <option selected disabled>سن المتوفي</option>
+                                            <option value="بالغ">بالغ</option>
+                                            <option value="طفل">طفل</option>
+                                            <option value="عضو">عضو</option>
+                                        </select>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="ageReq">أختر من القائمة أعلاه</p>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="form-group mt-3">
-                                        <label for="files" class="text-white">
+                                    <div class="form-group mt-2">
+                                        <label for="imgs" class="text-white">
                                             <b>صور</b>
                                         </label>
-                                        <input type="file" name="files" id="files" class="form-control text-center" accept="image/*">
+                                        <input type="file" name="files" id="imgs" class="form-control text-center" accept="image/*">
+                                        <p class="required d-none fw-bold text-danger mb-0" id="ImgsReq">هذا الحقل مطلوب</p>
+                                        <p class="required d-none fw-bold text-danger mb-0" id="ImgsExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
+                                        <p class="required d-none fw-bold text-danger mb-0" id="ImgsSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
                                     </div>
-                                    <div class="form-group mt-3">
-                                        <label for="files" class="text-white">
+                                    <div class="form-group mt-2">
+                                        <label for="pdfs" class="text-white">
                                             <b>ملفات PDF</b>
                                         </label>
-                                        <input type="file" name="pdf_files" id="files" class="form-control text-center" accept="application/pdf">
+                                        <input type="file" name="pdf_files" id="pdfs" class="form-control text-center" accept="application/pdf">
+                                        <p class="required d-none fw-bold text-danger mb-0" id="PdfReq">هذا الحقل مطلوب</p>
+                                        <p class="required d-none fw-bold text-danger mb-0" id="PdfExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
+                                        <p class="required d-none fw-bold text-danger mb-0" id="PdfSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>
                                     </div>
-                                    <div class="form-group mt-3">
+                                    <div class="form-group mt-2">
                                         <label for="the_washer" class="text-white">
                                             <b>القائم بالغسل</b>
                                         </label>
-                                        <input type="text" id="the_washer" class="form-control text-center" name="washer" placeholder="القائم بالغسل">
+                                        <input type="text" id="the_washer" class="form-control text-center" name="washer" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" placeholder="القائم بالغسل" required>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="washerReq">هذ الحقل مطلوب</p>
                                     </div>
-                                    <div class="form-group mt-3">
+                                    <div class="form-group mt-2">
                                         <label for="the_carrier" class="text-white">
                                             <b>القائم بالنقل</b>
                                         </label>
-                                        <input type="text" id="the_carrier" class="form-control text-center" name="carrier" placeholder="القائم بالنقل">
+                                        <input type="text" id="the_carrier" class="form-control text-center" name="carrier" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" placeholder="القائم بالنقل" required>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="carrierReq">هذ الحقل مطلوب</p>
                                     </div>
-                                    <div class="form-group mt-3">
+                                    <div class="form-group mt-2">
                                         <label for="region" class="text-white">
                                             <b>المنطقة</b>
                                         </label>
-                                        <select name="region" id="region" class="form-control">
-                                            <option value="0" selected>-- إختار المنطقة --</option>
+                                        <select name="region" id="region" class="form-control" required>
+                                            <option selected disabled>المنطقة</option>
                                             @foreach ($regions as $region)
                                                 <option value="{{ $region->name }}">{{ $region->name }}</option>
                                             @endforeach
                                         </select>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="regionReq">إختر من القائمة أعلاه</p>
                                     </div>
-                                    <div class="form-group mt-3">
+                                    <div class="form-group mt-2">
                                         <label for="tomb" class="text-white">
                                             <b>إسم المقبرة</b>
                                         </label>
-                                        <select name="tomb" id="regionTomb" class="form-control regionTomb">
-                                            <option value="0" selected>-- إختار المقبرة --</option>
+                                        <select name="tomb" id="regionTomb" class="form-control regionTomb" required>
+                                            <option selected disabled>المقبرة</option>
                                         </select>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="tombReq">إختر من القائمة السابقة أولا</p>
                                     </div>
-                                    <div class="form-group mt-3">
+                                    <div class="form-group mt-2">
                                         <label for="room" class="text-white">
                                             <b>رقم الغرفة</b>
                                         </label>
-                                        <select name="room" id="room" class="form-control roomTomb">
-                                            <option value="">-- إختار الغرفة --</option>
+                                        <select name="room" id="room" class="form-control roomTomb" required>
+                                            <option selected disabled>الغرفة</option>
                                         </select>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="roomReq">إختر من القائمة السابقة أولا</p>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -477,10 +421,11 @@
                                         <label for="notes" class="text-white">
                                             <b>ملاحظـــــــات</b>
                                         </label>
-                                        <textarea id="notes" class="form-control text-center" name="notes" rows="5" placeholder="ملاحظـــــــات"></textarea>
+                                        <textarea id="notes" class="form-control text-center" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" name="notes" rows="5" placeholder="ملاحظـــــــات" required></textarea>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="notesReq">هذا الحقل مطلوب</p>
                                     </div>
                                     <div class="field mt-3">
-                                        <button type="submit" class="btn btn-success w-100 text-white">
+                                        <button type="submit" id="deceasedSubmit" class="btn btn-success w-100 text-white">
                                             <b>إضافة المتوفي</b>
                                         </button>
                                     </div>

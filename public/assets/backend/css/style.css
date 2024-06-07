@@ -13,10 +13,9 @@
 }
 .dataTables_wrapper {
     margin-top: 3rem;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(201, 197, 197);
     padding: 20px;
     border-radius: 7px;
-    border: 2px solid #000;
 }
 .inputs-body {
     border: 2px solid #000;
