@@ -114,6 +114,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //! Village Routes
     Route::controller(VillageController::class)->group(function () {
         Route::get('tombs/villages/all', 'index')->name('village.all');
+        Route::post("tombs/village/deceaseds/store", 'createVillageDeceased')->name("village.deceaseds.store");
     });
     //! Rooms Routes
     Route::get('all_rooms', [RoomsController::class, 'index'])->name('rooms.all');

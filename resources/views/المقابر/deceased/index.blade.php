@@ -4,21 +4,23 @@
         @include('layouts.upper-header')
         <div class="header-divider"></div>
         <section class="content-header w-100">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 d-inline-flex align-items-center justify-content-between">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item">
-                                <a href="{{ route('home') }}">الرئيسية</a>
-                            </li>
-                            <li class="breadcrumb-item">
-                                <a href="{{ route('region.index') }}">كل المقابر</a>
-                            </li>
-                            <li class="breadcrumb-item active">كل المتوفيين</li>
-                        </ol>
-                        <button type="button" class="btn btn-success rounded" data-coreui-toggle="modal" data-coreui-target="#addnew" data-coreui-whatever="@mdo">
-                            <b>إضافة متوفي جديد</b>
-                        </button>
+            <div class="container-fluid d-flex">
+                <div class="row align-items-center justify-content-between w-100">
+                    <div class="col-lg-12">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('home') }}">الرئيسية</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('region.index') }}">كل المقابر</a>
+                                </li>
+                                <li class="breadcrumb-item active">كل المتوفيين</li>
+                            </ol>
+                            <button type="button" class="btn btn-success rounded" data-coreui-toggle="modal" data-coreui-target="#addnew" data-coreui-whatever="@mdo">
+                                <b>إضافة متوفي جديد</b>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

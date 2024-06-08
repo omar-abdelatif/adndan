@@ -11,6 +11,7 @@ class VillageDeceaseds extends Model
     protected $table = 'village_deceaseds';
     protected $fillable = [
         'name',
+        'gender',
         'death_place',
         'death_date',
         'burial_date',
