@@ -196,7 +196,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group mb-2">
-                                        <input type="text" name="name" placeholder="إسم المقبرة" id="tombName" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\d]/g, '')" pattern="[\u0600-\u06FF\s\d]{3,}" class="form-control text-center" required>
+                                        <input type="text" name="name" placeholder="إسم المقبرة" id="tombName" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\d\/\-\.\,]/g, '')" class="form-control text-center" required>
                                         <p class="required d-none text-danger mb-0 fw-bold" id="tombReq">هذا الحقل مطلوب</p>
                                         <p class="required d-none text-danger mb-0 fw-bold" id="tombMsg">يجب ان يكون اسم المقبره مكون من 3 احرف على الاقل</p>
                                     </div>

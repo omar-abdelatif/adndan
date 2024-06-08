@@ -713,7 +713,7 @@ if (tombForm) {
     const tombMsg = tombForm.querySelector("#tombMsg");
     if (tombName) {
         tombName.addEventListener("input", function () {
-            let letters = /^[\u0600-\u06FF\s\d]{3,}$/;
+            let letters = /^[\u0600-\u06FF\s\d\/\-\.\,]{3,}$/;
             if (this.value.trim() === "") {
                 tombReq.classList.remove("d-none");
                 tombMsg.classList.add("d-none");
@@ -1211,14 +1211,14 @@ if (deceasedForm) {
                 DeceasedPdfFilesSize.classList.add("d-none");
                 DeceasedPdfFilesExt.classList.add("d-none");
             }
-        })
+        });
     }
     //! Deceased Washer
     const DeceasedWasher = deceasedForm.querySelector("#the_washer");
     const DeceasedWasherReq = deceasedForm.querySelector("#washerReq");
     if (DeceasedWasher) {
         DeceasedWasher.addEventListener("input", function () {
-            let letters = /^[\u0600-\u06FF\s]+$/;
+            let letters = /^[\u0600-\u06FF\s\d\/\-\.\,]+$/;
             if (this.value.trim() === "") {
                 DeceasedWasher.classList.remove("good");
                 DeceasedWasher.classList.add("error");

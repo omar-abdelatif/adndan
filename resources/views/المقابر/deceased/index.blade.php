@@ -375,14 +375,14 @@
                                         <label for="the_washer" class="text-white">
                                             <b>القائم بالغسل</b>
                                         </label>
-                                        <input type="text" id="the_washer" class="form-control text-center" name="washer" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" placeholder="القائم بالغسل" required>
+                                        <input type="text" id="the_washer" class="form-control text-center" name="washer" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\d\/\-\.\,]/g, '')" placeholder="القائم بالغسل" required>
                                         <p class="required d-none text-danger fw-bold mb-0" id="washerReq">هذ الحقل مطلوب</p>
                                     </div>
                                     <div class="form-group mt-2">
                                         <label for="the_carrier" class="text-white">
                                             <b>القائم بالنقل</b>
                                         </label>
-                                        <input type="text" id="the_carrier" class="form-control text-center" name="carrier" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" placeholder="القائم بالنقل" required>
+                                        <input type="text" id="the_carrier" class="form-control text-center" name="carrier" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\d\/\-\.\,]/g, '')" placeholder="القائم بالنقل" required>
                                         <p class="required d-none text-danger fw-bold mb-0" id="carrierReq">هذ الحقل مطلوب</p>
                                     </div>
                                     <div class="form-group mt-2">
