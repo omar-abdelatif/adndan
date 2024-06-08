@@ -41,8 +41,7 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 let option = "";
-                option +=
-                    '<option value="" selected> -- إختار المقبره -- </option>';
+                option += '<option value="" selected>المقبرة</option>';
                 for (let i = 0; i < data.length; i++) {
                     let tomb = data[i];
                     let tombName = tomb.name;
