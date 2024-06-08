@@ -713,7 +713,7 @@ if (tombForm) {
     const tombMsg = tombForm.querySelector("#tombMsg");
     if (tombName) {
         tombName.addEventListener("input", function () {
-            let letters = /^[\u0600-\u06FF\s]{3,}$/;
+            let pattern = /^[\u0600-\u06FF\s\d]{3,}$/;
             if (this.value.trim() === "") {
                 tombReq.classList.remove("d-none");
                 tombMsg.classList.add("d-none");

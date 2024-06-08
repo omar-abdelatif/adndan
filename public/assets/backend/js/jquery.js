@@ -33,7 +33,7 @@ $(function () {
 $(function () {
     $(document).on("change", "#region", function () {
         let selectedRegion = $(this).val();
-        // let option = "";
+        let option = "";
         $.ajax({
             type: "get",
             url: "get-tombs",
@@ -41,7 +41,8 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 let option = "";
-                option += '<option value="" selected>المقبرة</option>';
+                option +=
+                    '<option value="" selected> -- إختار المقبره -- </option>';
                 for (let i = 0; i < data.length; i++) {
                     let tomb = data[i];
                     let tombName = tomb.name;
@@ -63,8 +64,18 @@ $(function () {
                                     allRoomsDisabled = false;
                                 }
                             }
-                            let Disabled = disabledRoomsCount === tombPower ? "disabled" : "";
-                            option += '<option value="' + tombName + '" ' + Disabled + ">" + tombName + "</option>";
+                            let Disabled =
+                                disabledRoomsCount === tombPower
+                                    ? "disabled"
+                                    : "";
+                            option +=
+                                '<option value="' +
+                                tombName +
+                                '" ' +
+                                Disabled +
+                                ">" +
+                                tombName +
+                                "</option>";
                             $(".regionTomb").empty();
                             $(".regionTomb").append(option);
                         },

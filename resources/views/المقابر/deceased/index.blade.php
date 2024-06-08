@@ -402,7 +402,7 @@
                                             <b>إسم المقبرة</b>
                                         </label>
                                         <select name="tomb" id="regionTomb" class="form-control regionTomb" required>
-                                            <option selected disabled>المقبرة</option>
+                                            <option selected>المقبرة</option>
                                         </select>
                                         <p class="required d-none text-danger fw-bold mb-0" id="tombReq">إختر من القائمة السابقة أولا</p>
                                     </div>
@@ -411,7 +411,7 @@
                                             <b>رقم الغرفة</b>
                                         </label>
                                         <select name="room" id="room" class="form-control roomTomb" required>
-                                            <option selected disabled>الغرفة</option>
+                                            <option selected>الغرفة</option>
                                         </select>
                                         <p class="required d-none text-danger fw-bold mb-0" id="roomReq">إختر من القائمة السابقة أولا</p>
                                     </div>

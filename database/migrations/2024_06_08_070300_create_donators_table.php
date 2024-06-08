@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kfala_safes', function (Blueprint $table) {
+        Schema::create('new_donators', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->bigInteger('mobile_number');
+            $table->string('donation_type');
+            $table->string('donator_duration');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kfala_safes');
+        Schema::dropIfExists('donators');
     }
 };

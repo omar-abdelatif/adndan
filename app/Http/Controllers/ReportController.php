@@ -47,8 +47,9 @@ class ReportController extends Controller
     public function safeReports(Request $request)
     {
         $month = $request->input('date');
+        // $reports = 
         if($month){
-            
+
         } else {
 
         }

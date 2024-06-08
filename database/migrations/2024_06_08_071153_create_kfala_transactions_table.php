@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tomb_donations', function (Blueprint $table) {
+        Schema::create('kfala_transactions', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('member_id')->index()->references('member_id')->on('')->onDelete('cascade');
-            $table->bigInteger('amount');
-            $table->bigInteger('invoice_no');
+            $table->string("transaction_type");
+            $table->string("proof_img");
+            $table->integer("amount");
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tomb_donations');
+        Schema::dropIfExists('kfala_transactions');
     }
 };
