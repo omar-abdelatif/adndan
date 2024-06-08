@@ -109,6 +109,7 @@ $(function () {
                         data: { name: roomName },
                         dataType: "json",
                         success: function (response) {
+                            console.log(response);
                             let sumSize = response.sumSize;
                             let isDisabled = sumSize === roomCapacity ? "disabled" : "";
                             options += '<option value="' + roomName + '" ' + isDisabled + ">" + roomName + "</option>";

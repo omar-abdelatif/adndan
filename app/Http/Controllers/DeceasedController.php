@@ -160,7 +160,7 @@ class DeceasedController extends Controller
         if ($room) {
             $sumSize = 0;
             foreach ($room->deceased as $deceased) {
-                $sumSize += $deceased->size;
+                $sumSize += (int) $deceased->size;
             }
             return response()->json(['sumSize' => $sumSize]);
         } else {

@@ -31,7 +31,7 @@ class RoomsController extends Controller
         foreach ($rooms as $room) {
             $sumSize = 0;
             foreach ($room->deceased as $deceased) {
-                $sumSize += $deceased->size;
+                $sumSize += (int) $deceased->size;
             }
             $room->disabled = ($sumSize === $room->capacity);
         }
