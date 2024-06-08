@@ -65,3 +65,40 @@
         </section>
     </header>
 @endsection
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="bg-info-gradient p-3 w-50 mx-auto rounded mt-5">
+                <div class="wrapper-title">
+                    <h2 class="text-center text-white">مقابر {{$region->name}}</h2>
+                </div>
+            </div>
+            <?php $i = 1 ?>
+            @if (session('success'))
+                <div class="alert alert-success text-center mt-5">
+                    <p class="mb-0">{{ session('success') }}</p>
+                </div>
+            @elseif ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger text-center mt-5">
+                        <p class="mb-0">{{ $error }}</p>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table borderd-table display align-middle text-center" id="table19" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th class="text-center">إسم المتوفي</th>
+                    <th class="text-center">مكان الوفاه</th>
+                    <th class="text-center">تاريخ الوفاه</th>
+                    <th class="text-center">تاريخ الدفن</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+@endsection

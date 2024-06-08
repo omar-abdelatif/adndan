@@ -305,36 +305,62 @@
                                                                         <th class="text-center">id</th>
                                                                         <th class="text-center">إسم الغرفة</th>
                                                                         <th class="text-center">قوة الغرفة</th>
-                                                                        <th class="text-center">المتاح ( رجال / سيدات )</th>
                                                                         <th class="text-center">تاريخ أخر دفنة</th>
+                                                                        <th class="text-center">المتاح رجال</th>
+                                                                        <th class="text-center">المتاح سيدات</th>
                                                                         <th class="text-center">Actions</th>
                                                                     </thead>
                                                                     <tbody>
                                                                         <?php $j=1 ?>
                                                                         @foreach ($tomb->rooms as $room)
-                                                                            <tr>
-                                                                                <td>{{ $j++ }}</td>
-                                                                                <td>{{$room->name}}</td>
-                                                                                <td>{{$room->capacity}}</td>
-                                                                                <td>0</td>
-                                                                                <td>{{ $room->burial_date }}</td>
-                                                                                <td>
-                                                                                    <a href="{{ route('fayum.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
-                                                                                        <i class="fa fa-eye"></i>
-                                                                                    </a>
-                                                                                    @php
-                                                                                        $sumSize = $room->deceased->sum('size');
-                                                                                    @endphp
-                                                                                    @if ($sumSize >= $room->capacity)
-                                                                                        <form action="{{route('rooms.oldDeceased', $room->id)}}" method="post">
-                                                                                            @csrf
-                                                                                            <button type="submit" class="btn btn-warning purify" data-room-id={{$room->id}}>
-                                                                                                <b>تطهير</b>
-                                                                                            </button>
-                                                                                        </form>
-                                                                                    @endif
-                                                                                </td>
-                                                                            </tr>
+                                                                            @php
+                                                                                $sumSize = $room->deceased->map(function($deceased) {
+                                                                                    return (int) $deceased->size;
+                                                                                })->sum();
+                                                                            @endphp
+                                                                            @if ($sumSize === $room->capacity)
+                                                                                <tr>
+                                                                                    <td class="text-center" colspan="6">{{$room->name}} ممتلئة</td>
+                                                                                    <td class="d-flex justify-content-center">
+                                                                                        <a href="{{ route('fayum.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info ms-2">
+                                                                                            <i class="fa fa-eye"></i>
+                                                                                        </a>
+                                                                                        @if ($sumSize >= $room->capacity)
+                                                                                            <form action="{{route('rooms.oldDeceased', $room->id)}}" method="post">
+                                                                                                @csrf
+                                                                                                <button type="submit" class="btn btn-warning purify ">
+                                                                                                    <b>تطهير</b>
+                                                                                                </button>
+                                                                                            </form>
+                                                                                        @endif
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @else
+                                                                                <tr>
+                                                                                    <td>{{ $j++ }}</td>
+                                                                                    <td>{{$room->name}}</td>
+                                                                                    <td>{{$room->capacity}}</td>
+                                                                                    <td>{{ $room->burial_date }}</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>
+                                                                                        <a href="{{ route('fayum.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
+                                                                                            <i class="fa fa-eye"></i>
+                                                                                        </a>
+                                                                                        @php
+                                                                                            $sumSize = $room->deceased->sum('size');
+                                                                                        @endphp
+                                                                                        @if ($sumSize >= $room->capacity)
+                                                                                            <form action="{{route('rooms.oldDeceased', $room->id)}}" method="post">
+                                                                                                @csrf
+                                                                                                <button type="submit" class="btn btn-warning purify" data-room-id={{$room->id}}>
+                                                                                                    <b>تطهير</b>
+                                                                                                </button>
+                                                                                            </form>
+                                                                                        @endif
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @endif
                                                                         @endforeach
                                                                     </tbody>
                                                                 </table>

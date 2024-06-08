@@ -94,6 +94,7 @@
                         <td class="text-center">قوة المقبرة</td>
                         <td class="text-center">المنطقة</td>
                         <td class="text-center">قمة الدفع السنوي</td>
+                        <td class="text-center">تاريخ أخر دفنة</td>ذ
                         <td class="text-center">Actions</td>
                     </tr>
                 </thead>
@@ -106,6 +107,7 @@
                             <td>{{$tomb->power}}</td>
                             <td>{{$tomb->region}}</td>
                             <td>{{$tomb->annual_cost}}</td>
+                            <td>{{$tomb->burial_date}}</td>
                             <td>
                                 <div class="btn-group align-items-center justify-content-evenly">
                                     <button type="button" class="btn btn-warning rounded" data-coreui-toggle="modal" data-coreui-target="#edit{{$tomb->id}}" data-coreui-whatever="@mdo">
@@ -302,25 +304,51 @@
                                                                     <th class="text-center">id</th>
                                                                     <th class="text-center">إسم الغرفة</th>
                                                                     <th class="text-center">قوة الغرفة</th>
-                                                                    <th class="text-center">المتاح ( رجال / سيدات )</th>
                                                                     <th class="text-center">تاريخ أخر دفنة</th>
+                                                                    <th class="text-center">المتاح رجال</th>
+                                                                    <th class="text-center">المتاح سيدات</th>
                                                                     <th class="text-center">Actions</th>
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php $j=1 ?>
                                                                     @foreach ($tomb->rooms as $room)
-                                                                        <tr>
-                                                                            <td>{{ $j++ }}</td>
-                                                                            <td>{{$room->name}}</td>
-                                                                            <td>{{$room->capacity}}</td>
-                                                                            <td>0</td>
-                                                                            <td>0</td>
-                                                                            <td>
-                                                                                <a href="{{ route('gafeer.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
-                                                                                    <i class="fa fa-eye"></i>
-                                                                                </a>
-                                                                            </td>
-                                                                        </tr>
+                                                                            @php
+                                                                                $sumSize = $room->deceased->map(function($deceased) {
+                                                                                    return (int) $deceased->size;
+                                                                                })->sum();
+                                                                            @endphp
+                                                                            @if ($sumSize === $room->capacity)
+                                                                                <tr>
+                                                                                    <td class="text-center" colspan="6">{{$room->name}} ممتلئة</td>
+                                                                                    <td class="d-flex justify-content-center">
+                                                                                        <a href="{{ route('gafeer.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info ms-2">
+                                                                                            <i class="fa fa-eye"></i>
+                                                                                        </a>
+                                                                                        @if ($sumSize >= $room->capacity)
+                                                                                            <form action="{{route('rooms.oldDeceased', $room->id)}}" method="post">
+                                                                                                @csrf
+                                                                                                <button type="submit" class="btn btn-warning purify ">
+                                                                                                    <b>تطهير</b>
+                                                                                                </button>
+                                                                                            </form>
+                                                                                        @endif
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @else
+                                                                                <tr>
+                                                                                    <td>{{ $j++ }}</td>
+                                                                                    <td>{{$room->name}}</td>
+                                                                                    <td>{{$room->capacity}}</td>
+                                                                                    <td>{{ $room->burial_date }}</td>
+                                                                                    <td>0</td>
+                                                                                    <td>0</td>
+                                                                                    <td>
+                                                                                        <a href="{{ route('gafeer.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
+                                                                                            <i class="fa fa-eye"></i>
+                                                                                        </a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @endif
                                                                     @endforeach
                                                                 </tbody>
                                                             </table>

@@ -343,14 +343,14 @@
                                                                                         <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info ms-2">
                                                                                             <i class="fa fa-eye"></i>
                                                                                         </a>
-                                                                                        @if ($sumSize >= $room->capacity)
+                                                                                        {{-- @if ($sumSize >= $room->capacity)
                                                                                             <form action="{{route('rooms.oldDeceased', $room->id)}}" method="post">
                                                                                                 @csrf
                                                                                                 <button type="submit" class="btn btn-warning purify" data-room-id={{$room->id}}>
                                                                                                     <b>تطهير</b>
                                                                                                 </button>
                                                                                             </form>
-                                                                                        @endif
+                                                                                        @endif --}}
                                                                                     </td>
                                                                                 </tr>
                                                                             @endif
