@@ -13,14 +13,12 @@ class TombDonationsController extends Controller
     }
     public function storeDonators(Request $request)
     {
-        $validations = $request->validate([]);
-        $store = TombDonations::create();
+        $validations = $request->validate([
+            
+        ]);
+        $store = TombDonations::create($validations);
         if ($store) {
-            $notificationSuccess = [
-                'message' => "تم الإضافة بنجاح",
-                'alert-type' => 'success',
-            ];
-            return redirect()->route('tomb.index')->with($notificationSuccess);
+            return redirect()->route('tomb.index')->withSuccess('تم التسجيل بنجاح');
         } else {
             return redirect()->route('tomb.index')->withErrors($validations);
         }

@@ -136,10 +136,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('store_old_deceased', [OldDeceasedController::class, 'store'])->name('old.store');
     Route::get('delete_old_deceased/{id}', [OldDeceasedController::class, 'destroy'])->name('old.delete');
     Route::post('update_old_deceased', [OldDeceasedController::class, 'edit'])->name('old.update');
-    //! Tombs Reports
+    //! Tombs Reports Routes
     Route::get('tombs_reports', [TombReportController::class, 'index'])->name('tombs.report');
-    //! Tomb Donations
+    //! New Tomb Donators Routes
     Route::controller(TombDonationsController::class)->group(function () {
-        Route::get('tombs', 'index')->name('tomb.index');
+        Route::get('new-tombs/donators', 'index')->name('tomb.index');
+        Route::post('new-tombs/donators/store', 'storeDonators')->name("new.tomb.donator.store");
     });
 });

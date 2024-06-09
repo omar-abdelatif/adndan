@@ -25,14 +25,14 @@
         </section>
     </header>
     <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة متبرع جديد</h1>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body bg-dark-gradient">
-                    <form action="{{route('deceased.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('new.tomb.donator.store')}}" method="post">
                         @csrf
                         <div class="container-fluid">
                             <div class="row">
@@ -42,9 +42,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="field mt-3">
-                                        <button type="submit" class="btn btn-success w-100 text-white">
-                                            <b>إضافة المتوفي</b>
-                                        </button>
+                                        <button type="submit" class="btn btn-success w-100 text-white fw-bold">إضافة المتوفي</button>
                                     </div>
                                 </div>
                             </div>

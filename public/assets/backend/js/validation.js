@@ -1348,9 +1348,7 @@ if (deceasedForm) {
 const VillageForm = document.getElementById("villageForm");
 if (VillageForm) {
     //! Village Deceased Name
-    const VillageDeceasedName = VillageForm.querySelector(
-        "#villageDeceasedName"
-    );
+    const VillageDeceasedName = VillageForm.querySelector("#villageDeceasedName");
     if (VillageDeceasedName) {
         const VillageDeceasedNameReq = VillageForm.querySelector(
             "#villageDeceasedNameReq"
@@ -1381,9 +1379,7 @@ if (VillageForm) {
         })
     }
     //! Village Deceased Gender
-    const VillageDeceasedGender = VillageForm.querySelector(
-        "#villageDeceasedGender"
-    );
+    const VillageDeceasedGender = VillageForm.querySelector("#villageDeceasedGender");
     if (VillageDeceasedGender) {
         VillageDeceasedGender.addEventListener("change", function () {
             const VillageDeceasedGenderReq =
@@ -1401,9 +1397,7 @@ if (VillageForm) {
         });
     }
     //! Village Deceased Death Place
-    const VillageDeceasedDeathPlace = VillageForm.querySelector(
-        "#villageDeceasedDeathPlace"
-    );
+    const VillageDeceasedDeathPlace = VillageForm.querySelector("#villageDeceasedDeathPlace");
     if (VillageDeceasedDeathPlace) {
         const VillageDeceasedDeathPlaceReq = VillageForm.querySelector(
             "#villageDeathPlaceReq"
@@ -1428,13 +1422,9 @@ if (VillageForm) {
         });
     }
     //! Village Deceased Death Date
-    const VillageDeceasedDeathDate = VillageForm.querySelector(
-        "#villageDeceasedDeathDate"
-    );
+    const VillageDeceasedDeathDate = VillageForm.querySelector("#villageDeceasedDeathDate");
     if (VillageDeceasedDeathDate) {
-        const VillageDeceasedDeathDateReq = VillageForm.querySelector(
-            "#village_death_date_req"
-        );
+        const VillageDeceasedDeathDateReq = VillageForm.querySelector("#village_death_date_req");
         VillageDeceasedDeathDate.addEventListener("change", function () {
             const deathDateValue = VillageDeceasedDeathDate.value;
             if (deathDateValue === "") {
@@ -1449,13 +1439,9 @@ if (VillageForm) {
         });
     }
     //! Village Deceased Burial Date
-    const VillageDeceasedBurialDate = VillageForm.querySelector(
-        "#villageDeceasedBurialDate"
-    );
+    const VillageDeceasedBurialDate = VillageForm.querySelector("#villageDeceasedBurialDate");
     if (VillageDeceasedBurialDate) {
-        const VillageDeceasedBurialDateReq = VillageForm.querySelector(
-            "#village_burial_date_req"
-        );
+        const VillageDeceasedBurialDateReq = VillageForm.querySelector("#village_burial_date_req");
         VillageDeceasedBurialDate.addEventListener("change", function () {
             const burialDateValue = VillageDeceasedBurialDate.value;
             if (burialDateValue === "") {
@@ -1480,3 +1466,4 @@ if (VillageForm) {
         })
     }
 }
+//! New Tomb Donators Validation
