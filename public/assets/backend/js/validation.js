@@ -1351,13 +1351,13 @@ if (VillageForm) {
     const VillageDeceasedName = VillageForm.querySelector(
         "#villageDeceasedName"
     );
-    const VillageDeceasedNameReq = VillageForm.querySelector(
-        "#villageDeceasedNameReq"
-    );
-    const VillageDeceasedNameMsg = VillageForm.querySelector(
-        "#villageDeceasedNameMsg"
-    );
     if (VillageDeceasedName) {
+        const VillageDeceasedNameReq = VillageForm.querySelector(
+            "#villageDeceasedNameReq"
+        );
+        const VillageDeceasedNameMsg = VillageForm.querySelector(
+            "#villageDeceasedNameMsg"
+        );
         VillageDeceasedName.addEventListener("input", function () {
             let letters = /^[\u0600-\u06FF\s\d\/\-\.\,]{3,}$/;
             if (VillageDeceasedName.value.trim() === "") {
@@ -1381,9 +1381,94 @@ if (VillageForm) {
         })
     }
     //! Village Deceased Gender
+    const VillageDeceasedGender = VillageForm.querySelector(
+        "#villageDeceasedGender"
+    );
+    if (VillageDeceasedGender) {
+        VillageDeceasedGender.addEventListener("change", function () {
+            const VillageDeceasedGenderReq =
+                VillageForm.querySelector("#villageGenReq");
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "جنس المتوفي") {
+                VillageDeceasedGender.classList.add("error");
+                VillageDeceasedGender.classList.remove("good");
+                VillageDeceasedGenderReq.classList.remove("d-none");
+            } else {
+                VillageDeceasedGender.classList.remove("error");
+                VillageDeceasedGender.classList.add("good");
+                VillageDeceasedGenderReq.classList.add("d-none");
+            }
+        });
+    }
     //! Village Deceased Death Place
+    const VillageDeceasedDeathPlace = VillageForm.querySelector(
+        "#villageDeceasedDeathPlace"
+    );
+    if (VillageDeceasedDeathPlace) {
+        const VillageDeceasedDeathPlaceReq = VillageForm.querySelector(
+            "#villageDeathPlaceReq"
+        );
+        VillageDeceasedDeathPlace.addEventListener("input", function () {
+            let letters = /^[\u0600-\u06FF\s\d\/\-\.\,]{3,}$/;
+            if (this.value.trim() === "") {
+                VillageDeceasedDeathPlaceReq.classList.remove("d-none");
+                VillageDeceasedDeathPlace.classList.remove("good");
+                VillageDeceasedDeathPlace.classList.add("error");
+            } else {
+                if (letters.test(this.value)) {
+                    VillageDeceasedDeathPlace.classList.add("good");
+                    VillageDeceasedDeathPlace.classList.remove("error");
+                    VillageDeceasedDeathPlaceReq.classList.add("d-none");
+                } else {
+                    VillageDeceasedDeathPlace.classList.remove("good");
+                    VillageDeceasedDeathPlace.classList.add("error");
+                    VillageDeceasedDeathPlaceReq.classList.add("d-none");
+                }
+            }
+        });
+    }
     //! Village Deceased Death Date
+    const VillageDeceasedDeathDate = VillageForm.querySelector(
+        "#villageDeceasedDeathDate"
+    );
+    if (VillageDeceasedDeathDate) {
+        const VillageDeceasedDeathDateReq = VillageForm.querySelector(
+            "#village_death_date_req"
+        );
+        VillageDeceasedDeathDate.addEventListener("change", function () {
+            const deathDateValue = VillageDeceasedDeathDate.value;
+            if (deathDateValue === "") {
+                VillageDeceasedDeathDate.classList.add("error");
+                VillageDeceasedDeathDate.classList.remove("good");
+                VillageDeceasedDeathDateReq.classList.remove("d-none");
+            } else {
+                VillageDeceasedDeathDate.classList.remove("error");
+                VillageDeceasedDeathDate.classList.add("good");
+                VillageDeceasedDeathDateReq.classList.add("d-none");
+            }
+        });
+    }
     //! Village Deceased Burial Date
+    const VillageDeceasedBurialDate = VillageForm.querySelector(
+        "#villageDeceasedBurialDate"
+    );
+    if (VillageDeceasedBurialDate) {
+        const VillageDeceasedBurialDateReq = VillageForm.querySelector(
+            "#village_burial_date_req"
+        );
+        VillageDeceasedBurialDate.addEventListener("change", function () {
+            const burialDateValue = VillageDeceasedBurialDate.value;
+            if (burialDateValue === "") {
+                VillageDeceasedBurialDate.classList.add("error");
+                VillageDeceasedBurialDate.classList.remove("good");
+                VillageDeceasedBurialDateReq.classList.remove("d-none");
+            } else {
+                VillageDeceasedBurialDate.classList.remove("error");
+                VillageDeceasedBurialDate.classList.add("good");
+                VillageDeceasedBurialDateReq.classList.add("d-none");
+            }
+        });
+    }
     //! Village Deceased Submittion
     const VillageFormSubmition = VillageForm.querySelector("#villageDeceasedSubmit");
     if (VillageFormSubmition) {
