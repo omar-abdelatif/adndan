@@ -113,8 +113,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('update_15may_deceased', [May15TombController::class, 'updateDeceased'])->name('15may-deceased.update');
     //! Village Routes
     Route::controller(VillageController::class)->group(function () {
-        Route::get('tombs/villages/all', 'index')->name('village.all');
+        Route::get('tombs/village/deceaseds/all', 'index')->name('village.all');
         Route::post("tombs/village/deceaseds/store", 'createVillageDeceased')->name("village.deceaseds.store");
+        Route::post('tombs/village/deceaseds/update', 'update')->name('village.deceaseds.update');
+        Route::get("tombs/village/deceaseds/delete/{id}", 'delete')->name('village.deceaseds.delete');
     });
     //! Rooms Routes
     Route::get('all_rooms', [RoomsController::class, 'index'])->name('rooms.all');

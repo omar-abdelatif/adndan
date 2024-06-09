@@ -1344,3 +1344,54 @@ if (deceasedForm) {
         });
     }
 }
+//! Village Deceaseds Validation
+const VillageForm = document.getElementById("villageForm");
+if (VillageForm) {
+    //! Village Deceased Name
+    const VillageDeceasedName = VillageForm.querySelector(
+        "#villageDeceasedName"
+    );
+    const VillageDeceasedNameReq = VillageForm.querySelector(
+        "#villageDeceasedNameReq"
+    );
+    const VillageDeceasedNameMsg = VillageForm.querySelector(
+        "#villageDeceasedNameMsg"
+    );
+    if (VillageDeceasedName) {
+        VillageDeceasedName.addEventListener("input", function () {
+            let letters = /^[\u0600-\u06FF\s\d\/\-\.\,]{3,}$/;
+            if (VillageDeceasedName.value.trim() === "") {
+                VillageDeceasedNameReq.classList.remove("d-none");
+                VillageDeceasedNameMsg.classList.add("d-none");
+                VillageDeceasedName.classList.remove("good");
+                VillageDeceasedName.classList.add("error");
+            } else {
+                if (letters.test(VillageDeceasedName.value)) {
+                    VillageDeceasedName.classList.add("good");
+                    VillageDeceasedName.classList.remove("error");
+                    VillageDeceasedNameMsg.classList.add("d-none");
+                    VillageDeceasedNameReq.classList.add("d-none");
+                } else {
+                    VillageDeceasedName.classList.remove("good");
+                    VillageDeceasedName.classList.add("error");
+                    VillageDeceasedNameMsg.classList.remove("d-none");
+                    VillageDeceasedNameReq.classList.add("d-none");
+                }
+            }
+        })
+    }
+    //! Village Deceased Gender
+    //! Village Deceased Death Place
+    //! Village Deceased Death Date
+    //! Village Deceased Burial Date
+    //! Village Deceased Submittion
+    const VillageFormSubmition = VillageForm.querySelector("#villageDeceasedSubmit");
+    if (VillageFormSubmition) {
+        VillageFormSubmition.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (validateForm(VillageForm)) {
+                VillageForm.submit();
+            }
+        })
+    }
+}
