@@ -1467,3 +1467,175 @@ if (VillageForm) {
     }
 }
 //! New Tomb Donators Validation
+const NewDonatorsForm = document.getElementById("newTombDonatorsForm");
+if (NewDonatorsForm) {
+    //! New Tomb Donators Name Validations
+    const NewDonatorsName = NewDonatorsForm.querySelector("#tombDonatorName");
+    if (NewDonatorsName) {
+        const NewDonatorsNameReq =
+            NewDonatorsForm.querySelector("#tombDonatorReq");
+        const NewDonatorsNameMsg =
+            NewDonatorsForm.querySelector("#tombDonatorMsg");
+        NewDonatorsName.addEventListener("input", function () {
+            let letters = /^[\u0600-\u06FF\s\d\/\-\.\,]{3,}$/;
+            if (NewDonatorsName.value.trim() === "") {
+                NewDonatorsNameReq.classList.remove("d-none");
+                NewDonatorsNameMsg.classList.add("d-none");
+                NewDonatorsName.classList.remove("good");
+                NewDonatorsName.classList.add("error");
+            } else {
+                if (letters.test(NewDonatorsName.value)) {
+                    NewDonatorsName.classList.add("good");
+                    NewDonatorsName.classList.remove("error");
+                    NewDonatorsNameMsg.classList.add("d-none");
+                    NewDonatorsNameReq.classList.add("d-none");
+                } else {
+                    NewDonatorsName.classList.remove("good");
+                    NewDonatorsName.classList.add("error");
+                    NewDonatorsNameMsg.classList.remove("d-none");
+                    NewDonatorsNameReq.classList.add("d-none");
+                }
+            }
+        });
+    }
+    //! New Tomb Donators Mobile Number Validation
+    const NewDonatorsMobile =
+        NewDonatorsForm.querySelector("#tombDonatorMobile");
+    if (NewDonatorsMobile) {
+        const NewDonatorsMobileReq = NewDonatorsForm.querySelector(
+            "#tombdonatorMobileReq"
+        );
+        const NewDonatorsMobileMsg = NewDonatorsForm.querySelector(
+            "#tombdonatorMobileMsg"
+        );
+        NewDonatorsMobile.addEventListener("input", function () {
+            let letters = /^[0-9]{12}$/;
+            if (this.value.trim() === "") {
+                NewDonatorsMobileReq.classList.remove("d-none");
+                NewDonatorsMobileMsg.classList.add("d-none");
+                NewDonatorsMobile.classList.remove("good");
+                NewDonatorsMobile.classList.add("error");
+            } else {
+                if (letters.test(this.value)) {
+                    NewDonatorsMobile.classList.add("good");
+                    NewDonatorsMobile.classList.remove("error");
+                    NewDonatorsMobileMsg.classList.add("d-none");
+                    NewDonatorsMobileReq.classList.add("d-none");
+                } else {
+                    NewDonatorsMobile.classList.remove("good");
+                    NewDonatorsMobile.classList.add("error");
+                    NewDonatorsMobileMsg.classList.remove("d-none");
+                    NewDonatorsMobileReq.classList.add("d-none");
+                }
+            }
+        });
+    }
+    //! New Tomb DOnators Duration Validation
+    const NewDonatorsDuration =
+        NewDonatorsForm.querySelector("#donationDuration");
+    if (NewDonatorsDuration) {
+        const NewDonatorsDurationReq =
+            NewDonatorsForm.querySelector("#tombDurationReq");
+        NewDonatorsDuration.addEventListener("change", function () {
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "نوع المتبرع") {
+                NewDonatorsDuration.classList.add("error");
+                NewDonatorsDuration.classList.remove("good");
+                NewDonatorsDurationReq.classList.remove("d-none");
+            } else {
+                NewDonatorsDuration.classList.remove("error");
+                NewDonatorsDuration.classList.add("good");
+                NewDonatorsDurationReq.classList.add("d-none");
+            }
+            if (selectedIndexValue === "أخرى") {
+                NewDonatorsOtherDonation.disabled = false;
+                NewDonatorsOtherDonation.classList.remove("d-none");
+                if (NewDonatorsOtherDonation.value.trim() === "") {
+                    NewDonatorsOtherDonationReq.classList.remove("d-none");
+                    NewDonatorsOtherDonation.classList.remove("good");
+                    NewDonatorsOtherDonation.classList.add("error");
+                }
+            } else {
+                NewDonatorsOtherDonation.disabled = true;
+                NewDonatorsOtherDonation.value = "";
+                NewDonatorsOtherDonation.classList.add("d-none");
+                NewDonatorsOtherDonation.classList.remove("good");
+                NewDonatorsOtherDonation.classList.remove("error");
+                NewDonatorsOtherDonationReq.classList.add("d-none");
+            }
+        });
+    }
+    //! New Tomb Donators Other Duration
+    const NewDonatorsOtherDonation =
+        NewDonatorsForm.querySelector("#tombOtherDuration");
+    const NewDonatorsOtherDonationReq =
+        NewDonatorsForm.querySelector("#tombOtherReq");
+    if (NewDonatorsOtherDonation) {
+        NewDonatorsOtherDonation.addEventListener("input", function () {
+            let letters = /^[\u0600-\u06FF\s]+$/;
+            if (this.value.trim() === "") {
+                NewDonatorsOtherDonationReq.classList.remove("d-none");
+                NewDonatorsOtherDonation.classList.remove("good");
+                NewDonatorsOtherDonation.classList.add("error");
+            } else {
+                if (letters.test(this.value)) {
+                    NewDonatorsOtherDonation.classList.add("good");
+                    NewDonatorsOtherDonation.classList.remove("error");
+                    NewDonatorsOtherDonationReq.classList.add("d-none");
+                } else {
+                    NewDonatorsOtherDonation.classList.remove("good");
+                    NewDonatorsOtherDonation.classList.add("error");
+                    NewDonatorsOtherDonationReq.classList.add("d-none");
+                }
+            }
+        });
+    }
+    //! Tomb From Submition Validation
+    const TombFormSubmition =
+        NewDonatorsForm.querySelector("#tombFormSubmition");
+    if (TombFormSubmition) {
+        TombFormSubmition.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (validateForm(NewDonatorsForm)) {
+                NewDonatorsForm.submit();
+            }
+        });
+    }
+}
+//! New Tomb Donator Update Validation
+const NewDonatorsFormUpdate = document.querySelectorAll("[data-newdonator-id]");
+if (NewDonatorsFormUpdate.length > 0) {
+    NewDonatorsFormUpdate.forEach((newdonation) => {
+        const UpdateDonatorType = newdonation.querySelectorAll("[data-donatortype-id]");
+        const UpdateOtherDonationType = newdonation.querySelectorAll("[data-donatorduration-id]");
+
+        function handleValidationDonation(updateSelect) {
+            const selectedDonatorType = updateSelect.options[updateSelect.selectedIndex].value;
+            if (selectedDonatorType === "شهري") {
+                UpdateOtherDonationType.forEach((input) => {
+                    input.disabled = true;
+                    input.classList.add("d-none");
+                });
+            } else if (selectedDonatorType === "أخرى") {
+                UpdateOtherDonationType.forEach((input) => {
+                    input.disabled = false;
+                    input.classList.remove("d-none");
+                });
+            }
+        }
+
+        UpdateDonatorType.forEach((update) => {
+            const updateSelect = newdonation.querySelector(`select[name="donator_type"][data-donatortype-id="${update.dataset.donatortypeId}"]`);
+            if (updateSelect) {
+                handleValidationDonation(updateSelect);
+                updateSelect.addEventListener("change", function () {
+                    handleValidationDonation(updateSelect);
+                });
+            }
+        });
+    });
+}
+//! Validation For Tomb Donator Form
+const TombDonatorForm = document.getElementById("TombDonatorForm");
+if (TombDonatorForm) {
+}

@@ -29,23 +29,23 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-12">
+        <div class="col-lg-12">
             <div class="deceased-section-title mt-5 text-center bg-dark-gradient text-white p-3 w-50 mx-auto rounded">
                 <h2 class="mb-0">كل المتوفيين</h2>
             </div>
             <div class="deceased-content">
-                <div class="table-responsive">
-                    @if (session('success'))
-                        <div class="alert alert-success text-center mt-5">
-                            <p class="mb-0">{{ session('success') }}</p>
+                @if (session('success'))
+                    <div class="alert alert-success text-center mt-5">
+                        <p class="mb-0">{{ session('success') }}</p>
+                    </div>
+                @elseif ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger text-center mt-5">
+                            <p class="mb-0">{{ $error }}</p>
                         </div>
-                    @elseif ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger text-center mt-5">
-                                <p class="mb-0">{{ $error }}</p>
-                            </div>
-                        @endforeach
-                    @endif
+                    @endforeach
+                @endif
+                <div class="table-responsive">
                     <table class="table borderd-table display align-middle text-center datatable" id="table9" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                         <thead>
                             <th class="text-center">#</th>

@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class NewTombDonators extends Model
 {
     use HasFactory;
-    protected $table = '';
-    protected $fillable = [];
+    protected $table = 'new_donators';
+    protected $fillable = [
+        'name',
+        'mobile_number',
+        'donator_type',
+        'donator_duration'
+    ];
+    public function tombdonations(){
+        return $this->hasMany(TombDonations::class);
+    }
 }
