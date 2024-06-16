@@ -33,8 +33,9 @@
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body bg-dark-gradient">
-                    <form action="{{route("new.tomb.donator.donation.history", $donator->id)}}" method="post" id="TombDonatorForm">
+                    <form action="{{route("new.tomb.donation.store")}}" method="post" id="TombDonationForm">
                         @csrf
+                        <input type="hidden" name="tomb_donator_id" value="{{$donator->id}}">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group mb-3">
@@ -53,20 +54,25 @@
                             <div class="col-lg-6">
                                 <div class="form-group mb-3">
                                     <label for="tombDonatorDonationDuration" class="form-label text-white fw-bold">مدة التبرع</label>
-                                    <input type="text" id="tombDonatorDonationDuration" class="form-control" name="donation_duration" placeholder="مدة التبرع" required>
+                                    <input type="text" id="tombDonatorDonationDuration" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" class="form-control" name="donation_duration" placeholder="مدة التبرع" required>
+                                    <p class="required d-none text-danger fw-bold mb-0" id="tombDonatorDonationDurationReq">هذا الحقل مطلوب</p>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="tombDonatorAmount" class="form-label text-white fw-bold">المبلغ</label>
-                                    <input type="text" id="tombDonatorAmount" class="form-control" name="amount" placeholder="مبلغ التبرع" required>
+                                    <input type="text" id="tombDonatorAmount" maxlength="5" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="مبلغ التبرع" required>
+                                    <p class="required d-none text-danger fw-bold mb-0" id="tombDonatorAmountReq">هذا الحقل مطلوب</p>
+                                    <p class="required d-none text-danger fw-bold mb-0" id="tombDonatorAmountMsg">يجب ان يكون المبلغ مكون من 5 أرقام كحد أكثر</p>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="tombDonatorDonationInvoice" class="form-label text-white fw-bold">رقم الايصال</label>
-                                    <input type="text" id="tombDonatorDonationInvoice" class="form-control" name="invoice_no" placeholder="رقم الايصال" required>
+                                    <input type="text" id="tombDonatorDonationInvoice" maxlength="5" class="form-control" name="invoice_no" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="رقم الايصال" required>
+                                    <p class="required d-none text-danger fw-bold mb-0" id="tombDonatorDonationInvoiceReq">هذا الحقل مطلوب</p>
+                                    <p class="required d-none text-danger fw-bold mb-0" id="tombDonatorDonationInvoiceMsg">يجب ان يكون رقم الايصال مكون من 5 أرقام</p>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">إلغاء</button>
-                                <button type="submit" role="button" class="btn btn-primary fw-bold">تأكيد</button>
+                                <button type="submit" role="button" id="TombDonationFormSubmition" class="btn btn-primary fw-bold">تأكيد</button>
                             </div>
                         </div>
                     </form>
@@ -107,7 +113,106 @@
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                            <?php $i=1 ?>
+                            @foreach ($donations as $donation)
+                                <tr>
+                                    <td>{{$i++}}</td>
+                                    <td>{{$donation->name}}</td>
+                                    <td>{{$donation->mobile_no}}</td>
+                                    <td>{{$donation->donation_type}}</td>
+                                    <td>{{$donation->donation_duration}}</td>
+                                    <td>{{$donation->amount}}</td>
+                                    <td>{{$donation->invoice_no}}</td>
+                                    <td>
+                                        {{-- ! Update Donators ! --}}
+                                        <button type="button" class="btn btn-warning rounded" data-coreui-toggle="modal" data-coreui-target="#edit{{$donation->id}}" data-coreui-whatever="@mdo">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <div class="modal fade" id="edit{{$donation->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title text-decoration-underline" id="exampleModalLabel">تعديل {{$donation->name}}</h3>
+                                                        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body bg-dark-gradient">
+                                                        <form action="{{route("new.tomb.donation.update")}}" method="post">
+                                                            @csrf
+                                                            <div class="row">
+                                                                <input type="hidden" name="id" value="{{$donation->id}}">
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="tombDonatorName" class="form-label text-white fw-bold">إسم المتبرع</label>
+                                                                        <input type="text" id="tombDonatorName" name="name" class="form-control" value="{{$donation->name}}" readonly>
+                                                                    </div>
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="tombDonatorMob" class="form-label text-white fw-bold">رقم المحمول</label>
+                                                                        <input type="text" maxlength="12" id="tombDonatorMob" name="mobile_no" class="form-control" value="{{$donation->mobile_no}}" readonly>
+                                                                    </div>
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="tombDonatorDonationType" class="form-label text-white fw-bold">نوع التبرع</label>
+                                                                        <input type="text" id="tombDonatorDonationType" class="form-control" value="{{$donation->donation_type}}" name="donation_type" value="مقابر جديدة" readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="tombDonatorDonationDuration" class="form-label text-white fw-bold">مدة التبرع</label>
+                                                                        <input type="text" id="tombDonatorDonationDuration" value="{{$donation->donation_duration}}" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" class="form-control" name="donation_duration" placeholder="مدة التبرع" required>
+                                                                    </div>
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="tombDonatorAmount" class="form-label text-white fw-bold">المبلغ</label>
+                                                                        <input type="text" id="tombDonatorAmount" class="form-control" name="amount" value="{{$donation->amount}}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="مبلغ التبرع" required>
+                                                                    </div>
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="tombDonatorDonationInvoice" class="form-label text-white fw-bold">رقم الايصال</label>
+                                                                        <input type="text" id="tombDonatorDonationInvoice" class="form-control" value="{{$donation->invoice_no}}" name="invoice_no" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="رقم الايصال" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">إلغاء</button>
+                                                                    <button type="submit" role="button" class="btn btn-primary fw-bold">تأكيد</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- ! Delete Donators ! --}}
+                                        <button type="button" class="btn btn-danger rounded" data-coreui-toggle="modal" data-coreui-target="#delete{{$donation->id}}" data-coreui-whatever="@mdo">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                        <div class="modal fade" id="delete{{$donation->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title text-decoration-underline" id="exampleModalLabel">حذف {{$donation->name}}</h3>
+                                                        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body bg-dark-gradient">
+                                                        <form action="{{route("new.tomb.donation.delete", $donation->id)}}" method="get">
+                                                            @csrf
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-title text-center">
+                                                                        <h3 class="text-white my-3">هل أنت متأكد من الحذف</h3>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-danger fw-bold" data-bs-dismiss="modal">إلغاء</button>
+                                                                        <button type="submit" role="button" class="btn btn-primary fw-bold">تأكيد</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>

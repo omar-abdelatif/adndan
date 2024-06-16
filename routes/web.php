@@ -144,7 +144,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('new-tombs/donators/store', 'storeDonators')->name("new.tomb.donator.store");
         Route::post('new-tombs/donators/update', 'updateDonators')->name('new.tomb.donator.update');
         Route::get("new-totmbs/donator/destroy/{id}", 'deleteDonators')->name('new.tomb.donator.destroy');
-        Route::post('new-tombs/donators/donations/store', 'donationStore')->name("new.tomb.donation.store");
         Route::get('new-tombs/donators/donations/history/{id}', 'tombDonatorHistory')->name('new.tomb.donator.donation.history');
+        Route::post('new-tombs/donators/donations/store', 'donationStore')->name("new.tomb.donation.store");
+        Route::post("new-tombs/donators/donations/update", 'donationUpdate')->name("new.tomb.donation.update");
+        Route::get("new-tombs/donators/donations/destroy/{id}", 'donationDelete')->name("new.tomb.donation.delete");
     });
 });

@@ -36,7 +36,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group mb-2">
                                     <label for="donatorName" class="text-white fw-bold">إسم المتبرع</label>
-                                    <input type="text" class="form-control" name="name" id="tombDonatorName" placeholder="إسم المتبرع" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}">
+                                    <input type="text" class="form-control" name="name" id="tombDonatorName" placeholder="إسم المتبرع" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')">
                                     <p id="tombDonatorReq" class="required text-danger fw-bold d-none mb-0">هذا الحقل مطلوب</p>
                                     <p id="tombDonatorMsg" class="required text-danger fw-bold d-none mb-0">الأسم باللغة العربية فقط ولا يقل عن 3 أحرف</p>
                                 </div>

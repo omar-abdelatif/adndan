@@ -9,14 +9,14 @@ class TombDonations extends Model
 {
     use HasFactory;
     protected $table = 'tomb_donations';
-    protected $fillabl = [
+    protected $fillable = [
         'name',
         'mobile_no',
         'donation_type',
         'amount',
         'invoice_no',
         'donation_duration',
-        'tomb_donator_id',
+        'new_tomb_donators_id',
     ];
     public function donators(){
         return $this->belongsTo(NewTombDonators::class);

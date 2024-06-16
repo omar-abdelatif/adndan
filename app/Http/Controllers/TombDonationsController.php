@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\NewTombDonators;
+use App\Models\TombDonations;
 use Illuminate\Http\Request;
 
 class TombDonationsController extends Controller
@@ -52,7 +53,62 @@ class TombDonationsController extends Controller
     }
     public function tombDonatorHistory($id){
         $donator = NewTombDonators::find($id);
-        return view('المقابر.donations.donation_history',compact('donator'));
+        $donations = $donator->tombdonations;
+        return view('المقابر.donations.donation_history', compact('donator', 'donations'));
     }
-    public function donationStore(Request $request){}
+    public function donationStore(Request $request)
+    {
+        $validations = $request->validate([
+            'name' => 'required',
+            'mobile_no' => 'required',
+            'donation_type' => 'required',
+            'donation_duration' => 'required',
+            'amount' => 'required',
+            'invoice_no' => 'required',
+        ]);
+        $donator = NewTombDonators::where("mobile_number", $request->mobile_no)->first();
+        $store = TombDonations::create([
+            'name' => $request->name,
+            'mobile_no' => $request->mobile_no,
+            'donation_type' => $request->donation_type,
+            'donation_duration' => $request->donation_duration,
+            'amount' => $request->amount,
+            'invoice_no' => $request->invoice_no,
+            'new_tomb_donators_id' => $donator->id,
+        ]);
+        if ($store) {
+            return redirect()->back()->withSuccess('تم التسجيل بنجاح');
+        }
+        return redirect()->back()->withErrors($validations);
+    }
+    public function donationUpdate(Request $request)
+    {
+        $id = $request->id;
+        $donation = TombDonations::find($id);
+        if ($donation) {
+            $update = $donation->update([
+                'name' => $request->name,
+                'mobile_no' => $request->mobile_no,
+                'donation_type' => $request->donation_type,
+                'donation_duration' => $request->donation_duration,
+                'amount' => $request->amount,
+                'invoice_no' => $request->invoice_no,
+            ]);
+            if ($update) {
+                return redirect()->back()->withSuccess('تم التعديل بنجاح');
+            }
+            return redirect()->back()->withErrors('حدث خطأ جرب مره أخرى');
+        }
+    }
+    public function donationDelete($id)
+    {
+        $donation = TombDonations::find($id);
+        if ($donation) {
+            $delete = $donation->delete();
+            if ($delete) {
+                return redirect()->back()->withSuccess('تم الحذف بنجاح');
+            }
+            return redirect()->back()->withErrors('حدث خطأ جرب مره أخرى');
+        }
+    }
 }

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tomb_donations', function (Blueprint $table) {
-            $table->bigInteger('tomb_donator_id')->after('donation_duration')->index()->references("id")->on("new_donators")->onDelete("cascade");
+            $table->bigInteger('new_tomb_donators_id')->after('donation_duration')->index()->references("id")->on("new_donators")->onDelete("cascade");
         });
     }
 

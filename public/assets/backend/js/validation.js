@@ -892,8 +892,7 @@ if (OldDeceasedForm) {
         });
     }
     //! Old Deceased Death Date Validation
-    const oldDeceasedDeathDate =
-        OldDeceasedForm.querySelector("#deceasedDeath");
+    const oldDeceasedDeathDate = OldDeceasedForm.querySelector("#deceasedDeath");
     const deathDateReq = OldDeceasedForm.querySelector("#deathDateReq");
     if (oldDeceasedDeathDate) {
         oldDeceasedDeathDate.addEventListener("change", function () {
@@ -910,8 +909,7 @@ if (OldDeceasedForm) {
         });
     }
     //! Old Deceased Burial Date Validation
-    const oldDeceasedBurialDate =
-        OldDeceasedForm.querySelector("#deceasedBurial");
+    const oldDeceasedBurialDate = OldDeceasedForm.querySelector("#deceasedBurial");
     const burialDateReq = OldDeceasedForm.querySelector("#burialReq");
     if (oldDeceasedBurialDate) {
         oldDeceasedBurialDate.addEventListener("change", function () {
@@ -1635,7 +1633,94 @@ if (NewDonatorsFormUpdate.length > 0) {
         });
     });
 }
-//! Validation For Tomb Donator Form
-const TombDonatorForm = document.getElementById("TombDonatorForm");
-if (TombDonatorForm) {
+//! Validation For Tomb Donation History Insertion
+const TombDonationForm = document.getElementById("TombDonationForm");
+if (TombDonationForm) {
+    //! New Tomb Donations Durations
+    const tombDonatorDonationDuration = TombDonationForm.querySelector("#tombDonatorDonationDuration");
+    if (tombDonatorDonationDuration) {
+        const tombDonatorDonationDurationReq = TombDonationForm.querySelector("#tombDonatorDonationDurationReq");
+        tombDonatorDonationDuration.addEventListener("input", function () {
+            let letters = /^[\u0600-\u06FF\s]+$/;
+            if (this.value.trim() === "") {
+                tombDonatorDonationDurationReq.classList.remove("d-none");
+                tombDonatorDonationDuration.classList.remove("good");
+                tombDonatorDonationDuration.classList.add("error");
+            } else {
+                if (letters.test(this.value)) {
+                    tombDonatorDonationDuration.classList.add("good");
+                    tombDonatorDonationDuration.classList.remove("error");
+                    tombDonatorDonationDurationReq.classList.add("d-none");
+                } else {
+                    tombDonatorDonationDuration.classList.remove("good");
+                    tombDonatorDonationDuration.classList.add("error");
+                    tombDonatorDonationDurationReq.classList.add("d-none");
+                }
+            }
+        })
+    }
+    //! New Tomb Donations Amount
+    const tombDonatorDonationAmount = TombDonationForm.querySelector("#tombDonatorAmount");
+    if (tombDonatorDonationAmount) {
+        const tombDonatorDonationAmountReq = TombDonationForm.querySelector("#tombDonatorDonationAmountReq");
+        const tombDonatorDonationAmountMsg = TombDonationForm.querySelector("#tombDonatorDonationAmountMsg");
+        tombDonatorDonationAmount.addEventListener("input", function () {
+            let letters = /^[0-9]{5}/;
+            if (this.value.trim() === "") {
+                tombDonatorDonationAmount.classList.remove("good");
+                tombDonatorDonationAmount.classList.add("error");
+                tombDonatorDonationAmountReq.classList.remove("d-none");
+                tombDonatorDonationAmountMsg.classList.add("d-none");
+            } else {
+                if (letters.test(this.value)) {
+                    tombDonatorDonationAmount.classList.add("good");
+                    tombDonatorDonationAmount.classList.remove("error");
+                    tombDonatorDonationAmountMsg.classList.add("d-none");
+                    tombDonatorDonationAmountReq.classList.add("d-none");
+                } else {
+                    tombDonatorDonationAmount.classList.remove("good");
+                    tombDonatorDonationAmount.classList.add("error");
+                    tombDonatorDonationAmountMsg.classList.remove("d-none");
+                    tombDonatorDonationAmountReq.classList.add("d-none");
+                }
+            }
+        })
+    }
+    //! New Tomb Donations Invoice Number
+    const tombDonatorDonationInvoice = TombDonationForm.querySelector("#tombDonatorDonationInvoice");
+    if (tombDonatorDonationInvoice) {
+        const tombDonatorDonationInvoiceReq = TombDonationForm.querySelector("#tombDonatorDonationInvoiceReq");
+        const tombDonatorDonationInvoiceMsg = TombDonationForm.querySelector("#tombDonatorDonationInvoiceMsg");
+        tombDonatorDonationInvoice.addEventListener("input", function () {
+            let letters = /^[0-9]{5}/;
+            if (this.value.trim() === "") {
+                tombDonatorDonationInvoice.classList.remove("good");
+                tombDonatorDonationInvoice.classList.add("error");
+                tombDonatorDonationInvoiceReq.classList.remove("d-none");
+                tombDonatorDonationInvoiceMsg.classList.add("d-none");
+            } else {
+                if (letters.test(this.value)) {
+                    tombDonatorDonationInvoice.classList.add("good");
+                    tombDonatorDonationInvoice.classList.remove("error");
+                    tombDonatorDonationInvoiceMsg.classList.add("d-none");
+                    tombDonatorDonationInvoiceReq.classList.add("d-none");
+                } else {
+                    tombDonatorDonationInvoice.classList.remove("good");
+                    tombDonatorDonationInvoice.classList.add("error");
+                    tombDonatorDonationInvoiceMsg.classList.remove("d-none");
+                    tombDonatorDonationInvoiceReq.classList.add("d-none");
+                }
+            }
+        })
+    }
+    //! Tomb Donator Form Submition
+    const TombDonatorFormSubmition = TombDonationForm.querySelector("#TombDonationFormSubmition");
+    if (TombDonatorFormSubmition) {
+        TombDonatorFormSubmition.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (validateForm(TombDonationForm)) {
+                TombDonationForm.submit();
+            }
+        });
+    }
 }
