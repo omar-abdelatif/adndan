@@ -310,7 +310,10 @@
                                                                     <th class="text-center">Actions</th>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <?php $j=1 ?>
+                                                                    <?php
+                                                                        $j = 1;
+                                                                        $q = 0;
+                                                                    ?>
                                                                     @foreach ($tomb->rooms as $room)
                                                                             @php
                                                                                 $sumSize = $room->deceased->sum(function($deceased) {
@@ -347,8 +350,13 @@
                                                                                     <td>{{$room->name}}</td>
                                                                                     <td>{{$room->capacity}}</td>
                                                                                     <td>{{ $room->burial_date }}</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
+                                                                                    @if ($q < $roomsCount / 2)
+                                                                                        <td>{{ $room->capacity - $deceasedsCount }}</td>
+                                                                                        <td>X</td>
+                                                                                    @else
+                                                                                        <td>X</td>
+                                                                                        <td>{{ $room->capacity - $deceasedsCount }}</td>
+                                                                                    @endif
                                                                                     <td>
                                                                                         <a href="{{ route('gafeer.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
                                                                                             <i class="fa fa-eye"></i>
@@ -367,6 +375,7 @@
                                                                                     </td>
                                                                                 </tr>
                                                                             @endif
+                                                                            {{ $q++ }}
                                                                     @endforeach
                                                                 </tbody>
                                                             </table>

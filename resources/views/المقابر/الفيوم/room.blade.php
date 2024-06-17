@@ -116,7 +116,7 @@
                                                                 @csrf
                                                                 <div class="container-fluid">
                                                                     <div class="row">
-                                                                        <input type="text" class="form-control" name="id" value="{{$deceased->id}}">
+                                                                        <input type="hidden" class="form-control" name="id" value="{{$deceased->id}}">
                                                                         <div class="col-6">
                                                                             <div class="form-group mt-3">
                                                                                 <label for="name">

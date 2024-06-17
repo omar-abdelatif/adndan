@@ -336,8 +336,8 @@
                                         </label>
                                         <select name="size" class="form-select" id="size" required>
                                             <option selected disabled>حجم المتوفي</option>
-                                            <option value="فردي">فردي</option>
-                                            <option value="زوجي">زوجي</option>
+                                            <option value="1">فردي</option>
+                                            <option value="2">زوجي</option>
                                         </select>
                                         <p class="required d-none text-danger fw-bold mb-0" id="sizeReq">أختر من القائمة أعلاه</p>
                                     </div>
