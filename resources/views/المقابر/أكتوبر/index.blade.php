@@ -307,24 +307,34 @@
                                                                         <th class="text-center">Actions</th>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <?php $j=1 ?>
+                                                                        <?php
+                                                                            $j = 1;
+                                                                            $i = 0;
+                                                                        ?>
                                                                         @foreach ($tomb->rooms as $room)
                                                                             @php
-                                                                                $sumSize = $room->deceased->map(function($deceased) {
+                                                                                $sumSize = $room->deceased->sum(function($deceased) {
                                                                                     return (int) $deceased->size;
-                                                                                })->sum();
+                                                                                });
+                                                                                $roomsCount = $tomb->rooms->count();
+                                                                                $roomId = $room->id;
+                                                                                $deceasedsCount = 0;
+                                                                                $deceasedsAll = $room->deceased->where("rooms_id", $roomId);
+                                                                                foreach ($deceasedsAll as $deceased) {
+                                                                                    $deceasedsCount += (int) $deceased->size;
+                                                                                }
                                                                             @endphp
                                                                             @if ($sumSize === $room->capacity)
                                                                                 <tr>
-                                                                                    <td class="text-center" colspan="6">{{$room->name}} ممتلئة</td>
+                                                                                    <td class="text-center" colspan="6">{{ $room->name }} ممتلئة</td>
                                                                                     <td class="d-flex justify-content-center">
                                                                                         <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info ms-2">
                                                                                             <i class="fa fa-eye"></i>
                                                                                         </a>
                                                                                         @if ($sumSize >= $room->capacity)
-                                                                                            <form action="{{route('rooms.oldDeceased', $room->id)}}" method="post">
+                                                                                            <form action="{{ route('rooms.oldDeceased', $room->id) }}" method="post">
                                                                                                 @csrf
-                                                                                                <button type="submit" class="btn btn-warning purify ">
+                                                                                                <button type="submit" class="btn btn-warning purify">
                                                                                                     <b>تطهير</b>
                                                                                                 </button>
                                                                                             </form>
@@ -333,12 +343,17 @@
                                                                                 </tr>
                                                                             @else
                                                                                 <tr>
-                                                                                    <td>{{ $j++ }}</td>
-                                                                                    <td>{{$room->name}}</td>
-                                                                                    <td>{{$room->capacity}}</td>
+                                                                                    <td>{{ $room->id }}</td>
+                                                                                    <td>{{ $room->name }}</td>
+                                                                                    <td>{{ $room->capacity }}</td>
                                                                                     <td>{{ $room->burial_date }}</td>
-                                                                                    <td>0</td>
-                                                                                    <td>0</td>
+                                                                                    @if ($i < $roomsCount / 2)
+                                                                                        <td>{{ $room->capacity - $deceasedsCount }}</td>
+                                                                                        <td>X</td>
+                                                                                    @else
+                                                                                        <td>X</td>
+                                                                                        <td>{{ $room->capacity - $deceasedsCount }}</td>
+                                                                                    @endif
                                                                                     <td>
                                                                                         <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info ms-2">
                                                                                             <i class="fa fa-eye"></i>
@@ -346,6 +361,7 @@
                                                                                     </td>
                                                                                 </tr>
                                                                             @endif
+                                                                            {{ $i++ }}
                                                                         @endforeach
                                                                     </tbody>
                                                                 </table>

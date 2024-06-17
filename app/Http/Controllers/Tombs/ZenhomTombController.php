@@ -15,7 +15,8 @@ class ZenhomTombController extends Controller
     {
         $region = Region::where('name', 'زينهم')->firstOrFail();
         $tombs = $region->tombs;
-        return view('المقابر.زينهم.index', compact('region', 'tombs'));
+        $deceased = Deceased::get();
+        return view('المقابر.زينهم.index', compact('region','tombs', 'deceased'));
     }
     public function updateTomb(Request $request)
     {

@@ -313,9 +313,16 @@
                                                                     <?php $j=1 ?>
                                                                     @foreach ($tomb->rooms as $room)
                                                                             @php
-                                                                                $sumSize = $room->deceased->map(function($deceased) {
+                                                                                $sumSize = $room->deceased->sum(function($deceased) {
                                                                                     return (int) $deceased->size;
-                                                                                })->sum();
+                                                                                });
+                                                                                $roomsCount = $tomb->rooms->count();
+                                                                                $roomId = $room->id;
+                                                                                $deceasedsCount = 0;
+                                                                                $deceasedsAll = $room->deceased->where("rooms_id", $roomId);
+                                                                                foreach ($deceasedsAll as $deceased) {
+                                                                                    $deceasedsCount += (int) $deceased->size;
+                                                                                }
                                                                             @endphp
                                                                             @if ($sumSize === $room->capacity)
                                                                                 <tr>
@@ -346,6 +353,17 @@
                                                                                         <a href="{{ route('15may.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info">
                                                                                             <i class="fa fa-eye"></i>
                                                                                         </a>
+                                                                                        @php
+                                                                                            $sumSize = $room->deceased->sum('size');
+                                                                                        @endphp
+                                                                                        @if ($sumSize >= $room->capacity)
+                                                                                            <form action="{{route('rooms.oldDeceased', $room->id)}}" method="post">
+                                                                                                @csrf
+                                                                                                <button type="submit" class="btn btn-warning purify" data-room-id={{$room->id}}>
+                                                                                                    <b>تطهير</b>
+                                                                                                </button>
+                                                                                            </form>
+                                                                                        @endif
                                                                                     </td>
                                                                                 </tr>
                                                                             @endif

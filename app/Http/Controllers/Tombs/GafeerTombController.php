@@ -15,7 +15,8 @@ class GafeerTombController extends Controller
     {
         $region = Region::where('name', 'الغفير')->firstOrFail();
         $tombs = $region->tombs;
-        return view('المقابر.الغفير.index', compact('region', 'tombs'));
+        $deceased = Deceased::get();
+        return view('المقابر.الغفير.index', compact('region','tombs', 'deceased'));
     }
     public function updateTomb(Request $request)
     {

@@ -314,9 +314,16 @@
                                                                         <?php $j=1 ?>
                                                                         @foreach ($tomb->rooms as $room)
                                                                             @php
-                                                                                $sumSize = $room->deceased->map(function($deceased) {
+                                                                                $sumSize = $room->deceased->sum(function($deceased) {
                                                                                     return (int) $deceased->size;
-                                                                                })->sum();
+                                                                                });
+                                                                                $roomsCount = $tomb->rooms->count();
+                                                                                $roomId = $room->id;
+                                                                                $deceasedsCount = 0;
+                                                                                $deceasedsAll = $room->deceased->where("rooms_id", $roomId);
+                                                                                foreach ($deceasedsAll as $deceased) {
+                                                                                    $deceasedsCount += (int) $deceased->size;
+                                                                                }
                                                                             @endphp
                                                                             @if ($sumSize === $room->capacity)
                                                                                 <tr>

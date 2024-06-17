@@ -15,7 +15,8 @@ class May15TombController extends Controller
     {
         $region = Region::where('name', 'مايو')->firstOrFail();
         $tombs = $region->tombs;
-        return view('المقابر.15-مايو.index', compact('region', 'tombs'));
+        $deceased = Deceased::get();
+        return view('المقابر.15-مايو.index', compact('region','tombs', 'deceased'));
     }
     public function updateTomb(Request $request)
     {
