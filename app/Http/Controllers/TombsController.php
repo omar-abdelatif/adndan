@@ -32,7 +32,8 @@ class TombsController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string',
-            'power' => 'required|numeric',
+            'power' => 'required',
+            'other_tomb_power' => 'required',
             'type' => 'required|string|in:لحد,عيون',
             'annual_cost' => 'required|numeric',
             'region' => 'required|string'
@@ -42,6 +43,7 @@ class TombsController extends Controller
             $tomb = new Tomb;
             $tomb->name = $request->name;
             $tomb->power = $request->power;
+            $tomb->other_tomb_power = $request->other_tomb_power;
             $tomb->region = $request->region;
             $tomb->type = $request->type;
             $tomb->annual_cost = $request->annual_cost;
