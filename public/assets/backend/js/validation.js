@@ -749,7 +749,41 @@ if (tombForm) {
                 tombPower.classList.add("good");
                 tombPowerReq.classList.add("d-none");
             }
+            if (selectedIndexValue === "أخرى") {
+                otherPower.disabled = false;
+                otherPower.classList.remove("d-none");
+                otherPower.classList.add("error");
+                otherPowerReq.classList.remove("d-none");
+            } else {
+                otherPower.disabled = true;
+                otherPower.classList.add("d-none");
+                otherPower.classList.remove("error");
+                otherPowerReq.classList.add("d-none");
+            }
         });
+    }
+    //! Other Tomb Power Validation
+    const otherPower = tombForm.querySelector("#otherPower");
+    const otherPowerReq = tombForm.querySelector("#otherPowerReq");
+    if (otherPower) {
+        otherPower.addEventListener("input", function () {
+            let letters = /^[0-9]{2,}$/;
+            if (this.value.trim() === "") {
+                otherPower.classList.remove("good");
+                otherPower.classList.add("error");
+                otherPowerReq.classList.remove("d-none");
+            } else {
+                if (letters.test(this.value)) {
+                    otherPower.classList.add("good");
+                    otherPower.classList.remove("error");
+                    otherPowerReq.classList.add("d-none");
+                } else {
+                    otherPower.classList.remove("good");
+                    otherPower.classList.add("error");
+                    otherPowerReq.classList.add("d-none");
+                }
+            }
+        })
     }
     //! Tomb Type Validation
     const tombType = tombForm.querySelector("#tombType");

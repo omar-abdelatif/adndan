@@ -126,11 +126,8 @@
                                                                     <div class="form-group mb-2">
                                                                         <select name="power" class="form-select">
                                                                             <option class="text-center" selected>قوة المقبرة</option>
-                                                                            <option value="1" {{$tomb->power  == '1' ? 'selected' : ''}}>1</option>
                                                                             <option value="2" {{$tomb->power  == '2' ? 'selected' : ''}}>2</option>
-                                                                            <option value="3" {{$tomb->power  == '3' ? 'selected' : ''}}>3</option>
                                                                             <option value="4" {{$tomb->power  == '4' ? 'selected' : ''}}>4</option>
-                                                                            <option value="5" {{$tomb->power  == '5' ? 'selected' : ''}}>5</option>
                                                                             <option value="6" {{$tomb->power  == '6' ? 'selected' : ''}}>6</option>
                                                                         </select>
                                                                     </div>
@@ -189,7 +186,7 @@
                     <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة مقبرة جديدة</h1>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body bg-dark-gradient">
                     <form action="{{route('tombs.store')}}" method="post" id="newTombForm">
                         @csrf
                         <div class="container-fluid">
@@ -200,16 +197,17 @@
                                         <p class="required d-none text-danger mb-0 fw-bold" id="tombReq">هذا الحقل مطلوب</p>
                                         <p class="required d-none text-danger mb-0 fw-bold" id="tombMsg">يجب ان يكون اسم المقبره مكون من 3 احرف على الاقل</p>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
                                     <div class="form-group mb-2">
                                         <select name="power" class="form-select" id="tombPower" required>
                                             <option class="text-center" selected disabled>قوة المقبرة (بالغرف)</option>
                                             <option value="2">2</option>
                                             <option value="4">4</option>
                                             <option value="6">6</option>
+                                            <option value="أخرى">أخرى</option>
                                         </select>
                                         <p class="required d-none text-danger fw-bold mb-0" id="powerReq">اختار من القائمة اعلاه</p>
+                                        <input type="text" name="other_tomb_power" maxlength="2" minlength="2" id="otherPower" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-control d-none mt-2" placeholder="قوة مقبرة اللحود" disabled>
+                                        <p class="required d-none text-danger fw-bold mb-0" id="otherPowerReq">هذا الحقل مطلوب</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -221,8 +219,6 @@
                                         </select>
                                         <p class="required d-none text-danger fw-bold mb-0" id="typeReq">اختار من القائمة اعلاه</p>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
                                     <div class="form-group mb-2">
                                         <select name="region" class="form-select" id="tombRegion" required>
                                             <option selected disabled>المنطقة</option>
@@ -232,8 +228,6 @@
                                         </select>
                                         <p class="required d-none text-danger fw-bold mb-0" id="regionReq">اختار من القائمة اعلاه</p>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
                                     <div class="form-group mb-2">
                                         <input type="text" name="annual_cost" class="form-control text-center" minlength="2" oninput="this.value = this.value.replace(/[^0-9]/g, '')" id="tombCost" placeholder="قيمة الدفع السنوي" required>
                                         <p class="required text-danger mb-0 fw-bold d-none" id="costReq">هذا الحقل مطلوب</p>
