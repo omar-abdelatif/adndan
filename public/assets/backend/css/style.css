@@ -82,3 +82,15 @@ hr{
 {
     display: none;
 }
+*[dir=rtl] .sidebar-toggler::before {
+    transform: rotate(-180deg);
+}
+.sidebar-toggler::before{
+    transition: transform 0.15s;
+}
+.sidebar{
+    transition: margin-left 0.15s, margin-right 0.15s, box-shadow 0.075s, transform 0.15s, width 0.15s, z-index 0s ease 0.15s;
+}
+.wrapper{
+    transition: padding 0.15s;
+}

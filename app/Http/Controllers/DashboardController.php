@@ -2,30 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Deceased;
-use App\Models\Donator;
-use App\Models\NewTombDonators;
-use App\Models\OldDeceased;
 use Carbon\Carbon;
-use App\Models\Report;
-use App\Models\TableCase;
 use App\Models\Tomb;
+use App\Models\Report;
+use App\Models\Donator;
+use App\Models\Deceased;
+use App\Models\TableCase;
+use App\Models\OldDeceased;
 use App\Models\TombDonations;
+use App\Models\DonationHistory;
+use App\Models\NewTombDonators;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $totalDeceased = Deceased::count();
-        $totalOldDeceased = OldDeceased::count();
-        $tombs = Tomb::count();
-        $totalTombDonations = TombDonations::sum('amount');
-        $totalDonators = Donator::count();
-        $totalTombDonators = NewTombDonators::count();
-        $totalAmount = Report::sum('amount');
-        $count = TableCase::count();
         $date = Carbon::now();
+        $tombs = Tomb::count();
+        $count = TableCase::count();
+        $totalDonators = Donator::count();
+        $totalDeceased = Deceased::count();
+        $totalAmount = Report::sum('amount');
         $fullDate = $date->format('l jS F Y');
-        return view('home', compact('fullDate', 'count', 'totalAmount', 'totalDeceased', 'totalOldDeceased', 'tombs', 'totalTombDonations', 'totalDonators', 'totalTombDonators'));
+        $totalOldDeceased = OldDeceased::count();
+        $totalTombDonators = NewTombDonators::count();
+        $totalDonations = DonationHistory::sum('amount');
+        $totalTombDonations = TombDonations::sum('amount');
+        return view('home', compact('fullDate', 'count', 'totalAmount', 'totalDeceased', 'totalDonations', 'totalOldDeceased', 'tombs', 'totalTombDonations', 'totalDonators', 'totalTombDonators'));
     }
 }

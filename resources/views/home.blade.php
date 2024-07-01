@@ -46,7 +46,7 @@
                     </div>
                     <div>
                         <div class="fs-6 fw-semibold text-primary">
-                            <p id="totalAmountHome" class="mb-0 ms-3"></p>
+                            <p id="totalAmountHome" class="mb-0 ms-3">{{$totalDonations}}</p>
                         </div>
                         <div class="text-medium-emphasis text-uppercase fw-semibold small ms-3">إجمالي التبرعات</div>
                     </div>
