@@ -15,8 +15,8 @@
                                 <li class="breadcrumb-item active">المتوفيين السابقين</li>
                             </ol>
                             <div class="buttons">
-                                <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#addcsv" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button>
-                                <button type="button" class="btn btn-primary mt-1" data-coreui-toggle="modal" data-coreui-target="#addnew" data-coreui-whatever="@mdo"> إضافة متوفي سابق جديد </button>
+                                <button type="button" class="btn btn-primary mt-1 fw-bold" data-coreui-toggle="modal" data-coreui-target="#addcsv" data-coreui-whatever="@mdo"> رفع متوفيين سابقين بالإجمالي </button>
+                                <button type="button" class="btn btn-primary mt-1 fw-bold" data-coreui-toggle="modal" data-coreui-target="#addnew" data-coreui-whatever="@mdo"> إضافة متوفي سابق جديد </button>
                             </div>
                         </div>
                     </div>
@@ -256,7 +256,6 @@
                             </label>
                             <input type="date" name="death_date" id="deceasedDeath" class="form-control" required>
                             <p class="required d-none text-danger fw-bold mb-0" id="deathDateReq">هذا الحقل مطلوب</p>
-                            {{-- <p class="required d-none text-danger fw-bold mb-0" id="deathMsg">تاريخ الوفاه لا يمكن أن يكون في المستقبل</p> --}}
                         </div>
                         <div class="form-group mb-3">
                             <label for="burial_date" class="text-white">
@@ -264,7 +263,6 @@
                             </label>
                             <input type="date" name="burial_date" id="deceasedBurial" class="form-control" required>
                             <p class="required d-none text-danger fw-bold mb-0" id="burialReq">هذا الحقل مطلوب</p>
-                            {{-- <p class="required d-none text-danger fw-bold mb-0" id="burialMsg">تاريخ الدفن لا يمكن أن يكون قبل تاريخ الوفاه</p> --}}
                         </div>
                         <div class="form-group">
                             <button type="submit" id="OldSubmit" class="btn bg-success-gradient w-100 text-white">

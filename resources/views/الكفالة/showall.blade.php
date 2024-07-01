@@ -32,7 +32,7 @@
         <h1 class="text-white">إجمالي الحالات</h1>
     </div>
     <div class="upload-csv mt-5">
-        <button type="button" class="btn btn-primary" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> Upload User Excel Sheet </button>
+        <button type="button" class="btn btn-primary fw-bold" data-coreui-toggle="modal" data-coreui-target="#exampleModal" data-coreui-whatever="@mdo"> رفع حالات بالجملة </button>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -40,14 +40,14 @@
                         <h5 class="modal-title" id="exampleModalLabel">إضافة مجموعة حالات</h5>
                         <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body bg-dark-gradient">
                         <form action="{{ route('import') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12">
                                         <input type="file" name="excel" class="form-control">
-                                        <input type="submit" class="btn btn-primary mt-3 d-block w-100" height="50px" value="Submit">
+                                        <input type="submit" class="btn btn-primary fw-bold mt-3 d-block w-100" height="50px" value="تأكيد">
                                     </div>
                                 </div>
                             </div>
