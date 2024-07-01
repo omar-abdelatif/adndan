@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Deceased;
 use App\Models\Tomb;
 use App\Models\Rooms;
 use App\Models\Region;
@@ -33,8 +34,9 @@ class TombsController extends Controller
         $validated = $request->validate([
             'name' => 'required|string',
             'power' => 'required',
-            'other_tomb_power' => 'required',
             'type' => 'required|string|in:لحد,عيون',
+            'tomb_specifices' => 'required',
+            'other_tomb_power' => 'numeric',
             'annual_cost' => 'required|numeric',
             'region' => 'required|string'
         ]);
@@ -42,50 +44,47 @@ class TombsController extends Controller
         if ($region) {
             $tomb = new Tomb;
             $tomb->name = $request->name;
-            $tomb->power = $request->power;
+            $tomb->power = (int) $request->power;
+            if ($tomb->power === 0) {
+                $tomb->power = 0;
+            } else {
+                $tomb->power = $request->power;
+            }
             $tomb->other_tomb_power = $request->other_tomb_power;
             $tomb->region = $request->region;
             $tomb->type = $request->type;
-            $tomb->annual_cost = $request->annual_cost;
+            $tomb->tomb_specifices = $request->tomb_specifices;
+            $tomb->annual_cost = (int) $request->annual_cost;
             $tomb->region_id = $region->id;
             $store = $tomb->save();
         }
         if ($store) {
             $tomb->createRooms();
             $rooms = $tomb->rooms;
-            Assert::assertCount($request->power, $rooms);
-            return redirect()->route('tombs.all')->with('success', 'تمت الإضافة بنجاح');
+            Assert::assertCount($tomb->power, $rooms);
+            return redirect()->back()->with('success', 'تمت الإضافة بنجاح');
         }
-        return redirect()->route('tombs.all')->withErrors($validated);
+        return redirect()->back()->withErrors($validated);
     }
     public function updateTomb(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string',
-            'power' => 'required|numeric',
-            'type' => 'required|string|in:لحد,عيون',
-            'annual_cost' => 'required|numeric',
-            'region' => 'required|string|in:أكتوبر,الغفير,القطامية,الفيوم,زينهم,مايو'
-        ]);
-        $tomb = Tomb::find($request->id);
-        if ($tomb) {
-            $tomb->update($validated);
-            return redirect()->route('tombs.all')->with('success', 'تمت تحديث المقبرة بنجاح.');
-        }
-        return redirect()->route('tombs.all')->withErrors($validated);
+        $tomb = Tomb::findOrFail($request->id);
+        $tomb->update($request->all());
+        return redirect()->route('tombs.all')->withSuccess('تمت تحديث المقبرة بنجاح.');
     }
     public function deleteTomb($id)
     {
         $tomb = Tomb::find($id);
         if ($tomb) {
             $rooms = Rooms::where('tomb_id', $tomb->id)->get();
-            $tomb->delete();
             foreach ($rooms as $room) {
+                Deceased::where('rooms_id', $room->id)->delete();
                 $room->delete();
             }
-            return redirect()->route('tombs.all')->with('success', 'تمت حذف المقبرة بنجاح.');
+            $tomb->delete();
+            return redirect()->back()->with('success', 'تمت حذف المقبرة بنجاح.');
         }
-        return redirect()->route('tombs.all')->withErrors('خطأ أثناء الحذف');
+        return redirect()->back()->withErrors('خطأ أثناء الحذف');
     }
     public function getTombs(Request $request)
     {

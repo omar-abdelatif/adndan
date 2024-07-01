@@ -57,8 +57,7 @@ class RoomsController extends Controller
     {
         $room = Rooms::findOrFail($roomId);
         if ($room && $room->deceased) {
-            $roomDeceased = $room->deceased;
-            foreach ($roomDeceased as $deceased) {
+            foreach ($room->deceased as $deceased) {
                 $deceasedData = [
                     'name' => $deceased->name,
                     'death_date' => $deceased->death_date,
@@ -66,19 +65,18 @@ class RoomsController extends Controller
                     'tomb' => $deceased->tomb,
                     'burial_date' => $deceased->burial_date,
                 ];
-                $move = OldDeceased::create($deceasedData);
+                OldDeceased::create($deceasedData);
                 $deceased->delete();
             }
-            $sumSize = $room->deceased->sum('size');
-            if ($sumSize >= $room->capacity) {
-                $room->update(['isDisabled' => 1]);
-            }
-            if ($move) {
-                return redirect()->route('october.index')->withSuccess('تم التطهير بنجااح');
-            }
+            $room->update([
+                'isDisabled' => 0,
+                'burial_date' => null
+            ]);
+            return redirect()->back()->withSuccess('تم التطهير بنجاح');
         }
-        return redirect()->route('october.index')->withErrors('حدث خطأ أثناء التطهير');
+        return redirect()->back()->withErrors('حدث خطأ أثناء التطهير');
     }
+
     public function countDeceaseds()
     {
         $tombs = Tomb::all();

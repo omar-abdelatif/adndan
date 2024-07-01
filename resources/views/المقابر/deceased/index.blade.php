@@ -338,6 +338,7 @@
                                             <option selected disabled>حجم المتوفي</option>
                                             <option value="1">فردي</option>
                                             <option value="2">زوجي</option>
+                                            <option value="6">لحد (فقط)</option>
                                         </select>
                                         <p class="required d-none text-danger fw-bold mb-0" id="sizeReq">أختر من القائمة أعلاه</p>
                                     </div>

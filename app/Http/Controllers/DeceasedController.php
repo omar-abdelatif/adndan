@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rooms;
 use App\Models\Region;
 use App\Models\Deceased;
+use App\Models\Tomb;
 use Illuminate\Http\Request;
 
 
@@ -41,8 +42,8 @@ class DeceasedController extends Controller
             'pdf_files' => 'mimes:pdf',
             'burial_cost' => 'required|integer'
         ]);
-        $regions = Region::all();
         $room = Rooms::where('name', $validated['room'])->first();
+        $tomb = Tomb::where('id', $room->tomb_id)->first();
         if ($room) {
             $deceased = new Deceased();
             $deceased->name = $validated['name'];
@@ -59,6 +60,7 @@ class DeceasedController extends Controller
             $deceased->room = $validated['room'];
             $deceased->notes = $validated['notes'];
             $deceased->burial_cost = $validated['burial_cost'];
+
             if ($request->hasFile('files')) {
                 $file = $request->file('files');
                 $name = time() . '.' . $file->getClientOriginalExtension();
@@ -75,17 +77,13 @@ class DeceasedController extends Controller
             }
             $deceased->rooms_id = $room->id;
             $room = $deceased->rooms;
-            $tomb = $regions->first()->tomb;
-            if ($tomb) {
-                if ($deceased->gender === 'ذكر') {
-                    $tomb->male -= $deceased->size;
-                } elseif ($deceased->gender === 'أنثى') {
-                    $tomb->female -= $deceased->size;
-                }
-                $tomb->save();
-            }
             $room->burial_date = $validated['burial_date'];
-            $room->save();
+            if ($tomb) {
+                if ($tomb->type === "لحد") {
+                    $room->update(['isDisabled' => 1]);
+                    $room->save();
+                }
+            }
             $store = $deceased->save();
             if ($store) {
                 return redirect()->back()->with('success', 'تمت الإضافة بنجاح');

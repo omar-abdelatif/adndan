@@ -1,48 +1,7 @@
 @extends('layouts.app')
 @section('header')
     <header class="header header-sticky">
-        <div class="container-fluid">
-            <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
-                <svg class="icon icon-lg">
-                    <use xlink:href="{{ asset('icons/coreui.svg#cil-menu') }}"></use>
-                </svg>
-            </button>
-            <a class="header-brand d-md-none" href="#">
-                <svg width="118" height="46" alt="CoreUI Logo">
-                    <use xlink:href="{{ asset('icons/brand.svg#full') }}"></use>
-                </svg>
-            </a>
-            <ul class="header-nav d-none d-md-flex">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">لوحة التحكم</a>
-                </li>
-            </ul>
-            <ul class="header-nav ms-auto"></ul>
-            <ul class="header-nav ms-3">
-                <li class="nav-item dropdown">
-                    <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        {{ Auth::user()->name }}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end pt-0">
-                        <a class="dropdown-item" href="{{ route('profile.show') }}">
-                            <svg class="icon me-2">
-                                <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
-                            </svg>
-                            {{ __('My profile') }}
-                        </a>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                                <svg class="icon me-2">
-                                    <use xlink:href="{{ asset('icons/coreui.svg#cil-account-logout') }}"></use>
-                                </svg>
-                                {{ __('Logout') }}
-                            </a>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        @include('layouts.upper-header')
         <div class="header-divider"></div>
         <section class="content-header w-100">
             <div class="container-fluid d-flex">
@@ -87,134 +46,41 @@
             <table class="table borderd-table display align-middle text-center" id="table11" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                 <thead>
                     <tr>
-                        <td class="text-center">id</td>
-                        <td class="text-center">الإسم</td>
-                        <td class="text-center">نوع المقبرة</td>
-                        <td class="text-center">قوة المقبرة</td>
-                        <td class="text-center">المنطقة</td>
-                        <td class="text-center">قمة الدفع السنوي</td>
-                        <td class="text-center">تاريخ أخر دفنة</td>
-                        <td class="text-center">Actions</td>
+                        <th class="text-center">الإسم</th>
+                        <th class="text-center">نوع المقبرة</th>
+                        <th class="text-center">تخصص المقبرة</th>
+                        <th class="text-center">قوة المقبرة</th>
+                        <th class="text-center">تاريخ أخر دفنة</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php $i = 1 ?>
-                    @if ($tombs->count() >= 1)
+                @if ($tombs->count() >= 1)
+                    <tbody>
                         @foreach ($tombs as $tomb)
                             <tr>
-                                <td>{{ $i++ }}</td>
                                 <td>{{$tomb->name}}</td>
                                 <td>{{$tomb->type}}</td>
-                                <td>{{$tomb->power}}</td>
-                                <td>{{$tomb->region}}</td>
-                                <td>{{$tomb->annual_cost}}</td>
+                                <td>
+                                    @if ($tomb->tomb_specifices === "0")
+                                        مختلط
+                                    @elseif ($tomb->tomb_specifices === "1")
+                                        رجال
+                                    @elseif ($tomb->tomb_specifices === "2")
+                                        سيدات
+                                    @else
+                                        <span class="fw-bold">ـــــ</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($tomb->power === "0")
+                                        {{$tomb->other_tomb_power}}
+                                    @else
+                                        {{$tomb->power}}
+                                    @endif
+                                </td>
                                 <td>{{$tomb->burial_date}}</td>
                                 <td>
                                     <div class="btn-group align-items-center justify-content-evenly">
-                                        <button type="button" class="btn btn-warning rounded" data-coreui-toggle="modal" data-coreui-target="#edit{{$tomb->id}}" data-coreui-whatever="@mdo">
-                                            <i class="fa-solid fa-pen-to-square fa-fade fa-lg"></i>
-                                            <b class="fa-fade">تعديل</b>
-                                        </button>
-                                        <div class="modal fade" id="edit{{$tomb->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">تعديل مقبرة {{$tomb->name}}</h1>
-                                                        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="{{route('october.update')}}" method="post">
-                                                            @csrf
-                                                            <div class="container-fluid">
-                                                                <div class="row">
-                                                                    <input type="hidden" name="id" value="{{$tomb->id}}">
-                                                                    <div class="col-lg-6">
-                                                                        <div class="field">
-                                                                            <input type="text" name="name" value="{{$tomb->name}}" placeholder="إسم المقبرة" class="form-control mb-3 text-center">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <div class="field">
-                                                                            <select name="power" class="form-control mb-2">
-                                                                                <option class="text-center" selected>قوة المقبرة</option>
-                                                                                <option value="1" {{$tomb->power  == '1' ? 'selected' : ''}}>1</option>
-                                                                                <option value="2" {{$tomb->power  == '2' ? 'selected' : ''}}>2</option>
-                                                                                <option value="3" {{$tomb->power  == '3' ? 'selected' : ''}}>3</option>
-                                                                                <option value="4" {{$tomb->power  == '4' ? 'selected' : ''}}>4</option>
-                                                                                <option value="5" {{$tomb->power  == '5' ? 'selected' : ''}}>5</option>
-                                                                                <option value="6" {{$tomb->power  == '6' ? 'selected' : ''}}>6</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <div class="field">
-                                                                            <select name="type" class="form-control mb-2">
-                                                                                <option class="text-center" selected>إختار نوع المقبرة</option>
-                                                                                <option value="لحد" {{$tomb->type  == 'لحد' ? 'selected' : ''}}>لحد</option>
-                                                                                <option value="عيون" {{$tomb->type  == 'عيون' ? 'selected' : ''}}>عيون</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <div class="field">
-                                                                            <input type="text" name="region" value="{{$tomb->region}}" class="form-control text-center mb-3" placeholder="إختار المنطقة" readonly>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <div class="field">
-                                                                            <input type="number" name="annual_cost" value="{{$tomb->annual_cost}}" class="form-control mb-3 text-center" placeholder="قيمة الدفع السنوي">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-12">
-                                                                        <div class="field">
-                                                                            <input type="submit" value="تعديل" class="btn btn-success w-100">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn btn-danger rounded ms-2 me-2" data-coreui-toggle="modal" data-coreui-target="#delete{{$tomb->id}}" data-coreui-whatever="@mdo">
-                                            <i class="fa-solid fa-trash fa-fade fa-lg"></i>
-                                            <b class="fa-fade">حذف</b>
-                                        </button>
-                                        <div class="modal fade" id="delete{{$tomb->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h3 class="modal-title text-decoration-underline" id="exampleModalLabel">حذف مقبرة {{$tomb->name}}</h3>
-                                                        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="{{route('october.destroy', $tomb->id)}}" method="get">
-                                                            @csrf
-                                                            <div class="container-fluid">
-                                                                <div class="row">
-                                                                    <div class="col-12">
-                                                                        <div class="confirm_msg mb-3">
-                                                                            <h2 class="text-center">هل أنت متأكد من الحذف ؟</h2>
-                                                                        </div>
-                                                                        <div class="modal-footer d-flex justify-content-center w-100">
-                                                                            <div class="field">
-                                                                                <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
-                                                                            </div>
-                                                                            <div class="field">
-                                                                                <button type="submit" class="btn btn-danger w-100 text-white">
-                                                                                    <b>حذف</b>
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <button type="button" class="btn btn-success rounded" data-coreui-toggle="modal" data-coreui-target="#show{{$tomb->id}}" data-coreui-whatever="@mdo">
                                             <i class="fa-solid fa-eye fa-fade fa-lg"></i>
                                             <b class=" fa-fade">عرض</b>
@@ -238,55 +104,99 @@
                                                                 </p>
                                                                 <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
                                                                     <b>قوة المقبرة:</b>
-                                                                    {{$tomb->power}}
+                                                                    @if ($tomb->type === 'لحد')
+                                                                        {{$tomb->other_tomb_power}}
+                                                                    @else
+                                                                        {{$tomb->power}}
+                                                                    @endif
                                                                 </p>
                                                                 <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
                                                                     <b>إسم المنطقة:</b>
                                                                     {{$tomb->region}}
                                                                 </p>
-                                                                <div class="available bg-primary p-2 rounded">
+                                                                <div class="available bg-primary p-2 rounded {{$tomb->type === 'لحد' ? 'd-none' : ''}}">
                                                                     <div class="available-title">
-                                                                        <p class="mb-0 ms-3 text-white text-decoration-underline">
+                                                                        <p class="mb-0 text-white text-decoration-underline">
                                                                             <b>الإجمالي</b>
                                                                         </p>
                                                                     </div>
                                                                     <div class="available-body text-white">
-                                                                        <span>
-                                                                            <b>رجال:</b>
-                                                                            {{ $tomb->getTotalPlaces()['male'] }}
-                                                                        </span>
-                                                                        <span>
-                                                                            <b>سيدات:</b>
-                                                                            {{ $tomb->getTotalPlaces()['female'] }}
-                                                                        </span>
+                                                                        @if ($tomb->tomb_specifices === "0" && $tomb->type === 'لحد')
+                                                                            <span class="d-none">
+                                                                                <i class="fas fa-times text-white"></i>
+                                                                            </span>
+                                                                        @elseif ($tomb->tomb_specifices === "0")
+                                                                            <span>
+                                                                                <b>رجال:</b>
+                                                                                {{$tomb->getTotalPlaces()['male']}}
+                                                                            </span>
+                                                                            <span>
+                                                                                <b>سيدات:</b>
+                                                                                {{$tomb->getTotalPlaces()['female']}}
+                                                                            </span>
+                                                                        @elseif ($tomb->tomb_specifices === "1")
+                                                                            <span>
+                                                                                <b>رجال:</b>
+                                                                                {{$tomb->getTotalPlaces()['totalMaleOnly']}}
+                                                                            </span>
+                                                                        @else
+                                                                            <span>
+                                                                                <b>سيدات:</b>
+                                                                                {{$tomb->getTotalPlaces()['totalFemaleOnly']}}
+                                                                            </span>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="tomb-status bg-info rounded p-3 mt-3">
+                                                        @if ($tomb->tomb_specifices === "0")
+                                                            <div class="tomb-status bg-info rounded p-3 mt-3 d-none">
+                                                        @else
+                                                            <div class="tomb-status bg-info rounded p-3 mt-3">
+                                                        @endif
                                                             <div class="tomb-status-title mb-3">
                                                                 <h2 class="text-center text-decoration-underline">حالة المقبرة</h2>
                                                             </div>
                                                             <div class="tomb-status-content d-flex align-items-center justify-content-around">
                                                                 <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
                                                                     <b>قوة المقبرة:</b>
-                                                                    {{$tomb->power}}
+                                                                    @if ($tomb->type === 'لحد')
+                                                                        {{$tomb->other_tomb_power}}
+                                                                    @else
+                                                                        {{$tomb->power}}
+                                                                    @endif
                                                                 </p>
                                                                 <div class="available bg-primary p-2 rounded">
                                                                     <div class="available-title">
-                                                                        <p class="mb-0 ms-3 text-white text-decoration-underline">
+                                                                        <p class="mb-0 text-white text-decoration-underline">
                                                                             <b>المتاح</b>
                                                                         </p>
                                                                     </div>
                                                                     <div class="available-body text-white">
-                                                                        <span>
-                                                                            <b>رجال:</b>
-                                                                            {{$tomb->getTotalPlaces()['availableMales']}}
-                                                                        </span>
-                                                                        <span>
-                                                                            <b>سيدات:</b>
-                                                                            {{$tomb->getTotalPlaces()['availableFemales']}}
-                                                                        </span>
+                                                                        @if ($tomb->tomb_specifices === "0" && $tomb->type === 'لحد')
+                                                                            <span>
+                                                                                {{$tomb->getAvailablePlaces()['lahd']}}
+                                                                            </span>
+                                                                        @elseif ($tomb->tomb_specifices === "0")
+                                                                            <span class="d-none">
+                                                                                <b>رجال:</b>
+                                                                                {{$tomb->mixTombs()['male']}}
+                                                                            </span>
+                                                                            <span class="d-none">
+                                                                                <b>سيدات:</b>
+                                                                                {{$tomb->mixTombs()['female']}}
+                                                                            </span>
+                                                                        @elseif ($tomb->tomb_specifices === "1")
+                                                                            <span>
+                                                                                <b>رجال:</b>
+                                                                                {{$tomb->getAvailablePlaces()['MaleFemale']}}
+                                                                            </span>
+                                                                        @else
+                                                                            <span>
+                                                                                <b>سيدات:</b>
+                                                                                {{$tomb->getAvailablePlaces()['FemaleMale']}}
+                                                                            </span>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -298,19 +208,26 @@
                                                             <div class="rooms-content">
                                                                 <table class="table borderd-table display align-middle text-center" id="table" data-order='[[ 0, "asc" ]]' data-page-length='10'>
                                                                     <thead>
-                                                                        <th class="text-center">id</th>
-                                                                        <th class="text-center">إسم الغرفة</th>
-                                                                        <th class="text-center">قوة الغرفة</th>
-                                                                        <th class="text-center">تاريخ أخر دفنة</th>
-                                                                        <th class="text-center">المتاح رجال</th>
-                                                                        <th class="text-center">المتاح سيدات</th>
-                                                                        <th class="text-center">Actions</th>
+                                                                        <tr>
+                                                                            <th class="text-center">id</th>
+                                                                            <th class="text-center">إسم الغرفة</th>
+                                                                            <th class="text-center">قوة الغرفة</th>
+                                                                            <th class="text-center">تاريخ أخر دفنة</th>
+                                                                            @if ($tomb->tomb_specifices === "0")
+                                                                                <th class="text-center">المتاح رجال</th>
+                                                                                <th class="text-center">المتاح سيدات</th>
+                                                                            @elseif ($tomb->tomb_specifices === "1")
+                                                                                <th class="text-center">المتاح رجال</th>
+                                                                            @else
+                                                                                <th class="text-center">المتاح سيدات</th>
+                                                                            @endif
+                                                                            <th class="text-center">Actions</th>
+                                                                        </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <?php
-                                                                            $j = 1;
-                                                                            $i = 0;
-                                                                        ?>
+                                                                        @php
+                                                                            $k = 0;
+                                                                        @endphp
                                                                         @foreach ($tomb->rooms as $room)
                                                                             @php
                                                                                 $sumSize = $room->deceased->sum(function($deceased) {
@@ -318,20 +235,42 @@
                                                                                 });
                                                                                 $roomsCount = $tomb->rooms->count();
                                                                                 $roomId = $room->id;
-                                                                                $deceasedsCount = 0;
-                                                                                $deceasedsAll = $room->deceased->where("rooms_id", $roomId);
-                                                                                foreach ($deceasedsAll as $deceased) {
-                                                                                    $deceasedsCount += (int) $deceased->size;
-                                                                                }
+                                                                                $deceasedsCount = $room->deceased->where('rooms_id', $roomId)->sum('size');
+                                                                                $isDisabled = $room->isDisabled;
                                                                             @endphp
-                                                                            @if ($sumSize === $room->capacity)
+                                                                            @if ($sumSize === 6 && $tomb->type === 'عيون')
                                                                                 <tr>
-                                                                                    <td class="text-center" colspan="6">{{ $room->name }} ممتلئة</td>
+                                                                                    @if ($tomb->tomb_specifices === "1" || $tomb->tomb_specifices === "2")
+                                                                                        <td class="text-center" colspan="5">{{ $room->name }} ممتلئة</td>
+                                                                                    @else
+                                                                                        <td class="text-center" colspan="6">{{ $room->name }} ممتلئة</td>
+                                                                                    @endif
                                                                                     <td class="d-flex justify-content-center">
                                                                                         <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info ms-2">
                                                                                             <i class="fa fa-eye"></i>
                                                                                         </a>
-                                                                                        @if ($sumSize >= $room->capacity)
+                                                                                        @if ($sumSize === 6 && $tomb->type === 'عيون')
+                                                                                            <form action="{{ route('rooms.oldDeceased', $room->id) }}" method="post">
+                                                                                                @csrf
+                                                                                                <button type="submit" class="btn btn-warning purify">
+                                                                                                    <b>تطهير</b>
+                                                                                                </button>
+                                                                                            </form>
+                                                                                        @endif
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @elseif ($isDisabled === 1 && $tomb->type === 'لحد')
+                                                                                <tr>
+                                                                                    @if ($tomb->tomb_specifices === "1" || $tomb->tomb_specifices === "2")
+                                                                                        <td class="text-center" colspan="5">{{ $room->name }} ممتلئة</td>
+                                                                                    @else
+                                                                                        <td class="text-center" colspan="6">{{ $room->name }} ممتلئة</td>
+                                                                                    @endif
+                                                                                    <td class="d-flex justify-content-center">
+                                                                                        <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info ms-2">
+                                                                                            <i class="fa fa-eye"></i>
+                                                                                        </a>
+                                                                                        @if ($sumSize >= 6)
                                                                                             <form action="{{ route('rooms.oldDeceased', $room->id) }}" method="post">
                                                                                                 @csrf
                                                                                                 <button type="submit" class="btn btn-warning purify">
@@ -343,16 +282,37 @@
                                                                                 </tr>
                                                                             @else
                                                                                 <tr>
-                                                                                    <td>{{ $room->id }}</td>
+                                                                                    <td>{{ $loop->iteration }}</td>
                                                                                     <td>{{ $room->name }}</td>
-                                                                                    <td>{{ $room->capacity }}</td>
+                                                                                    <td>
+                                                                                        @if ($tomb->type === 'لحد')
+                                                                                            1
+                                                                                        @else
+                                                                                            6
+                                                                                        @endif
+                                                                                    </td>
                                                                                     <td>{{ $room->burial_date }}</td>
-                                                                                    @if ($i < $roomsCount / 2)
-                                                                                        <td>{{ $room->capacity - $deceasedsCount }}</td>
-                                                                                        <td>X</td>
+                                                                                    @if ($tomb->type === 'لحد')
+                                                                                        <td>1</td>
+                                                                                        <td>1</td>
                                                                                     @else
-                                                                                        <td>X</td>
-                                                                                        <td>{{ $room->capacity - $deceasedsCount }}</td>
+                                                                                        @if ($tomb->tomb_specifices === "0")
+                                                                                            @if ($k < $roomsCount / 2)
+                                                                                                <td>{{ 6 - $deceasedsCount }}</td>
+                                                                                                <td>
+                                                                                                    <i class="fas fa-times text-danger"></i>
+                                                                                                </td>
+                                                                                            @else
+                                                                                                <td>
+                                                                                                    <i class="fas fa-times text-danger"></i>
+                                                                                                </td>
+                                                                                                <td>{{ 6 - $deceasedsCount }}</td>
+                                                                                            @endif
+                                                                                        @elseif ($tomb->tomb_specifices === "1")
+                                                                                            <td>{{ 6 - $deceasedsCount }}</td>
+                                                                                        @else
+                                                                                            <td>{{ 6 - $deceasedsCount }}</td>
+                                                                                        @endif
                                                                                     @endif
                                                                                     <td>
                                                                                         <a href="{{ route('october.rooms', ['tombId' => $tomb->id, 'roomId' => $room->id]) }}" class="btn btn-info ms-2">
@@ -361,7 +321,7 @@
                                                                                     </td>
                                                                                 </tr>
                                                                             @endif
-                                                                            {{ $i++ }}
+                                                                            @php $k++; @endphp
                                                                         @endforeach
                                                                     </tbody>
                                                                 </table>
@@ -373,18 +333,43 @@
                                                             </div>
                                                             <div class="last-burial-content">
                                                                 <div class="details d-flex align-items-center justify-content-evenly">
-                                                                    <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
-                                                                        <b>إسم المتوفي:</b>
-                                                                        .....
-                                                                    </p>
-                                                                    <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
-                                                                        <b>تاريخ الدفن:</b>
-                                                                        .....
-                                                                    </p>
-                                                                    <p class="mb-0 ms-3 bg-primary p-2 rounded text-white">
-                                                                        <b>الغرفة:</b>
-                                                                        .....
-                                                                    </p>
+                                                                    @if ($tomb->type === "عيون")
+                                                                        @foreach ($tombData as $tombInfo)
+                                                                            @if ($tomb->id === $tombInfo['id'])
+                                                                                @if (isset($tombInfo['latest_deceased']))
+                                                                                    <p class="mb-0 ms-3 bg-primary text-white p-2 rounded">
+                                                                                        <b>إسم المتوفي:</b>
+                                                                                        {{ $tombInfo['latest_deceased']['name'] }}
+                                                                                    </p>
+                                                                                    <p class="mb-0 ms-3 bg-primary text-white p-2 rounded">
+                                                                                        <b>تاريخ الدفن:</b>
+                                                                                        {{ $tombInfo['latest_deceased']['burial_date'] }}
+                                                                                    </p>
+                                                                                    <p class="mb-0 ms-3 bg-primary text-white p-2 rounded">
+                                                                                        <b>الغرفة:</b>
+                                                                                        {{ $tombInfo['latest_deceased']['room'] }}
+                                                                                    </p>
+                                                                                @endif
+                                                                            @endif
+                                                                        @endforeach
+                                                                    @elseif ($tomb->type === "لحد")
+                                                                        @if ($lahdDeceaseds === null)
+                                                                            <p class="text-center fw-bold mb-0 fs-4">--- لم يتم الدفن في هذه المقبره بعد ---</p>
+                                                                        @else
+                                                                            <p class="mb-0 ms-3 bg-primary p-2 fw-bold rounded text-white">
+                                                                                <b>إسم المتوفي:</b>
+                                                                                @if ($lahdDeceaseds) {!! $lahdDeceaseds->name !!} @endif
+                                                                            </p>
+                                                                            <p class="mb-0 ms-3 bg-primary p-2 fw-bold rounded text-white">
+                                                                                <b>تاريخ الدفن:</b>
+                                                                                @if ($lahdDeceaseds) {!! $lahdDeceaseds->burial_date !!} @endif
+                                                                            </p>
+                                                                            <p class="mb-0 ms-3 bg-primary p-2 fw-bold rounded text-white">
+                                                                                <b>الغرفة:</b>
+                                                                                @if ($lahdDeceaseds) {!! $lahdDeceaseds->room !!} @endif
+                                                                            </p>
+                                                                        @endif
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -396,10 +381,16 @@
                                 </td>
                             </tr>
                         @endforeach
-                    @else
-                        <h1 class="text-center mb-0">لا توجد مقابر في هذه المنطقة حالياً</h1>
-                    @endif
-                </tbody>
+                    </tbody>
+                @else
+                    <tfoot>
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                <h1 class="mb-0">لا توجد مقابر في هذه المنطقة حالياً</h1>
+                            </td>
+                        </tr>
+                    </tfoot>
+                @endif
             </table>
         </div>
     </div>

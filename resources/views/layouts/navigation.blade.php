@@ -43,9 +43,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link justify-content-center" href="{{route('reports.safe')}}" target="_top">
+                        <a class="nav-link justify-content-center" href="{{route('safe.view')}}" target="_top">
                             <img src="https://img.icons8.com/external-filled-color-icons-papa-vector/150/external-Safe-money-filled-color-icons-papa-vector.png" style="width: 50px !important" alt="external-Safe-money-filled-color-icons-papa-vector"/>
                             الخزنة
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link justify-content-center" href="{{route("bank.view")}}" target="_top">
+                            <img width="50" height="50" src="https://img.icons8.com/officel/50/bank.png" style="width: 50px !important" alt="bank"/>
+                            البنك
                         </a>
                     </li>
                 </ul>
@@ -83,11 +89,31 @@
                     <b>كل المتوفيين</b>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{route('tombs.report')}}" target="_top">
                     <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
                     <b>التقارير</b>
                 </a>
+            </li> --}}
+            <li class="nav-group" aria-expanded="false">
+                <a class="nav-link nav-group-toggle" href="#">
+                    <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
+                    <b>التقارير</b>
+                </a>
+                <ul class="nav-group-items" style="height: 0px;">
+                    <li class="nav-item">
+                        <a class="nav-link justify-content-center" href="{{route('tombs.report')}}" target="_top">
+                            <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
+                            <b>المقابر</b>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route("tomb.safe.view")}}" class="nav-link justify-content-center" target="_top">
+                            <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
+                            <b>الخزينة</b>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('tomb.index')}}" target="_top">

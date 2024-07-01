@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NewTombDonators;
-use App\Models\TombDonations;
+use App\Models\TombSafe;
 use Illuminate\Http\Request;
+use App\Models\TombDonations;
+use App\Models\TombTotalSafe;
+use App\Models\NewTombDonators;
 
 class TombDonationsController extends Controller
 {
@@ -58,6 +60,7 @@ class TombDonationsController extends Controller
     }
     public function donationStore(Request $request)
     {
+        $tombSafe = TombTotalSafe::findOrFail(1);
         $validations = $request->validate([
             'name' => 'required',
             'mobile_no' => 'required',
@@ -77,6 +80,13 @@ class TombDonationsController extends Controller
             'new_tomb_donators_id' => $donator->id,
         ]);
         if ($store) {
+            TombSafe::create([
+                'transaction_type' => $request->donation_type,
+                'amount' => $validations['amount'],
+                'proof_img' => $request->invoice_no
+            ]);
+            $newAmount = $tombSafe->amount + $validations['amount'];
+            $tombSafe->update(['amount' => $newAmount]);
             return redirect()->back()->withSuccess('تم التسجيل بنجاح');
         }
         return redirect()->back()->withErrors($validations);

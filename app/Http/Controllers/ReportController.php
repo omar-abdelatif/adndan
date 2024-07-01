@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DonationHistory;
+use App\Models\KfalaBank;
+use App\Models\KfalaSafe;
+use App\Models\KfalaTransaction;
 use App\Models\TableCase;
+use App\Models\TotalKfalaSafe;
 
 class ReportController extends Controller
 {
@@ -43,16 +47,5 @@ class ReportController extends Controller
     {
         $cases = TableCase::where('benefit_type', 'نقدية')->get();
         return $cases;
-    }
-    public function safeReports(Request $request)
-    {
-        $month = $request->input('date');
-        // $reports = 
-        if($month){
-
-        } else {
-
-        }
-        return view('reports.safe');
     }
 }

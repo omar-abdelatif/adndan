@@ -11,10 +11,15 @@ $(function () {
     });
     $("#totalAmount").text(totalAmount.toFixed(2));
     //! Calculate The Total Income of The Case
-    $('input[name="monthly_income"], input[name="another_source"], input[name="retire_income"]').on("input", function () {
-        let monthly_income =parseInt($('input[name="monthly_income"]').val()) || 0;
-        let another_source =parseInt($('input[name="another_source"]').val()) || 0;
-        let retire_income =parseInt($('input[name="retire_income"]').val()) || 0;
+    $(
+        'input[name="monthly_income"], input[name="another_source"], input[name="retire_income"]'
+    ).on("input", function () {
+        let monthly_income =
+            parseInt($('input[name="monthly_income"]').val()) || 0;
+        let another_source =
+            parseInt($('input[name="another_source"]').val()) || 0;
+        let retire_income =
+            parseInt($('input[name="retire_income"]').val()) || 0;
         let total = monthly_income + another_source + retire_income;
         $('input[name="total_income"]').val(total);
     });
@@ -29,6 +34,17 @@ $(function () {
         }
     });
     $("#kfalaTotal").text(kfalaTotal.toFixed(2));
+    //! Calculate the total amount of transaction monthly income
+    let table32 = $("#table32").DataTable();
+    let transactionTotal = 0;
+    table32.rows().every(function () {
+        let row = this.data();
+        let amounts = parseFloat(row[5].replace(",", ""));
+        if (!isNaN(amounts)) {
+            transactionTotal += amounts;
+        }
+    });
+    $("#totaltransaction").text(transactionTotal.toFixed(2));
 });
 $(function () {
     $(document).on("change", "#region", function () {
@@ -111,13 +127,24 @@ $(function () {
                         success: function (response) {
                             console.log(response);
                             let sumSize = response.sumSize;
-                            let isDisabled = sumSize === roomCapacity ? "disabled" : "";
-                            options += '<option value="' + roomName + '" ' + isDisabled + ">" + roomName + "</option>";
+                            let isDisabled =
+                                sumSize === roomCapacity ? "disabled" : "";
+                            options +=
+                                '<option value="' +
+                                roomName +
+                                '" ' +
+                                isDisabled +
+                                ">" +
+                                roomName +
+                                "</option>";
                             $(".roomTomb").empty();
                             $(".roomTomb").append(options);
                         },
                         error: function () {
-                            alert( "Error fetching deceased data for room: " + roomName );
+                            alert(
+                                "Error fetching deceased data for room: " +
+                                    roomName
+                            );
                         },
                     });
                 }

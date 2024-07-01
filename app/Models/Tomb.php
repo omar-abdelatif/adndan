@@ -12,9 +12,12 @@ class Tomb extends Model
     protected $table = 'tombs';
     protected $fillable = [
         'name',
-        'type',
         'power',
+        'type',
+        'tomb_specifices',
+        'other_tomb_power',
         'region',
+        'burial_date',
         'annual_cost',
         'region_id'
     ];
@@ -28,17 +31,42 @@ class Tomb extends Model
     }
     public function createRooms()
     {
+        $id = $this->id;
         $region = $this->region;
         $name = $this->name;
         $power = $this->power;
+        $type = $this->type;
+        $otherPower = $this->other_tomb_power;
         try {
-            for ($i = 1; $i <= $power; $i++) {
-                $room = new Rooms;
-                $room->name = "غرفة " . $i . " - " . $name . " - " . $region;
-                $room->burial_date = null;
-                $room->capacity = 6;
-                $room->tomb_id = $this->id;
-                $room->save();
+            if ($type === "لحد") {
+                if ($power === 0) {
+                    for ($i = 1; $i <= $otherPower; $i++) {
+                        $room = new Rooms;
+                        $room->name = "لحد " . $i . " - " . $name . " - " . $region;
+                        $room->burial_date = null;
+                        $room->capacity = 1;
+                        $room->tomb_id = $this->id;
+                        $room->save();
+                    }
+                } else {
+                    for ($i = 1; $i <= $power; $i++) {
+                        $room = new Rooms;
+                        $room->name = "لحد " . $i . " - " . $name . " - " . $region;
+                        $room->burial_date = null;
+                        $room->capacity = 1;
+                        $room->tomb_id = $this->id;
+                        $room->save();
+                    }
+                }
+            } else {
+                for ($i = 1; $i <= $power; $i++) {
+                    $room = new Rooms;
+                    $room->name = "غرفة " . $i . " - " . $name . " - " . $region;
+                    $room->burial_date = null;
+                    $room->capacity = 6;
+                    $room->tomb_id = $id;
+                    $room->save();
+                }
             }
             return "Rooms created successfully";
         } catch (\Exception $e) {
@@ -53,24 +81,64 @@ class Tomb extends Model
     {
         $totalMale = 0;
         $totalFemale = 0;
-        $availableMales = 0;
-        $availableFemales = 0;
+        $totalDeceased = 0;
+        $totalLahd = 0;
+        $power = $this->power;
+        $otherPower = $this->other_tomb_power;
         foreach ($this->rooms as $room) {
-            $power = $this->power;
             $roomCapacity = $room->getCapacity();
-            $totalDeceased = $roomCapacity * $power;
-            //! Update total male and female counts
-            $totalMale += $totalDeceased / 2;
-            $totalFemale += $totalDeceased / 2;
-            //! Update available male and female counts based on the available slots in the room
-            $availableMales += $room->availableMaleSlots();
-            $availableFemales += $room->availableFemaleSlots();
+            if ($power === 0) {
+                $totalDeceased = $roomCapacity * $otherPower;
+            } else {
+                $totalDeceased = $roomCapacity * $power;
+            }
         }
+        //! Update total male and female counts
+        $totalMale = $totalDeceased / 2;
+        $totalFemale = $totalDeceased / 2;
+        //! Calculate totals when tomb is exclusively for males or females
+        $totalMaleOnly = $totalMale + $totalFemale;
+        $totalFemaleOnly = $totalMale + $totalFemale;
         return [
             'male' => $totalMale,
             'female' => $totalFemale,
-            'availableMales' => $availableMales,
-            'availableFemales' => $availableFemales,
+            'totalMaleOnly' => $totalMaleOnly,
+            'totalFemaleOnly' => $totalFemaleOnly,
+            'lahd' => $totalLahd,
+        ];
+    }
+    public function getAvailablePlaces()
+    {
+        $lahd = 0;
+        $MaleFemale = 0;
+        $FemaleMale = 0;
+        foreach ($this->rooms as $rooms) {
+            $maleDeceasedSize = $rooms->deceased->where("gender", "ذكر")->where("rooms_id", $rooms->id)->sum('size');
+            $femaleDeceasedSize = $rooms->deceased->where("gender", "أنثى")->where("rooms_id", $rooms->id)->sum('size');
+            $deceasedLahd = $rooms->deceased->where("size", 6)->where("rooms_id", $rooms->id)->count();
+            $lahd += 1 - $deceasedLahd;
+            $MaleFemale += $rooms->capacity - ($maleDeceasedSize + $femaleDeceasedSize);
+            $FemaleMale += $rooms->capacity - ($maleDeceasedSize + $femaleDeceasedSize);
+        }
+        return [
+            'lahd' => $lahd,
+            'MaleFemale' => $MaleFemale,
+            'FemaleMale' => $FemaleMale,
+        ];
+    }
+    public function mixTombs()
+    {
+        foreach ($this->rooms as $room) {
+            $availableMales = 0;
+            $availableFemales = 0;
+            $maleDeceasedSize = $room->deceased->where("gender", "ذكر")->sum('size');
+            $femaleDeceasedSize = $room->deceased->where("gender", "أنثى")->sum('size');
+            $availableMales = ($room->capacity - $maleDeceasedSize);
+            $availableFemales = ($room->capacity - $femaleDeceasedSize);
+        }
+        return [
+            'male' => $availableMales,
+            'female' => $availableFemales,
         ];
     }
 }

@@ -15,8 +15,39 @@ class GafeerTombController extends Controller
     {
         $region = Region::where('name', 'الغفير')->firstOrFail();
         $tombs = $region->tombs;
-        $deceased = Deceased::get();
-        return view('المقابر.الغفير.index', compact('region','tombs', 'deceased'));
+        $tombsBurialDate = $region->tombs()->where("type", 'عيون')->with('rooms.deceased')->get();
+        $tombData = [];
+        foreach ($tombsBurialDate as $tomb) {
+            $tombInfo = [
+                'id' => $tomb->id,
+                'rooms' => [],
+            ];
+            $latestDeceased = null;
+            foreach ($tomb->rooms as $chamber) {
+                $roomInfo = [
+                    'id' => $chamber->id,
+                    'room_name' => $chamber->name,
+                    'tomb_id' => $chamber->tomb_id,
+                ];
+                $tombInfo['rooms'][] = $roomInfo;
+                if ($chamber->deceased->isNotEmpty()) {
+                    $chamberLatestDeceased = $chamber->deceased->sortByDesc('burial_date')->first();
+                    if (is_null($latestDeceased) || strtotime($chamberLatestDeceased->burial_date) > strtotime($latestDeceased->burial_date)) {
+                        $latestDeceased = $chamberLatestDeceased;
+                    }
+                }
+            }
+            if (!is_null($latestDeceased)) {
+                $tombInfo['latest_deceased'] = [
+                    'name' => $latestDeceased->name,
+                    'room' => $latestDeceased->room,
+                    'burial_date' => $latestDeceased->burial_date,
+                    'rooms_id' => $latestDeceased->rooms_id,
+                ];
+            }
+            $tombData[] = $tombInfo;
+        }
+        return view('المقابر.الغفير.index', compact('region', 'tombs', 'tombData'));
     }
     public function updateTomb(Request $request)
     {

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Donator;
 use Illuminate\Http\Request;
 use App\Models\DonationHistory;
+use App\Models\KfalaBank;
+use App\Models\KfalaSafe;
+use App\Models\KfalaTransaction;
+use App\Models\TotalKfalaSafe;
 
 class DonationHistoryController extends Controller
 {
@@ -20,6 +24,7 @@ class DonationHistoryController extends Controller
     }
     public function donationstore(Request $request)
     {
+        $kfalaTotalSafe = TotalKfalaSafe::findOrFail(1);
         $validator = $request->validate([
             'name' => 'required|string',
             'mobile_phone' => 'required|numeric',
@@ -45,9 +50,19 @@ class DonationHistoryController extends Controller
             $store = $donation->save();
         }
         if ($store) {
+            KfalaTransaction::create([
+                'transaction_type' => 'تبرعات',
+                'donation_type' => $donation->donation_type,
+                'other_type' => $donation->other_type,
+                'money_type' => $donation->money_type,
+                'amount' => $donation->amount,
+                'invoice_no' => $donation->invoice_no,
+            ]);
+            $newSafeAmount = $kfalaTotalSafe->amount + $request->amount;
+            $kfalaTotalSafe->update(['amount' => $newSafeAmount]);
             return redirect()->route('donation.index', ['id' => $donator->id])->with('success', 'تم الإضافة بنجاح');
         }
-        return redirect()->route('donation.addnew')->withErrors($validator);
+        return redirect()->back()->withErrors($validator);
     }
     public function destroy($id)
     {

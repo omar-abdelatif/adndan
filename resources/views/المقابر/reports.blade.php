@@ -97,9 +97,30 @@
                                                         @foreach ($region->tombs as $tomb)
                                                             <tr>
                                                                 <td>{{$tomb->name}}</td>
-                                                                <td>{{$tomb->power}} غرف</td>
-                                                                <td>0</td>
-                                                                <td>0</td>
+                                                                <td>
+                                                                    @if ($tomb->type === 'لحد')
+                                                                        {{$tomb->other_tomb_power}} - لحد
+                                                                    @else
+                                                                        {{$tomb->power}} - غرفة
+                                                                    @endif
+                                                                </td>
+                                                                @if ($tomb->tomb_specifices === "0" && $tomb->type === 'لحد')
+                                                                    <td>{{ $tomb->getAvailablePlaces()['lahd'] }}</td>
+                                                                    <td>{{ $tomb->getAvailablePlaces()['lahd'] }}</td>
+                                                                @elseif ($tomb->tomb_specifices === "0")
+                                                                    <td>{{$tomb->mixTombs()['male']}}</td>
+                                                                    <td>{{$tomb->mixTombs()['female']}}</td>
+                                                                @elseif ($tomb->tomb_specifices === "1")
+                                                                    <td>{{ $tomb->getAvailablePlaces()['MaleFemale'] }}</td>
+                                                                    <td>
+                                                                        <i class="fa-solid fa-square-xmark text-danger fs-3"></i>
+                                                                    </td>
+                                                                @else
+                                                                    <td>
+                                                                        <i class="fa-solid fa-square-xmark text-danger fs-3"></i>
+                                                                    </td>
+                                                                    <td>{{ $tomb->getAvailablePlaces()['FemaleMale'] }}</td>
+                                                                @endif
                                                                 <td>{{$tomb->burial_date}}</td>
                                                             </tr>
                                                         @endforeach

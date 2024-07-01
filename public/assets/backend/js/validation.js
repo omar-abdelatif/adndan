@@ -31,7 +31,8 @@ function validateForm(form) {
             select.value === "الغرفة" ||
             select.value === "جنس المتوفي" ||
             select.value === "حجم المتوفي" ||
-            select.value === "سن المتوفي"
+            select.value === "سن المتوفي" ||
+            select.value === "تخصص المقبره"
         ) {
             select.classList.add("error");
             select.classList.remove("good");
@@ -767,7 +768,7 @@ if (tombForm) {
     const otherPowerReq = tombForm.querySelector("#otherPowerReq");
     if (otherPower) {
         otherPower.addEventListener("input", function () {
-            let letters = /^[0-9]{2,}$/;
+            let letters = /^[0-9]+$/;
             if (this.value.trim() === "") {
                 otherPower.classList.remove("good");
                 otherPower.classList.add("error");
@@ -783,7 +784,41 @@ if (tombForm) {
                     otherPowerReq.classList.add("d-none");
                 }
             }
-        })
+        });
+    }
+    //! Update Other Tomb Power Validation
+    const updateOtherPowerForm = document.querySelectorAll(
+        "[data-tombPower-id]"
+    );
+    if (updateOtherPowerForm) {
+        updateOtherPowerForm.forEach((power) => {
+            const powerSelect = power.querySelectorAll("[data-powerselect-id]");
+            const otherPowerSelect = power.querySelectorAll("[data-otherpowerselect-id]");
+            //! Update Tomb Power Validation
+            function handleUpdateTombOtherPower(updateSelect) {
+                const selectedIndexValue = updateSelect.options[updateSelect.selectedIndex].value;
+                if (selectedIndexValue === "شهري") {
+                    otherPowerSelect.forEach((input) => {
+                        input.disabled = true;
+                        input.classList.add("d-none");
+                    });
+                } else if (selectedIndexValue === "0") {
+                    otherPowerSelect.forEach((input) => {
+                        input.disabled = false;
+                        input.classList.remove("d-none");
+                    });
+                }
+            }
+            powerSelect.forEach((inputSelect) => {
+                const updateSelect = power.querySelector(`select[name="power"][data-powerselect-id="${inputSelect.dataset.powerselectId}"]`);
+                if (updateSelect) {
+                    handleUpdateTombOtherPower(updateSelect);
+                    updateSelect.addEventListener("change", function () {
+                        handleUpdateTombOtherPower(updateSelect);
+                    });
+                }
+            })
+        });
     }
     //! Tomb Type Validation
     const tombType = tombForm.querySelector("#tombType");
@@ -799,6 +834,23 @@ if (tombForm) {
                 tombType.classList.remove("error");
                 tombType.classList.add("good");
                 tombTypeReq.classList.add("d-none");
+            }
+        });
+    }
+    //! Tomb Specefices Validation
+    const tombSpecifices = tombForm.querySelector("#tombSpecifices");
+    const tombSpecificesReq = tombForm.querySelector("#tombSpecificesReq");
+    if (tombSpecifices) {
+        tombSpecifices.addEventListener("change", function () {
+            const selectedIndexValue = this.options[this.selectedIndex].value;
+            if (selectedIndexValue === "تخصص المقبره") {
+                tombSpecifices.classList.add("error");
+                tombSpecifices.classList.remove("good");
+                tombSpecificesReq.classList.remove("d-none");
+            } else {
+                tombSpecifices.classList.remove("error");
+                tombSpecifices.classList.add("good");
+                tombSpecificesReq.classList.add("d-none");
             }
         });
     }
@@ -926,7 +978,8 @@ if (OldDeceasedForm) {
         });
     }
     //! Old Deceased Death Date Validation
-    const oldDeceasedDeathDate = OldDeceasedForm.querySelector("#deceasedDeath");
+    const oldDeceasedDeathDate =
+        OldDeceasedForm.querySelector("#deceasedDeath");
     const deathDateReq = OldDeceasedForm.querySelector("#deathDateReq");
     if (oldDeceasedDeathDate) {
         oldDeceasedDeathDate.addEventListener("change", function () {
@@ -943,7 +996,8 @@ if (OldDeceasedForm) {
         });
     }
     //! Old Deceased Burial Date Validation
-    const oldDeceasedBurialDate = OldDeceasedForm.querySelector("#deceasedBurial");
+    const oldDeceasedBurialDate =
+        OldDeceasedForm.querySelector("#deceasedBurial");
     const burialDateReq = OldDeceasedForm.querySelector("#burialReq");
     if (oldDeceasedBurialDate) {
         oldDeceasedBurialDate.addEventListener("change", function () {

@@ -15,8 +15,48 @@ class OctoberTombController extends Controller
     {
         $region = Region::where('name', 'أكتوبر')->firstOrFail();
         $tombs = $region->tombs;
-        $deceased = Deceased::get();
-        return view('المقابر.أكتوبر.index', compact('region', 'tombs', 'deceased'));
+        $tombsBurialDate = $region->tombs()->where("type", 'عيون')->with('rooms.deceased')->get();
+        $tombLahdBurialDate = $region->tombs()->where("type", 'لحد')->with('rooms.deceased')->get();
+        $lahdDeceaseds = null;
+        $tombData = [];
+        foreach ($tombLahdBurialDate as $lahd) {
+            foreach ($lahd->rooms as $rooms) {
+                foreach ($rooms->deceased as $deceased) {
+                    $lahdDeceaseds = $deceased;
+                }
+            }
+        }
+        foreach ($tombsBurialDate as $tomb) {
+            $tombInfo = [
+                'id' => $tomb->id,
+                'rooms' => [],
+            ];
+            $latestDeceased = null;
+            foreach ($tomb->rooms as $chamber) {
+                $roomInfo = [
+                    'id' => $chamber->id,
+                    'room_name' => $chamber->name,
+                    'tomb_id' => $chamber->tomb_id,
+                ];
+                $tombInfo['rooms'][] = $roomInfo;
+                if ($chamber->deceased->isNotEmpty()) {
+                    $chamberLatestDeceased = $chamber->deceased->sortByDesc('burial_date')->first();
+                    if (is_null($latestDeceased) || strtotime($chamberLatestDeceased->burial_date) > strtotime($latestDeceased->burial_date)) {
+                        $latestDeceased = $chamberLatestDeceased;
+                    }
+                }
+            }
+            if (!is_null($latestDeceased)) {
+                $tombInfo['latest_deceased'] = [
+                    'name' => $latestDeceased->name,
+                    'room' => $latestDeceased->room,
+                    'burial_date' => $latestDeceased->burial_date,
+                    'rooms_id' => $latestDeceased->rooms_id,
+                ];
+            }
+            $tombData[] = $tombInfo;
+        }
+        return view('المقابر.أكتوبر.index', compact('region', 'tombs', 'lahdDeceaseds', 'tombData'));
     }
     public function updateTomb(Request $request)
     {

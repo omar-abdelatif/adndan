@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tomb;
 use App\Models\Region;
 use Illuminate\Http\Request;
 

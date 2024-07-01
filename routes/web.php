@@ -3,24 +3,27 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CaseController;
-use App\Http\Controllers\TombsController;
 use App\Http\Controllers\RoomsController;
+use App\Http\Controllers\TombsController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\DonatorController;
+use App\Http\Controllers\TombSafeController;
 use App\Http\Controllers\DeceasedController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KfalaBankController;
+use App\Http\Controllers\KfalaSafeController;
 use App\Http\Controllers\TombReportController;
 use App\Http\Controllers\OldDeceasedController;
-use App\Http\Controllers\DonationHistoryController;
 use App\Http\Controllers\TombDonationsController;
+use App\Http\Controllers\Tombs\VillageController;
+use App\Http\Controllers\DonationHistoryController;
 use App\Http\Controllers\Tombs\FayumTombController;
 use App\Http\Controllers\Tombs\May15TombController;
 use App\Http\Controllers\Tombs\GafeerTombController;
 use App\Http\Controllers\Tombs\ZenhomTombController;
 use App\Http\Controllers\Tombs\KatamyaTombController;
 use App\Http\Controllers\Tombs\OctoberTombController;
-use App\Http\Controllers\Tombs\VillageController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -57,7 +60,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //! Reports Routes
     Route::get('repotrs/allreports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('reports/all_kfala_reports', [ReportController::class, 'kfala'])->name('reports.kfala');
-    Route::get('reports/safe_reports', [ReportController::class, 'safeReports'])->name('reports.safe');
+
     //! Region  Routes
     Route::get('allregions', [RegionController::class, 'index'])->name('region.index');
     Route::post('store_region', [RegionController::class, 'regionStore'])->name('region.store');
@@ -148,5 +151,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('new-tombs/donators/donations/store', 'donationStore')->name("new.tomb.donation.store");
         Route::post("new-tombs/donators/donations/update", 'donationUpdate')->name("new.tomb.donation.update");
         Route::get("new-tombs/donators/donations/destroy/{id}", 'donationDelete')->name("new.tomb.donation.delete");
+    });
+    //! Kfala Bank & Safe Routes
+    Route::prefix('kfala')->group(function () {
+        //! Kfala Bank Reports
+        Route::controller(KfalaBankController::class)->group(function () {
+            Route::get('bank/view', 'index')->name('bank.view');
+            Route::post('bank/deposit', 'bankDeposit')->name("bank.deposit");
+        });
+        //! Kfala Safe Reports
+        Route::controller(KfalaSafeController::class)->group(function () {
+            Route::get('safe/view', 'index')->name('safe.view');
+            Route::post('bank/withdraw', 'bankWithDraw')->name("bank.withdraw");
+            Route::get('reports/safe_reports', 'safeReports')->name('reports.safe');
+        });
+    });
+    Route::prefix('tomb')->group(function () {
+        Route::controller(TombSafeController::class)->group(function () {
+            Route::get("reports/safe", "index")->name("tomb.safe.view");
+            Route::get("reports/filter", 'filter')->name('tomb.filter');
+        });
     });
 });

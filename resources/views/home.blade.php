@@ -70,6 +70,66 @@
                 </div>
             </div>
         </div>
+        <div class="col-6 col-lg-3">
+            <div class="card overflow-hidden mt-3">
+                <div class="card-body p-0 d-flex align-items-center">
+                    <div class="bg-success text-white p-4">
+                        <i class="fa-duotone fa-tombstone-blank fa-2xl"></i>
+                    </div>
+                    <div>
+                        <div class="fs-6 fw-semibold text-primary">
+                            <p class="mb-0 ms-3"></p>
+                        </div>
+                        <div class="text-medium-emphasis text-uppercase fw-semibold small ms-3">عدد المتوفيين</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="card overflow-hidden mt-3">
+                <div class="card-body p-0 d-flex align-items-center">
+                    <div class="bg-success text-white p-4">
+                        <i class="fa-duotone fa-tombstone-blank fa-2xl"></i>
+                    </div>
+                    <div>
+                        <div class="fs-6 fw-semibold text-primary">
+                            <p class="mb-0 ms-3"></p>
+                        </div>
+                        <div class="text-medium-emphasis text-uppercase fw-semibold small ms-3">عدد المتوفيين السابقين</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="card overflow-hidden mt-3">
+                <div class="card-body p-0 d-flex align-items-center">
+                    <div class="bg-success text-white p-4">
+                        <i class="fa-duotone fa-tombstone-blank fa-2xl"></i>
+                    </div>
+                    <div>
+                        <div class="fs-6 fw-semibold text-primary">
+                            <p class="mb-0 ms-3"></p>
+                        </div>
+                        <div class="text-medium-emphasis text-uppercase fw-semibold small ms-3">عدد المقابر</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="card overflow-hidden mt-3">
+                <div class="card-body p-0 d-flex align-items-center">
+                    <div class="bg-success text-white p-4">
+                        <i class="fa-duotone fa-hands-holding-dollar fa-2xl"></i>
+                    </div>
+                    <div>
+                        <div class="fs-6 fw-semibold text-primary">
+                            <p class="mb-0 ms-3"></p>
+                        </div>
+                        <div class="text-medium-emphasis text-uppercase fw-semibold small ms-3">عدد المتبرعين</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-12">
             @if (session('success'))
                 <div class="alert alert-success text-center mt-5">
