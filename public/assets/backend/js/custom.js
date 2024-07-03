@@ -26,3 +26,17 @@ document.addEventListener("keydown", function (event) {
         document.getElementById("logout-form").submit();
     }
 });
+//! Set Timeout To Alert Notification
+const errors = document.querySelectorAll(".alert-danger");
+errors.forEach((error) => {
+    setTimeout(function () {
+        error.style.display = "none";
+    }, 5000);
+});
+//! Set Timeout To Alert Notification
+const success = document.querySelectorAll(".alert-success");
+success.forEach((error) => {
+    setTimeout(function () {
+        error.style.display = "none";
+    }, 5000);
+});
