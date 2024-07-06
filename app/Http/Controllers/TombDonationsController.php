@@ -17,7 +17,7 @@ class TombDonationsController extends Controller
     public function storeDonators(Request $request){
         $validations = $request->validate([
             'name' => 'required|string',
-            'mobile_number' => 'required|integer',
+            'mobile_number' => 'required|numeric',
             'donator_type' => 'required',
             'donator_duration' => 'nullable'
         ]);
