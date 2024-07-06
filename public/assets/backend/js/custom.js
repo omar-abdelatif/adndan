@@ -19,7 +19,6 @@ const currentYear = new Date().getFullYear();
 document.getElementById("year").innerHTML = currentYear;
 //! WOW Animation
 new WOW().init();
-
 //! Logging Out When Pressing Escape Button In The KeyBoard
 document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {

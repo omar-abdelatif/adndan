@@ -287,7 +287,7 @@
                                         <label for="deceasedName" class="text-white">
                                             <b>إسم المتوفي</b>
                                         </label>
-                                        <input type="text" id="deceasedName" class="form-control text-center" name="name" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" placeholder="إسم المتوفي" required>
+                                        <input type="text" id="deceasedName" class="form-control text-center" name="name" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\/\-_()\[\]]/g, '')" pattern="[\u0600-\u06FF\s\/\-_()\[\]]{3,}" placeholder="إسم المتوفي" required>
                                         <p class="required d-none text-danger fw-bold mb-2" id="deceasedNameReq">هذا الحقل مطلوب</p>
                                         <p class="required d-none text-danger fw-bold mb-2" id="deceasedNameMsg">يجب ان يكون الاسم مكون من 3 احرف على الاقل</p>
                                     </div>

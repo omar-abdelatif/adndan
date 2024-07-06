@@ -1097,7 +1097,7 @@ if (deceasedForm) {
     let DeceasedNameMsg = deceasedForm.querySelector("#deceasedNameMsg");
     if (DeceasedName) {
         DeceasedName.addEventListener("input", function () {
-            let letters = /^[\u0600-\u06FF\s]{3,}$/;
+            let letters = /^[\u0600-\u06FF\s\/\-_()\[\]]{3,}$/;
             if (this.value.trim() === "") {
                 DeceasedNameReq.classList.remove("d-none");
                 DeceasedNameMsg.classList.add("d-none");

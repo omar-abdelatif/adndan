@@ -357,6 +357,7 @@
                                         <input type="text" name="gov" class="form-control text-center" placeholder="المحافظة">
                                     </div>
                                     <div class="form-group mb-3">
+                                        <label for="files" class="form-label text-muted">الصور</label>
                                         <input type="file" name="files" class="form-control text-center" id="files" accept="image/*">
                                         <p class="required d-none fw-bold text-danger mb-0" id="filesReq">هذا الحقل مطلوب</p>
                                         <p class="required d-none fw-bold text-danger mb-0" id="filesExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
