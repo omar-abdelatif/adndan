@@ -1304,7 +1304,7 @@ if (deceasedForm) {
     const DeceasedWasherReq = deceasedForm.querySelector("#washerReq");
     if (DeceasedWasher) {
         DeceasedWasher.addEventListener("input", function () {
-            let letters = /^[\u0600-\u06FF\s\d\/\-\.\,]+$/;
+            let letters = /^[\u0600-\u06FF\s\/\-_()\[\]]{3,}$/;
             if (this.value.trim() === "") {
                 DeceasedWasher.classList.remove("good");
                 DeceasedWasher.classList.add("error");
@@ -1327,7 +1327,7 @@ if (deceasedForm) {
     const DeceasedCarrierReq = deceasedForm.querySelector("#carrierReq");
     if (DeceasedCarrier) {
         DeceasedCarrier.addEventListener("input", function () {
-            let letters = /^[\u0600-\u06FF\s]+$/;
+            let letters = /^[\u0600-\u06FF\s\/\-_()\[\]]{3,}$/;
             if (this.value.trim() === "") {
                 DeceasedCarrier.classList.remove("good");
                 DeceasedCarrier.classList.add("error");
