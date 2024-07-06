@@ -1401,7 +1401,7 @@ if (deceasedForm) {
     const DeceasedNotesReq = deceasedForm.querySelector("#notesReq");
     if (DeceasedNotes) {
         DeceasedNotes.addEventListener("input", function () {
-            let letters = /^[\u0600-\u06FF\s]+$/;
+            let letters = /^[\u0600-\u06FF\s\/\-_()\[\]]{3,}$/;
             if (this.value.trim() === "") {
                 DeceasedNotes.classList.remove("good");
                 DeceasedNotes.classList.add("error");

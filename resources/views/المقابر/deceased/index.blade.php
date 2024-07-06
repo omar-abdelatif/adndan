@@ -424,7 +424,7 @@
                                         <label for="notes" class="text-white">
                                             <b>ملاحظـــــــات</b>
                                         </label>
-                                        <textarea id="notes" class="form-control text-center" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" name="notes" rows="5" placeholder="ملاحظـــــــات" required></textarea>
+                                        <textarea id="notes" class="form-control text-center" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\/\-_()\[\]]/g, '')" pattern="[\u0600-\u06FF\s\/\-_()\[\]]{3,}" name="notes" rows="5" placeholder="ملاحظـــــــات" required></textarea>
                                         <p class="required d-none text-danger fw-bold mb-0" id="notesReq">هذا الحقل مطلوب</p>
                                     </div>
                                     <div class="field mt-3">
