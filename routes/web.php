@@ -8,8 +8,8 @@ use App\Http\Controllers\TombsController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\DonatorController;
-use App\Http\Controllers\TombSafeController;
 use App\Http\Controllers\DeceasedController;
+use App\Http\Controllers\TombSafeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KfalaBankController;
 use App\Http\Controllers\KfalaSafeController;
@@ -24,6 +24,7 @@ use App\Http\Controllers\Tombs\GafeerTombController;
 use App\Http\Controllers\Tombs\ZenhomTombController;
 use App\Http\Controllers\Tombs\KatamyaTombController;
 use App\Http\Controllers\Tombs\OctoberTombController;
+use App\Http\Controllers\TombDonationsReportsController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -167,9 +168,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
     });
     Route::prefix('tomb')->group(function () {
-        Route::controller(TombSafeController::class)->group(function () {
-            Route::get("reports/safe", "index")->name("tomb.safe.view");
-            Route::get("reports/filter", 'filter')->name('tomb.filter');
+        Route::prefix('reports')->group(function () {
+            Route::controller(TombSafeController::class)->group(function () {
+                Route::get("safe", "index")->name("tomb.safe.view");
+                Route::get("filter", 'filter')->name('tomb.filter');
+            });
+        });
+        Route::prefix('donations_reports')->group(function () {
+            Route::controller(TombDonationsReportsController::class)->group(function () {
+                Route::get('all', 'index')->name('tomb.reports.donations.index');
+                Route::get('filter', 'filter')->name('tomb.reports.donations.filter');
+            });
         });
     });
 });

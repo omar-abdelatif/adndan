@@ -72,7 +72,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($tomb->power === "0")
+                                    @if ($tomb->power === 0)
                                         {{$tomb->other_tomb_power}}
                                     @else
                                         {{$tomb->power}}

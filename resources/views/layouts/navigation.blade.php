@@ -113,6 +113,12 @@
                             <b>الخزينة</b>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{route("tomb.reports.donations.index")}}" class="nav-link justify-content-center" target="_top">
+                            <img src="{{ asset('icons/icons8-cemetery-30.png') }}" alt="donate">
+                            <b>التبرعات</b>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item">

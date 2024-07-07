@@ -11,7 +11,7 @@ for (let i = 0; i < 100; i++) {
         pagingType: "simple_numbers",
         dom: "Bfrtip",
         select: true,
-        buttons: ["copyHtml5", "excelHtml5", "csvHtml5", "pdfHtml5", "print"],
+        buttons: ["excelHtml5", "print"],
     });
 }
 //! Calculate The Year

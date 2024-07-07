@@ -37,42 +37,27 @@ class Tomb extends Model
         $power = $this->power;
         $type = $this->type;
         $otherPower = $this->other_tomb_power;
-        try {
-            if ($type === "لحد") {
-                if ($power === 0) {
-                    for ($i = 1; $i <= $otherPower; $i++) {
-                        $room = new Rooms;
-                        $room->name = "لحد " . $i . " - " . $name . " - " . $region;
-                        $room->burial_date = null;
-                        $room->capacity = 1;
-                        $room->tomb_id = $this->id;
-                        $room->save();
-                    }
-                } else {
-                    for ($i = 1; $i <= $power; $i++) {
-                        $room = new Rooms;
-                        $room->name = "لحد " . $i . " - " . $name . " - " . $region;
-                        $room->burial_date = null;
-                        $room->capacity = 1;
-                        $room->tomb_id = $this->id;
-                        $room->save();
-                    }
-                }
-            } else {
-                for ($i = 1; $i <= $power; $i++) {
-                    $room = new Rooms;
-                    $room->name = "غرفة " . $i . " - " . $name . " - " . $region;
-                    $room->burial_date = null;
-                    $room->capacity = 6;
-                    $room->tomb_id = $id;
-                    $room->save();
-                }
+        if ($type === "لحد") {
+            for ($i = 1; $i <= $otherPower; $i++) {
+                Rooms::create([
+                    'name' => "لحد " . $i . " - " . $name . " - " . $region,
+                    'capacity' => 6,
+                    'burial_date' => null,
+                    'tomb_id' => $id,
+                ]);
             }
-            return "Rooms created successfully";
-        } catch (\Exception $e) {
-            return "Error creating rooms: " . $e->getMessage();
+        } else {
+            for ($i = 1; $i <= $power; $i++) {
+                Rooms::create([
+                    'name' => "غرفة " . $i . " - " . $name . " - " . $region,
+                    'capacity' => 6,
+                    'burial_date' => null,
+                    'tomb_id' => $id,
+                ]);
+            }
         }
     }
+
     public function getBurialDateAttribute()
     {
         return $this->rooms()->max('burial_date');

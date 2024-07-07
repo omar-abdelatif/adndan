@@ -79,18 +79,13 @@ $(function () {
                                     allRoomsDisabled = false;
                                 }
                             }
-                            let Disabled =
-                                disabledRoomsCount === tombPower
-                                    ? "disabled"
-                                    : "";
-                            option +=
-                                '<option value="' +
-                                tombName +
-                                '" ' +
-                                Disabled +
-                                ">" +
-                                tombName +
-                                "</option>";
+                            if (tombType === 'لحد') {
+                                let Disabled = disabledRoomsCount === tombOtherPower ? "disabled" : "";
+                                option += '<option value="' + tombName + '" ' + Disabled + ">" + tombName + "</option>";
+                            } else {
+                                let Disabled = disabledRoomsCount === tombPower ? "disabled" : "";
+                                option += '<option value="' + tombName + '" ' + Disabled + ">" + tombName + "</option>";
+                            }
                             $(".regionTomb").empty();
                             $(".regionTomb").append(option);
                         },

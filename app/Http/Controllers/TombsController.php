@@ -48,7 +48,7 @@ class TombsController extends Controller
             if ($tomb->power === 0) {
                 $tomb->power = 0;
             } else {
-                $tomb->power = $request->power;
+                $tomb->power = (int) $request->power;
             }
             $tomb->other_tomb_power = $request->other_tomb_power;
             $tomb->region = $request->region;
@@ -60,9 +60,14 @@ class TombsController extends Controller
         }
         if ($store) {
             $tomb->createRooms();
+            $tomb->refresh();
             $rooms = $tomb->rooms;
-            Assert::assertCount($tomb->power, $rooms);
-            return redirect()->back()->with('success', 'تمت الإضافة بنجاح');
+            $expectedRoomCount = $tomb->type === "لحد" ? $tomb->other_tomb_power : $tomb->power;
+            if ($rooms->count() == $expectedRoomCount) {
+                return redirect()->back()->withSuccess('تمت الإضافة بنجاح');
+            } else {
+                return redirect()->back()->withErrors($validated);
+            }
         }
         return redirect()->back()->withErrors($validated);
     }
