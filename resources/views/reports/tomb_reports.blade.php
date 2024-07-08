@@ -62,7 +62,7 @@
         <h3>تقارير التبرعات الشهرية</h3>
     </div>
     <div class="filter-form w-50 mx-auto">
-        <form action="{{route('tomb.reports.donations.filter')}}" method="get" class="d-flex">
+        <form action="{{route('tomb.reports.donations.index')}}" method="get" class="d-flex">
             @csrf
             <input type="month" name="date" class="form-control">
             <button class="btn btn-success ms-2 px-3 text-white fw-bold" type="submit">بحث</button>
@@ -80,7 +80,9 @@
             </tr>
         </thead>
         <tbody>
-            
+            @foreach ($donationFilter as $item)
+
+            @endforeach
         </tbody>
     </table>
 @endsection

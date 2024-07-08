@@ -7,7 +7,6 @@ use App\Models\Tomb;
 use App\Models\Rooms;
 use App\Models\Region;
 use Illuminate\Http\Request;
-use PHPUnit\Framework\Assert;
 
 class TombsController extends Controller
 {
