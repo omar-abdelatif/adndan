@@ -53,11 +53,6 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group mb-3">
-                                    <label for="tombDonatorDonationDuration" class="form-label text-white fw-bold">مدة التبرع</label>
-                                    <input type="text" id="tombDonatorDonationDuration" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" class="form-control" name="donation_duration" placeholder="مدة التبرع" required>
-                                    <p class="required d-none text-danger fw-bold mb-0" id="tombDonatorDonationDurationReq">هذا الحقل مطلوب</p>
-                                </div>
-                                <div class="form-group mb-3">
                                     <label for="tombDonatorAmount" class="form-label text-white fw-bold">المبلغ</label>
                                     <input type="text" id="tombDonatorAmount" maxlength="5" class="form-control" name="amount" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="مبلغ التبرع" required>
                                     <p class="required d-none text-danger fw-bold mb-0" id="tombDonatorAmountReq">هذا الحقل مطلوب</p>
@@ -107,7 +102,6 @@
                                 <th class="text-center">إسم المتبرع</th>
                                 <th class="text-center">رقم المحمول</th>
                                 <th class="text-center">نوع التبرع</th>
-                                <th class="text-center">مدة التبرع</th>
                                 <th class="text-center">المبلغ</th>
                                 <th class="text-center">رقم الايصال</th>
                                 <th class="text-center">Actions</th>
@@ -121,7 +115,6 @@
                                     <td>{{$donation->name}}</td>
                                     <td>{{$donation->mobile_no}}</td>
                                     <td>{{$donation->donation_type}}</td>
-                                    <td>{{$donation->donation_duration}}</td>
                                     <td>{{$donation->amount}}</td>
                                     <td>{{$donation->invoice_no}}</td>
                                     <td>

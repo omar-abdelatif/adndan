@@ -65,7 +65,6 @@ class TombDonationsController extends Controller
             'name' => 'required',
             'mobile_no' => 'required',
             'donation_type' => 'required',
-            'donation_duration' => 'required',
             'amount' => 'required',
             'invoice_no' => 'required',
         ]);

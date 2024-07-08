@@ -15,7 +15,6 @@ class TombDonations extends Model
         'donation_type',
         'amount',
         'invoice_no',
-        'donation_duration',
         'new_tomb_donators_id',
     ];
     public function donators(){

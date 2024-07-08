@@ -1724,29 +1724,6 @@ if (NewDonatorsFormUpdate.length > 0) {
 //! Validation For Tomb Donation History Insertion
 const TombDonationForm = document.getElementById("TombDonationForm");
 if (TombDonationForm) {
-    //! New Tomb Donations Durations
-    const tombDonatorDonationDuration = TombDonationForm.querySelector("#tombDonatorDonationDuration");
-    if (tombDonatorDonationDuration) {
-        const tombDonatorDonationDurationReq = TombDonationForm.querySelector("#tombDonatorDonationDurationReq");
-        tombDonatorDonationDuration.addEventListener("input", function () {
-            let letters = /^[\u0600-\u06FF\s]+$/;
-            if (this.value.trim() === "") {
-                tombDonatorDonationDurationReq.classList.remove("d-none");
-                tombDonatorDonationDuration.classList.remove("good");
-                tombDonatorDonationDuration.classList.add("error");
-            } else {
-                if (letters.test(this.value)) {
-                    tombDonatorDonationDuration.classList.add("good");
-                    tombDonatorDonationDuration.classList.remove("error");
-                    tombDonatorDonationDurationReq.classList.add("d-none");
-                } else {
-                    tombDonatorDonationDuration.classList.remove("good");
-                    tombDonatorDonationDuration.classList.add("error");
-                    tombDonatorDonationDurationReq.classList.add("d-none");
-                }
-            }
-        })
-    }
     //! New Tomb Donations Amount
     const tombDonatorDonationAmount = TombDonationForm.querySelector("#tombDonatorAmount");
     if (tombDonatorDonationAmount) {

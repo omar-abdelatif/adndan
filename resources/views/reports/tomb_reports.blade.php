@@ -81,7 +81,14 @@
         </thead>
         <tbody>
             @foreach ($donationFilter as $item)
-
+                <tr>
+                    <td>{{$item->name}}</td>
+                    <td>تبرعات</td>
+                    <td>مقابر جديدة</td>
+                    <td>{{$item->invoice_no}}</td>
+                    <td>{{$item->created_at->format('Y-M')}}</td>
+                    <td>{{$item->amount}}</td>
+                </tr>
             @endforeach
         </tbody>
     </table>

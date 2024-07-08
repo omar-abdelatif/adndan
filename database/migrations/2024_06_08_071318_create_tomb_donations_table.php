@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->bigInteger('mobile_no');
-            $table->string('donator_type');
+            $table->string('donation_type');
             $table->bigInteger('amount');
             $table->bigInteger('invoice_no');
-            $table->string('donator_duration');
             $table->timestamps();
         });
     }
