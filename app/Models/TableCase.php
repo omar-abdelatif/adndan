@@ -29,6 +29,6 @@ class TableCase extends Model
         'gov',
         'sons',
         'daughters',
-        'files',
+        'imgs',
     ];
 }

@@ -23,7 +23,7 @@ class CaseController extends Controller
         $validation = $request->validate([
             'fullname'              => 'required|min:3',
             'ssn'                   => 'required|unique:table_case,ssn',
-            'phone_number'          => 'unique:table_case,phone_number',
+            'phone_number'              => 'unique:table_case,phone_number',
             'age'                   => 'required',
             'address'               => 'required',
             'monthly_income'        => 'required|numeric',
@@ -38,14 +38,14 @@ class CaseController extends Controller
             'gov'                   => 'required',
             'sons'                  => 'required',
             'daughters'             => 'required',
-            'files'                 => 'image|max:2028|mimes:jpg,png,jpeg,webp',
+            'imgs'                 => 'image|max:2028|mimes:jpg,png,jpeg,webp',
         ]);
-        if ($request->hasFile('files')) {
-            $upload = $request->file('files');
+        if ($request->hasFile('imgs')) {
+            $upload = $request->file('imgs');
             $name = time() . '.' . $upload->getClientOriginalExtension();
             $destinationPath = public_path('build/assets/backend/files');
             $upload->move($destinationPath, $name);
-        } elseif (!$request->file('files')) {
+        } elseif (!$request->file('imgs')) {
             $name = 'download.png';
         }
         $store = TableCase::create([
@@ -66,7 +66,7 @@ class CaseController extends Controller
             'gov' => $request->gov,
             'sons' => $request->sons,
             'daughters' => $request->daughters,
-            'files' => $name,
+            'imgs' => $name,
         ]);
         if ($store) {
             return redirect()->route('showall')->with('success', 'تمت الإضافة بنجاح');
@@ -92,19 +92,19 @@ class CaseController extends Controller
     {
         $case = TableCase::find($request->id);
         //! Delete Old Image
-        if ($request->hasFile('files') && $case->files !== null) {
-            $oldImagePath = public_path('build/assets/backend/files/' . $case->files);
+        if ($request->hasFile('imgs') && $case->imgs !== null) {
+            $oldImagePath = public_path('build/assets/backend/files/' . $case->imgs);
             if (file_exists($oldImagePath)) {
                 unlink($oldImagePath);
             }
         }
         //! Insert New Image
-        if ($request->hasFile('files') && $request->file('files')->isValid()) {
-            $uploadFile = $request->file('files');
+        if ($request->hasFile('imgs') && $request->file('imgs')->isValid()) {
+            $uploadFile = $request->file('imgs');
             $name = time() . '.' . $uploadFile->getClientOriginalExtension();
             $destinationPath = public_path('build/assets/backend/files');
             $uploadFile->move($destinationPath, $name);
-            $case->files = $name;
+            $case->imgs = $name;
         }
         //! Update User Data
         $case->fullname = $request->fullname;

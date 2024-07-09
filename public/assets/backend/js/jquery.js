@@ -11,17 +11,13 @@ $(function () {
     });
     $("#totalAmount").text(totalAmount.toFixed(2));
     //! Calculate The Total Income of The Case
-    $(
-        'input[name="monthly_income"], input[name="another_source"], input[name="retire_income"]'
-    ).on("input", function () {
-        let monthly_income =
-            parseInt($('input[name="monthly_income"]').val()) || 0;
-        let another_source =
-            parseInt($('input[name="another_source"]').val()) || 0;
-        let retire_income =
-            parseInt($('input[name="retire_income"]').val()) || 0;
+    $(document).on("input", 'input[name="monthly_income"], input[name="another_source"], input[name="retire_income"]', function () {
+        const $case = $(this).closest('.case');
+        let monthly_income = parseInt($case.find('input[name="monthly_income"]').val()) || 0;
+        let another_source = parseInt($case.find('input[name="another_source"]').val()) || 0;
+        let retire_income = parseInt($case.find('input[name="retire_income"]').val()) || 0;
         let total = monthly_income + another_source + retire_income;
-        $('input[name="total_income"]').val(total);
+        $case.find('input[name="total_income"]').val(total);
     });
     //! Calculate the total amount of kfala cases monthly income
     let table30 = $("#table30").DataTable();

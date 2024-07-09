@@ -14,9 +14,9 @@ return new class extends Migration
     {
         Schema::create('table_case', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->string('name');
-            $table->integer('ssn')->unique();
-            $table->integer('phone_no')->unique();
+            $table->string('fullname');
+            $table->bigInteger('ssn')->unique();
+            $table->bigInteger('phone_number')->unique();
             $table->integer('age');
             $table->string('address');
             $table->string('income_type');

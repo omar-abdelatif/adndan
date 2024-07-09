@@ -101,7 +101,7 @@
                                             <h5 class="modal-title" id="exampleModalLabel">بيانات الحالة كاملة</h5>
                                             <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body bg-dark-gradient">
                                             <form action="{{ 'update' }}" method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="container-fluid">
@@ -124,15 +124,15 @@
                                                                     <label for="age">
                                                                         <b>السن</b>
                                                                     </label>
-                                                                    <input type="number" id="age" name="age" class="form-control mb-2 text-center" value="{{ $case->age }}" placeholder="السن">
+                                                                    <input type="number" id="caseAge" name="age" class="form-control mb-2 text-center" value="{{ $case->age }}" placeholder="السن">
                                                                     <label for="ssn">
                                                                         <b>الرقم القومي</b>
                                                                     </label>
-                                                                    <input type="number" id="ssn" name="ssn" class="form-control mb-2 text-center" value="{{ $case->ssn }}" placeholder="الرقم القومي">
+                                                                    <input type="number" id="caseSsn" name="ssn" class="form-control mb-2 text-center" value="{{ $case->ssn }}" placeholder="الرقم القومي">
                                                                     <label for="address">
                                                                         <b>العنوان</b>
                                                                     </label>
-                                                                    <input type="text" id="address" name="address" class="form-control mb-2 text-center" value="{{ $case->address }}" placeholder="العنوان">
+                                                                    <input type="text" id="caseAddress" name="address" class="form-control mb-2 text-center" value="{{ $case->address }}" placeholder="العنوان">
                                                                     <label for="gov">
                                                                         <b>المحافظة</b>
                                                                     </label>
@@ -268,14 +268,14 @@
                     <h1 class="modal-title text-decoration-underline" id="exampleModalLabel">إضافة حالة جديدة</h1>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body bg-dark-gradient">
                     <form action="{{ 'storecase' }}" method="post" enctype="multipart/form-data" id="CaseTable">
                         @csrf
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group mb-3">
-                                        <input type="text" name="fullname" placeholder="إسم الحالة" id="CaseFullName" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" class="form-control text-center" required>
+                                        <input type="text" name="fullname" placeholder="إسم الحالة" id="CaseFullName" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\/\-_()\[\]]/g, '')" pattern="[\u0600-\u06FF\s\/\-_()\[\]]{3,}" class="form-control text-center" required>
                                         <p id="CaseReq" class="required text-danger fw-bold d-none mb-0">هذا الحقل مطلوب</p>
                                         <p id="CaseMsg" class="required text-danger fw-bold d-none mb-0">يجب ان يكون الحقل لا يقل عن 3 أحرف</p>
                                     </div>
@@ -290,7 +290,7 @@
                                         <p id="mobileMsg" class=" required fw-bold text-danger d-none mb-0">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input type="text" name="address" placeholder="العنوان" id="address" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" class="form-control text-center" required>
+                                        <input type="text" name="address" placeholder="العنوان" id="address" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\d\/\-_()\[\]]/g, '')" class="form-control text-center" required>
                                         <p class="required d-none mb-0 text-danger fw-bold" id="addressReq">هذا الحقل مطلوب</p>
                                         <p class="required d-none mb-0 text-danger fw-bold" id="addressMsg">يجب ان يكون العنوان باللغة العربية ولا يقل عن 5 احرف</p>
                                     </div>
@@ -299,17 +299,19 @@
                                         <p class="required d-none mb-0 fw-bold text-danger" id="ageReq">هذا الحقل مطلوب</p>
                                         <p class="required d-none mb-0 fw-bold text-danger" id="ageMsg">يجب ان يكون السن مكون من 2 رقم فقط</p>
                                     </div>
-                                    <div class="form-group mb-3">
-                                        <input type="number" name="retire_income" class="form-control text-center" placeholder="دخل المعاش">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <input type="number" name="monthly_income" class="form-control text-center" placeholder="الدخل الشهري">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <input type="number" name="another_source" class="form-control text-center" placeholder="مصدر أخر">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <input id="total_income" type="number" name="total_income" class="form-control text-center" placeholder="إجمالي الدخل" readonly autofocus="none">
+                                    <div class="case">
+                                        <div class="form-group mb-3">
+                                            <input type="number" name="retire_income" class="form-control text-center" placeholder="دخل المعاش">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="number" name="monthly_income" class="form-control text-center" placeholder="الدخل الشهري">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input type="number" name="another_source" class="form-control text-center" placeholder="مصدر أخر">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <input id="total_income" type="number" name="total_income" class="form-control text-center" placeholder="إجمالي الدخل" readonly autofocus="none">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -358,7 +360,7 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="files" class="form-label text-muted">الصور</label>
-                                        <input type="file" name="files" class="form-control text-center" id="files" accept="image/*">
+                                        <input type="file" name="imgs" class="form-control text-center" id="files" accept="image/*">
                                         <p class="required d-none fw-bold text-danger mb-0" id="filesReq">هذا الحقل مطلوب</p>
                                         <p class="required d-none fw-bold text-danger mb-0" id="filesExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
                                         <p class="required d-none fw-bold text-danger mb-0" id="filesSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>

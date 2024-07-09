@@ -170,7 +170,7 @@ if (CaseTable) {
     const CaseReq = document.getElementById("CaseReq");
     const CaseSubMsg = document.getElementById("CaseMsg");
     CaseFullName.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s]{3,}$/;
+        let letters = /^[\u0600-\u06FF\s\/\-_()\[\]]{3,}$/;
         if (this.value.trim() === "") {
             CaseReq.classList.remove("d-none");
             CaseSubMsg.classList.add("d-none");
@@ -207,19 +207,11 @@ if (CaseTable) {
                 ssn.classList.remove("error");
                 ssnMsg.classList.add("d-none");
                 ssnReq.classList.add("d-none");
-                f1 = 1;
-                if (f1 === 1 && f2 === 1 && f3 === 1 && f4 === 1) {
-                    document.getElementById("nextbtn").disabled = false;
-                } else {
-                    document.getElementById("nextbtn").disabled = true;
-                }
             } else {
                 ssn.classList.remove("good");
                 ssn.classList.add("error");
                 ssnMsg.classList.remove("d-none");
                 ssnReq.classList.add("d-none");
-                f1 = 0;
-                document.getElementById("nextbtn").disabled = true;
             }
         }
     });
@@ -278,7 +270,7 @@ if (CaseTable) {
     const addressReq = document.getElementById("addressReq");
     const addressMsg = document.getElementById("addressMsg");
     address.addEventListener("input", function () {
-        let letters = /^[\u0600-\u06FF\s]{3,}$/;
+        let letters = /^[\u0600-\u06FF\s\d\/\-_()\[\]]{3,}$/;
         if (this.value.trim() === "") {
             addressReq.classList.remove("d-none");
             addressMsg.classList.add("d-none");
