@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('sons');
             $table->string('daughters');
             $table->string('gov');
-            $table->string('imgs');
+            $table->string('imgs')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
