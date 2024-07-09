@@ -113,30 +113,46 @@
                                                                 </div>
                                                                 <div class="inputs-body">
                                                                     <input type="hidden" name="id" value="{{ $case->id }}">
-                                                                    <label for="fullname">
-                                                                        <b>الإسم</b>
-                                                                    </label>
-                                                                    <input type="text" id="fullname" name="fullname" class="form-control mb-2 text-center" value="{{ $case->fullname }}" placeholder="إسم الحالة">
-                                                                    <label for="phone_number">
-                                                                        <b>رقم المحمول (اذا وجد)</b>
-                                                                    </label>
-                                                                    <input type="number" id="phone_number" name="phone_number" class="form-control mb-2 text-center" value="{{ $case->phone_number }}" placeholder="رقم المحمول">
-                                                                    <label for="age">
-                                                                        <b>السن</b>
-                                                                    </label>
-                                                                    <input type="number" id="caseAge" name="age" class="form-control mb-2 text-center" value="{{ $case->age }}" placeholder="السن">
-                                                                    <label for="ssn">
-                                                                        <b>الرقم القومي</b>
-                                                                    </label>
-                                                                    <input type="number" id="caseSsn" name="ssn" class="form-control mb-2 text-center" value="{{ $case->ssn }}" placeholder="الرقم القومي">
-                                                                    <label for="address">
-                                                                        <b>العنوان</b>
-                                                                    </label>
-                                                                    <input type="text" id="caseAddress" name="address" class="form-control mb-2 text-center" value="{{ $case->address }}" placeholder="العنوان">
-                                                                    <label for="gov">
-                                                                        <b>المحافظة</b>
-                                                                    </label>
-                                                                    <input type="text" id="gov" name="gov" class="form-control text-center" value="{{ $case->gov }}" placeholder="المحافظة">
+                                                                    <div class="form-group mb-2">
+                                                                        <label for="fullname">
+                                                                            <b>الإسم</b>
+                                                                        </label>
+                                                                        <input type="text" id="fullname" name="fullname" class="form-control mb-2 text-center" value="{{ $case->fullname }}" placeholder="إسم الحالة">
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label for="phone_number">
+                                                                            <b>رقم المحمول</b>
+                                                                        </label>
+                                                                        <input type="number" id="phone_number" name="phone_number" class="form-control mb-2 text-center" value="{{ $case->phone_number }}" placeholder="رقم المحمول">
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label for="" class="form-label text-white fw-bold">رقم المحمول الأخر</label>
+                                                                        <input type="number" name="another_phone_number" class="form-control mb-2 text-center" value="{{ $case->another_phone_number }}" placeholder="رقم المحمول">
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label for="age">
+                                                                            <b>السن</b>
+                                                                        </label>
+                                                                        <input type="number" id="caseAge" name="age" class="form-control mb-2 text-center" value="{{ $case->age }}" placeholder="السن">
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label for="ssn">
+                                                                            <b>الرقم القومي</b>
+                                                                        </label>
+                                                                        <input type="number" id="caseSsn" name="ssn" class="form-control mb-2 text-center" value="{{ $case->ssn }}" placeholder="الرقم القومي">
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label for="address">
+                                                                            <b>العنوان</b>
+                                                                        </label>
+                                                                        <input type="text" id="caseAddress" name="address" class="form-control mb-2 text-center" value="{{ $case->address }}" placeholder="العنوان">
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label for="gov">
+                                                                            <b>المحافظة</b>
+                                                                        </label>
+                                                                        <input type="text" id="gov" name="gov" class="form-control text-center" value="{{ $case->gov }}" placeholder="المحافظة">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -146,47 +162,61 @@
                                                                     <h3 class="mb-2 bg-info p-2 rounded text-white"> البيانات المادية</h3>
                                                                 </div>
                                                                 <div class="inputs-body">
-                                                                    <label>
-                                                                        <b>نوع الدخل</b>
-                                                                    </label>
-                                                                    <select name="income_type" class="form-control">
-                                                                        <option class="text-center" selected>إختار نوع الدخل للحالة</option>
-                                                                        <option value="معاش" {{ $case->income_type == 'معاش' ? 'selected' : '' }}> معاش</option>
-                                                                        <option value="بدون" {{ $case->income_type == 'بدون' ? 'selected' : '' }}> بدون</option>
-                                                                        <option value="مصدر_أخر" {{ $case->income_type == 'مصدر_أخر' ? 'selected' : '' }}> مصدر أخر</option>
-                                                                    </select>
-                                                                    <label class="mt-2">
-                                                                        <b>دخل المعاش</b>
-                                                                    </label>
-                                                                    <input type="number" name="retire_income" value="{{$case->retire_income}}" class="form-control text-center" placeholder="دخل المعاش">
-                                                                    <label class="mt-2">
-                                                                        <b>مصدر أخر</b>
-                                                                    </label>
-                                                                    <input type="number" name="another_source" value="{{$case->another_source}}" class="form-control text-center" placeholder="مصدر أخر">
-                                                                    <label class="mt-2">
-                                                                        <b>نوع الإستفادة</b>
-                                                                    </label>
-                                                                    <select name="benefit_type" class="form-control">
-                                                                        <option class="text-center" selected>إختار نوع الإستفادة للحالة</option>
-                                                                        <option value="عينية" {{ $case->benefit_type == 'عينية' ? 'selected' : '' }}> عينية</option>
-                                                                        <option value="نقدية" {{ $case->benefit_type == 'نقدية' ? 'selected' : '' }}>نقدية</option>
-                                                                    </select>
-                                                                    <label for="" class="mt-2">
-                                                                        <b>إختار مدة الإستفادة</b>
-                                                                    </label>
-                                                                    <select name="benefit_duration" class="form-control mb-2">
-                                                                        <option class="text-center" selected>إختار مدة الإستفادة</option>
-                                                                        <option value="شهرية" {{$case->benefit_duration == 'شهرية' ? 'selected' : '' }}>شهرية</option>
-                                                                        <option value="موسمية" {{$case->benefit_duration == 'موسمية' ? 'selected' : '' }}>موسمية</option>
-                                                                    </select>
-                                                                    <label class="mt-2">
-                                                                        <b>الدخل الشهري</b>
-                                                                    </label>
-                                                                    <input type="number" name="monthly_income" class="form-control text-center" value="{{ $case->monthly_income }}" placeholder="الدخل الشهري">
-                                                                    <label class="mt-2">
-                                                                        <b>إجمالي الدخل</b>
-                                                                    </label>
-                                                                    <input type="number" name="total_income" class="form-control text-center bg-secondary text-white" value="{{$case->total_income}}" placeholder="إجمالي الدخل">
+                                                                    <div class="form-group mb-2">
+                                                                        <label>
+                                                                            <b>نوع الدخل</b>
+                                                                        </label>
+                                                                        <select name="income_type" class="form-control">
+                                                                            <option class="text-center" selected>إختار نوع الدخل للحالة</option>
+                                                                            <option value="معاش" {{ $case->income_type == 'معاش' ? 'selected' : '' }}> معاش</option>
+                                                                            <option value="بدون" {{ $case->income_type == 'بدون' ? 'selected' : '' }}> بدون</option>
+                                                                            <option value="مصدر_أخر" {{ $case->income_type == 'مصدر_أخر' ? 'selected' : '' }}> مصدر أخر</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label class="mt-2">
+                                                                            <b>دخل المعاش</b>
+                                                                        </label>
+                                                                        <input type="number" name="retire_income" value="{{$case->retire_income}}" class="form-control text-center" placeholder="دخل المعاش">
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label class="mt-2">
+                                                                            <b>مصدر أخر</b>
+                                                                        </label>
+                                                                        <input type="number" name="another_source" value="{{$case->another_source}}" class="form-control text-center" placeholder="مصدر أخر">
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label class="mt-2">
+                                                                            <b>نوع الإستفادة</b>
+                                                                        </label>
+                                                                        <select name="benefit_type" class="form-control">
+                                                                            <option class="text-center" selected>إختار نوع الإستفادة للحالة</option>
+                                                                            <option value="عينية" {{ $case->benefit_type == 'عينية' ? 'selected' : '' }}> عينية</option>
+                                                                            <option value="نقدية" {{ $case->benefit_type == 'نقدية' ? 'selected' : '' }}>نقدية</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label for="" class="mt-2">
+                                                                            <b>إختار مدة الإستفادة</b>
+                                                                        </label>
+                                                                        <select name="benefit_duration" class="form-control mb-2">
+                                                                            <option class="text-center" selected>إختار مدة الإستفادة</option>
+                                                                            <option value="شهرية" {{$case->benefit_duration == 'شهرية' ? 'selected' : '' }}>شهرية</option>
+                                                                            <option value="موسمية" {{$case->benefit_duration == 'موسمية' ? 'selected' : '' }}>موسمية</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label class="mt-2">
+                                                                            <b>الدخل الشهري</b>
+                                                                        </label>
+                                                                        <input type="number" name="monthly_income" class="form-control text-center" value="{{ $case->monthly_income }}" placeholder="الدخل الشهري">
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label class="mt-2">
+                                                                            <b>إجمالي الدخل</b>
+                                                                        </label>
+                                                                        <input type="number" name="total_income" class="form-control text-center bg-secondary text-white" value="{{$case->total_income}}" placeholder="إجمالي الدخل">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -196,20 +226,24 @@
                                                                     <h3 class="mb-2 bg-warning p-2 rounded text-white"> البيانات الإجتماعية</h3>
                                                                 </div>
                                                                 <div class="inputs-body">
-                                                                    <label class="mb-2">
-                                                                        <b>الحالة الاجتماعية</b>
-                                                                    </label>
-                                                                    <select name="marital_status" class="form-control mb-2">
-                                                                        <option class="text-center" selected>إختار الحالة الاجتماعية للحالة</option>
-                                                                        <option value="أعزب" {{ $case->marital_status == 'أعزب' ? 'selected' : '' }}> أعزب</option>
-                                                                        <option value="متزوج/ة" {{ $case->marital_status == 'متزوج/ة' ? 'selected' : '' }}> متزوج/ة</option>
-                                                                        <option value="أرمل/ة"{{ $case->marital_status == 'أرمل/ة' ? 'selected' : '' }}> أرمل/ة</option>
-                                                                        <option value="مطلق/ة"{{ $case->marital_status == 'مطلق/ة' ? 'selected' : '' }}> مطلق/ة</option>
-                                                                    </select>
-                                                                    <label class="mb-2">
-                                                                        <b>الحالة الصحية</b>
-                                                                    </label>
-                                                                    <input type="text" name="health_status" class="form-control text-center" value="{{ $case->health_status }}" placeholder="الحالة الصحية">
+                                                                    <div class="form-group mb-2">
+                                                                        <label class="mb-2">
+                                                                            <b>الحالة الاجتماعية</b>
+                                                                        </label>
+                                                                        <select name="marital_status" class="form-control mb-2">
+                                                                            <option class="text-center" selected>إختار الحالة الاجتماعية للحالة</option>
+                                                                            <option value="أعزب" {{ $case->marital_status == 'أعزب' ? 'selected' : '' }}> أعزب</option>
+                                                                            <option value="متزوج/ة" {{ $case->marital_status == 'متزوج/ة' ? 'selected' : '' }}> متزوج/ة</option>
+                                                                            <option value="أرمل/ة"{{ $case->marital_status == 'أرمل/ة' ? 'selected' : '' }}> أرمل/ة</option>
+                                                                            <option value="مطلق/ة"{{ $case->marital_status == 'مطلق/ة' ? 'selected' : '' }}> مطلق/ة</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label class="mb-2">
+                                                                            <b>الحالة الصحية</b>
+                                                                        </label>
+                                                                        <input type="text" name="health_status" class="form-control text-center" value="{{ $case->health_status }}" placeholder="الحالة الصحية">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -219,14 +253,18 @@
                                                                     <h3 class="mb-2 bg-success p-2 rounded text-white"> العائلة</h3>
                                                                 </div>
                                                                 <div class="inputs-body">
-                                                                    <label class="mb-2">
-                                                                        <b>عدد الأولاد</b>
-                                                                    </label>
-                                                                    <input type="number" name="sons" value="{{ $case->sons }}" class="form-control text-center mb-2" placeholder="عدد الأولاد">
-                                                                    <label class="mb-2">
-                                                                        <b>عدد البنات</b>
-                                                                    </label>
-                                                                    <input type="number" name="daughters" value="{{ $case->daughters }}" class="form-control text-center" placeholder="عدد البنات">
+                                                                    <div class="form-group mb-2">
+                                                                        <label class="mb-2">
+                                                                            <b>عدد الأولاد</b>
+                                                                        </label>
+                                                                        <input type="number" name="sons" value="{{ $case->sons }}" class="form-control text-center mb-2" placeholder="عدد الأولاد">
+                                                                    </div>
+                                                                    <div class="form-group mb-2">
+                                                                        <label class="mb-2">
+                                                                            <b>عدد البنات</b>
+                                                                        </label>
+                                                                        <input type="number" name="daughters" value="{{ $case->daughters }}" class="form-control text-center" placeholder="عدد البنات">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -236,9 +274,12 @@
                                                                     <h3 class="mb-2 bg-secondary p-2 rounded text-white"> ملفات الحالة</h3>
                                                                 </div>
                                                                 <div class="inputs-body">
-                                                                    <input type="file" name="files" class="form-control mb-3 text-center" value="{{ $case->files }}" accept="image/*">
-                                                                    <div class="files">
-                                                                        <img src="{{ asset('build/assets/backend/files/' . $case->files) }}" class="" width="300" alt="{{ $case->fullname }}">
+                                                                    <div class="form-group mb-2">
+                                                                        <label for="" class="form-label text-white fw-bold">الصور</label>
+                                                                        <input type="file" name="files" class="form-control mb-3 text-center" value="{{ $case->files }}" accept="image/*">
+                                                                        <div class="files">
+                                                                            <img src="{{ asset('build/assets/backend/files/' . $case->files) }}" class="" width="300" alt="{{ $case->fullname }}">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -274,48 +315,64 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">إسم الحالة</label>
                                         <input type="text" name="fullname" placeholder="إسم الحالة" id="CaseFullName" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\/\-_()\[\]]/g, '')" pattern="[\u0600-\u06FF\s\/\-_()\[\]]{3,}" class="form-control text-center" required>
                                         <p id="CaseReq" class="required text-danger fw-bold d-none mb-0">هذا الحقل مطلوب</p>
                                         <p id="CaseMsg" class="required text-danger fw-bold d-none mb-0">يجب ان يكون الحقل لا يقل عن 3 أحرف</p>
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">الرقم القومي</label>
                                         <input type="text" name="ssn" id="ssn" placeholder="الرقم القومي" maxlength="14" class="form-control text-center" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <p id="ssnReq" class="d-none required text-danger fw-bold mb-0">هذا الحقل مطلوب</p>
                                         <p id="ssnMsg" class="d-none required text-danger fw-bold mb-0">يجب ان بكون الرقم القومي 14 رقماً لا غير</p>
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">رقم المحمول</label>
                                         <input type="text" name="phone_number" id="mobile_no" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="رقم المحمول" class="form-control text-center" required>
                                         <p id="mobileReq" class="required fw-bold text-danger d-none mb-0">هذا الحقل مطلوب</p>
                                         <p id="mobileMsg" class=" required fw-bold text-danger d-none mb-0">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">رقم المحمول الأخر</label>
+                                        <input type="text" name="another_phone_number" id="another_phone_number" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="رقم المحمول الأخر" class="form-control text-center">
+                                        <p id="otherMobileReq" class="required fw-bold text-danger d-none mb-0">هذا الحقل مطلوب</p>
+                                        <p id="otherMobileMsg" class=" required fw-bold text-danger d-none mb-0">يجب ان بكون رقم المحمول 11 رقماً لا غير</p>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">العنوان</label>
                                         <input type="text" name="address" placeholder="العنوان" id="address" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s\d\/\-_()\[\]]/g, '')" class="form-control text-center" required>
                                         <p class="required d-none mb-0 text-danger fw-bold" id="addressReq">هذا الحقل مطلوب</p>
                                         <p class="required d-none mb-0 text-danger fw-bold" id="addressMsg">يجب ان يكون العنوان باللغة العربية ولا يقل عن 5 احرف</p>
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">سن الحالة</label>
                                         <input type="text" name="age" placeholder="سن الحالة" id="age" class="form-control text-center" maxlength="2" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                         <p class="required d-none mb-0 fw-bold text-danger" id="ageReq">هذا الحقل مطلوب</p>
                                         <p class="required d-none mb-0 fw-bold text-danger" id="ageMsg">يجب ان يكون السن مكون من 2 رقم فقط</p>
                                     </div>
                                     <div class="case">
-                                        <div class="form-group mb-3">
+                                        <div class="form-group mb-2">
+                                            <label for="" class="form-label text-white fw-bold">دخل المعاش</label>
                                             <input type="number" name="retire_income" class="form-control text-center" placeholder="دخل المعاش">
                                         </div>
-                                        <div class="form-group mb-3">
+                                        <div class="form-group mb-2">
+                                            <label for="" class="form-label text-white fw-bold">الدخل الشهري</label>
                                             <input type="number" name="monthly_income" class="form-control text-center" placeholder="الدخل الشهري">
                                         </div>
-                                        <div class="form-group mb-3">
+                                        <div class="form-group mb-2">
+                                            <label for="" class="form-label text-white fw-bold">مصدر أخر</label>
                                             <input type="number" name="another_source" class="form-control text-center" placeholder="مصدر أخر">
                                         </div>
-                                        <div class="form-group mb-3">
+                                        <div class="form-group mb-2">
+                                            <label for="" class="form-label text-white fw-bold">إجمالي الدخل</label>
                                             <input id="total_income" type="number" name="total_income" class="form-control text-center" placeholder="إجمالي الدخل" readonly autofocus="none">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">نوع الدخل</label>
                                         <select name="income_type" class="form-control">
                                             <option class="text-center" selected>إختار نوع الدخل</option>
                                             <option value="معاش">معاش</option>
@@ -323,21 +380,24 @@
                                             <option value="مصدر_أخر">مصدر أخر</option>
                                         </select>
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">مدة الإستفادة</label>
                                         <select name="benefit_duration" class="form-control">
                                             <option class="text-center" selected>إختار مدة الإستفادة</option>
                                             <option value="شهرية">شهرية</option>
                                             <option value="موسمية">موسمية</option>
                                         </select>
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">نوع الإستفادة</label>
                                         <select name="benefit_type" class="form-control">
                                             <option class="text-center" selected>إختار نوع الإستفادة</option>
                                             <option value="عينية">عينية</option>
                                             <option value="نقدية">نقدية</option>
                                         </select>
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">الحالة الاجتماعية</label>
                                         <select name="marital_status" class="form-control">
                                             <option class="text-center" selected>إختار الحالة الاجتماعية للحالة</option>
                                             <option value="single">أعزب</option>
@@ -346,21 +406,25 @@
                                             <option value="divorced">مطلق/ة</option>
                                         </select>
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">عدد الأولاد</label>
                                         <input type="number" name="sons" class="form-control text-center" placeholder="عدد الأولاد">
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">عدد البنات</label>
                                         <input type="number" name="daughters" class="form-control text-center" placeholder="عدد البنات">
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">الحالة الصحية</label>
                                         <input type="text" name="health_status" class="form-control text-center"placeholder="الحالة الصحية">
                                     </div>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group mb-2">
+                                        <label for="" class="form-label text-white fw-bold">المحافظة</label>
                                         <input type="text" name="gov" class="form-control text-center" placeholder="المحافظة">
                                     </div>
-                                    <div class="form-group mb-3">
-                                        <label for="files" class="form-label text-muted">الصور</label>
-                                        <input type="file" name="imgs" class="form-control text-center" id="files" accept="image/*">
+                                    <div class="form-group mb-2">
+                                        <label for="imgs" class="form-label text-white fw-bold">الصور</label>
+                                        <input type="file" name="imgs" class="form-control text-center" id="imgs" accept="image/*">
                                         <p class="required d-none fw-bold text-danger mb-0" id="filesReq">هذا الحقل مطلوب</p>
                                         <p class="required d-none fw-bold text-danger mb-0" id="filesExt">يجب ان يكون امتداد الصورة [ jpg, png, jpeg, webp ]</p>
                                         <p class="required d-none fw-bold text-danger mb-0" id="filesSize">يجب ان يكون حجم الصورة اقل من 2 ميجا</p>

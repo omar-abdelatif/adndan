@@ -23,7 +23,8 @@ class CaseController extends Controller
         $validation = $request->validate([
             'fullname'              => 'required|min:3',
             'ssn'                   => 'required|unique:table_case,ssn',
-            'phone_number'              => 'unique:table_case,phone_number',
+            'phone_number'          => 'unique:table_case,phone_number',
+            'another_phone_number'  => 'unique:table_case,another_phone_number',
             'age'                   => 'required',
             'address'               => 'required',
             'monthly_income'        => 'required|numeric',
@@ -38,7 +39,7 @@ class CaseController extends Controller
             'gov'                   => 'required',
             'sons'                  => 'required',
             'daughters'             => 'required',
-            'imgs'                 => 'image|max:2028|mimes:jpg,png,jpeg,webp',
+            'imgs'                  => 'image|max:2028|mimes:jpg,png,jpeg,webp',
         ]);
         if ($request->hasFile('imgs')) {
             $upload = $request->file('imgs');
@@ -52,6 +53,7 @@ class CaseController extends Controller
             'fullname' => $request->fullname,
             'ssn' => $request->ssn,
             'phone_number' => $request->phone_number,
+            'another_phone_number' => $request->another_phone_number,
             'age' => $request->age,
             'address' => $request->address,
             'monthly_income' => $request->monthly_income,
@@ -110,6 +112,7 @@ class CaseController extends Controller
         $case->fullname = $request->fullname;
         $case->ssn = $request->ssn;
         $case->phone_number = $request->phone_number;
+        $case->another_phone_number = $request->another_phone_number;
         $case->age = $request->age;
         $case->address = $request->address;
         $case->income_type = $request->income_type;

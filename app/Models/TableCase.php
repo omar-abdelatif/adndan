@@ -15,6 +15,7 @@ class TableCase extends Model
         'fullname',
         'ssn',
         'phone_number',
+        'another_phone_number',
         'age',
         'address',
         'income_type',
