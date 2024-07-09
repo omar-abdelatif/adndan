@@ -276,9 +276,9 @@
                                                                 <div class="inputs-body">
                                                                     <div class="form-group mb-2">
                                                                         <label for="" class="form-label text-white fw-bold">الصور</label>
-                                                                        <input type="file" name="files" class="form-control mb-3 text-center" value="{{ $case->files }}" accept="image/*">
+                                                                        <input type="file" name="imgs" class="form-control mb-3 text-center" value="{{ $case->imgs }}" accept="image/*">
                                                                         <div class="files">
-                                                                            <img src="{{ asset('build/assets/backend/files/' . $case->files) }}" class="" width="300" alt="{{ $case->fullname }}">
+                                                                            <img src="{{ asset('build/assets/backend/files/' . $case->imgs) }}" class="" width="300" alt="{{ $case->fullname }}">
                                                                         </div>
                                                                     </div>
                                                                 </div>

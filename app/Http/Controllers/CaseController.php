@@ -68,7 +68,7 @@ class CaseController extends Controller
             'gov' => $request->gov,
             'sons' => $request->sons,
             'daughters' => $request->daughters,
-            'imgs' => $name,
+            'imgs' => $name ?? null,
         ]);
         if ($store) {
             return redirect()->route('showall')->with('success', 'تمت الإضافة بنجاح');
