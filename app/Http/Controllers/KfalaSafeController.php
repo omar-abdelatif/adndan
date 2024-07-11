@@ -31,6 +31,7 @@ class KfalaSafeController extends Controller
                     'proof_img' => $imagename,
                     'amount' => $validated['amount'],
                     'transaction_type' => 'خزينة/سحب',
+                    'donation_type' => null
                 ]);
                 if ($store) {
                     BankTransactions::create([

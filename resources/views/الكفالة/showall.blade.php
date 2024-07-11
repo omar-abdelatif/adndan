@@ -104,6 +104,7 @@
                                         <div class="modal-body bg-dark-gradient">
                                             <form action="{{ 'update' }}" method="post" enctype="multipart/form-data">
                                                 @csrf
+                                                <input type="hidden" name="id" value="{{ $case->id }}">
                                                 <div class="container-fluid">
                                                     <div class="row">
                                                         <div class="col-lg-6">
@@ -112,15 +113,14 @@
                                                                     <h3 class="mb-2 bg-primary p-2 rounded text-white"> البيانات الشخصية</h3>
                                                                 </div>
                                                                 <div class="inputs-body">
-                                                                    <input type="hidden" name="id" value="{{ $case->id }}">
                                                                     <div class="form-group mb-2">
-                                                                        <label for="fullname">
+                                                                        <label for="fullname" class="form-label text-white fw-bold">
                                                                             <b>الإسم</b>
                                                                         </label>
                                                                         <input type="text" id="fullname" name="fullname" class="form-control mb-2 text-center" value="{{ $case->fullname }}" placeholder="إسم الحالة">
                                                                     </div>
                                                                     <div class="form-group mb-2">
-                                                                        <label for="phone_number">
+                                                                        <label for="phone_number" class="form-label text-white fw-bold">
                                                                             <b>رقم المحمول</b>
                                                                         </label>
                                                                         <input type="number" id="phone_number" name="phone_number" class="form-control mb-2 text-center" value="{{ $case->phone_number }}" placeholder="رقم المحمول">
@@ -130,25 +130,25 @@
                                                                         <input type="number" name="another_phone_number" class="form-control mb-2 text-center" value="{{ $case->another_phone_number }}" placeholder="رقم المحمول">
                                                                     </div>
                                                                     <div class="form-group mb-2">
-                                                                        <label for="age">
+                                                                        <label for="age" class="form-label text-white fw-bold">
                                                                             <b>السن</b>
                                                                         </label>
                                                                         <input type="number" id="caseAge" name="age" class="form-control mb-2 text-center" value="{{ $case->age }}" placeholder="السن">
                                                                     </div>
                                                                     <div class="form-group mb-2">
-                                                                        <label for="ssn">
+                                                                        <label for="ssn" class="form-label text-white fw-bold">
                                                                             <b>الرقم القومي</b>
                                                                         </label>
                                                                         <input type="number" id="caseSsn" name="ssn" class="form-control mb-2 text-center" value="{{ $case->ssn }}" placeholder="الرقم القومي">
                                                                     </div>
                                                                     <div class="form-group mb-2">
-                                                                        <label for="address">
+                                                                        <label for="address" class="form-label text-white fw-bold">
                                                                             <b>العنوان</b>
                                                                         </label>
                                                                         <input type="text" id="caseAddress" name="address" class="form-control mb-2 text-center" value="{{ $case->address }}" placeholder="العنوان">
                                                                     </div>
                                                                     <div class="form-group mb-2">
-                                                                        <label for="gov">
+                                                                        <label for="gov" class="form-label text-white fw-bold">
                                                                             <b>المحافظة</b>
                                                                         </label>
                                                                         <input type="text" id="gov" name="gov" class="form-control text-center" value="{{ $case->gov }}" placeholder="المحافظة">
@@ -163,7 +163,7 @@
                                                                 </div>
                                                                 <div class="inputs-body">
                                                                     <div class="form-group mb-2">
-                                                                        <label>
+                                                                        <label class="form-label text-white fw-bold">
                                                                             <b>نوع الدخل</b>
                                                                         </label>
                                                                         <select name="income_type" class="form-control">
@@ -174,19 +174,19 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="form-group mb-2">
-                                                                        <label class="mt-2">
+                                                                        <label class="form-label text-white fw-bold">
                                                                             <b>دخل المعاش</b>
                                                                         </label>
                                                                         <input type="number" name="retire_income" value="{{$case->retire_income}}" class="form-control text-center" placeholder="دخل المعاش">
                                                                     </div>
                                                                     <div class="form-group mb-2">
-                                                                        <label class="mt-2">
+                                                                        <label class="form-label text-white fw-bold">
                                                                             <b>مصدر أخر</b>
                                                                         </label>
                                                                         <input type="number" name="another_source" value="{{$case->another_source}}" class="form-control text-center" placeholder="مصدر أخر">
                                                                     </div>
                                                                     <div class="form-group mb-2">
-                                                                        <label class="mt-2">
+                                                                        <label class="form-label text-white fw-bold">
                                                                             <b>نوع الإستفادة</b>
                                                                         </label>
                                                                         <select name="benefit_type" class="form-control">
@@ -196,7 +196,7 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="form-group mb-2">
-                                                                        <label for="" class="mt-2">
+                                                                        <label for="" class="form-label text-white fw-bold">
                                                                             <b>إختار مدة الإستفادة</b>
                                                                         </label>
                                                                         <select name="benefit_duration" class="form-control mb-2">
@@ -206,13 +206,13 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="form-group mb-2">
-                                                                        <label class="mt-2">
+                                                                        <label class="form-label text-white fw-bold">
                                                                             <b>الدخل الشهري</b>
                                                                         </label>
                                                                         <input type="number" name="monthly_income" class="form-control text-center" value="{{ $case->monthly_income }}" placeholder="الدخل الشهري">
                                                                     </div>
                                                                     <div class="form-group mb-2">
-                                                                        <label class="mt-2">
+                                                                        <label class="form-label text-white fw-bold">
                                                                             <b>إجمالي الدخل</b>
                                                                         </label>
                                                                         <input type="number" name="total_income" class="form-control text-center bg-secondary text-white" value="{{$case->total_income}}" placeholder="إجمالي الدخل">
@@ -227,7 +227,7 @@
                                                                 </div>
                                                                 <div class="inputs-body">
                                                                     <div class="form-group mb-2">
-                                                                        <label class="mb-2">
+                                                                        <label class="form-label text-white fw-bold">
                                                                             <b>الحالة الاجتماعية</b>
                                                                         </label>
                                                                         <select name="marital_status" class="form-control mb-2">
@@ -239,7 +239,7 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="form-group mb-2">
-                                                                        <label class="mb-2">
+                                                                        <label class="form-label text-white fw-bold">
                                                                             <b>الحالة الصحية</b>
                                                                         </label>
                                                                         <input type="text" name="health_status" class="form-control text-center" value="{{ $case->health_status }}" placeholder="الحالة الصحية">
@@ -254,13 +254,13 @@
                                                                 </div>
                                                                 <div class="inputs-body">
                                                                     <div class="form-group mb-2">
-                                                                        <label class="mb-2">
+                                                                        <label class="form-label text-white fw-bold">
                                                                             <b>عدد الأولاد</b>
                                                                         </label>
                                                                         <input type="number" name="sons" value="{{ $case->sons }}" class="form-control text-center mb-2" placeholder="عدد الأولاد">
                                                                     </div>
                                                                     <div class="form-group mb-2">
-                                                                        <label class="mb-2">
+                                                                        <label class="form-label text-white fw-bold">
                                                                             <b>عدد البنات</b>
                                                                         </label>
                                                                         <input type="number" name="daughters" value="{{ $case->daughters }}" class="form-control text-center" placeholder="عدد البنات">

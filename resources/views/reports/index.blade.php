@@ -36,9 +36,6 @@
             <p class="text-center fw-bold fs-3 text-decoration-underline">تقارير التبرعات</p>
         </div>
         <div class="report-content bg-secondary p-3 rounded w-100 mt-4">
-            <div class="sub-logo">
-                <h3 class="text-center text-decoration-underline">التبرعات</h3>
-            </div>
             <div class="report-info mt-2">
                 <div class="container-fluid">
                     <div class="row">

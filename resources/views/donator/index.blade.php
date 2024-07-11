@@ -136,12 +136,12 @@
                                         <h5 class="modal-title" id="exampleModalLabel">إضافة تبرع جديد</h5>
                                         <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body p-0">
+                                    <div class="modal-body p-0 bg-dark-gradient">
                                         <form action="{{ route('donation.store') }}" method="post" data-donation-id={{$donate->id}}>
                                             @csrf
-                                            <div class="data-info bg-light p-3 rounded">
+                                            <div class="data-info p-3 rounded">
                                                 <div class="data-info-title mt-3">
-                                                    <h3 class="text-center text-dark text-decoration-underline mb-3">البيانات الشخصية</h3>
+                                                    <h3 class="text-center text-white text-decoration-underline mb-3">البيانات الشخصية</h3>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-12">
@@ -192,6 +192,7 @@
                                                                 <option value="أكتوبر">أكتوبر</option>
                                                                 <option value="نوفمبر">نوفمبر</option>
                                                                 <option value="ديسمبر">ديسمبر</option>
+                                                                <option value="مره واحده">مره واحده</option>
                                                             </select>
                                                             <p class="required d-none text-danger fw-bold mb-0 durReq" data-duration-id={{$donate->id}}>إختر من القائمة أعلاه</p>
                                                         </div>
@@ -218,7 +219,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">إضافة متبرع جديد</h5>
                     <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body bg-dark-gradient">
                     <form action="{{route('donator.store')}}" method="post" id="newDonators">
                         @csrf
                         <div class="row">

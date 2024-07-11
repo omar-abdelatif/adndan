@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('kfala_transactions', function (Blueprint $table) {
             $table->string('donation_type')->after('transaction_type');
-            $table->string('other_type')->after('donation_type');
+            $table->string('other_type')->after('donation_type')->nullable();
             $table->string('money_type')->after('other_type');
         });
     }

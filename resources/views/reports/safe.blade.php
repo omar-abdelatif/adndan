@@ -102,7 +102,7 @@
         </form>
     </div>
     <div class="table-responsive">
-        <table class="table borderd-table table-striped display align-middle text-center" id="table32" data-order='[[ 0, "asc" ]]' data-page-length='10'>
+        <table class="table borderd-table table-striped display align-middle text-center" id="table32" data-page-length='10'>
             <thead>
                 <tr>
                     <th class="text-center">البند</th>

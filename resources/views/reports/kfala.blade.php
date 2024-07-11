@@ -104,7 +104,7 @@
         </div>
     </div>
     {{-- ! تفاصيل المصروفات لكل حالة ! --}}
-    <div class="table-responsive">
+    {{-- <div class="table-responsive">
         <div class="table-title mt-5 mb-3 bg-primary rounded mx-auto w-50 p-2 text-center text-white">
             <h3>تفاصيل المصروفات لكل حالة</h3>
         </div>
@@ -143,5 +143,5 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
+    </div> --}}
 @endsection

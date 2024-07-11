@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('donation_histories', function (Blueprint $table) {
             $table->string('donation_type')->after('duration');
-            $table->string('other_type')->after('donation_type');
+            $table->string('other_type')->after('donation_type')->nullable();
         });
     }
 

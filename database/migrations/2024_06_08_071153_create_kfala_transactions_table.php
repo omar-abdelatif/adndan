@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kfala_transactions', function (Blueprint $table) {
             $table->id();
             $table->string("transaction_type");
-            $table->string("proof_img");
+            $table->string("proof_img")->nullable();
             $table->integer("amount");
             $table->timestamps();
         });

@@ -33,7 +33,7 @@ class UserImport implements WithHeadingRow, WithBatchInserts, SkipsEmptyRows, To
                 'sons' => $row['sons'],
                 'daughters' => $row['daughters'],
                 'gov' => $row['gov'],
-                'files' => $row['files'],
+                'imgs' => $row['imgs'],
             ]);
         }
     }
