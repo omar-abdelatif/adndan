@@ -162,7 +162,9 @@
                                                                 <option selected disabled>نوع التبرع النقدي</option>
                                                                 <option value="صدقات">صدقات</option>
                                                                 <option value="نقدي">ذكات فطر</option>
-                                                                <option value="أخرى">ذكات مال</option>
+                                                                <option value="ذكات مال">ذكات مال</option>
+                                                                <option value="كفالة يتيم">كفالة يتيم</option>
+                                                                <option value="أخرى">أخرى</option>
                                                             </select>
                                                             <p class="required d-none text-danger fw-bold mb-0 donationmoneytype" data-donationmoneytype-id={{$donate->id}}>أختر من القائمة اعلاه</p>
                                                             <input type="text" name="other_type" class="form-control otherDonationType mt-2 d-none" oninput="this.value = this.value.replace(/[^\u0600-\u06FF\s]/g, '')" pattern="[\u0600-\u06FF\s]{3,}" data-donationothertype-id={{$donate->id}} placeholder="نوع التبرع الأخر">
