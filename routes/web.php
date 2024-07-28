@@ -156,9 +156,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //! Kfala Bank & Safe Routes
     Route::prefix('kfala')->group(function () {
         //! Kfala Bank Reports
-        Route::controller(KfalaBankController::class)->group(function () {
-            Route::get('bank/view', 'index')->name('bank.view');
-            Route::post('bank/deposit', 'bankDeposit')->name("bank.deposit");
+        Route::prefix('bank')->group(function () {
+            Route::controller(KfalaBankController::class)->group(function () {
+                Route::get('view', 'index')->name('bank.view');
+                Route::post('deposit', 'bankDeposit')->name("bank.deposit");
+            });
         });
         //! Kfala Safe Reports
         Route::controller(KfalaSafeController::class)->group(function () {
@@ -174,7 +176,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 Route::get("filter", 'filter')->name('tomb.filter');
             });
         });
-        Route::prefix('donations_reports')->group(function () {
+        Route::prefix('tombs_donations_reports')->group(function () {
             Route::controller(TombDonationsReportsController::class)->group(function () {
                 Route::get('all', 'index')->name('tomb.reports.donations.index');
                 Route::get('filter', 'filter')->name('tomb.reports.donations.filter');
