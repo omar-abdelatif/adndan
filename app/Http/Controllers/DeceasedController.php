@@ -76,6 +76,7 @@ class DeceasedController extends Controller
                 $deceased->pdf_files = $file_name;
             }
             $deceased->rooms_id = $room->id;
+            $deceased->tombs_id = $tomb->id;
             $room = $deceased->rooms;
             $room->burial_date = $validated['burial_date'];
             if ($tomb) {

@@ -64,6 +64,7 @@ class RoomsController extends Controller
                     'region' => $deceased->region,
                     'tomb' => $deceased->tomb,
                     'burial_date' => $deceased->burial_date,
+                    'burial_place' => $deceased->room
                 ];
                 OldDeceased::create($deceasedData);
                 $deceased->delete();

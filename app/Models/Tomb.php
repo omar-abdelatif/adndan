@@ -29,6 +29,10 @@ class Tomb extends Model
     {
         return $this->hasMany(Rooms::class);
     }
+    public function deceased()
+    {
+        return $this->hasMany(Deceased::class);
+    }
     public function createRooms()
     {
         $id = $this->id;
@@ -57,7 +61,6 @@ class Tomb extends Model
             }
         }
     }
-
     public function getBurialDateAttribute()
     {
         return $this->rooms()->max('burial_date');
@@ -73,20 +76,18 @@ class Tomb extends Model
         foreach ($this->rooms as $room) {
             $roomCapacity = $room->getCapacity();
             if ($power === 0) {
-                $totalDeceased = $roomCapacity * $otherPower;
+                $totalDeceased += $roomCapacity * $otherPower;
             } else {
-                $totalDeceased = $roomCapacity * $power;
+                $totalDeceased += $roomCapacity * $power;
             }
         }
-        //! Update total male and female counts
         $totalMale = $totalDeceased / 2;
         $totalFemale = $totalDeceased / 2;
-        //! Calculate totals when tomb is exclusively for males or females
-        $totalMaleOnly = $totalMale + $totalFemale;
-        $totalFemaleOnly = $totalMale + $totalFemale;
+        $totalMaleOnly = $totalDeceased;
+        $totalFemaleOnly = $totalDeceased;
         return [
-            'male' => $totalMale,
-            'female' => $totalFemale,
+            'male' => $totalMale / 4,
+            'female' => $totalFemale / 4,
             'totalMaleOnly' => $totalMaleOnly,
             'totalFemaleOnly' => $totalFemaleOnly,
             'lahd' => $totalLahd,
@@ -113,17 +114,13 @@ class Tomb extends Model
     }
     public function mixTombs()
     {
-        foreach ($this->rooms as $room) {
-            $availableMales = 0;
-            $availableFemales = 0;
-            $maleDeceasedSize = $room->deceased->where("gender", "ذكر")->sum('size');
-            $femaleDeceasedSize = $room->deceased->where("gender", "أنثى")->sum('size');
-            $availableMales = ($room->capacity - $maleDeceasedSize);
-            $availableFemales = ($room->capacity - $femaleDeceasedSize);
-        }
+        $maleDeceasedSize = Deceased::where("gender", "ذكر")->where('tombs_id', $this->id)->sum('size');
+        $currentMaleCapacity = (($this->power * 6) / 2) - $maleDeceasedSize;
+        $femaleDeceasedSize = Deceased::where("gender", "أنثى")->where('tombs_id', $this->id)->sum('size');
+        $currentFemaleCapacity = (($this->power * 6) / 2) - $femaleDeceasedSize;
         return [
-            'male' => $availableMales,
-            'female' => $availableFemales,
+            'male' => $currentMaleCapacity,
+            'female' => $currentFemaleCapacity,
         ];
     }
 }

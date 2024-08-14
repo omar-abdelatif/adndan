@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('deceaseds', function (Blueprint $table) {
-            $table->bigInteger('burial_cost')->after('burial_date');
+            $table->integer('tombs_id')->index()->references('id')->on('tombs')->onDelete('cascade')->after('rooms_id');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('deceaseds', function (Blueprint $table) {
-            $table->dropColumn('burial_cost');
+            $table->dropColumn('tombs_id');
         });
     }
 };

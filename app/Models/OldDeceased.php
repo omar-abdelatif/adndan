@@ -14,6 +14,7 @@ class OldDeceased extends Model
         'burial_date',
         'death_date',
         'region',
-        'tomb'
+        'tomb',
+        'burial_place'
     ];
 }

@@ -137,23 +137,19 @@
                                                                         @elseif ($tomb->tomb_specifices === "1")
                                                                             <span>
                                                                                 <b>رجال:</b>
-                                                                                {{$tomb->getTotalPlaces()['totalMaleOnly']}}
+                                                                                {{$tomb->getAvailablePlaces()['MaleFemale']}}
                                                                             </span>
                                                                         @else
                                                                             <span>
                                                                                 <b>سيدات:</b>
-                                                                                {{$tomb->getTotalPlaces()['totalFemaleOnly']}}
+                                                                                {{$tomb->getAvailablePlaces()['FemaleMale']}}
                                                                             </span>
                                                                         @endif
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @if ($tomb->tomb_specifices === "0")
-                                                            <div class="tomb-status bg-info rounded p-3 mt-3 d-none">
-                                                        @else
-                                                            <div class="tomb-status bg-info rounded p-3 mt-3">
-                                                        @endif
+                                                        <div class="tomb-status bg-info rounded p-3 mt-3">
                                                             <div class="tomb-status-title mb-3">
                                                                 <h2 class="text-center text-decoration-underline">حالة المقبرة</h2>
                                                             </div>
@@ -178,11 +174,11 @@
                                                                                 {{$tomb->getAvailablePlaces()['lahd']}}
                                                                             </span>
                                                                         @elseif ($tomb->tomb_specifices === "0")
-                                                                            <span class="d-none">
+                                                                            <span>
                                                                                 <b>رجال:</b>
                                                                                 {{$tomb->mixTombs()['male']}}
                                                                             </span>
-                                                                            <span class="d-none">
+                                                                            <span>
                                                                                 <b>سيدات:</b>
                                                                                 {{$tomb->mixTombs()['female']}}
                                                                             </span>

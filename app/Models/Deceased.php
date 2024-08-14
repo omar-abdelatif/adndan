@@ -27,9 +27,13 @@ class Deceased extends Model
         'files',
         'pdf_files',
         'rooms_id',
+        'tombs_id',
     ];
     public function rooms()
     {
         return $this->belongsTo(Rooms::class);
+    }
+    public function tombs(){
+        return $this->belongsTo(Tomb::class);
     }
 }

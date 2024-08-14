@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('room');
             $table->longText('notes');
             $table->string('files');
-            $table->integer('rooms_id');
+            $table->integer('rooms_id')->index()->references('id')->on('rooms')->onDelete('cascade');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
