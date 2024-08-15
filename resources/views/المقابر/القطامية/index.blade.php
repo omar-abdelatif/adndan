@@ -117,26 +117,14 @@
                                                                         </p>
                                                                     </div>
                                                                     <div class="available-body text-white">
-                                                                        @if ($tomb->tomb_specifices === "0")
-                                                                            <span>
-                                                                                <b>رجال:</b>
-                                                                                {{ $tomb->getTotalPlaces()['male'] }}
-                                                                            </span>
-                                                                            <span>
-                                                                                <b>سيدات:</b>
-                                                                                {{ $tomb->getTotalPlaces()['female'] }}
-                                                                            </span>
-                                                                        @elseif ($tomb->tomb_specifices === "1")
-                                                                            <span>
-                                                                                <b>رجال:</b>
-                                                                                {{$tomb->getTotalPlaces()['totalMaleOnly']}}
-                                                                            </span>
-                                                                        @else
-                                                                            <span>
-                                                                                <b>سيدات:</b>
-                                                                                {{$tomb->getTotalPlaces()['totalFemaleOnly']}}
-                                                                            </span>
-                                                                        @endif
+                                                                        <span>
+                                                                            <b>رجال:</b>
+                                                                            {{ $tomb->getTotalPlaces()['male'] }}
+                                                                        </span>
+                                                                        <span>
+                                                                            <b>سيدات:</b>
+                                                                            {{ $tomb->getTotalPlaces()['female'] }}
+                                                                        </span>
                                                                     </div>
                                                                 </div>
                                                             </div>

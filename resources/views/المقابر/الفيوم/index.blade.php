@@ -121,10 +121,6 @@
                                                                             <b>رجال:</b>
                                                                             {{ $tomb->getTotalPlaces()['male'] }}
                                                                         </span>
-                                                                        <span>
-                                                                            <b>سيدات:</b>
-                                                                            {{ $tomb->getTotalPlaces()['female'] }}
-                                                                        </span>
                                                                     </div>
                                                                 </div>
                                                             </div>

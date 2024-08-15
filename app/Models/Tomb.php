@@ -76,9 +76,9 @@ class Tomb extends Model
         foreach ($this->rooms as $room) {
             $roomCapacity = $room->getCapacity();
             if ($power === 0) {
-                $totalDeceased += $roomCapacity * $otherPower;
+                $totalDeceased = $roomCapacity * $otherPower;
             } else {
-                $totalDeceased += $roomCapacity * $power;
+                $totalDeceased = $roomCapacity * $power;
             }
         }
         $totalMale = $totalDeceased / 2;
@@ -86,8 +86,8 @@ class Tomb extends Model
         $totalMaleOnly = $totalDeceased;
         $totalFemaleOnly = $totalDeceased;
         return [
-            'male' => $totalMale / 4,
-            'female' => $totalFemale / 4,
+            'male' => $totalMale,
+            'female' => $totalFemale,
             'totalMaleOnly' => $totalMaleOnly,
             'totalFemaleOnly' => $totalFemaleOnly,
             'lahd' => $totalLahd,
